@@ -11,7 +11,7 @@ import UIKit
 class wineDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     let tableContainerTopAnchor:CGFloat = 200.0
-    let tableContainerHeightAnchor:CGFloat = 284.0
+    let tableContainerHeightAnchor:CGFloat = 280.0
     let tableRowHeight:CGFloat = 50
     let sortBins:Bool = true
     
