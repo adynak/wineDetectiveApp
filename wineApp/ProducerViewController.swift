@@ -10,67 +10,10 @@ import UIKit
 
 class ProducerViewController:UITableViewController {
     
-    let cellId = "cellId123123"
+    let cellID = "cellId123123"
     
-    var inventory = [
-        InventoryByProducer(isExpanded : false,
-                            producer : "Abacela",
-                            vintages : ["2017"],
-                            varietals : ["Grenache"],
-                            avas : ["Umpqua Valley"],
-                            designations : ["Estate"],
-                            bottleCount : ["1"]),
-        InventoryByProducer(isExpanded : false,
-                            producer : "Adelshiem",
-                            vintages : ["2015"],
-                            varietals : ["Pinot Noir"],
-                            avas : ["Dundee Hills"],
-                            designations : ["Elizabeth's Reserve"],
-                            bottleCount : ["1"]),
-        InventoryByProducer(isExpanded : false,
-                            producer : "Beckham Estates",
-                            vintages : ["2015"],
-                            varietals : ["Pinot Noir"],
-                            avas : ["Wilamette Valley"],
-                            designations : ["Sopia's"],
-                            bottleCount : ["1"]),
-        InventoryByProducer(isExpanded : false,
-                            producer : "Del Rio",
-                            vintages : ["2014"],
-                            varietals : ["Malbec"],
-                            avas : ["Rogue Valley"],
-                            designations : [""],
-                            bottleCount : ["1"]),
-        InventoryByProducer(isExpanded : false,
-                            producer : "Hawk's View",
-                            vintages : ["2016"],
-                            varietals : ["Pinot Noir"],
-                            avas : ["Wilamette Valley"],
-                            designations : ["Estate"],
-                            bottleCount : ["3"]),
-        InventoryByProducer(isExpanded : false,
-                            producer : "Roxy Ann",
-                            vintages : ["2014"],
-                            varietals : ["Honor Barn Red"],
-                            avas : ["Rogue Valley"],
-                            designations : ["Estate"],
-                            bottleCount : ["1"]),
-        InventoryByProducer(isExpanded : false,
-                            producer : "Stoller",
-                            vintages : ["2015"],
-                            varietals : ["Chardonnay"],
-                            avas : ["Dundee Hills"],
-                            designations : ["Family Estate"],
-                            bottleCount : ["3"]),
-        InventoryByProducer(isExpanded : false,
-                            producer : "Zerba",
-                            vintages : ["2017","2016"],
-                            varietals : ["Barbara", "Dolcetto"],
-                            avas : ["Walla Walla","Walla Walla"],
-                            designations : ["The Rocks","The Rocks"],
-                            bottleCount : ["3","1"])
-    ]
-
+    var allWines: WineInventory?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,13 +30,19 @@ class ProducerViewController:UITableViewController {
                                       action: #selector(handleAddWine))
         navigationItem.leftBarButtonItem = addWine
         
-        tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
+        
+        StorageBins.fetchWineInventory { (wineInventory) -> () in
+            self.allWines = wineInventory
+            self.tableView.reloadData()
+        }
         
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let sectionTitle = inventory[section].producer + " (" + String(inventory[section].varietals.count) + ")"
+        let sectionTitle = (allWines!.producers?[section].name)! +
+            " (" + String(allWines!.producers![section].wines!.count) + ")"
         let colorOdd = UIColor(r:184, g:206, b:249)
         let colorEven = UIColor(r:202, g:227, b:255)
         
@@ -110,85 +59,91 @@ class ProducerViewController:UITableViewController {
         
         return button
     }
-    
+
     @objc func handleExpandClose(button: UIButton) {
         
         let section = button.tag
         
         // we'll try to close the section first by deleting the rows
         var indexPaths = [IndexPath]()
-        for row in inventory[section].varietals.indices {
+        for row in allWines!.producers![section].wines!.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
         
-        let isExpanded  = inventory[section].isExpanded
-        let setionTitle = inventory[section].producer + " (" + String(inventory[section].varietals.count) + ")"
-        inventory[section].isExpanded = !isExpanded
+        let isRowExpanded = allWines?.producers?[section].isExpanded
+        // set this for call to numberOfRowsInSection to toggle display of these rows
+        allWines?.producers?[section].isExpanded = !isRowExpanded!
         
-        button.setTitle(setionTitle, for: .normal)
-        
-        if isExpanded {
+        if isRowExpanded! {
             tableView.deleteRows(at: indexPaths, with: .fade)
         } else {
             tableView.insertRows(at: indexPaths, with: .fade)
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 36
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return inventory.count
+        if allWines == nil {
+            return 0
+        } else {
+            return (allWines?.producers?.count)!
+        }
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !inventory[section].isExpanded {
+        if !(allWines?.producers?[section].isExpanded)! {
             return 0
         }
-        
-        return inventory[section].varietals.count
+        return (allWines?.producers![section].wines!.count)!
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var wineSelected = wineDetail()
-        var section: NSInteger
-        var row: NSInteger
         
         //getting the index path of selected row
         let indexPath = tableView.indexPathForSelectedRow
-        section = indexPath![0]
-        row = indexPath![1]
+        let section = indexPath![0]
+        let row = indexPath![1]
         
         //getting the current cell from the index path
-        wineSelected.vintage = inventory[section].vintages[row]
-        wineSelected.varietal = inventory[section].varietals[row]
-        wineSelected.producer = inventory[section].producer
-        wineSelected.ava = inventory[section].avas[row]
-        wineSelected.designation = inventory[section].designations[row]
-        wineSelected.bottleCount = inventory[section].bottleCount[row]
-
+        wineSelected.vintage = allWines!.producers![section].wines![row].vintage!
+        wineSelected.varietal = allWines!.producers![section].wines![row].varietal!
+        wineSelected.producer = allWines!.producers![section].name!
+        wineSelected.ava = allWines!.producers![section].wines![row].ava!
+        wineSelected.designation = allWines!.producers![section].wines![row].designation!
+        wineSelected.storageBins = allWines!.producers![section].wines![row].storageBins
         
         let wineDetailController = wineDetailViewController()
         wineDetailController.passedValue = wineSelected
         let navController = UINavigationController(rootViewController: wineDetailController)
+        wineDetailController.myUpdater = (self as BottleCountDelegate)
         present(navController, animated: true, completion: nil)
 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        let varietal = inventory[indexPath.section].varietals[indexPath.row]
-        let vintage = inventory[indexPath.section].vintages[indexPath.row]
-        let ava = inventory[indexPath.section].avas[indexPath.row]
-        let designaion = inventory[indexPath.section].designations[indexPath.row]
+        var bottleCount: Int = 0
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let varietal = allWines?.producers?[indexPath.section].wines?[indexPath.row].varietal
+        let vintage = allWines?.producers?[indexPath.section].wines?[indexPath.row].vintage
+        let designation = allWines?.producers?[indexPath.section].wines?[indexPath.row].designation
+        let ava = allWines?.producers?[indexPath.section].wines?[indexPath.row].ava
         
-        cell.textLabel?.text = vintage + " " + varietal
-        if designaion == "" {
+        let bottleLocations = allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins
+        for bin in (allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins)! {
+            bottleCount += bin.bottleCount!
+        }
+
+        
+        cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + " bottles)"
+        if designation == "" {
             cell.detailTextLabel?.text = ava
         } else {
-            cell.detailTextLabel?.text = ava + " - " + designaion
+            cell.detailTextLabel?.text = ava! + " - " + designation!
         }
         
         return cell
@@ -200,6 +155,19 @@ class ProducerViewController:UITableViewController {
     
     @objc func handleAddWine(){
         Alert.showAddBottleAlert(on: self)
+    }
+    
+}
+
+
+extension ProducerViewController: BottleCountDelegate{
+    
+    func passBackBinsAndBottlesInThem(newBinData:[StorageBins]){
+        let indexPath = tableView.indexPathForSelectedRow
+        let section = indexPath![0]
+        let row = indexPath![1]
+        allWines!.producers![section].wines![row].storageBins = newBinData
+        tableView.reloadData()
     }
     
 }

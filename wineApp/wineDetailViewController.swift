@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol BottleCountDelegate {
+    func passBackBinsAndBottlesInThem(newBinData:[StorageBins])
+}
+
 class wineDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+    var myUpdater: BottleCountDelegate!
     
     let tableContainerTopAnchor:CGFloat = 200.0
     let tableContainerHeightAnchor:CGFloat = 280.0
@@ -16,7 +22,10 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     let sortBins:Bool = true
     
     var cellID = "cellID123"
+    var wineBins = [StorageBins]()
     
+    var cells = [BinTableViewCell]() //initialize array at class level
+
     var passedValue = wineDetail()
     
     let wineLabel: UITextView = {
@@ -72,16 +81,11 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return tv
     }()
     
-    private var wineBins = InventoryAPI.getInventory() // model
+//    private var wineBins = InventoryAPI.getInventory() // model
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(r:202, g:227, b:255)
-    
-//        let screenSize: CGRect = UIScreen.main.bounds
-//        let screenWidth = screenSize.width
-//        let screenHeight = screenSize.height
-//        print("Screen width = \(screenWidth), screen height = \(screenHeight)")
         
         setupNavigationBar()
         
@@ -90,6 +94,8 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         view.addSubview(tableContainer)
         tableContainer.addSubview(wineBinsTableView)
         view.addSubview(inventoryFooter)
+        
+        wineBins = passedValue.storageBins!
 
         assignPassedValuesToTextarea()
         setupWineLabelLayout()
@@ -167,6 +173,11 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! BinTableViewCell
         cell.bin = wineBins[indexPath.row]
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
+        cell.delegate = self
+        
+        if(!cells.contains(cell)){
+            self.cells.append(cell)
+        }
         
         return cell
     }
@@ -185,7 +196,19 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                                                             action: #selector(addTapped))
     }
     
+    
     @objc func addTapped(sender: UIBarButtonItem){
+        var newBinData = [StorageBins]()
+
+        if (sender.title == "Save"){
+            for cell in cells {
+                if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
+                    newBinData.append(StorageBins(binName: cell.binNameLabel.text!, bottleCount:bottles))
+                }
+                
+            }
+            myUpdater.passBackBinsAndBottlesInThem(newBinData: newBinData)
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -227,11 +250,29 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return String(totalBottles) + " bottles"
     }
 
-    public func test(){
-        print(inventoryFooter.text)
-        inventoryFooter.text = getTotalBottles()
-        print(inventoryFooter.text)
-        inventoryFooter.setNeedsDisplay()
-    }
+}
 
+extension Int {
+    static func parse(from string: String) -> Int? {
+        return Int(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
+    }
+}
+
+extension wineDetailViewController : BinCellDelegate {
+    func didTapStepper(direction: String){
+        let minus = "minus" as String
+        let plus = "plus" as String
+        
+        var count = 0
+        
+        let number = Int.parse(from: inventoryFooter.text!)
+        if (direction == minus){
+            count = number! - 1
+        }
+        if (direction == plus){
+            count = number! + 1
+        }
+        
+        inventoryFooter.text = String(count) + " bottles"
+    }
 }
