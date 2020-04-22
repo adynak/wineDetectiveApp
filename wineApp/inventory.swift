@@ -66,31 +66,68 @@ struct wineDetail {
     var storageBins: [StorageBins]?
 }
 
-struct WineInventory: Decodable {
+struct WineInventory: Codable {
     var producers: [Producers]?
 }
 
-struct Producers: Decodable {
+struct Producers: Codable {
     let name: String?
     var isExpanded: Bool?
     var wines : [Wines]?
 }
 
-struct Wines: Decodable {
-    let vintage: String?
+struct Wines : Codable {
+    let iWine: String?
     let varietal: String?
+    let vineyard: String?
+    let vintage: String?
     let designation: String?
     let ava: String?
-    let drinkBy: String?
-    let locale: String?
     let region: String?
     let country: String?
+    let locale: String?
     let type: String?
-    let vineyard: String?
+    let drinkBy: String?
     var storageBins: [StorageBins]?
 }
 
-struct StorageBins: Decodable {
+struct Label{
+    let vintage: Int
+    let varietal: Int
+    let iWine: Int
+    let producer: Int
+    let location: Int
+    let bin: Int
+    let vineyard: Int
+    let designation: Int
+    let ava: Int
+    let locale: Int
+    let type: Int
+    let region: Int
+    let country: Int
+    let beginConsume: Int
+    let endConsume: Int
+    
+    init(data: [Int]) {
+        vintage = data[0]
+        varietal = data[1]
+        iWine = data[2]
+        producer = data[3]
+        location = data[4]
+        bin = data[5]
+        vineyard = data[6]
+        designation = data[7]
+        ava = data[8]
+        locale = data[9]
+        type = data[10]
+        region = data[11]
+        country = data[12]
+        beginConsume = data[13]
+        endConsume = data[14]
+    }
+}
+
+struct StorageBins: Codable {
     
     var binName: String?
     var bottleCount: Int?
