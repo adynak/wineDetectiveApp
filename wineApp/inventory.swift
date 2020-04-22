@@ -54,9 +54,15 @@ struct wineDetail {
     var varietal = "123"
     var vintage = "123"
     var producer = "123"
+    var vineyard = "123"
     var ava = "123"
     var designation = "123"
     var bottleCount = "19"
+    var drinkBy = "123"
+    var locale = "123"
+    var region = "123"
+    var country = "123"
+    var type = "123"
     var storageBins: [StorageBins]?
 }
 
@@ -75,6 +81,12 @@ struct Wines: Decodable {
     let varietal: String?
     let designation: String?
     let ava: String?
+    let drinkBy: String?
+    let locale: String?
+    let region: String?
+    let country: String?
+    let type: String?
+    let vineyard: String?
     var storageBins: [StorageBins]?
 }
 
@@ -82,10 +94,11 @@ struct StorageBins: Decodable {
     
     var binName: String?
     var bottleCount: Int?
+    var binLocation: String?
     
     static func fetchWineInventory(_ completionHandler: @escaping (WineInventory) -> ()) {
         
-        let urlString = "http://localhost:8000/xcode/dataStore.php"
+        let urlString = "http://localhost/angular/git/wine/resources/dataservices/test.php?rows=500"
         
         URLSession.shared.dataTask(with: URL(string: urlString)!, completionHandler: { (data, response, error) -> Void in
             

@@ -42,7 +42,7 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     let storageLabel: UITextView = {
         let tv = UITextView()
-        tv.text = "Cellar Locations:\n"
+        tv.text = "Location and Bin:\n"
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor(r:202, g:227, b:255)
@@ -190,6 +190,7 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(addTapped))
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                             style: .plain,
                                                             target: self,
@@ -214,40 +215,56 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func assignPassedValuesToTextarea(){
         
+        navigationItem.title = passedValue.producer
+        var designation = "";
+        var vineyard = ""
+        
+        if (passedValue.designation != ""){
+            designation = " - " + passedValue.designation
+        }
+        
+        if (passedValue.vineyard != ""){
+            vineyard = " - " + passedValue.vineyard
+        }
+        
         let attributedText = NSMutableAttributedString(
-            string: passedValue.vintage + " " + passedValue.producer + "\n",
-            attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18),
+            string: passedValue.vintage + " " + passedValue.varietal + designation + "\n",
+            attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15),
                          NSAttributedString.Key.foregroundColor: UIColor.black]
         )
         
         attributedText.append(NSAttributedString(
-            string: passedValue.varietal + "\n",
+            string: passedValue.ava + vineyard + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
                          NSAttributedString.Key.foregroundColor: UIColor.gray])
         )
         
         attributedText.append(NSAttributedString(
-            string: passedValue.ava + "\n",
+            string: passedValue.locale + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
                          NSAttributedString.Key.foregroundColor: UIColor.gray])
         )
         
         attributedText.append(NSAttributedString(
-            string: passedValue.designation + "\n",
+            string: "Drinking Window: " + passedValue.drinkBy + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
                          NSAttributedString.Key.foregroundColor: UIColor.gray])
         )
-        
+                
         wineLabel.attributedText = attributedText
     }
     
     private func getTotalBottles()  -> String {
         var totalBottles = 0
+        var bottleString = " bottle"
         for bin in wineBins
         {
             totalBottles += bin.bottleCount!
         }
-        return String(totalBottles) + " bottles"
+        if (totalBottles > 1){
+          bottleString = " bottles"
+        }
+        return String(totalBottles) + bottleString
     }
 
 }
@@ -270,7 +287,11 @@ extension wineDetailViewController : BinCellDelegate {
             count = number! - 1
         }
         if (direction == plus){
-            count = number! + 1
+            count = number!
+            let addWineController = AddWineController()
+            addWineController.passedValue = passedValue
+            let navController = UINavigationController(rootViewController: addWineController)
+            present(navController, animated: true, completion: nil)
         }
         
         inventoryFooter.text = String(count) + " bottles"

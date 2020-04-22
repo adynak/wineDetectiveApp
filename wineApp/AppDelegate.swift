@@ -4,7 +4,7 @@
 //
 //  Created by adynak on 12/6/18.
 //  Copyright © 2018 Al Dynak. All rights reserved.
-//
+//  vinos olvidados
 
 import UIKit
 
@@ -15,10 +15,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor(r: 255, g: 255, b: 255),
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16)!
+        ]
+        
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        
         UINavigationBar.appearance().barTintColor = UIColor(r: 61,  g: 91,  b: 151) // background
         UINavigationBar.appearance().tintColor =    UIColor(r: 255, g: 255, b: 255) // buttons and icons
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white] // text
-
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(
+            [
+                NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14)!,
+                NSAttributedString.Key.foregroundColor : UIColor.white,
+            ], for: .normal)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let mainVC = MainTabBarController()

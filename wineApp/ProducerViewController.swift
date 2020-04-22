@@ -16,7 +16,17 @@ class ProducerViewController:UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         
+        StorageBins.fetchWineInventory { (wineInventory) -> () in
+            self.allWines = wineInventory
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+    func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Producer"
         
@@ -29,14 +39,6 @@ class ProducerViewController:UITableViewController {
                                       target: self,
                                       action: #selector(handleAddWine))
         navigationItem.leftBarButtonItem = addWine
-        
-        tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
-        
-        StorageBins.fetchWineInventory { (wineInventory) -> () in
-            self.allWines = wineInventory
-            self.tableView.reloadData()
-        }
-        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -112,10 +114,39 @@ class ProducerViewController:UITableViewController {
         //getting the current cell from the index path
         wineSelected.vintage = allWines!.producers![section].wines![row].vintage!
         wineSelected.varietal = allWines!.producers![section].wines![row].varietal!
+        wineSelected.drinkBy = allWines!.producers![section].wines![row].drinkBy!
+        wineSelected.locale = allWines!.producers![section].wines![row].locale!
         wineSelected.producer = allWines!.producers![section].name!
         wineSelected.ava = allWines!.producers![section].wines![row].ava!
         wineSelected.designation = allWines!.producers![section].wines![row].designation!
+        wineSelected.region = allWines!.producers![section].wines![row].region!
+        wineSelected.country = allWines!.producers![section].wines![row].country!
+        wineSelected.type = allWines!.producers![section].wines![row].type!
+        wineSelected.vineyard = allWines!.producers![section].wines![row].vineyard!
+
         wineSelected.storageBins = allWines!.producers![section].wines![row].storageBins
+        
+//        struct Contact {
+//          var firstName: String
+//          var lastName: String
+//        }
+//
+//        var contacts = [
+//          Contact(firstName: "Leonard", lastName: "Charleson"),
+//          Contact(firstName: "Michael", lastName: "Webb"),
+//          Contact(firstName: "Charles", lastName: "Alexson"),
+//          Contact(firstName: "Michael", lastName: "Elexson"),
+//          Contact(firstName: "Alex", lastName: "Elexson"),
+//        ]
+//
+//        contacts.sort {
+//          ($0.lastName, $0.firstName) <
+//            ($1.lastName, $1.firstName)
+//        }
+//
+//        print(contacts)
+        
+        
         
         let wineDetailController = wineDetailViewController()
         wineDetailController.passedValue = wineSelected
@@ -130,20 +161,27 @@ class ProducerViewController:UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let varietal = allWines?.producers?[indexPath.section].wines?[indexPath.row].varietal
         let vintage = allWines?.producers?[indexPath.section].wines?[indexPath.row].vintage
-        let designation = allWines?.producers?[indexPath.section].wines?[indexPath.row].designation
+//        var designation = allWines?.producers?[indexPath.section].wines?[indexPath.row].designation
         let ava = allWines?.producers?[indexPath.section].wines?[indexPath.row].ava
-        
-        let bottleLocations = allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins
-        for bin in (allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins)! {
-            bottleCount += bin.bottleCount!
-        }
+//        let type = allWines?.producers?[indexPath.section].wines?[indexPath.row].type
+        let vineyard = allWines?.producers?[indexPath.section].wines?[indexPath.row].vineyard
 
         
-        cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + " bottles)"
-        if designation == "" {
+        let bottleLocations = allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins
+        for bin in bottleLocations! {
+            bottleCount += bin.bottleCount!
+        }
+        
+        var collective = " bottle)"
+        if (bottleCount > 1){
+            collective = " bottles)"
+        }
+        
+        cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + collective
+        if vineyard == "" {
             cell.detailTextLabel?.text = ava
         } else {
-            cell.detailTextLabel?.text = ava! + " - " + designation!
+            cell.detailTextLabel?.text = ava! + " - " + vineyard!
         }
         
         return cell
@@ -154,7 +192,10 @@ class ProducerViewController:UITableViewController {
     }
     
     @objc func handleAddWine(){
-        Alert.showAddBottleAlert(on: self)
+        let addWineController = AddWineController()
+//        wineDetailController.passedValue = wineSelected
+        let navController = UINavigationController(rootViewController: addWineController)
+        present(navController, animated: true, completion: nil)
     }
     
 }

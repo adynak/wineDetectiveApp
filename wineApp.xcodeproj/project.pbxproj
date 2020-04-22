@@ -14,10 +14,13 @@
 		36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4D0203D884D00581A05 /* ProducerViewController.swift */; };
 		922FBD3A21B9AEC100E14641 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FBD3921B9AEC100E14641 /* Alert.swift */; };
 		922FBD4021B9CD4800E14641 /* inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FBD3F21B9CD4800E14641 /* inventory.swift */; };
+		923B6D3F24509B020080A5F6 /* bottles1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 923B6D3E24509B020080A5F6 /* bottles1.csv */; };
+		92A25F2521F0E4F3005847F0 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A25F2421F0E4F3005847F0 /* AddTableViewCell.swift */; };
 		92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E15D1021B8A49E0068C213 /* VarietalViewController.swift */; };
 		92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */; };
 		92EE679121CD69BE00BAEEC1 /* InventoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678E21CD69BE00BAEEC1 /* InventoryAPI.swift */; };
 		92EE679221CD69BE00BAEEC1 /* WineBins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678F21CD69BE00BAEEC1 /* WineBins.swift */; };
+		92F7830621E8E7040003C451 /* AddWineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7830521E8E7040003C451 /* AddWineController.swift */; };
 		92FA003121BAD3B70091A710 /* wineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FA003021BAD3B70091A710 /* wineDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +34,13 @@
 		36BDE4D0203D884D00581A05 /* ProducerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducerViewController.swift; sourceTree = "<group>"; };
 		922FBD3921B9AEC100E14641 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		922FBD3F21B9CD4800E14641 /* inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inventory.swift; sourceTree = "<group>"; };
+		923B6D3E24509B020080A5F6 /* bottles1.csv */ = {isa = PBXFileReference; lastKnownFileType = text; name = bottles1.csv; path = wineApp/bottles1.csv; sourceTree = "<group>"; };
+		92A25F2421F0E4F3005847F0 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddTableViewCell.swift; path = ../../addWine/AddTableViewCell.swift; sourceTree = "<group>"; };
 		92E15D1021B8A49E0068C213 /* VarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarietalViewController.swift; sourceTree = "<group>"; };
 		92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinTableViewCell.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/BinTableViewCell.swift; sourceTree = "<group>"; };
 		92EE678E21CD69BE00BAEEC1 /* InventoryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InventoryAPI.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/InventoryAPI.swift; sourceTree = "<group>"; };
 		92EE678F21CD69BE00BAEEC1 /* WineBins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineBins.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/WineBins.swift; sourceTree = "<group>"; };
+		92F7830521E8E7040003C451 /* AddWineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineController.swift; sourceTree = "<group>"; };
 		92FA003021BAD3B70091A710 /* wineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wineDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +58,7 @@
 		36BDE4B0203D87BC00581A05 = {
 			isa = PBXGroup;
 			children = (
+				923B6D3E24509B020080A5F6 /* bottles1.csv */,
 				36BDE4BB203D87BC00581A05 /* wineApp */,
 				36BDE4BA203D87BC00581A05 /* Products */,
 			);
@@ -73,12 +80,14 @@
 				36BDE4CE203D884000581A05 /* VintageViewController.swift */,
 				92E15D1021B8A49E0068C213 /* VarietalViewController.swift */,
 				36BDE4D0203D884D00581A05 /* ProducerViewController.swift */,
+				92F7830521E8E7040003C451 /* AddWineController.swift */,
 				36BDE4C3203D87BC00581A05 /* Assets.xcassets */,
 				36BDE4C8203D87BC00581A05 /* Info.plist */,
 				922FBD3921B9AEC100E14641 /* Alert.swift */,
 				922FBD3F21B9CD4800E14641 /* inventory.swift */,
 				92FA003021BAD3B70091A710 /* wineDetailViewController.swift */,
 				92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */,
+				92A25F2421F0E4F3005847F0 /* AddTableViewCell.swift */,
 				92EE678E21CD69BE00BAEEC1 /* InventoryAPI.swift */,
 				92EE678F21CD69BE00BAEEC1 /* WineBins.swift */,
 			);
@@ -117,7 +126,7 @@
 				TargetAttributes = {
 					36BDE4B8203D87BC00581A05 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -145,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923B6D3F24509B020080A5F6 /* bottles1.csv in Resources */,
 				36BDE4C4203D87BC00581A05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,11 +167,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				922FBD4021B9CD4800E14641 /* inventory.swift in Sources */,
+				92A25F2521F0E4F3005847F0 /* AddTableViewCell.swift in Sources */,
 				92EE679221CD69BE00BAEEC1 /* WineBins.swift in Sources */,
 				36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */,
 				36BDE4BD203D87BC00581A05 /* AppDelegate.swift in Sources */,
 				92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,
+				92F7830621E8E7040003C451 /* AddWineController.swift in Sources */,
 				92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */,
 				36BDE4CF203D884000581A05 /* VintageViewController.swift in Sources */,
 				92EE679121CD69BE00BAEEC1 /* InventoryAPI.swift in Sources */,
@@ -294,7 +306,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = adynak.wineApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -309,7 +321,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = adynak.wineApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

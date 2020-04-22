@@ -36,7 +36,7 @@ class MainTabBarController: UITabBarController {
                                                      unselected: #imageLiteral(resourceName: "star_black"))
         varietalController.title = "Varietal"
         
-        viewControllers = [vintageController, producerController, varietalController]
+        viewControllers = [producerController, vintageController ,varietalController]
         
         guard let items = tabBar.items else { return }
         
