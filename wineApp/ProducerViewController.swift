@@ -123,30 +123,7 @@ class ProducerViewController:UITableViewController {
         wineSelected.country = allWines!.producers![section].wines![row].country!
         wineSelected.type = allWines!.producers![section].wines![row].type!
         wineSelected.vineyard = allWines!.producers![section].wines![row].vineyard!
-
         wineSelected.storageBins = allWines!.producers![section].wines![row].storageBins
-        
-//        struct Contact {
-//          var firstName: String
-//          var lastName: String
-//        }
-//
-//        var contacts = [
-//          Contact(firstName: "Leonard", lastName: "Charleson"),
-//          Contact(firstName: "Michael", lastName: "Webb"),
-//          Contact(firstName: "Charles", lastName: "Alexson"),
-//          Contact(firstName: "Michael", lastName: "Elexson"),
-//          Contact(firstName: "Alex", lastName: "Elexson"),
-//        ]
-//
-//        contacts.sort {
-//          ($0.lastName, $0.firstName) <
-//            ($1.lastName, $1.firstName)
-//        }
-//
-//        print(contacts)
-        
-        
         
         let wineDetailController = wineDetailViewController()
         wineDetailController.passedValue = wineSelected

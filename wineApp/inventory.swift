@@ -126,7 +126,6 @@ struct Label{
         endConsume = data[14]
     }
 }
-
 var fields = [Int]()
 var dataArray = [[String]]()
 var producer = [Producers]()
@@ -140,226 +139,50 @@ struct StorageBins: Codable {
     var bottleCount: Int?
     var binLocation: String?
     
+    
     static func fetchWineInventory(_ completionHandler: @escaping (WineInventory) -> ()) {
         
         //***
+        let user: String = "al00p"
+        let pword: String = "Genesis13355Tigard"
         
-        do {
-            guard let fileURL = Bundle.main.url(forResource: "bottles1", withExtension: "csv") else { fatalError() }
-            var data = try String(contentsOf: fileURL, encoding: String.Encoding.utf8)
+        let dataUrl = DataServices.getDataUrl(user: user,pword: pword)
+
+        URLSession.shared.dataTask(with: URL(string: dataUrl)!, completionHandler: { (data, response, error) -> Void in
             
-            data = data.replacingOccurrences(of: "Unknown", with: "")
-
-            dataArray = parseCsv(data)
-
-            let dataHeader = dataArray.removeFirst()
-            
-            let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume"]
-
-            for field in fieldsWeCareAbout{
-                if let i = dataHeader.firstIndex(where: { $0 == field }) {
-                    fields.append(i)
-                }
+            guard let data = data else {
+                return
             }
             
-        } catch {
-            print(error)
-        }
-
-        let positionOf = Label(data:fields)
-        var locationBin: String
-        var checkLocation: [StorageBins]
-        
-        for row in dataArray{
-            locationBin = row[positionOf.location] + row[positionOf.bin]
-            
-            if let producerIndex = producer.firstIndex(where: { $0.name == row[positionOf.producer] }) {
-                if let iWineIndex = producer[producerIndex].wines!.firstIndex(where: { $0.iWine == row[positionOf.iWine] }) {
-                    checkLocation = producer[producerIndex].wines![iWineIndex].storageBins!
-                    // existing iWine, is it in the same bin as the existing bottle?
-                    if let storageIndex = checkLocation.firstIndex(where: { ($0.binLocation! + $0.binName!) == locationBin }) {
-                            // bottle is in the same bin, bump the bottle count
-                        producer[producerIndex].wines![iWineIndex].storageBins![storageIndex].bottleCount! += 1
-                        } else {
-                            // bottle is in a new bin, add a new storage struct
-                            bin.removeAll()
-                            addNewStorage(binName: row[positionOf.bin], binLocation: row[positionOf.location], bin: &bin)
-                            producer[producerIndex].wines![iWineIndex].storageBins!.append(contentsOf: bin)
-                        }
-                } else {
-                    // new wine for existing producer
-                    wine.removeAll()
-                    wine.append(Wines(iWine: row[positionOf.iWine],
-                                      varietal: row[positionOf.varietal],
-                                      vineyard: row[positionOf.vineyard],
-                                      vintage: row[positionOf.vintage],
-                                      designation: row[positionOf.designation],
-                                      ava: row[positionOf.ava],
-                                      region: row[positionOf.region],
-                                      country: row[positionOf.country],
-                                      locale: row[positionOf.locale],
-                                      type: row[positionOf.type],
-                                      drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume],endConsume: row[positionOf.endConsume]),
-                                      storageBins: bin))
-                    producer[producerIndex].wines!.append(contentsOf:wine)
-                }
-
-            } else {
-                // new producer
-                wine.removeAll()
-                bin.removeAll()
-                addNewStorage(binName: row[positionOf.bin], binLocation: row[positionOf.location], bin: &bin)
-                wine.append(Wines(iWine: row[positionOf.iWine],
-                                  varietal: row[positionOf.varietal],
-                                  vineyard: row[positionOf.vineyard],
-                                  vintage: row[positionOf.vintage],
-                                  designation: row[positionOf.designation],
-                                  ava: row[positionOf.ava],
-                                  region: row[positionOf.region],
-                                  country: row[positionOf.country],
-                                  locale: row[positionOf.locale],
-                                  type: row[positionOf.type],
-                                  drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume],endConsume: row[positionOf.endConsume]),
-                                  storageBins: bin))
-                producer.append(Producers(name: row[positionOf.producer], isExpanded: false, wines: wine))
+            if let error = error {
+                print(error)
+                return
             }
 
-        }
-
-        var wineInventory = [WineInventory]()
-        let newInventory = WineInventory(producers: producer)
-        wineInventory.append(newInventory)
-        
-        producer = producer.sorted {
-            var isSorted = false
-            if let first = $0.name, let second = $1.name {
-                isSorted = first < second
-            }
-            return isSorted
-        }
-        
-        do {
-            var wineInventory = [WineInventory]()
-            let newInventory = WineInventory(producers: producer)
-            wineInventory.append(newInventory)
+            do {
+                var csvData = String(data: data, encoding: .ascii)
+                csvData = csvData!.replacingOccurrences(of: "Unknown", with: "")
+                dataArray = DataServices.parseCsv(data:csvData!)
+                let dataHeader = dataArray.removeFirst()
+                let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+                DataServices.buildProducersArray(fields: fields)
+                
+                var wineInventory = [WineInventory]()
+                let newInventory = WineInventory(producers: producer)
+                wineInventory.append(newInventory)
 
                 DispatchQueue.main.async(execute: { () -> Void in
                     completionHandler(newInventory)
                 })
+                
+            } catch let err {
+                print(err)
+            }
 
-        } catch let err {
-            print(err)
-        }
+        }) .resume()
 
-        
-//        do {
-//            let decoder = JSONDecoder()
-//
-//            let jsonData = try JSONEncoder().encode(newInventory)
-//            let jsonString = String(data: jsonData, encoding: .utf8)!
-//
-//        } catch let err {
-//            print(err)
-//        }
-        
-        
-        
-        //***
-        
-//        let urlString = "http://localhost/angular/git/wine/resources/dataservices/test.php?rows=1"
-//
-//        URLSession.shared.dataTask(with: URL(string: urlString)!, completionHandler: { (data, response, error) -> Void in
-//
-//            guard let data = data else {
-//                return
-//            }
-//
-//            if let error = error {
-//                print(error)
-//                return
-//            }
-//
-//            do {
-//                let decoder = JSONDecoder()
-//                let wineInventory = try decoder.decode(WineInventory.self, from: data)
-//
-////                DispatchQueue.main.async(execute: { () -> Void in
-////                    completionHandler(wineInventory)
-////                })
-//
-//            } catch let err {
-//                print(err)
-//            }
-//
-//        }) .resume()
-        
     }
     
-}
-
-func parseCsv(_ data: String) -> [[String]] {
-    // data: String = contents of a CSV file.
-    // Returns: [[String]] = two-dimension array [rows][columns].
-    // Data minimum two characters or fail.
-    if data.count < 2 {
-        return []
-    }
-    var a: [String] = [] // Array of columns.
-    var index: String.Index = data.startIndex
-    let maxIndex: String.Index = data.index(before: data.endIndex)
-    var q: Bool = false // "Are we in quotes?"
-    var result: [[String]] = []
-    var v: String = "" // Column value.
-    while index < data.endIndex {
-        if q { // In quotes.
-            if (data[index] == "\"") {
-                // Found quote; look ahead for another.
-                if index < maxIndex && data[data.index(after: index)] == "\"" {
-                    // Found another quote means escaped.
-                    // Increment and add to column value.
-                    data.formIndex(after: &index)
-                    v += String(data[index])
-                } else {
-                    // Next character not a quote; last quote not escaped.
-                    q = !q // Toggle "Are we in quotes?"
-                }
-            } else {
-                // Add character to column value.
-                v += String(data[index])
-            }
-        } else { // Not in quotes.
-            if data[index] == "\"" {
-                // Found quote.
-                q = !q // Toggle "Are we in quotes?"
-            } else if data[index] == "\n" || data[index] == "\r\n" {
-                // Reached end of line.
-                // Column and row complete.
-                a.append(v)
-                v = ""
-                result.append(a)
-                a = []
-            } else if data[index] == "," {
-                // Found comma; column complete.
-                a.append(v)
-                v = ""
-            } else {
-                // Add character to column value.
-                v += String(data[index])
-            }
-        }
-        if index == maxIndex {
-            // Reached end of data; flush.
-            if v.count > 0 || data[data.index(before: index)] == "," {
-                a.append(v)
-            }
-            if a.count > 0 {
-                result.append(a)
-            }
-            break
-        }
-        data.formIndex(after: &index) // Increment.
-    }
-    return result
 }
 
 func addNewStorage(binName: String, binLocation: String, bin: inout [StorageBins]) {

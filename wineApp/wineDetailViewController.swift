@@ -227,6 +227,10 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             vineyard = " - " + passedValue.vineyard
         }
         
+        if (passedValue.varietal == passedValue.designation){
+            designation = ""
+        }
+        
         let attributedText = NSMutableAttributedString(
             string: passedValue.vintage + " " + passedValue.varietal + designation + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15),

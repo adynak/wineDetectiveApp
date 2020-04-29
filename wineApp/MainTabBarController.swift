@@ -21,17 +21,17 @@ class MainTabBarController: UITabBarController {
     
     func setupTabBar() {
         
-        let vintageController = createNavController(vc: VintageViewController(),
+        let vintageController = createNavController(viewController: VintageViewController(),
                                                     selected: #imageLiteral(resourceName: "star_white"),
                                                     unselected: #imageLiteral(resourceName: "star_black"))
         vintageController.title = "Vintage"
         
-        let producerController = createNavController(vc: ProducerViewController(),
+        let producerController = createNavController(viewController: ProducerViewController(),
                                                      selected: #imageLiteral(resourceName: "star_white"),
                                                      unselected: #imageLiteral(resourceName: "star_black"))
         producerController.title = "Producer"
         
-        let varietalController = createNavController(vc: VarietalViewController(),
+        let varietalController = createNavController(viewController: VarietalViewController(),
                                                      selected: #imageLiteral(resourceName: "star_white"),
                                                      unselected: #imageLiteral(resourceName: "star_black"))
         varietalController.title = "Varietal"
@@ -49,8 +49,7 @@ class MainTabBarController: UITabBarController {
 
 extension UITabBarController {
     
-    func createNavController(vc: UIViewController, selected: UIImage, unselected: UIImage) -> UINavigationController {
-        let viewController = vc
+    func createNavController(viewController: UIViewController, selected: UIImage, unselected: UIImage) -> UINavigationController {
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.image = unselected
         navController.tabBarItem.selectedImage = selected
