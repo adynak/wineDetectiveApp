@@ -41,6 +41,12 @@ struct Alert{
         showBasicAlert(on: vc, with: "Action Menu", message: "action menu requested")
     }
 
+    static func showLoginCredentialsAlert(on vc: UIViewController){
+        showBasicAlert(on: vc, with: "Login", message: "User Name and Password are required")
+    }
+
+    
+    
     static func showWineDetailAlert(on vc: UIViewController, with bottleInfo:String){
         showBasicAlert(on: vc,
                        with: "Wine Details",

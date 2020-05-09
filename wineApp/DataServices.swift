@@ -75,9 +75,9 @@ class DataServices {
         return result
     }
     
-    static func getDataUrl(user: String,pword: String)-> String{
+    static func getDataUrl(user: String,pword: String) -> String{
         
-        let debug: Bool = false
+        let debug: Bool = true
         struct URL {
             let scheme: String
             let host: String
@@ -86,7 +86,7 @@ class DataServices {
         }
         var url: URL
         if (debug == true){
-            url = URL.init(scheme: "http", host: "localhost", path: "/angular/git/wine/resources/dataservices/csv.php")
+            url = URL.init(scheme: "http", host: "10.0.1.9", path: "/angular/git/wine/resources/dataservices/csv.php")
         } else {
             url = URL.init(scheme: "https", host: "www.cellartracker.com", path: "/xlquery.asp")
         }
@@ -138,19 +138,34 @@ class DataServices {
 
         return varietal
     }
-    
-    static func buildProducersArray(fields: [Int]){
+        
+    static func buildProducersArray(fields: [Int],
+                                    sortKey: String) -> [Producers]{
         
         let positionOf = Label(data:fields)
         var locationBin: String
-        var varietal: String
         var checkLocation: [StorageBins]
+        var producer = [Producers]()
+        var firstSortBy: Int
+        
+        switch sortKey {
+            case "producer":
+                firstSortBy = positionOf.producer
+            case "varietal":
+                firstSortBy = positionOf.varietal
+            case "drinkBy":
+                firstSortBy = positionOf.endConsume
+            default:
+                firstSortBy = positionOf.producer
+        }
         
         for row in dataArray{
+            // special transformations
             locationBin = row[positionOf.location] + row[positionOf.bin]
-            varietal = buildVarietal(row: row, positionOf: positionOf)
+            let varietal = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : row[firstSortBy]
+            let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
 
-            if let producerIndex = producer.firstIndex(where: { $0.name == row[positionOf.producer] }) {
+            if let producerIndex = producer.firstIndex(where: { $0.name == row[firstSortBy] }) {
                 if let iWineIndex = producer[producerIndex].wines!.firstIndex(where: { $0.iWine == row[positionOf.iWine] }) {
                     checkLocation = producer[producerIndex].wines![iWineIndex].storageBins!
                     // existing iWine, is it in the same bin as the existing bottle?
@@ -163,23 +178,26 @@ class DataServices {
                             addNewStorage(binName: row[positionOf.bin], binLocation: row[positionOf.location], bin: &bin)
                             producer[producerIndex].wines![iWineIndex].storageBins!.append(contentsOf: bin)
                         }
+                    producer[producerIndex].bottleCount! += 1
                 } else {
                     // new wine for existing producer
                     wine.removeAll()
                     wine.append(Wines(iWine: row[positionOf.iWine],
                                       varietal: varietal,
                                       vineyard: row[positionOf.vineyard],
-                                      vintage: row[positionOf.vintage],
+                                      vintage: vintage,
                                       designation: row[positionOf.designation],
                                       ava: row[positionOf.ava],
                                       region: row[positionOf.region],
                                       country: row[positionOf.country],
                                       locale: row[positionOf.locale],
                                       type: row[positionOf.type],
-                                      drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume],endConsume: row[positionOf.endConsume]),
+                                      drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume]),
+                                      producer: row[positionOf.producer],
                                       storageBins: bin))
                     // keep wines sorted by using insert
-                    let searchKey = varietal + row[positionOf.vintage]
+                    producer[producerIndex].bottleCount! += 1
+                    let searchKey = row[positionOf.varietal] + row[positionOf.vintage]
                     if let index = producer[producerIndex].wines!.firstIndex(where: { $0.varietal! + $0.vintage! > searchKey}) {
                         producer[producerIndex].wines!.insert(contentsOf: wine, at: index)
                     } else {
@@ -196,7 +214,7 @@ class DataServices {
                 wine.append(Wines(iWine: row[positionOf.iWine],
                                   varietal: varietal,
                                   vineyard: row[positionOf.vineyard],
-                                  vintage: row[positionOf.vintage],
+                                  vintage: vintage,
                                   designation: row[positionOf.designation],
                                   ava: row[positionOf.ava],
                                   region: row[positionOf.region],
@@ -204,8 +222,12 @@ class DataServices {
                                   locale: row[positionOf.locale],
                                   type: row[positionOf.type],
                                   drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume],endConsume: row[positionOf.endConsume]),
+                                  producer: row[positionOf.producer],
                                   storageBins: bin))
-                producer.append(Producers(name: row[positionOf.producer], isExpanded: false, wines: wine))
+                producer.append(Producers(name: row[firstSortBy],
+                                          isExpanded: false,
+                                          bottleCount: 1,
+                                          wines: wine))
             }
 
         }
@@ -217,7 +239,13 @@ class DataServices {
             }
             return isSorted
         }
+        
+        return producer
 
+    }
+    
+    static func getWineData(){
+        print("gwd")
     }
     
 }

@@ -19,11 +19,12 @@ class ProducerViewController:UITableViewController {
         setupNavBar()
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         
-        StorageBins.fetchWineInventory { (wineInventory) -> () in
+        fetchWineInventory { (wineInventory) -> () in
             self.allWines = wineInventory
             self.tableView.reloadData()
+            allWine = wineInventory
         }
-        
+                
     }
     
     func setupNavBar(){
@@ -35,16 +36,24 @@ class ProducerViewController:UITableViewController {
                                          action: #selector(handleActionMenu))
         navigationItem.rightBarButtonItem = moreMenu
         
-        let addWine = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add,
-                                      target: self,
-                                      action: #selector(handleAddWine))
-        navigationItem.leftBarButtonItem = addWine
+//        let addWine = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
+//                                      target: self,
+//                                      action: #selector(handleAddWine))
+        
+        let cancelButton = UIBarButtonItem(title: "Log Out",
+                                           style: UIBarButtonItem.Style.plain,
+                                           target: self,
+                                           action: #selector(handleLogOut))
+        
+        navigationItem.leftBarButtonItem = cancelButton
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let sectionTitle = (allWines!.producers?[section].name)! +
-            " (" + String(allWines!.producers![section].wines!.count) + ")"
+        let sectionName = (allWines!.producers?[section].name)!
+        let bottleCount = (allWines!.producers?[section].bottleCount)!
+
+        let sectionTitle = sectionName + " (\(bottleCount))"
         let colorOdd = UIColor(r:184, g:206, b:249)
         let colorEven = UIColor(r:202, g:227, b:255)
         
@@ -169,10 +178,24 @@ class ProducerViewController:UITableViewController {
     }
     
     @objc func handleAddWine(){
-        let addWineController = AddWineController()
-//        wineDetailController.passedValue = wineSelected
-        let navController = UINavigationController(rootViewController: addWineController)
-        present(navController, animated: true, completion: nil)
+//        let addWineController = AddWineController()
+////        wineDetailController.passedValue = wineSelected
+//        let navController = UINavigationController(rootViewController: addWineController)
+//        present(navController, animated: true, completion: nil)
+        
+        UserDefaults.standard.setIsLoggedIn(value: false)
+        
+        let loginController = LoginController()
+        present(loginController, animated: true, completion: nil)
+        
+    }
+    
+    @objc func handleLogOut(){
+        UserDefaults.standard.setIsLoggedIn(value: false)
+        
+        let loginController = LoginController()
+        present(loginController, animated: true, completion: nil)
+        
     }
     
 }

@@ -220,7 +220,6 @@ class AddWineController: UIViewController {
         
         return vintageToolbar
 
-        
     }
     
     func assignPassedValuesToTextarea(){

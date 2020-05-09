@@ -10,17 +10,25 @@
 		36BDE4BD203D87BC00581A05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4BC203D87BC00581A05 /* AppDelegate.swift */; };
 		36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */; };
 		36BDE4C4203D87BC00581A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36BDE4C3203D87BC00581A05 /* Assets.xcassets */; };
-		36BDE4CF203D884000581A05 /* VintageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4CE203D884000581A05 /* VintageViewController.swift */; };
+		36BDE4CF203D884000581A05 /* DrinkByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4CE203D884000581A05 /* DrinkByViewController.swift */; };
 		36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4D0203D884D00581A05 /* ProducerViewController.swift */; };
+		92042F3524645CBC00515BAD /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92042F3424645CBC00515BAD /* UserCell.swift */; };
 		922FBD3A21B9AEC100E14641 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FBD3921B9AEC100E14641 /* Alert.swift */; };
 		922FBD4021B9CD4800E14641 /* inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FBD3F21B9CD4800E14641 /* inventory.swift */; };
 		923B6D3F24509B020080A5F6 /* bottles1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 923B6D3E24509B020080A5F6 /* bottles1.csv */; };
+		924175EE245A1EA7002502FE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175ED245A1EA7002502FE /* LoginController.swift */; };
+		924175F2245A2082002502FE /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175F1245A2082002502FE /* LoginCell.swift */; };
+		924175F4245A2104002502FE /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175F3245A2104002502FE /* PageCell.swift */; };
+		924175F6245A212E002502FE /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175F5245A212E002502FE /* Page.swift */; };
+		924175FA245A2625002502FE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175F9245A2625002502FE /* UserDefaults.swift */; };
+		924175FC245A2910002502FE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175FB245A2910002502FE /* Extensions.swift */; };
+		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
 		92A25F2521F0E4F3005847F0 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A25F2421F0E4F3005847F0 /* AddTableViewCell.swift */; };
+		92D65EBE2465A4B4009FD605 /* WineBins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D65EBD2465A4B4009FD605 /* WineBins.swift */; };
 		92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E15D1021B8A49E0068C213 /* VarietalViewController.swift */; };
 		92E60F452455DBAB0047911C /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60F442455DBAB0047911C /* DataServices.swift */; };
 		92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */; };
 		92EE679121CD69BE00BAEEC1 /* InventoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678E21CD69BE00BAEEC1 /* InventoryAPI.swift */; };
-		92EE679221CD69BE00BAEEC1 /* WineBins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678F21CD69BE00BAEEC1 /* WineBins.swift */; };
 		92F7830621E8E7040003C451 /* AddWineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7830521E8E7040003C451 /* AddWineController.swift */; };
 		92FA003121BAD3B70091A710 /* wineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FA003021BAD3B70091A710 /* wineDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -31,17 +39,25 @@
 		36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		36BDE4C3203D87BC00581A05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36BDE4C8203D87BC00581A05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		36BDE4CE203D884000581A05 /* VintageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VintageViewController.swift; sourceTree = "<group>"; };
+		36BDE4CE203D884000581A05 /* DrinkByViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkByViewController.swift; sourceTree = "<group>"; };
 		36BDE4D0203D884D00581A05 /* ProducerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducerViewController.swift; sourceTree = "<group>"; };
+		92042F3424645CBC00515BAD /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		922FBD3921B9AEC100E14641 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		922FBD3F21B9CD4800E14641 /* inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inventory.swift; sourceTree = "<group>"; };
 		923B6D3E24509B020080A5F6 /* bottles1.csv */ = {isa = PBXFileReference; lastKnownFileType = text; name = bottles1.csv; path = wineApp/bottles1.csv; sourceTree = "<group>"; };
+		924175ED245A1EA7002502FE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		924175F1245A2082002502FE /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
+		924175F3245A2104002502FE /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		924175F5245A212E002502FE /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		924175F9245A2625002502FE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		924175FB245A2910002502FE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		92753CE4245DC3D400EF08F6 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		92A25F2421F0E4F3005847F0 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddTableViewCell.swift; path = ../../addWine/AddTableViewCell.swift; sourceTree = "<group>"; };
+		92D65EBD2465A4B4009FD605 /* WineBins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineBins.swift; path = ../../../../Users/adynak/.Trash/WineBins.swift; sourceTree = "<group>"; };
 		92E15D1021B8A49E0068C213 /* VarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarietalViewController.swift; sourceTree = "<group>"; };
 		92E60F442455DBAB0047911C /* DataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
 		92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinTableViewCell.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/BinTableViewCell.swift; sourceTree = "<group>"; };
 		92EE678E21CD69BE00BAEEC1 /* InventoryAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InventoryAPI.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/InventoryAPI.swift; sourceTree = "<group>"; };
-		92EE678F21CD69BE00BAEEC1 /* WineBins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineBins.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/WineBins.swift; sourceTree = "<group>"; };
 		92F7830521E8E7040003C451 /* AddWineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineController.swift; sourceTree = "<group>"; };
 		92FA003021BAD3B70091A710 /* wineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wineDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,9 +76,16 @@
 		36BDE4B0203D87BC00581A05 = {
 			isa = PBXGroup;
 			children = (
+				92042F3424645CBC00515BAD /* UserCell.swift */,
+				92753CE4245DC3D400EF08F6 /* Keyboard.swift */,
+				924175F9245A2625002502FE /* UserDefaults.swift */,
+				924175F1245A2082002502FE /* LoginCell.swift */,
+				924175F3245A2104002502FE /* PageCell.swift */,
+				924175F5245A212E002502FE /* Page.swift */,
 				923B6D3E24509B020080A5F6 /* bottles1.csv */,
 				36BDE4BB203D87BC00581A05 /* wineApp */,
 				36BDE4BA203D87BC00581A05 /* Products */,
+				92D65EBD2465A4B4009FD605 /* WineBins.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,8 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				36BDE4BC203D87BC00581A05 /* AppDelegate.swift */,
+				924175ED245A1EA7002502FE /* LoginController.swift */,
+				924175FB245A2910002502FE /* Extensions.swift */,
 				36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */,
-				36BDE4CE203D884000581A05 /* VintageViewController.swift */,
+				36BDE4CE203D884000581A05 /* DrinkByViewController.swift */,
 				92E15D1021B8A49E0068C213 /* VarietalViewController.swift */,
 				36BDE4D0203D884D00581A05 /* ProducerViewController.swift */,
 				92F7830521E8E7040003C451 /* AddWineController.swift */,
@@ -92,7 +117,6 @@
 				92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */,
 				92A25F2421F0E4F3005847F0 /* AddTableViewCell.swift */,
 				92EE678E21CD69BE00BAEEC1 /* InventoryAPI.swift */,
-				92EE678F21CD69BE00BAEEC1 /* WineBins.swift */,
 			);
 			path = wineApp;
 			sourceTree = "<group>";
@@ -172,14 +196,22 @@
 				922FBD4021B9CD4800E14641 /* inventory.swift in Sources */,
 				92E60F452455DBAB0047911C /* DataServices.swift in Sources */,
 				92A25F2521F0E4F3005847F0 /* AddTableViewCell.swift in Sources */,
-				92EE679221CD69BE00BAEEC1 /* WineBins.swift in Sources */,
+				924175EE245A1EA7002502FE /* LoginController.swift in Sources */,
+				924175FA245A2625002502FE /* UserDefaults.swift in Sources */,
 				36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */,
 				36BDE4BD203D87BC00581A05 /* AppDelegate.swift in Sources */,
 				92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */,
+				924175FC245A2910002502FE /* Extensions.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,
+				92042F3524645CBC00515BAD /* UserCell.swift in Sources */,
 				92F7830621E8E7040003C451 /* AddWineController.swift in Sources */,
+				92D65EBE2465A4B4009FD605 /* WineBins.swift in Sources */,
 				92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */,
-				36BDE4CF203D884000581A05 /* VintageViewController.swift in Sources */,
+				36BDE4CF203D884000581A05 /* DrinkByViewController.swift in Sources */,
+				924175F6245A212E002502FE /* Page.swift in Sources */,
+				924175F2245A2082002502FE /* LoginCell.swift in Sources */,
+				924175F4245A2104002502FE /* PageCell.swift in Sources */,
+				92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */,
 				92EE679121CD69BE00BAEEC1 /* InventoryAPI.swift in Sources */,
 				92FA003121BAD3B70091A710 /* wineDetailViewController.swift in Sources */,
 				922FBD3A21B9AEC100E14641 /* Alert.swift in Sources */,

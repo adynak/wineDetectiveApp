@@ -8,48 +8,6 @@
 
 import Foundation
 
-struct InventoryByVintage {
-    
-    var isExpanded: Bool
-    var vintage: String
-    var producers: [String]
-    var varietals: [String]
-    var avas: [String]
-    var designations: [String]
-    var bottleCount: [String]
-}
-
-struct InventoryByVarietal {
-    
-    var isExpanded: Bool
-    var varietal: String
-    var producers: [String]
-    var vintages: [String]
-    var avas: [String]
-    var designations: [String]
-    var bottleCount: [String]
-}
-
-struct InventoryByProducer {
-    
-    var isExpanded: Bool
-    var producer: String
-    var vintages: [String]
-    var varietals: [String]
-    var avas: [String]
-    var designations: [String]
-    var bottleCount: [String]
-}
-
-//struct wineDetail {
-//    var varietal = "123"
-//    var vintage = "123"
-//    var producer = "123"
-//    var ava = "123"
-//    var designation = "123"
-//    var bottleCount = "19"
-//}
-
 struct wineDetail {
     var varietal = "123"
     var vintage = "123"
@@ -68,11 +26,15 @@ struct wineDetail {
 
 struct WineInventory: Codable {
     var producers: [Producers]?
+    var varietals: [Producers]?
+    var drinkBy: [Producers]?
+
 }
 
 struct Producers: Codable {
     let name: String?
     var isExpanded: Bool?
+    var bottleCount: Int?
     var wines : [Wines]?
 }
 
@@ -88,6 +50,7 @@ struct Wines : Codable {
     let locale: String?
     let type: String?
     let drinkBy: String?
+    let producer: String?
     var storageBins: [StorageBins]?
 }
 
@@ -128,7 +91,6 @@ struct Label{
 }
 var fields = [Int]()
 var dataArray = [[String]]()
-var producer = [Producers]()
 var wine = [Wines]()
 var bin = [StorageBins]()
 var designation: String = ""
@@ -139,14 +101,16 @@ struct StorageBins: Codable {
     var bottleCount: Int?
     var binLocation: String?
     
-    
-    static func fetchWineInventory(_ completionHandler: @escaping (WineInventory) -> ()) {
+}
+
+    func fetchWineInventory(_ completionHandler: @escaping (WineInventory) -> ()) {
         
-        //***
-        let user: String = "al00p"
-        let pword: String = "Genesis13355Tigard"
+                
+        let user = UserDefaults.standard.getUserName()
+        let pword = UserDefaults.standard.getUserPword()
         
         let dataUrl = DataServices.getDataUrl(user: user,pword: pword)
+        print(dataUrl)
 
         URLSession.shared.dataTask(with: URL(string: dataUrl)!, completionHandler: { (data, response, error) -> Void in
             
@@ -165,25 +129,28 @@ struct StorageBins: Codable {
                 dataArray = DataServices.parseCsv(data:csvData!)
                 let dataHeader = dataArray.removeFirst()
                 let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
-                DataServices.buildProducersArray(fields: fields)
                 
-                var wineInventory = [WineInventory]()
-                let newInventory = WineInventory(producers: producer)
-                wineInventory.append(newInventory)
+                let producerSort = DataServices.buildProducersArray(fields: fields,
+                                                                    sortKey: "producer")
+                let varietalSort = DataServices.buildProducersArray(fields: fields,
+                                                                    sortKey: "varietal")
+                let drinkBySort = DataServices.buildProducersArray(fields: fields,
+                                                                   sortKey: "drinkBy")
+                
+                let newInventory = WineInventory(producers: producerSort,
+                                                 varietals: varietalSort,
+                                                 drinkBy: drinkBySort)
 
                 DispatchQueue.main.async(execute: { () -> Void in
                     completionHandler(newInventory)
                 })
                 
-            } catch let err {
-                print(err)
             }
 
         }) .resume()
 
     }
-    
-}
+
 
 func addNewStorage(binName: String, binLocation: String, bin: inout [StorageBins]) {
     let storage = StorageBins(binName:binName, bottleCount:1, binLocation:binLocation)

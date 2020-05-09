@@ -13,35 +13,58 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.barTintColor = UIColor(r: 61,  g: 91,  b: 151)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
-        setupTabBar()
+        if isLoggedIn() {
+            tabBar.barTintColor = UIColor.white
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .selected)
+            setupTabBar()
+        } else {
+            perform(#selector(showLoginController), with: nil, afterDelay: 0.01)
+        }
     }
+    
+    fileprivate func isLoggedIn() -> Bool {
+           return UserDefaults.standard.isLoggedIn()
+    }
+    
+    @objc func showLoginController() {
+        let loginController = LoginController()
+        present(loginController, animated: true, completion: {
+            //perhaps we'll do something here later
+        })
+    }
+
     
     func setupTabBar() {
         
-        let vintageController = createNavController(viewController: VintageViewController(),
-                                                    selected: #imageLiteral(resourceName: "star_white"),
-                                                    unselected: #imageLiteral(resourceName: "star_black"))
-        vintageController.title = "Vintage"
+        let drinkByController = createNavController(viewController: DrinkByViewController(),
+                                                    selected: #imageLiteral(resourceName: "star_black"),
+                                                    unselected: #imageLiteral(resourceName: "star_black"),
+                                                    title: "Drink")
         
         let producerController = createNavController(viewController: ProducerViewController(),
-                                                     selected: #imageLiteral(resourceName: "star_white"),
-                                                     unselected: #imageLiteral(resourceName: "star_black"))
-        producerController.title = "Producer"
+                                                     selected: #imageLiteral(resourceName: "star_black"),
+                                                     unselected: #imageLiteral(resourceName: "star_black"),
+                                                     title: "Producer")
         
         let varietalController = createNavController(viewController: VarietalViewController(),
-                                                     selected: #imageLiteral(resourceName: "star_white"),
-                                                     unselected: #imageLiteral(resourceName: "star_black"))
-        varietalController.title = "Varietal"
+                                                     selected: #imageLiteral(resourceName: "star_black"),
+                                                     unselected: #imageLiteral(resourceName: "star_black"),
+                                                     title: "Varietal")
         
-        viewControllers = [producerController, vintageController ,varietalController]
+        viewControllers = [producerController, varietalController, drinkByController]
         
-        guard let items = tabBar.items else { return }
+//        guard let items = tabBar.items else { return }
         
-        for item in items {
-            item.imageInsets = UIEdgeInsets.init(top: 4, left: 0, bottom: -4, right: 0)
+        var offset: CGFloat = 0.0
+        if #available(iOS 11.0, *), traitCollection.horizontalSizeClass == .regular {
+            offset = 0.0
+        }
+        if let items = tabBar.items {
+            for item in items {
+                item.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0)
+                item.titlePositionAdjustment = UIOffset(horizontal:0, vertical:0)
+            }
         }
     }
     
@@ -49,10 +72,11 @@ class MainTabBarController: UITabBarController {
 
 extension UITabBarController {
     
-    func createNavController(viewController: UIViewController, selected: UIImage, unselected: UIImage) -> UINavigationController {
+    func createNavController(viewController: UIViewController, selected: UIImage, unselected: UIImage, title: String) -> UINavigationController {
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem.image = unselected
         navController.tabBarItem.selectedImage = selected
+        navController.tabBarItem.title = title
         return navController
     }
 }

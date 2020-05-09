@@ -16,8 +16,8 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var myUpdater: BottleCountDelegate!
     
-    let tableContainerTopAnchor:CGFloat = 200.0
-    let tableContainerHeightAnchor:CGFloat = 280.0
+    var tableContainerTopAnchor:CGFloat = 200.0
+    var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
     let tableRowHeight:CGFloat = 50
     let sortBins:Bool = true
     
@@ -42,7 +42,7 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     let storageLabel: UITextView = {
         let tv = UITextView()
-        tv.text = "Location and Bin:\n"
+        tv.text = "Location and Bin:"
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor(r:202, g:227, b:255)
@@ -66,7 +66,6 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return tv
     }()
     
-    
     let tableContainer: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -80,9 +79,7 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         tv.layer.cornerRadius = 5
         return tv
     }()
-    
-//    private var wineBins = InventoryAPI.getInventory() // model
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(r:202, g:227, b:255)
@@ -114,8 +111,8 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         inventoryFooter.text = getTotalBottles()
         NSLayoutConstraint.activate([
             inventoryFooter.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            inventoryFooter.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -52),
-            inventoryFooter.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            inventoryFooter.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            inventoryFooter.heightAnchor.constraint(equalToConstant: 40),
             inventoryFooter.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant : 6),
             inventoryFooter.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant : -6)
         ])
@@ -144,7 +141,8 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             tableContainer.topAnchor.constraint(equalTo:storageLabel.bottomAnchor, constant:10),
             tableContainer.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant : 6),
             tableContainer.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant : -6),
-            tableContainer.heightAnchor.constraint(equalToConstant: tableContainerHeightAnchor)
+            tableContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -110),
+//            tableContainer.heightAnchor.constraint(equalToConstant: tableContainerHeightAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -185,6 +183,7 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     private func setupNavigationBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Inventory"
+
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
@@ -260,14 +259,11 @@ class wineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func getTotalBottles()  -> String {
         var totalBottles = 0
-        var bottleString = " bottle"
         for bin in wineBins
         {
             totalBottles += bin.bottleCount!
         }
-        if (totalBottles > 1){
-          bottleString = " bottles"
-        }
+        let bottleString = (totalBottles > 1) ? " bottles" : " bottle"
         return String(totalBottles) + bottleString
     }
 
