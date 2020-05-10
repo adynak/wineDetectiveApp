@@ -29,6 +29,7 @@ class ProducerViewController:UITableViewController {
     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
+        
         navigationItem.title = "Producer"
         
         let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
