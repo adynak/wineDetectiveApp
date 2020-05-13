@@ -38,21 +38,29 @@ class MainTabBarController: UITabBarController {
     func setupTabBar() {
         
         let drinkByController = createNavController(viewController: DrinkByViewController(),
-                                                    selected: #imageLiteral(resourceName: "star_black"),
-                                                    unselected: #imageLiteral(resourceName: "star_black"),
+                                                    selected: #imageLiteral(resourceName: "drinkDark"),
+                                                    unselected: #imageLiteral(resourceName: "drinkLight"),
                                                     title: "Drink")
         
         let producerController = createNavController(viewController: ProducerViewController(),
-                                                     selected: #imageLiteral(resourceName: "star_black"),
-                                                     unselected: #imageLiteral(resourceName: "star_black"),
+                                                     selected: #imageLiteral(resourceName: "farmDark"),
+                                                     unselected: #imageLiteral(resourceName: "farmLight"),
                                                      title: "Producer")
         
         let varietalController = createNavController(viewController: VarietalViewController(),
-                                                     selected: #imageLiteral(resourceName: "star_black"),
-                                                     unselected: #imageLiteral(resourceName: "star_black"),
+                                                     selected: #imageLiteral(resourceName: "grapesDark"),
+                                                     unselected: #imageLiteral(resourceName: "grapesLight"),
                                                      title: "Varietal")
         
-        viewControllers = [producerController, varietalController, drinkByController]
+        let searchController = createNavController(viewController: SearchViewController(),
+                                                     selected: #imageLiteral(resourceName: "search"),
+                                                     unselected: #imageLiteral(resourceName: "search"),
+                                                     title: "Search")
+        
+        viewControllers = [producerController,
+                           varietalController,
+                           drinkByController,
+                           searchController]
         
 //        guard let items = tabBar.items else { return }
         

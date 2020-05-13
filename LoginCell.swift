@@ -75,8 +75,8 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        emailTextField.text = "al00p"
-//        passwordTextField.text = "Genesis13355Tigard"
+        emailTextField.text = "al00p"
+        passwordTextField.text = "Genesis13355Tigard"
         
         if ((emailTextField.text!.isEmpty) || (passwordTextField.text?.isEmpty) != nil) {
             loginButton.isEnabled = true
