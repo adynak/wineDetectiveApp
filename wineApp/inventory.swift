@@ -132,8 +132,10 @@ struct StorageBins: Codable {
                 
                 let producerSort = DataServices.buildProducersArray(fields: fields,
                                                                     sortKey: "producer")
+                
                 let varietalSort = DataServices.buildProducersArray(fields: fields,
                                                                     sortKey: "varietal")
+                
                 let drinkBySort = DataServices.buildProducersArray(fields: fields,
                                                                    sortKey: "drinkBy")
                 

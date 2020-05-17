@@ -145,9 +145,9 @@ class DrinkByViewController :UITableViewController {
         let varietal = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].varietal
         let vintage = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].vintage
 //        var designation = allWines?.producers?[indexPath.section].wines?[indexPath.row].designation
-        let ava = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].ava
+//        let ava = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].ava
 //        let type = allWines?.producers?[indexPath.section].wines?[indexPath.row].type
-        let vineyard = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].vineyard
+//        let vineyard = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].vineyard
 
         let producer = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].producer
 

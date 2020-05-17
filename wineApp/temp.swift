@@ -8,12 +8,7 @@
 
 import Foundation
 
-struct sb {
-    let binName: String
-    let bottleCount: Int
-    let binLocation: String
-
-}
+var varietals: [Producers]?
 
 
 struct Country {
@@ -21,35 +16,47 @@ struct Country {
     let producer: String
     let varietal: String
     let appellation: String
+    let region: String
+    let country: String
+    let locale: String
+    let type: String
+    let designation: String
+    let vineyard: String
     let drinkBy: String
     let searckKey: String
-    let storageBins: sb
-//
-//    var binName: String?
-//       var bottleCount: Int?
-//       var binLocation: String?
-
+    var storageBins: [StorageBins]?
     
-    static func GetAllCountries() -> [Country] {
-        return [
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Abacela", varietal: "Dolcetto", appellation: "Umpqua Valley", drinkBy: "2020-2022", searckKey: "2020 Abacela Dolcetto Umpqua Valley", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall")),
-            Country(vintage: "2020", producer: "Zerba", varietal: "Syrah", appellation: "Walla Walla", drinkBy: "2020-2022", searckKey: "2020 Zerba Syrah Walla Walla", storageBins: sb(binName: "A", bottleCount: 1,binLocation: "Tall"))
-        ]
+
+
+    static func GetAllCountries(varietals: inout [Producers]) -> [Country] {
+        
+        var searchWines = [Country]()
+        
+        varietals.forEach {
+            for (wine) in $0.wines!{
+                let searchKey = wine.vintage! + " " +
+                                wine.varietal! + " " +
+                                wine.producer! + " " +
+                                wine.ava! + " "
+                    
+                searchWines.append(Country(vintage: wine.vintage!,
+                                           producer: wine.producer!,
+                                           varietal: wine.varietal!,
+                                           appellation: wine.ava!,
+                                           region: wine.region!,
+                                           country: wine.country!,
+                                           locale: wine.locale!,
+                                           type: wine.type!,
+                                           designation: wine.designation!,
+                                           vineyard: wine.vineyard!,
+                                           drinkBy: wine.drinkBy!,
+                                           searckKey: searchKey,
+                                           storageBins: wine.storageBins)
+                )
+            }
+            
+        }
+
+        return searchWines
     }
 }

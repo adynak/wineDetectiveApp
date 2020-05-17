@@ -77,7 +77,7 @@ class DataServices {
     
     static func getDataUrl(user: String,pword: String) -> String{
         
-        let debug: Bool = true
+        let debug: Bool = false
         struct URL {
             let scheme: String
             let host: String
@@ -123,6 +123,17 @@ class DataServices {
     static func buildVarietal( row: [String], positionOf: Label) -> String{
         
         var varietal = row[positionOf.varietal]
+        var showMe: Bool = false
+        
+        if (row[positionOf.varietal].localizedCaseInsensitiveContains("Ros")){
+            showMe = true
+            print("\(varietal) varietal")
+        }
+        
+        if (row[positionOf.type].localizedCaseInsensitiveContains("Ros")){
+            showMe = true
+            print("\(row[positionOf.type]) type")
+        }
         
         if (row[positionOf.type].contains("Ros")) {
             if(row[positionOf.varietal].contains("Ros")) {
@@ -136,6 +147,9 @@ class DataServices {
             }
         }
 
+        if showMe {
+        print("\(varietal) varietal return")
+        }
         return varietal
     }
         
@@ -164,7 +178,7 @@ class DataServices {
             locationBin = row[positionOf.location] + row[positionOf.bin]
             let varietal = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : row[firstSortBy]
             let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
-
+            
             if let producerIndex = producer.firstIndex(where: { $0.name == row[firstSortBy] }) {
                 if let iWineIndex = producer[producerIndex].wines!.firstIndex(where: { $0.iWine == row[positionOf.iWine] }) {
                     checkLocation = producer[producerIndex].wines![iWineIndex].storageBins!
@@ -242,10 +256,6 @@ class DataServices {
         
         return producer
 
-    }
-    
-    static func getWineData(){
-        print("gwd")
     }
     
 }

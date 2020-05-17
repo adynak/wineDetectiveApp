@@ -12,12 +12,13 @@ class VarietalViewController :UITableViewController {
     
     let cellID = "varietalCellId123123"
     
-    var varietals = allWine?.varietals
+    var varietals: [Producers]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
+        varietals = allWine?.varietals
     }
     
     func setupNavBar(){
