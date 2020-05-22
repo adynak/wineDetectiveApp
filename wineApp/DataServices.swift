@@ -77,7 +77,7 @@ class DataServices {
     
     static func getDataUrl(user: String,pword: String) -> String{
         
-        let debug: Bool = false
+        let debug: Bool = true
         struct URL {
             let scheme: String
             let host: String
@@ -152,6 +152,99 @@ class DataServices {
         }
         return varietal
     }
+    
+    static func buildReconcileArray(fields:[Int])->[Level0]{
+//        struct Bottle {
+//            let producer: String
+//            let varietal: String
+//            let location: String
+//            let bin: String
+//            let vintage: String
+//        }
+//        
+//        struct Level0 {
+//            var name: String?
+//            var isExpanded: Bool = false
+//            var data: [Level1]
+//        }
+//
+//        struct Level1 {
+//            var name: String?
+//            var data: [Level2]
+//        }
+//
+//        struct Level2 {
+//            var producer: String?
+//            var varietal: String?
+//            var vintage: String?
+//        }
+
+        
+        var wines: [Bottle] = []
+        let positionOf = Label(data:fields)
+
+        for row in dataArray{
+            
+            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.varietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage])
+
+            wines.append(bottle)
+        }
+                
+        var level0: [Level0] = []
+        var level1: [Level1] = []
+        var level2: [Level2] = []
+        var bottleCount: Int = 0
+
+        let groupLevel0 = Dictionary(grouping: wines, by: { $0.location })
+
+        for (item0) in groupLevel0{
+            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.bin })
+            for (item1) in groupLevel1{
+                let groupLevel2 = Dictionary(grouping: item1.value, by: { $0.bin })
+                for (item2) in groupLevel2{
+                    for (detail) in item2.value {
+                        bottleCount += 1
+                        level2.append(Level2(producer: detail.producer,
+                                             varietal: detail.varietal,
+                                             vintage: detail.vintage))
+                    }
+                    
+                    level2 =  level2.sorted(by: {
+                        ($0.producer!.lowercased()) < ($1.producer!.lowercased())
+                    })
+
+                    level1.append(Level1(name: item1.key, bottleCount: level2.count, data: level2))
+                    level2.removeAll()
+                }
+            }
+            
+            level1 =  level1.sorted(by: {
+                ($0.name!.lowercased()) < ($1.name!.lowercased())
+            })
+            level0.append(Level0(name: item0.key, bottleCount: bottleCount, data: level1))
+            bottleCount = 0
+            level1.removeAll()
+
+        }
+
+        level0 =  level0.sorted(by: {
+            ($0.name!.lowercased()) < ($1.name!.lowercased())
+        })
+
+        for (item0) in level0{
+            print("Location: \(item0.name!)")
+                
+            for (item1) in item0.data{
+                print("  Bin: \(item1.name!)")
+                for (item2) in item1.data{
+                    print("    Bottle: \(item2.vintage!) \(item2.producer!) \(item2.varietal!)")
+                }
+            }
+            print("***")
+        }
+
+        return level0
+    }
         
     static func buildProducersArray(fields: [Int],
                                     sortKey: String) -> [Producers]{
@@ -169,14 +262,18 @@ class DataServices {
                 firstSortBy = positionOf.varietal
             case "drinkBy":
                 firstSortBy = positionOf.endConsume
+            case "reconcile":
+                firstSortBy = positionOf.location
             default:
                 firstSortBy = positionOf.producer
         }
         
+//        var x = (sortKey == "reconcile") ? row[positionOf.bin] : row[firstSortBy]
+        
         for row in dataArray{
             // special transformations
             locationBin = row[positionOf.location] + row[positionOf.bin]
-            let varietal = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : row[firstSortBy]
+            let varietal = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : (sortKey == "reconcile") ? row[positionOf.bin] : row[firstSortBy]
             let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
             
             if let producerIndex = producer.firstIndex(where: { $0.name == row[firstSortBy] }) {

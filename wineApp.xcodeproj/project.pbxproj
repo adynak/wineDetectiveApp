@@ -12,7 +12,9 @@
 		36BDE4C4203D87BC00581A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36BDE4C3203D87BC00581A05 /* Assets.xcassets */; };
 		36BDE4CF203D884000581A05 /* DrinkByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4CE203D884000581A05 /* DrinkByViewController.swift */; };
 		36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4D0203D884D00581A05 /* ProducerViewController.swift */; };
+		92032433247726690035B9A7 /* ReconcileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92032432247726690035B9A7 /* ReconcileDetailController.swift */; };
 		92042F3524645CBC00515BAD /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92042F3424645CBC00515BAD /* UserCell.swift */; };
+		920DA68E247793700025BA44 /* ReconcileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920DA68D247793700025BA44 /* ReconcileTableViewCell.swift */; };
 		922B8ECF2469A94D00911785 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922B8ECE2469A94D00911785 /* AddTableViewCell.swift */; };
 		922B8ED12469AB3700911785 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922B8ED02469AB3700911785 /* SearchViewController.swift */; };
 		922FBD3A21B9AEC100E14641 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FBD3921B9AEC100E14641 /* Alert.swift */; };
@@ -29,6 +31,7 @@
 		92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E15D1021B8A49E0068C213 /* VarietalViewController.swift */; };
 		92E60F452455DBAB0047911C /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60F442455DBAB0047911C /* DataServices.swift */; };
 		92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */; };
+		92F6896B2472E294006EB934 /* ReconcileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F6896A2472E294006EB934 /* ReconcileViewController.swift */; };
 		92F7830621E8E7040003C451 /* AddWineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7830521E8E7040003C451 /* AddWineController.swift */; };
 		92FA003121BAD3B70091A710 /* wineDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FA003021BAD3B70091A710 /* wineDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -41,7 +44,9 @@
 		36BDE4C8203D87BC00581A05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36BDE4CE203D884000581A05 /* DrinkByViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkByViewController.swift; sourceTree = "<group>"; };
 		36BDE4D0203D884D00581A05 /* ProducerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducerViewController.swift; sourceTree = "<group>"; };
+		92032432247726690035B9A7 /* ReconcileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconcileDetailController.swift; sourceTree = "<group>"; };
 		92042F3424645CBC00515BAD /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		920DA68D247793700025BA44 /* ReconcileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconcileTableViewCell.swift; sourceTree = "<group>"; };
 		922B8ECE2469A94D00911785 /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		922B8ED02469AB3700911785 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		922FBD3921B9AEC100E14641 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 		92E15D1021B8A49E0068C213 /* VarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarietalViewController.swift; sourceTree = "<group>"; };
 		92E60F442455DBAB0047911C /* DataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
 		92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinTableViewCell.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/BinTableViewCell.swift; sourceTree = "<group>"; };
+		92F6896A2472E294006EB934 /* ReconcileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconcileViewController.swift; sourceTree = "<group>"; };
 		92F7830521E8E7040003C451 /* AddWineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineController.swift; sourceTree = "<group>"; };
 		92FA003021BAD3B70091A710 /* wineDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wineDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +82,7 @@
 		36BDE4B0203D87BC00581A05 = {
 			isa = PBXGroup;
 			children = (
+				920DA68D247793700025BA44 /* ReconcileTableViewCell.swift */,
 				922B8ECE2469A94D00911785 /* AddTableViewCell.swift */,
 				92042F3424645CBC00515BAD /* UserCell.swift */,
 				92753CE4245DC3D400EF08F6 /* Keyboard.swift */,
@@ -108,6 +115,7 @@
 				925C4512246AE8A000044894 /* temp.swift */,
 				36BDE4CE203D884000581A05 /* DrinkByViewController.swift */,
 				92E15D1021B8A49E0068C213 /* VarietalViewController.swift */,
+				92F6896A2472E294006EB934 /* ReconcileViewController.swift */,
 				36BDE4D0203D884D00581A05 /* ProducerViewController.swift */,
 				92F7830521E8E7040003C451 /* AddWineController.swift */,
 				36BDE4C3203D87BC00581A05 /* Assets.xcassets */,
@@ -116,6 +124,7 @@
 				922FBD3F21B9CD4800E14641 /* inventory.swift */,
 				92E60F442455DBAB0047911C /* DataServices.swift */,
 				92FA003021BAD3B70091A710 /* wineDetailViewController.swift */,
+				92032432247726690035B9A7 /* ReconcileDetailController.swift */,
 				92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */,
 			);
 			path = wineApp;
@@ -197,15 +206,18 @@
 				922FBD4021B9CD4800E14641 /* inventory.swift in Sources */,
 				922B8ECF2469A94D00911785 /* AddTableViewCell.swift in Sources */,
 				92E60F452455DBAB0047911C /* DataServices.swift in Sources */,
+				92F6896B2472E294006EB934 /* ReconcileViewController.swift in Sources */,
 				924175EE245A1EA7002502FE /* LoginController.swift in Sources */,
 				924175FA245A2625002502FE /* UserDefaults.swift in Sources */,
 				36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */,
 				36BDE4BD203D87BC00581A05 /* AppDelegate.swift in Sources */,
 				92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */,
+				920DA68E247793700025BA44 /* ReconcileTableViewCell.swift in Sources */,
 				924175FC245A2910002502FE /* Extensions.swift in Sources */,
 				925C4513246AE8A000044894 /* temp.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,
 				92042F3524645CBC00515BAD /* UserCell.swift in Sources */,
+				92032433247726690035B9A7 /* ReconcileDetailController.swift in Sources */,
 				92F7830621E8E7040003C451 /* AddWineController.swift in Sources */,
 				92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */,
 				36BDE4CF203D884000581A05 /* DrinkByViewController.swift in Sources */,

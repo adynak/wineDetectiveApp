@@ -57,10 +57,17 @@ class MainTabBarController: UITabBarController {
                                                      unselected: #imageLiteral(resourceName: "search"),
                                                      title: "Search")
         
+        let reconcileController = createNavController(viewController: ReconcileViewController(),
+                                                     selected: #imageLiteral(resourceName: "reconcileDark"),
+                                                     unselected: #imageLiteral(resourceName: "reconcileLight"),
+                                                     title: "Reconcile")
+        
+        
         viewControllers = [producerController,
                            varietalController,
                            drinkByController,
-                           searchController]
+                           searchController,
+                           reconcileController]
         
 //        guard let items = tabBar.items else { return }
         

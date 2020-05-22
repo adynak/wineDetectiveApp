@@ -1,4 +1,3 @@
-var allWines: WineInventory?
 //
 //  ViewController.swift
 //  SearchBar
@@ -8,6 +7,8 @@ var allWines: WineInventory?
 //
 
 import UIKit
+
+var allWines: WineInventory?
 
 class SearchBarContainerView: UIView {
 

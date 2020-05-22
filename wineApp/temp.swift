@@ -26,8 +26,6 @@ struct Country {
     let searckKey: String
     var storageBins: [StorageBins]?
     
-
-
     static func GetAllCountries(varietals: inout [Producers]) -> [Country] {
         
         var searchWines = [Country]()
