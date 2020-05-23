@@ -113,7 +113,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     }
     
     func setupWineLabelLayout(){
-        storageLabel.text = "Location: \(passedValue.location!) \nBin: \(passedValue.bin!)"
+        storageLabel.text = "Location and Bin: \(passedValue.location!) \(passedValue.bin!)\nBottles: \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
             storageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -154,7 +154,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         
         // want to stripe the table's rows?
         let colorOdd = UIColor(r:255, g:255, b:255) //white
-        let colorEven = UIColor(r:255, g:255, b:255)
+        let colorEven = UIColor(r:240, g:240, b:240)
         
         let vintage = wineBins[indexPath.row].vintage
         let producer = wineBins[indexPath.row].producer
@@ -162,15 +162,9 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ReconcileTableViewCell
         
-//        cell.bin = "\(vintage) \(producer) \(varietal)"
         cell.bin = Level2(producer: producer, varietal: varietal, vintage: vintage)
-//        cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
-//        cell.delegate = self
-//
-//        if(!cells.contains(cell)){
-//            self.cells.append(cell)
-//        }
-//
+        cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
+        cell.delegate = self
         return cell
     }
     
@@ -252,23 +246,13 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     }
     
     private func getTotalBottles()  -> String {
-        var totalBottles = wineBins.count
-//        for bin in wineBins
-//        {
-//            totalBottles += bin.bottleCount!
-//        }
-        let bottleString = (totalBottles > 1) ? " bottles" : " bottle"
+        let totalBottles = wineBins.count
+        let bottleString = (totalBottles > 1) ? " bottles remaining" : " bottle remaining"
         
         return String(totalBottles) + bottleString
     }
 
 }
-
-//extension Int {
-//    static func parse(from string: String) -> Int? {
-//        return Int(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
-//    }
-//}
 
 extension ReconcileViewDetailController : ReconcileBinCellDelegate {
     func didTapStepper(direction: String){
@@ -282,13 +266,14 @@ extension ReconcileViewDetailController : ReconcileBinCellDelegate {
             count = number! - 1
         }
         if (direction == plus){
-            count = number!
-            let addWineController = AddWineController()
-            addWineController.passedValue = passedValue
-            let navController = UINavigationController(rootViewController: addWineController)
-            present(navController, animated: true, completion: nil)
+            count = number! + 1
+//            let addWineController = AddWineController()
+//            addWineController.passedValue = passedValue
+//            let navController = UINavigationController(rootViewController: addWineController)
+//            present(navController, animated: true, completion: nil)
         }
-        
-        inventoryFooter.text = String(count) + " bottles"
+        let bottleString = (count == 1) ? " bottle remaining" : " bottles remaining"
+
+        inventoryFooter.text = String(count) + bottleString
     }
 }

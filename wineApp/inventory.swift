@@ -53,7 +53,6 @@ struct wineDetail {
     var bottles: [Level2]?
     var location: String?
     var bin: String?
-    
 }
 
 struct WineInventory {

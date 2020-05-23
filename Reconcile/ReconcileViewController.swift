@@ -133,7 +133,7 @@ class ReconcileViewController :UITableViewController {
         wineSelected.bottles = bottles![section].data[row].data
         wineSelected.location = bottles![section].name
         wineSelected.bin = bottles![section].data[row].name
-
+        wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
         
         let reconcileDetailController = ReconcileViewDetailController()
         reconcileDetailController.passedValue = wineSelected
@@ -147,6 +147,8 @@ class ReconcileViewController :UITableViewController {
         var bottleCount: Int
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let bin = bottles?[indexPath.section].data[indexPath.row].name
+        let colorOdd = UIColor(r:255, g:255, b:255) //white
+        let colorEven = UIColor(r:240, g:240, b:240)
                 
         bottleCount = bottles![indexPath.section].data[indexPath.row].bottleCount!
 //        var collective = " bottle)"
@@ -162,7 +164,7 @@ class ReconcileViewController :UITableViewController {
 //        }
         
         cell.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        
+        cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         return cell
     }
     

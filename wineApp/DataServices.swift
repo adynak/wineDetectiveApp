@@ -8,6 +8,8 @@
 
 import Foundation
 
+let debug: Bool = false
+
 class DataServices {
     
     static func parseCsv(data: String) -> [[String]]{
@@ -77,7 +79,6 @@ class DataServices {
     
     static func getDataUrl(user: String,pword: String) -> String{
         
-        let debug: Bool = true
         struct URL {
             let scheme: String
             let host: String
@@ -123,62 +124,20 @@ class DataServices {
     static func buildVarietal( row: [String], positionOf: Label) -> String{
         
         var varietal = row[positionOf.varietal]
-        var showMe: Bool = false
-        
-        if (row[positionOf.varietal].localizedCaseInsensitiveContains("Ros")){
-            showMe = true
-            print("\(varietal) varietal")
-        }
-        
-        if (row[positionOf.type].localizedCaseInsensitiveContains("Ros")){
-            showMe = true
-            print("\(row[positionOf.type]) type")
-        }
-        
-        if (row[positionOf.type].contains("Ros")) {
-            if(row[positionOf.varietal].contains("Ros")) {
+        let type = row[positionOf.type]
+                
+        if (type.localizedCaseInsensitiveContains("Ros")) {
+            if(varietal.contains("Ros")) {
 
             } else {
-                if(row[positionOf.designation].contains("Ros")) {
-                    varietal = row[positionOf.designation]
-                } else {
-                    varietal = row[positionOf.type] + " of " + row[positionOf.varietal]
-                }
+                varietal = type + " of " + varietal
             }
         }
 
-        if showMe {
-        print("\(varietal) varietal return")
-        }
         return varietal
     }
     
     static func buildReconcileArray(fields:[Int])->[Level0]{
-//        struct Bottle {
-//            let producer: String
-//            let varietal: String
-//            let location: String
-//            let bin: String
-//            let vintage: String
-//        }
-//        
-//        struct Level0 {
-//            var name: String?
-//            var isExpanded: Bool = false
-//            var data: [Level1]
-//        }
-//
-//        struct Level1 {
-//            var name: String?
-//            var data: [Level2]
-//        }
-//
-//        struct Level2 {
-//            var producer: String?
-//            var varietal: String?
-//            var vintage: String?
-//        }
-
         
         var wines: [Bottle] = []
         let positionOf = Label(data:fields)
@@ -231,17 +190,17 @@ class DataServices {
             ($0.name!.lowercased()) < ($1.name!.lowercased())
         })
 
-        for (item0) in level0{
-            print("Location: \(item0.name!)")
-                
-            for (item1) in item0.data{
-                print("  Bin: \(item1.name!)")
-                for (item2) in item1.data{
-                    print("    Bottle: \(item2.vintage!) \(item2.producer!) \(item2.varietal!)")
-                }
-            }
-            print("***")
-        }
+//        for (item0) in level0{
+//            print("Location: \(item0.name!)")
+//
+//            for (item1) in item0.data{
+//                print("  Bin: \(item1.name!)")
+//                for (item2) in item1.data{
+//                    print("    Bottle: \(item2.vintage!) \(item2.producer!) \(item2.varietal!)")
+//                }
+//            }
+//            print("***")
+//        }
 
         return level0
     }
@@ -254,6 +213,7 @@ class DataServices {
         var checkLocation: [StorageBins]
         var producer = [Producers]()
         var firstSortBy: Int
+        var sortName: String
         
         switch sortKey {
             case "producer":
@@ -273,10 +233,20 @@ class DataServices {
         for row in dataArray{
             // special transformations
             locationBin = row[positionOf.location] + row[positionOf.bin]
-            let varietal = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : (sortKey == "reconcile") ? row[positionOf.bin] : row[firstSortBy]
+            let varietal0 = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : (sortKey == "reconcile") ? row[positionOf.bin] : row[firstSortBy]
+            let varietal = buildVarietal(row: row, positionOf: positionOf)
             let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
             
-            if let producerIndex = producer.firstIndex(where: { $0.name == row[firstSortBy] }) {
+//            print(varietal)
+//            print(buildVarietal(row: row, positionOf: positionOf))
+            
+            if sortKey == "varietal"{
+                sortName = varietal
+            } else {
+                sortName = row[firstSortBy]
+            }
+            
+            if let producerIndex = producer.firstIndex(where: { $0.name == sortName }) {
                 if let iWineIndex = producer[producerIndex].wines!.firstIndex(where: { $0.iWine == row[positionOf.iWine] }) {
                     checkLocation = producer[producerIndex].wines![iWineIndex].storageBins!
                     // existing iWine, is it in the same bin as the existing bottle?
@@ -335,7 +305,13 @@ class DataServices {
                                   drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume],endConsume: row[positionOf.endConsume]),
                                   producer: row[positionOf.producer],
                                   storageBins: bin))
-                producer.append(Producers(name: row[firstSortBy],
+                print(row[firstSortBy])
+                if sortKey == "varietal"{
+                    sortName = varietal
+                } else {
+                    sortName = row[firstSortBy]
+                }
+                producer.append(Producers(name: sortName,
                                           isExpanded: false,
                                           bottleCount: 1,
                                           wines: wine))

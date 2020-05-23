@@ -82,7 +82,7 @@
 		36BDE4B0203D87BC00581A05 = {
 			isa = PBXGroup;
 			children = (
-				920DA68D247793700025BA44 /* ReconcileTableViewCell.swift */,
+				92ABB14924797CDB00F85B20 /* Reconcile */,
 				922B8ECE2469A94D00911785 /* AddTableViewCell.swift */,
 				92042F3424645CBC00515BAD /* UserCell.swift */,
 				92753CE4245DC3D400EF08F6 /* Keyboard.swift */,
@@ -115,7 +115,6 @@
 				925C4512246AE8A000044894 /* temp.swift */,
 				36BDE4CE203D884000581A05 /* DrinkByViewController.swift */,
 				92E15D1021B8A49E0068C213 /* VarietalViewController.swift */,
-				92F6896A2472E294006EB934 /* ReconcileViewController.swift */,
 				36BDE4D0203D884D00581A05 /* ProducerViewController.swift */,
 				92F7830521E8E7040003C451 /* AddWineController.swift */,
 				36BDE4C3203D87BC00581A05 /* Assets.xcassets */,
@@ -124,10 +123,19 @@
 				922FBD3F21B9CD4800E14641 /* inventory.swift */,
 				92E60F442455DBAB0047911C /* DataServices.swift */,
 				92FA003021BAD3B70091A710 /* wineDetailViewController.swift */,
-				92032432247726690035B9A7 /* ReconcileDetailController.swift */,
 				92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */,
 			);
 			path = wineApp;
+			sourceTree = "<group>";
+		};
+		92ABB14924797CDB00F85B20 /* Reconcile */ = {
+			isa = PBXGroup;
+			children = (
+				920DA68D247793700025BA44 /* ReconcileTableViewCell.swift */,
+				92032432247726690035B9A7 /* ReconcileDetailController.swift */,
+				92F6896A2472E294006EB934 /* ReconcileViewController.swift */,
+			);
+			path = Reconcile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,12 +293,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -339,10 +348,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
