@@ -23,16 +23,19 @@ class ReconcileTableViewCell : UITableViewCell {
         didSet {
             guard let binItem = bin else {return}
 
-            if let varietal = binItem.producer {
-                vintageProducerLabel.text =  " \(binItem.vintage ?? "")" + " \(varietal) "
+            if let producer = binItem.producer {
+                vintageProducerLabel.text =  " \(binItem.vintage!) \(producer) "
+                producerLabel.text = producer
             }
-            let bottleCount = 1
+            let bottleCount: Int = 1
             varietalLabel.text = "  \(binItem.varietal!)"
 
-                bottleCountLabel.text = setLabelText(count:Int(bottleCount))
-                stepperView.value = Double(bottleCount)
-                stepperView.tag = bottleCount
-
+            bottleCountLabel.text = setLabelText(count:bottleCount)
+            stepperView.value = Double(bottleCount)
+            stepperView.tag = bottleCount
+            barcodeLabel.text = binItem.barcode
+            iWineLabel.text = binItem.iWine
+            vintageLabel.text = binItem.vintage
         }
     }
     
@@ -43,7 +46,32 @@ class ReconcileTableViewCell : UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    let iWineLabel:UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        return label
+    }()
+    
+    let barcodeLabel:UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        return label
+    }()
 
+    let vintageLabel:UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        return label
+    }()
+    
+    let producerLabel:UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        return label
+    }()
+
+    
     let varietalLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
@@ -52,7 +80,6 @@ class ReconcileTableViewCell : UITableViewCell {
         return label
     }()
 
-    
     let bottleCountLabel:UILabel = {
         let label = UILabel()
         label.textColor = .black

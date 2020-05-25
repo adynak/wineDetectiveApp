@@ -399,15 +399,10 @@ extension AddWineController: UITextFieldDelegate {
 
 extension AddWineController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected")
     }
 }
 extension AddWineController: UITableViewDataSource{
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("selected")
-//    }
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -422,14 +417,7 @@ extension AddWineController: UITableViewDataSource{
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let accept = UIContextualAction(style: .normal, title: "Accept") { (action, view, nil) in
-//            print("accept")
-//        }
-//        return UISwipeActionsConfiguration(actions: [accept])
-//    }
-    
+        
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let contextItem = UIContextualAction(style: .normal, title: "Leading & .normal") { (contextualAction, view, boolValue) in
     boolValue(true) // pass true if you want the handler to allow the action

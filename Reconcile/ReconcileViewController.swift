@@ -130,6 +130,7 @@ class ReconcileViewController :UITableViewController {
         wineSelected.type = varietals![section].wines![row].type!
         wineSelected.vineyard = varietals![section].wines![row].vineyard!
         wineSelected.storageBins = varietals![section].wines![row].storageBins
+       
         wineSelected.bottles = bottles![section].data[row].data
         wineSelected.location = bottles![section].name
         wineSelected.bin = bottles![section].data[row].name

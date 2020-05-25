@@ -218,7 +218,6 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-//        print(UIDevice.current.orientation.isLandscape)
         
         collectionView.collectionViewLayout.invalidateLayout()
         

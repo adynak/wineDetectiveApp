@@ -8,7 +8,7 @@
 
 import Foundation
 
-let debug: Bool = false
+let debug: Bool = true
 
 class DataServices {
     
@@ -111,7 +111,7 @@ class DataServices {
     static func locateDataPositions(dataHeader: [String]) -> [Int]{
         
         var fields = [Int]()
-        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume"]
+        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume","Barcode"]
 
         for field in fieldsWeCareAbout{
             if let i = dataHeader.firstIndex(where: { $0 == field }) {
@@ -144,7 +144,7 @@ class DataServices {
 
         for row in dataArray{
             
-            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.varietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage])
+            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.varietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode])
 
             wines.append(bottle)
         }
@@ -165,7 +165,9 @@ class DataServices {
                         bottleCount += 1
                         level2.append(Level2(producer: detail.producer,
                                              varietal: detail.varietal,
-                                             vintage: detail.vintage))
+                                             vintage: detail.vintage,
+                                             iWine: detail.iWine,
+                                             barcode: detail.barcode))
                     }
                     
                     level2 =  level2.sorted(by: {
@@ -189,18 +191,6 @@ class DataServices {
         level0 =  level0.sorted(by: {
             ($0.name!.lowercased()) < ($1.name!.lowercased())
         })
-
-//        for (item0) in level0{
-//            print("Location: \(item0.name!)")
-//
-//            for (item1) in item0.data{
-//                print("  Bin: \(item1.name!)")
-//                for (item2) in item1.data{
-//                    print("    Bottle: \(item2.vintage!) \(item2.producer!) \(item2.varietal!)")
-//                }
-//            }
-//            print("***")
-//        }
 
         return level0
     }
@@ -236,10 +226,7 @@ class DataServices {
             let varietal0 = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : (sortKey == "reconcile") ? row[positionOf.bin] : row[firstSortBy]
             let varietal = buildVarietal(row: row, positionOf: positionOf)
             let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
-            
-//            print(varietal)
-//            print(buildVarietal(row: row, positionOf: positionOf))
-            
+                        
             if sortKey == "varietal"{
                 sortName = varietal
             } else {
@@ -305,7 +292,6 @@ class DataServices {
                                   drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume],endConsume: row[positionOf.endConsume]),
                                   producer: row[positionOf.producer],
                                   storageBins: bin))
-                print(row[firstSortBy])
                 if sortKey == "varietal"{
                     sortName = varietal
                 } else {

@@ -14,6 +14,8 @@ struct Bottle {
     let location: String
     let bin: String
     let vintage: String
+    let iWine: String
+    let barcode: String
 }
 
 struct Level0 {
@@ -33,6 +35,8 @@ struct Level2 {
     var producer: String?
     var varietal: String?
     var vintage: String?
+    var iWine: String?
+    var barcode: String?
 }
 
 
@@ -103,6 +107,7 @@ struct Label{
     let country: Int
     let beginConsume: Int
     let endConsume: Int
+    let barcode: Int
     
     init(data: [Int]) {
         vintage = data[0]
@@ -120,6 +125,7 @@ struct Label{
         country = data[12]
         beginConsume = data[13]
         endConsume = data[14]
+        barcode = data[15]
     }
 }
 var fields = [Int]()
@@ -143,7 +149,6 @@ struct StorageBins: Codable {
         let pword = UserDefaults.standard.getUserPword()
         
         let dataUrl = DataServices.getDataUrl(user: user,pword: pword)
-        print(dataUrl)
 
         URLSession.shared.dataTask(with: URL(string: dataUrl)!, completionHandler: { (data, response, error) -> Void in
             

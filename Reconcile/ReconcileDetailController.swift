@@ -28,18 +28,6 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
 
     var passedValue = wineDetail()
     
-    let wineLabel: UITextView = {
-        let tv = UITextView()
-        tv.font = UIFont.boldSystemFont(ofSize: 18)
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.textAlignment = .left
-        tv.isEditable = false
-        tv.isScrollEnabled = false
-        tv.layer.cornerRadius = 5
-        tv.layer.masksToBounds = true
-        return tv
-    }()
-
     let storageLabel: UITextView = {
         let tv = UITextView()
         tv.text = "Location and Bin:"
@@ -82,19 +70,15 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(r:202, g:227, b:255)
-        
-        setupNavigationBar()
-        
+        wineBins = passedValue.bottles!
 
+        view.backgroundColor = UIColor(r:202, g:227, b:255)
         view.addSubview(storageLabel)
         view.addSubview(tableContainer)
         tableContainer.addSubview(wineBinsTableView)
         view.addSubview(inventoryFooter)
-//
-        wineBins = passedValue.bottles!
-//
-//        assignPassedValuesToTextarea()
+
+        setupNavigationBar()
         setupWineLabelLayout()
         setupInventoryFooterLayout()
         setupWineBinsTableViewLayout()
@@ -129,8 +113,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
             tableContainer.topAnchor.constraint(equalTo:storageLabel.bottomAnchor, constant:10),
             tableContainer.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor, constant : 6),
             tableContainer.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor, constant : -6),
-            tableContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -110),
-//            tableContainer.heightAnchor.constraint(equalToConstant: tableContainerHeightAnchor)
+            tableContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -110)
         ])
         
         NSLayoutConstraint.activate([
@@ -159,12 +142,19 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         let vintage = wineBins[indexPath.row].vintage
         let producer = wineBins[indexPath.row].producer
         let varietal = wineBins[indexPath.row].varietal
+        let iWine = wineBins[indexPath.row].iWine
+        let barcode = wineBins[indexPath.row].barcode
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ReconcileTableViewCell
         
-        cell.bin = Level2(producer: producer, varietal: varietal, vintage: vintage)
+        cell.bin = Level2(producer: producer, varietal: varietal, vintage: vintage, iWine: iWine, barcode: barcode)
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         cell.delegate = self
+        
+        if(!cells.contains(cell)){
+            self.cells.append(cell)
+        }
+
         return cell
     }
     
@@ -184,67 +174,30 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
                                                             action: #selector(addTapped))
     }
     
-    
     @objc func addTapped(sender: UIBarButtonItem){
-        var newBinData = [StorageBins]()
+        var markAsDrank = [Level2]()
 
         if (sender.title == "Save"){
             for cell in cells {
                 if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
-//                    newBinData.append(StorageBins(binName: cell.binNameLabel.text!, bottleCount:bottles))
+                    if bottles == 0{
+                        markAsDrank.append(Level2(
+                            producer: cell.producerLabel.text!,
+                            varietal: cell.varietalLabel.text!,
+                            vintage: cell.vintageLabel.text!,
+                            iWine: cell.iWineLabel.text!,
+                            barcode: cell.barcodeLabel.text!))
+                    }
                 }
-                
             }
-            myUpdater.passBackBinsAndBottlesInThem(newBinData: newBinData)
+            if markAsDrank.count > 0{
+                print(markAsDrank)
+            }
+//            myUpdater.passBackBinsAndBottlesInThem(newBinData: newBinData)
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    private func assignPassedValuesToTextarea(){
         
-        navigationItem.title = passedValue.producer
-        var designation = "";
-        var vineyard = ""
-        
-        if (passedValue.designation != ""){
-            designation = " - " + passedValue.designation
-        }
-        
-        if (passedValue.vineyard != ""){
-            vineyard = " - " + passedValue.vineyard
-        }
-        
-        if (passedValue.varietal == passedValue.designation){
-            designation = ""
-        }
-        
-        let attributedText = NSMutableAttributedString(
-            string: passedValue.vintage + " " + passedValue.varietal + designation + "\n",
-            attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.black]
-        )
-        
-        attributedText.append(NSAttributedString(
-            string: passedValue.ava + vineyard + "\n",
-            attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.gray])
-        )
-        
-        attributedText.append(NSAttributedString(
-            string: passedValue.locale + "\n",
-            attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.gray])
-        )
-        
-        attributedText.append(NSAttributedString(
-            string: "Drinking Window: " + passedValue.drinkBy + "\n",
-            attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.gray])
-        )
-                
-        wineLabel.attributedText = attributedText
-    }
-    
     private func getTotalBottles()  -> String {
         let totalBottles = wineBins.count
         let bottleString = (totalBottles > 1) ? " bottles remaining" : " bottle remaining"
