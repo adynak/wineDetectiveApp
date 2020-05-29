@@ -8,14 +8,8 @@
 
 import UIKit
 
-//protocol BottleCountDelegate {
-//    func passBackBinsAndBottlesInThem(newBinData:[StorageBins])
-//}
-
 class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
-    var myUpdater: BottleCountDelegate!
-    
+        
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
     let tableRowHeight:CGFloat = 50
@@ -191,11 +185,28 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
                 }
             }
             if markAsDrank.count > 0{
-                print(markAsDrank)
+
+                let message = buildRemoveMessage(bottles: markAsDrank)
+
+                let logOutAlert = UIAlertController.init(title: "Remove Bottles", message: message, preferredStyle:.alert)
+
+                logOutAlert.addAction(UIAlertAction.init(title: "Yes", style: .default) { (UIAlertAction) -> Void in
+                    self.dismiss(animated: true, completion:{
+                        DataServices.removeBottles(bottles: markAsDrank)
+                    })
+                })
+
+                logOutAlert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+
+                self.present(logOutAlert, animated: true, completion: nil)
+
+            } else {
+                dismiss(animated: true, completion: nil)
             }
-//            myUpdater.passBackBinsAndBottlesInThem(newBinData: newBinData)
+
+        } else {
+            dismiss(animated: true, completion: nil)
         }
-        dismiss(animated: true, completion: nil)
     }
         
     private func getTotalBottles()  -> String {
@@ -203,6 +214,15 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         let bottleString = (totalBottles > 1) ? " bottles remaining" : " bottle remaining"
         
         return String(totalBottles) + bottleString
+    }
+    
+    func buildRemoveMessage(bottles: [Level2])->String{
+        var message: String = ""
+        for bottle in bottles{
+            message += "\(bottle.vintage!) \(bottle.producer!)\n \(bottle.varietal!)\n\n"
+        }
+        message += "Are you sure?"
+        return message
     }
 
 }

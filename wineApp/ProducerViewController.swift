@@ -159,9 +159,9 @@ class ProducerViewController:UITableViewController {
             bottleCount += bin.bottleCount!
         }
         
-        var collective = " bottle)"
-        if (bottleCount > 1){
-            collective = " bottles)"
+        var collective = " bottles)"
+        if (bottleCount == 1){
+            collective = " bottle)"
         }
         
         cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + collective

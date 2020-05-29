@@ -23,9 +23,12 @@ struct Alert{
                                           style: .default,
                                           handler: nil)
         alert.addAction(defaultAction)
-        
+
         DispatchQueue.main.async {
             vc.present(alert,animated: true)
+//            vc.navigationController?.popViewController(animated: true)
+
+            
         }
         
     }
@@ -39,6 +42,7 @@ struct Alert{
     
     static func showActionMenuAlert(on vc: UIViewController){
         showBasicAlert(on: vc, with: "Action Menu", message: "action menu requested")
+        
     }
 
     static func showLoginCredentialsAlert(on vc: UIViewController){

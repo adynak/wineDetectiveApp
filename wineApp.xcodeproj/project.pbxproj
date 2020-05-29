@@ -27,6 +27,7 @@
 		924175FA245A2625002502FE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175F9245A2625002502FE /* UserDefaults.swift */; };
 		924175FC245A2910002502FE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175FB245A2910002502FE /* Extensions.swift */; };
 		925C4513246AE8A000044894 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C4512246AE8A000044894 /* temp.swift */; };
+		926D0921247CD556001A8838 /* RemoveBottlesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926D0920247CD556001A8838 /* RemoveBottlesController.swift */; };
 		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
 		92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E15D1021B8A49E0068C213 /* VarietalViewController.swift */; };
 		92E60F452455DBAB0047911C /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60F442455DBAB0047911C /* DataServices.swift */; };
@@ -59,6 +60,7 @@
 		924175F9245A2625002502FE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		924175FB245A2910002502FE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		925C4512246AE8A000044894 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
+		926D0920247CD556001A8838 /* RemoveBottlesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBottlesController.swift; sourceTree = "<group>"; };
 		92753CE4245DC3D400EF08F6 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		92E15D1021B8A49E0068C213 /* VarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarietalViewController.swift; sourceTree = "<group>"; };
 		92E60F442455DBAB0047911C /* DataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				36BDE4BC203D87BC00581A05 /* AppDelegate.swift */,
 				924175ED245A1EA7002502FE /* LoginController.swift */,
+				926D0920247CD556001A8838 /* RemoveBottlesController.swift */,
 				924175FB245A2910002502FE /* Extensions.swift */,
 				36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */,
 				922B8ED02469AB3700911785 /* SearchViewController.swift */,
@@ -236,6 +239,7 @@
 				92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */,
 				92FA003121BAD3B70091A710 /* wineDetailViewController.swift in Sources */,
 				922FBD3A21B9AEC100E14641 /* Alert.swift in Sources */,
+				926D0921247CD556001A8838 /* RemoveBottlesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

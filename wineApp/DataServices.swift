@@ -317,5 +317,22 @@ class DataServices {
 
     }
     
+    static func removeBottles(bottles: [Level2]){
+        let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+        var dataArrayFiltered = [[String]]()
+        
+        for bottle in bottles{
+            let barcode = bottle.barcode
+            dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode!) }
+            dataArray = dataArrayFiltered
+        }
+                
+        let reconcileSort = DataServices.buildReconcileArray(fields: fields)
+        
+        allWine?.reconcile = reconcileSort
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UserlistUpdate"), object: nil)
+
+    }
+    
 }
 

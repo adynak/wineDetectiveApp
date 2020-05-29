@@ -11,7 +11,7 @@ import UIKit
 class ReconcileViewController :UITableViewController {
     
     let cellID = "varietalCellId123123"
-    
+
     var varietals: [Producers]?
     var bottles: [Level0]?
 
@@ -22,8 +22,10 @@ class ReconcileViewController :UITableViewController {
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         varietals = allWine?.reconcile1
         bottles = allWine?.reconcile
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "UserlistUpdate"), object: nil)
+
     }
-    
+                    
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Reconcile"
@@ -31,7 +33,7 @@ class ReconcileViewController :UITableViewController {
         let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
                                          target: self,
                                          action: #selector(handleActionMenu))
-        navigationItem.rightBarButtonItem = moreMenu
+//        navigationItem.rightBarButtonItem = moreMenu
         
 //        let addWine = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
 //                                      target: self,
@@ -66,6 +68,12 @@ class ReconcileViewController :UITableViewController {
         button.tag = section
         
         return button
+    }
+    
+    @objc func handleReload() {
+        bottles = allWine?.reconcile
+
+        self.tableView.reloadData()
     }
 
     @objc func handleExpandClose(button: UIButton) {
@@ -139,7 +147,6 @@ class ReconcileViewController :UITableViewController {
         let reconcileDetailController = ReconcileViewDetailController()
         reconcileDetailController.passedValue = wineSelected
         let navController = UINavigationController(rootViewController: reconcileDetailController)
-        reconcileDetailController.myUpdater = (self as BottleCountDelegate)
         present(navController, animated: true, completion: nil)
 
     }
@@ -193,17 +200,5 @@ class ReconcileViewController :UITableViewController {
         present(loginController, animated: true, completion: nil)
         
     }
-    
-}
-
-extension ReconcileViewController: BottleCountDelegate{
-    
-    func passBackBinsAndBottlesInThem(newBinData:[StorageBins]){
-        let indexPath = tableView.indexPathForSelectedRow
-        let section = indexPath![0]
-        let row = indexPath![1]
-        varietals![section].wines![row].storageBins = newBinData
-        tableView.reloadData()
-    }
-    
+        
 }

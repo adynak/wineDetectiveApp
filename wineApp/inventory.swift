@@ -133,6 +133,7 @@ var dataArray = [[String]]()
 var wine = [Wines]()
 var bin = [StorageBins]()
 var designation: String = ""
+var dataHeader = [String]()
 
 struct StorageBins: Codable {
     
@@ -165,7 +166,7 @@ struct StorageBins: Codable {
                 var csvData = String(data: data, encoding: .ascii)
                 csvData = csvData!.replacingOccurrences(of: "Unknown", with: "")
                 dataArray = DataServices.parseCsv(data:csvData!)
-                let dataHeader = dataArray.removeFirst()
+                dataHeader = dataArray.removeFirst()
                 let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
                 
                 let reconcileSort = DataServices.buildReconcileArray(fields: fields)
