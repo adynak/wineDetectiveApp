@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
-//  autolayout_lbta
+//  ReconcileViewDetailController.swift
+//  wineApp
 //
-//  Created by Brian Voong on 9/25/17.
-//  Copyright © 2017 Lets Build That App. All rights reserved.
+//  Created by adynak on 12/6/18.
+//  Copyright © 2018 Al Dynak. All rights reserved.//
 //
 
 import UIKit
@@ -15,7 +15,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     let tableRowHeight:CGFloat = 50
     let sortBins:Bool = true
     
-    var cellID = "cellID123"
+    let cellID = "cellId"
     var wineBins = [Level2]()
     
     var cells = [ReconcileTableViewCell]() //initialize array at class level
@@ -24,7 +24,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     
     let storageLabel: UITextView = {
         let tv = UITextView()
-        tv.text = "Location and Bin:"
+        tv.text = NSLocalizedString("locationAndBin", comment: "")
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = UIColor(r:202, g:227, b:255)
@@ -43,7 +43,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         tv.isScrollEnabled = false
         tv.layer.cornerRadius = 5
         tv.layer.masksToBounds = true
-        tv.text = "total Bottles"
+        tv.text = NSLocalizedString("totalBottles", comment: "")
         tv.contentInset=UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0);
         return tv
     }()
@@ -91,7 +91,9 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     }
     
     func setupWineLabelLayout(){
-        storageLabel.text = "Location and Bin: \(passedValue.location!) \(passedValue.bin!)\nBottles: \(passedValue.bottleCount)"
+        let locationAndBin = NSLocalizedString("locationAndBin", comment: "")
+        let bottles = NSLocalizedString("bottles", comment: "")
+        storageLabel.text = "\(locationAndBin): \(passedValue.location!) \(passedValue.bin!)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
             storageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -154,24 +156,25 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     
     private func setupNavigationBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = "Reconcile"
+        navigationItem.title = NSLocalizedString("reconcileTitle", comment: "")
 
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(addTapped))
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(addTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title:   NSLocalizedString("cancel", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(addTapped))
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title:   NSLocalizedString("save", comment: ""),
+            style: .plain,
+            target: self,
+            action: #selector(addTapped))
     }
     
     @objc func addTapped(sender: UIBarButtonItem){
         var markAsDrank = [Level2]()
 
-        if (sender.title == "Save"){
+        if (sender.title == NSLocalizedString("save", comment: "")){
             for cell in cells {
                 if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
                     if bottles == 0{
@@ -185,20 +188,22 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
                 }
             }
             if markAsDrank.count > 0{
-
+                let alertTitle = NSLocalizedString("markAsDrankTitle", comment: "")
+                let okBtn = NSLocalizedString("okBtn", comment: "")
+                let cancelBtn = NSLocalizedString("cancelBtn", comment: "")
                 let message = buildRemoveMessage(bottles: markAsDrank)
 
-                let logOutAlert = UIAlertController.init(title: "Remove Bottles", message: message, preferredStyle:.alert)
+                let markAsDrankAlert = UIAlertController.init(title: alertTitle, message: message, preferredStyle:.alert)
 
-                logOutAlert.addAction(UIAlertAction.init(title: "Yes", style: .default) { (UIAlertAction) -> Void in
+                markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
                     self.dismiss(animated: true, completion:{
                         DataServices.removeBottles(bottles: markAsDrank)
                     })
                 })
 
-                logOutAlert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+                markAsDrankAlert.addAction(UIAlertAction.init(title: cancelBtn, style: .cancel, handler: nil))
 
-                self.present(logOutAlert, animated: true, completion: nil)
+                present(markAsDrankAlert, animated: true, completion: nil)
 
             } else {
                 dismiss(animated: true, completion: nil)
@@ -210,18 +215,22 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     }
         
     private func getTotalBottles()  -> String {
+        let singularBottle = NSLocalizedString("singularBottle", comment: "")
+        let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
         let totalBottles = wineBins.count
-        let bottleString = (totalBottles > 1) ? " bottles remaining" : " bottle remaining"
+        let bottleString = (totalBottles > 1) ? pluralBottle : singularBottle
         
         return String(totalBottles) + bottleString
     }
     
     func buildRemoveMessage(bottles: [Level2])->String{
+        let confirmBtn = NSLocalizedString("confirmBtn", comment: "")
+
         var message: String = ""
         for bottle in bottles{
             message += "\(bottle.vintage!) \(bottle.producer!)\n \(bottle.varietal!)\n\n"
         }
-        message += "Are you sure?"
+        message += confirmBtn
         return message
     }
 
@@ -229,6 +238,8 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
 
 extension ReconcileViewDetailController : ReconcileBinCellDelegate {
     func didTapStepper(direction: String){
+        let singularBottle = NSLocalizedString("singularBottle", comment: "")
+        let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
         let minus = "minus" as String
         let plus = "plus" as String
         
@@ -240,12 +251,8 @@ extension ReconcileViewDetailController : ReconcileBinCellDelegate {
         }
         if (direction == plus){
             count = number! + 1
-//            let addWineController = AddWineController()
-//            addWineController.passedValue = passedValue
-//            let navController = UINavigationController(rootViewController: addWineController)
-//            present(navController, animated: true, completion: nil)
         }
-        let bottleString = (count == 1) ? " bottle remaining" : " bottles remaining"
+        let bottleString = (count == 1) ? singularBottle : pluralBottle
 
         inventoryFooter.text = String(count) + bottleString
     }

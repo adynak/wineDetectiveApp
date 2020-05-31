@@ -37,6 +37,9 @@ class MainTabBarController: UITabBarController {
     
     func setupTabBar() {
         
+        let reconcileTitle = NSLocalizedString("reconcileTitle", comment: "")
+
+        
         let drinkByController = createNavController(viewController: DrinkByViewController(),
                                                     selected: #imageLiteral(resourceName: "drinkDark"),
                                                     unselected: #imageLiteral(resourceName: "drinkLight"),
@@ -57,10 +60,11 @@ class MainTabBarController: UITabBarController {
                                                      unselected: #imageLiteral(resourceName: "search"),
                                                      title: "Search")
         
-        let reconcileController = createNavController(viewController: ReconcileViewController(),
-                                                     selected: #imageLiteral(resourceName: "reconcileDark"),
-                                                     unselected: #imageLiteral(resourceName: "reconcileLight"),
-                                                     title: "Reconcile")
+        let reconcileController = createNavController(
+            viewController: ReconcileViewController(),
+            selected: #imageLiteral(resourceName: "reconcileDark"),
+            unselected: #imageLiteral(resourceName: "reconcileLight"),
+            title: reconcileTitle)
         
         
         viewControllers = [producerController,

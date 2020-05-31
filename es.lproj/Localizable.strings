@@ -1,0 +1,28 @@
+/*
+  Localizable.strings
+  wineApp
+
+  Created by adynak on 5/30/20.
+  Copyright © 2020 Al Dynak. All rights reserved.
+  
+  NSLocalizedString("locationAndBin", comment: "")
+ 
+*/
+"singularBottle" = " botella restante";
+"pluralBottle" = " botellas restantes";
+"totalBottles" = "botellas totales";
+"bottles" = "Botellas";
+
+"locationAndBin" = "Ubicación y Compartimiento";
+
+"save" = "Salvar";
+"cancel" = "Cancelar";
+
+"reconcileTitle" = "Conciliar";
+"markAsDrankTitle" = "Quitar Botellas";
+
+"okBtn" = "Aceptar";
+"cancelBtn" = "Cancelar";
+"confirmBtn" = "Confirmar?";
+"logOutBtn" = "Cerrar Sesión";
+

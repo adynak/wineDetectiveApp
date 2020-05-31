@@ -1,6 +1,6 @@
 //
-//  FavoriteViewController.swift
-//  TabbarApp
+//  ReconcileViewController.swift
+//  wineApp
 //
 //  Created by adynak on 12/6/18.
 //  Copyright © 2018 Al Dynak. All rights reserved.
@@ -10,17 +10,16 @@ import UIKit
 
 class ReconcileViewController :UITableViewController {
     
-    let cellID = "varietalCellId123123"
+    let cellID = "cellId"
 
-    var varietals: [Producers]?
     var bottles: [Level0]?
+    var reconcileLocations:Set = Set<Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavBar()
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
-        varietals = allWine?.reconcile1
         bottles = allWine?.reconcile
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "UserlistUpdate"), object: nil)
 
@@ -28,18 +27,10 @@ class ReconcileViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = "Reconcile"
-        
-        let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
-                                         target: self,
-                                         action: #selector(handleActionMenu))
-//        navigationItem.rightBarButtonItem = moreMenu
-        
-//        let addWine = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
-//                                      target: self,
-//                                      action: #selector(handleAddWine))
-        
-        let cancelButton = UIBarButtonItem(title: "Log Out",
+        navigationItem.title = NSLocalizedString("reconcileTitle", comment: "title for reconcile")
+        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+                
+        let cancelButton = UIBarButtonItem(title: logOutBtn,
                                            style: UIBarButtonItem.Style.plain,
                                            target: self,
                                            action: #selector(handleLogOut))
@@ -72,15 +63,21 @@ class ReconcileViewController :UITableViewController {
     
     @objc func handleReload() {
         bottles = allWine?.reconcile
-
         self.tableView.reloadData()
+        for row in reconcileLocations{
+            if (row < bottles!.count){
+                let button = UIButton(type: .system)
+                button.tag = row
+                handleExpandClose(button: button)
+            }
+        }
     }
 
     @objc func handleExpandClose(button: UIButton) {
         
         let section = button.tag
+        reconcileLocations.insert(section)
         
-        // we'll try to close the section first by deleting the rows
         var indexPaths = [IndexPath]()
         for row in bottles![section].data.indices {
             let indexPath = IndexPath(row: row, section: section)
@@ -88,7 +85,6 @@ class ReconcileViewController :UITableViewController {
         }
         
         let isRowExpanded = bottles?[section].isExpanded
-        // set this for call to numberOfRowsInSection to toggle display of these rows
         bottles?[section].isExpanded = !isRowExpanded!
         
         if isRowExpanded! {
@@ -125,20 +121,6 @@ class ReconcileViewController :UITableViewController {
         let section = indexPath![0]
         let row = indexPath![1]
         
-        //getting the current cell from the index path
-        wineSelected.vintage = varietals![section].wines![row].vintage!
-        wineSelected.varietal = varietals![section].wines![row].producer!
-        wineSelected.drinkBy = varietals![section].wines![row].drinkBy!
-        wineSelected.locale = varietals![section].wines![row].locale!
-        wineSelected.producer = varietals![section].name!
-        wineSelected.ava = varietals![section].wines![row].ava!
-        wineSelected.designation = varietals![section].wines![row].designation!
-        wineSelected.region = varietals![section].wines![row].region!
-        wineSelected.country = varietals![section].wines![row].country!
-        wineSelected.type = varietals![section].wines![row].type!
-        wineSelected.vineyard = varietals![section].wines![row].vineyard!
-        wineSelected.storageBins = varietals![section].wines![row].storageBins
-       
         wineSelected.bottles = bottles![section].data[row].data
         wineSelected.location = bottles![section].name
         wineSelected.bin = bottles![section].data[row].name
@@ -159,40 +141,13 @@ class ReconcileViewController :UITableViewController {
         let colorEven = UIColor(r:240, g:240, b:240)
                 
         bottleCount = bottles![indexPath.section].data[indexPath.row].bottleCount!
-//        var collective = " bottle)"
-//        if (bottleCount > 1){
-//            collective = " bottles)"
-//        }
         
         cell.textLabel?.text = "\(bin!) (\(bottleCount))"
-//        if vineyard == "" {
-//            cell.detailTextLabel?.text = "  \(bottleCount) \(collective)"
-//        } else {
-//            cell.detailTextLabel?.text = ava! + " - " + vineyard!
-//        }
-        
         cell.heightAnchor.constraint(equalToConstant: 36).isActive = true
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         return cell
     }
-    
-    @objc func handleActionMenu(){
-        Alert.showActionMenuAlert(on: self)
-    }
-    
-    @objc func handleAddWine(){
-//        let addWineController = AddWineController()
-////        wineDetailController.passedValue = wineSelected
-//        let navController = UINavigationController(rootViewController: addWineController)
-//        present(navController, animated: true, completion: nil)
-        
-        UserDefaults.standard.setIsLoggedIn(value: false)
-        
-        let loginController = LoginController()
-        present(loginController, animated: true, completion: nil)
-        
-    }
-    
+            
     @objc func handleLogOut(){
         UserDefaults.standard.setIsLoggedIn(value: false)
         

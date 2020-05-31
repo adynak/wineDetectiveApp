@@ -14,8 +14,8 @@ protocol ReconcileBinCellDelegate{
 
 class ReconcileTableViewCell : UITableViewCell {
     
-    let singularText = " bottle remaining"
-    let pluralText = " bottles remaining"
+    let singularText = NSLocalizedString("singularBottle", comment: "")
+    let pluralText = NSLocalizedString("pluralBottle", comment: "plural")
     
     var delegate: ReconcileBinCellDelegate?
 
@@ -157,12 +157,9 @@ class ReconcileTableViewCell : UITableViewCell {
         var responseMessages = ["direction": "OK"]
         
         let stepDirection = sender.tag > Int(sender.value) ? "minus" : "plus"
-//        if (stepDirection == "minus"){
-            sender.tag = Int(sender.value)
-            bottleCountLabel.text = setLabelText(count: Int(sender.value))
-        
-//        }
-        
+        sender.tag = Int(sender.value)
+        bottleCountLabel.text = setLabelText(count: Int(sender.value))
+                
         responseMessages["direction"] = stepDirection
         delegate?.didTapStepper(direction: stepDirection)
 

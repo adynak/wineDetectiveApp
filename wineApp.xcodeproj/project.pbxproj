@@ -29,6 +29,7 @@
 		925C4513246AE8A000044894 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C4512246AE8A000044894 /* temp.swift */; };
 		926D0921247CD556001A8838 /* RemoveBottlesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926D0920247CD556001A8838 /* RemoveBottlesController.swift */; };
 		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
+		927C22B02483729800695B45 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 927C22B22483729800695B45 /* Localizable.strings */; };
 		92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E15D1021B8A49E0068C213 /* VarietalViewController.swift */; };
 		92E60F452455DBAB0047911C /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60F442455DBAB0047911C /* DataServices.swift */; };
 		92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */; };
@@ -62,6 +63,8 @@
 		925C4512246AE8A000044894 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
 		926D0920247CD556001A8838 /* RemoveBottlesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBottlesController.swift; sourceTree = "<group>"; };
 		92753CE4245DC3D400EF08F6 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		927C22B12483729800695B45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		927C22B3248372AA00695B45 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		92E15D1021B8A49E0068C213 /* VarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarietalViewController.swift; sourceTree = "<group>"; };
 		92E60F442455DBAB0047911C /* DataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
 		92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinTableViewCell.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/BinTableViewCell.swift; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		36BDE4B0203D87BC00581A05 = {
 			isa = PBXGroup;
 			children = (
+				927C22B22483729800695B45 /* Localizable.strings */,
 				92ABB14924797CDB00F85B20 /* Reconcile */,
 				922B8ECE2469A94D00911785 /* AddTableViewCell.swift */,
 				92042F3424645CBC00515BAD /* UserCell.swift */,
@@ -184,7 +188,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				es,
 			);
 			mainGroup = 36BDE4B0203D87BC00581A05;
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				923B6D3F24509B020080A5F6 /* bottles1.csv in Resources */,
+				927C22B02483729800695B45 /* Localizable.strings in Resources */,
 				36BDE4C4203D87BC00581A05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,6 +248,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		927C22B22483729800695B45 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				927C22B12483729800695B45 /* en */,
+				927C22B3248372AA00695B45 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		36BDE4C9203D87BC00581A05 /* Debug */ = {
@@ -297,7 +313,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -352,7 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
