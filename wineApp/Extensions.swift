@@ -55,3 +55,52 @@ extension UIView {
     }
     
 }
+
+var boxView = UIView()
+
+extension UIViewController{
+    
+    func showSpinner(localizedText: String){
+
+        let boxView: UIView = {
+            let box =  UIView()
+            box.frame = CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25, width: 180, height: 100)
+            box.backgroundColor = UIColor(r:80, g:102, b:144)
+            box.alpha = 0.8
+            box.layer.cornerRadius = 10
+            return box
+        }()
+        
+        let text:UILabel = {
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: 60, width: 180, height: 30)
+            label.textAlignment = .center
+            label.backgroundColor = UIColor(r:80, g:102, b:144)
+            label.textColor = .white
+            label.text = localizedText
+            return label
+        }()
+        
+        let spinner: UIActivityIndicatorView = {
+            let view = UIActivityIndicatorView()
+            view.style = .large
+            view.color = .black
+            view.center = boxView.center
+            view.frame = CGRect(x: 70, y: 10, width: 50, height: 50)
+            view.startAnimating()
+            return view
+        }()
+        
+        boxView.addSubview(spinner)
+        boxView.addSubview(text)
+
+        view.addSubview(boxView)
+
+        
+    }
+    
+    func hideSpinner(){
+        boxView.removeFromSuperview()
+    }
+}
+

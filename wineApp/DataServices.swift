@@ -77,7 +77,7 @@ class DataServices {
         return result
     }
     
-    static func getDataUrl(user: String,pword: String) -> String{
+    static func getDataUrl(user: String,pword: String, table: String) -> String{
         
         struct URL {
             let scheme: String
@@ -100,7 +100,7 @@ class DataServices {
            URLQueryItem(name: "User", value: user),
            URLQueryItem(name: "Password", value: pword),
            URLQueryItem(name: "Format", value: "csv"),
-           URLQueryItem(name: "Table", value: "Inventory"),
+           URLQueryItem(name: "Table", value: table),
            URLQueryItem(name: "Location", value: "1")
         ]
 

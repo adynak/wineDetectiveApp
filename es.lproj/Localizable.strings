@@ -8,6 +8,9 @@
   NSLocalizedString("locationAndBin", comment: "")
  
 */
+
+"runAPI" = "Cargando";
+
 "singularBottle" = " botella restante";
 "pluralBottle" = " botellas restantes";
 "totalBottles" = "botellas totales";

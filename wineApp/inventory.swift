@@ -149,7 +149,7 @@ struct StorageBins: Codable {
         let user = UserDefaults.standard.getUserName()
         let pword = UserDefaults.standard.getUserPword()
         
-        let dataUrl = DataServices.getDataUrl(user: user,pword: pword)
+        var dataUrl = DataServices.getDataUrl(user: user,pword: pword, table: "Inventory")
 
         URLSession.shared.dataTask(with: URL(string: dataUrl)!, completionHandler: { (data, response, error) -> Void in
             
@@ -163,9 +163,9 @@ struct StorageBins: Codable {
             }
 
             do {
-                var csvData = String(data: data, encoding: .ascii)
-                csvData = csvData!.replacingOccurrences(of: "Unknown", with: "")
-                dataArray = DataServices.parseCsv(data:csvData!)
+                var csvInventory = String(data: data, encoding: .ascii)
+                csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
+                dataArray = DataServices.parseCsv(data:csvInventory!)
                 dataHeader = dataArray.removeFirst()
                 let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
                 
@@ -196,6 +196,33 @@ struct StorageBins: Codable {
             }
 
         }) .resume()
+        
+        dataUrl = DataServices.getDataUrl(user: user,pword: pword, table: "Availability")
+
+//        URLSession.shared.dataTask(with: URL(string: dataUrl)!, completionHandler: { (data, response, error) -> Void in
+//            
+//            guard let data = data else {
+//                return
+//            }
+//            
+//            if let error = error {
+//                print(error)
+//                return
+//            }
+//
+//            do {
+//                var csvDrinkBy = String(data: data, encoding: .ascii)
+//                
+//                let newInventory1 = WineInventory()
+//                
+//                DispatchQueue.main.async(execute: { () -> Void in
+//                    completionHandler(newInventory1)
+//                })
+//                
+//            }
+//
+//        }) .resume()
+
 
     }
 
