@@ -61,10 +61,17 @@ var boxView = UIView()
 extension UIViewController{
     
     func showSpinner(localizedText: String){
+        
+        let logo: UIImageView = {
+            let image = UIImage(named: "logo")
+            let imageView = UIImageView(image: image)
+            imageView.frame = CGRect(x: view.center.x - 70, y: view.center.y - 268, width: 160, height: 160)
+            return imageView
+        }()
 
         let boxView: UIView = {
             let box =  UIView()
-            box.frame = CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25, width: 180, height: 100)
+            box.frame = CGRect(x: view.frame.midX - 90, y: view.frame.midY - 65, width: 180, height: 100)
             box.backgroundColor = UIColor(r:80, g:102, b:144)
             box.alpha = 0.8
             box.layer.cornerRadius = 10
@@ -91,9 +98,10 @@ extension UIViewController{
             return view
         }()
         
+        self.view.addSubview(logo)
         boxView.addSubview(spinner)
         boxView.addSubview(text)
-
+        
         view.addSubview(boxView)
 
         
