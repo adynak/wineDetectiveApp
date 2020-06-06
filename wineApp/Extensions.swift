@@ -62,53 +62,72 @@ extension UIViewController{
     
     func showSpinner(localizedText: String){
         
-        let logo: UIImageView = {
-            let image = UIImage(named: "logo")
-            let imageView = UIImageView(image: image)
-            imageView.frame = CGRect(x: view.center.x - 70, y: view.center.y - 268, width: 160, height: 160)
-            return imageView
+        let loadingView: UIView = {
+            let v =  UIView()
+            v.frame = CGRect(x: 0, y: 0, width: 180, height: 340)
+            v.tag = 19
+            v.center.x = view.center.x
+            v.center.y = view.center.y - 100
+            return v
         }()
 
-        let boxView: UIView = {
-            let box =  UIView()
-            box.frame = CGRect(x: view.frame.midX - 90, y: view.frame.midY - 65, width: 180, height: 100)
-            box.backgroundColor = UIColor(r:80, g:102, b:144)
-            box.alpha = 0.8
-            box.layer.cornerRadius = 10
-            return box
+        let logo: UIImageView = {
+            let image = UIImage(named: "logo")
+            let iv = UIImageView(image: image)
+            iv.frame = CGRect(x: 0, y: 0, width: 160, height: 160)
+            iv.center.x = loadingView.center.x - 98
+            return iv
         }()
-        
-        let text:UILabel = {
-            let label = UILabel()
-            label.frame = CGRect(x: 0, y: 60, width: 180, height: 30)
-            label.textAlignment = .center
-            label.backgroundColor = UIColor(r:80, g:102, b:144)
-            label.textColor = .white
-            label.text = localizedText
-            return label
+
+        let box: UIView = {
+            let b =  UIView()
+            b.frame = CGRect(x: 0, y: 0, width: 180, height: 100)
+            b.backgroundColor = UIColor(r:80, g:102, b:144)
+            b.alpha = 0.8
+            b.layer.cornerRadius = 10
+            b.center.x = loadingView.center.x - 98
+            b.center.y = logo.center.y + 150
+            return b
         }()
         
         let spinner: UIActivityIndicatorView = {
-            let view = UIActivityIndicatorView()
-            view.style = .large
-            view.color = .black
-            view.center = boxView.center
-            view.frame = CGRect(x: 70, y: 10, width: 50, height: 50)
-            view.startAnimating()
-            return view
+            let s = UIActivityIndicatorView()
+            s.style = .large
+            s.color = .black
+            s.center.x = box.center.x
+            s.center.y = box.center.y - 20
+            s.startAnimating()
+            return s
         }()
         
-        self.view.addSubview(logo)
-        boxView.addSubview(spinner)
-        boxView.addSubview(text)
+        let text:UILabel = {
+            let l = UILabel()
+            l.frame = CGRect(x: 0, y: 0, width: 180, height: 30)
+            l.textAlignment = .center
+            l.layer.borderWidth = 0
+            l.textColor = .white
+            l.text = localizedText
+            l.center.x = box.center.x
+            l.center.y = box.center.y + 20
+            return l
+        }()
+                
+        loadingView.addSubview(logo)
+        loadingView.addSubview(box)
+        loadingView.addSubview(spinner)
+        loadingView.addSubview(text)
         
-        view.addSubview(boxView)
+        view.addSubview(loadingView)
 
         
     }
     
     func hideSpinner(){
-        boxView.removeFromSuperview()
+        if let subview = self.view.viewWithTag(19) {
+        subview.removeFromSuperview()
+        }
+        
+//        boxView.removeFromSuperview()
     }
 }
 
