@@ -334,5 +334,18 @@ class DataServices {
 
     }
     
+    static func locateAvailabilityFields(availabilityHeader: [String?]) -> [Int]{
+        
+        var fields = [Int]()
+        let fieldsWeCareAbout: [String] = ["iWine","Available","Linear","Bell","Early","Late","Fast","TwinPeak","Simple"]
+
+        for field in fieldsWeCareAbout{
+            if let i = availabilityHeader.firstIndex(where: { $0 == field }) {
+                fields.append(i)
+            }
+        }
+        return fields
+    }
+    
 }
 

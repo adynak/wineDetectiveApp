@@ -30,6 +30,7 @@
 		926D0921247CD556001A8838 /* RemoveBottlesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926D0920247CD556001A8838 /* RemoveBottlesController.swift */; };
 		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
 		927C22B02483729800695B45 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 927C22B22483729800695B45 /* Localizable.strings */; };
+		92BD925A248D3C3700FF839C /* wip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BD9259248D3C3700FF839C /* wip.swift */; };
 		92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E15D1021B8A49E0068C213 /* VarietalViewController.swift */; };
 		92E60F452455DBAB0047911C /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60F442455DBAB0047911C /* DataServices.swift */; };
 		92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */; };
@@ -65,6 +66,7 @@
 		92753CE4245DC3D400EF08F6 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		927C22B12483729800695B45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		927C22B3248372AA00695B45 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		92BD9259248D3C3700FF839C /* wip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wip.swift; sourceTree = "<group>"; };
 		92E15D1021B8A49E0068C213 /* VarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarietalViewController.swift; sourceTree = "<group>"; };
 		92E60F442455DBAB0047911C /* DataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
 		92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinTableViewCell.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/BinTableViewCell.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				922FBD3921B9AEC100E14641 /* Alert.swift */,
 				922FBD3F21B9CD4800E14641 /* inventory.swift */,
 				92E60F442455DBAB0047911C /* DataServices.swift */,
+				92BD9259248D3C3700FF839C /* wip.swift */,
 				92FA003021BAD3B70091A710 /* wineDetailViewController.swift */,
 				92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */,
 			);
@@ -222,6 +225,7 @@
 				922B8ECF2469A94D00911785 /* AddTableViewCell.swift in Sources */,
 				92E60F452455DBAB0047911C /* DataServices.swift in Sources */,
 				92F6896B2472E294006EB934 /* ReconcileViewController.swift in Sources */,
+				92BD925A248D3C3700FF839C /* wip.swift in Sources */,
 				924175EE245A1EA7002502FE /* LoginController.swift in Sources */,
 				924175FA245A2625002502FE /* UserDefaults.swift in Sources */,
 				36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */,
