@@ -41,7 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36BDE4B9203D87BC00581A05 /* wineApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wineApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		36BDE4B9203D87BC00581A05 /* Wine Detective.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wine Detective.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BDE4BC203D87BC00581A05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		36BDE4C3203D87BC00581A05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		36BDE4BA203D87BC00581A05 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				36BDE4B9203D87BC00581A05 /* wineApp.app */,
+				36BDE4B9203D87BC00581A05 /* Wine Detective.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,7 +168,7 @@
 			);
 			name = wineApp;
 			productName = TabbarApp;
-			productReference = 36BDE4B9203D87BC00581A05 /* wineApp.app */;
+			productReference = 36BDE4B9203D87BC00581A05 /* Wine Detective.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -403,7 +403,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/wineApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = adynak.wineApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Wine Detective";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -418,7 +418,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/wineApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = adynak.wineApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Wine Detective";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
