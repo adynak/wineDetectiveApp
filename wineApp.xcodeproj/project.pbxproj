@@ -33,6 +33,7 @@
 		92BD925A248D3C3700FF839C /* wip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BD9259248D3C3700FF839C /* wip.swift */; };
 		92E15D1121B8A49E0068C213 /* VarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E15D1021B8A49E0068C213 /* VarietalViewController.swift */; };
 		92E60F452455DBAB0047911C /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60F442455DBAB0047911C /* DataServices.swift */; };
+		92ED7705248EE3F3000FAD39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92ED7703248EE3F2000FAD39 /* LaunchScreen.storyboard */; };
 		92EE679021CD69BE00BAEEC1 /* BinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */; };
 		92F6896B2472E294006EB934 /* ReconcileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F6896A2472E294006EB934 /* ReconcileViewController.swift */; };
 		92F7830621E8E7040003C451 /* AddWineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7830521E8E7040003C451 /* AddWineController.swift */; };
@@ -69,6 +70,7 @@
 		92BD9259248D3C3700FF839C /* wip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wip.swift; sourceTree = "<group>"; };
 		92E15D1021B8A49E0068C213 /* VarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarietalViewController.swift; sourceTree = "<group>"; };
 		92E60F442455DBAB0047911C /* DataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
+		92ED7704248EE3F2000FAD39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../learn/learn/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92EE678D21CD69BD00BAEEC1 /* BinTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinTableViewCell.swift; path = ../../../../../Library/apps/xcode/wineBinsTableView/wineBinsTableView/BinTableViewCell.swift; sourceTree = "<group>"; };
 		92F6896A2472E294006EB934 /* ReconcileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconcileViewController.swift; sourceTree = "<group>"; };
 		92F7830521E8E7040003C451 /* AddWineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWineController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		36BDE4BB203D87BC00581A05 /* wineApp */ = {
 			isa = PBXGroup;
 			children = (
+				92ED7703248EE3F2000FAD39 /* LaunchScreen.storyboard */,
 				36BDE4BC203D87BC00581A05 /* AppDelegate.swift */,
 				924175ED245A1EA7002502FE /* LoginController.swift */,
 				926D0920247CD556001A8838 /* RemoveBottlesController.swift */,
@@ -192,6 +195,7 @@
 			knownRegions = (
 				en,
 				es,
+				Base,
 			);
 			mainGroup = 36BDE4B0203D87BC00581A05;
 			productRefGroup = 36BDE4BA203D87BC00581A05 /* Products */;
@@ -209,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				923B6D3F24509B020080A5F6 /* bottles1.csv in Resources */,
+				92ED7705248EE3F3000FAD39 /* LaunchScreen.storyboard in Resources */,
 				927C22B02483729800695B45 /* Localizable.strings in Resources */,
 				36BDE4C4203D87BC00581A05 /* Assets.xcassets in Resources */,
 			);
@@ -261,6 +266,14 @@
 				927C22B3248372AA00695B45 /* es */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		92ED7703248EE3F2000FAD39 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92ED7704248EE3F2000FAD39 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

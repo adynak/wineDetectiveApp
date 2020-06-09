@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedString.Key.foregroundColor: UIColor(r: 255, g: 255, b: 255),
             NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16)!
         ]
-        
         UINavigationBar.appearance().titleTextAttributes = attrs
         
         UINavigationBar.appearance().barTintColor = UIColor(r: 61,  g: 91,  b: 151) // background
