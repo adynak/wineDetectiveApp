@@ -198,6 +198,9 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     func finishLoggingIn() {
+        
+//        API.load()
+        
         let userName = UserDefaults.standard.getUserName()
         let userPword = UserDefaults.standard.getUserPword()
         if (userName.isEmpty || userPword.isEmpty) {

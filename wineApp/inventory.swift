@@ -144,7 +144,8 @@ struct StorageBins: Codable {
 
     func fetchWineInventory(_ completionHandler: @escaping (WineInventory) -> ()) {
         
-                
+//        API.load()
+        
         let user = UserDefaults.standard.getUserName()
         let pword = UserDefaults.standard.getUserPword()
         

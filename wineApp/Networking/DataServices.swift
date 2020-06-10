@@ -12,7 +12,7 @@ import UIKit
 let debug: Bool = true
 
 class DataServices {
-    
+        
     static func parseCsv(data: String) -> [[String]]{
         // data: String = contents of a CSV file.
         // Returns: [[String]] = two-dimension array [rows][columns].

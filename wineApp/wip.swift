@@ -11,36 +11,36 @@ import UIKit
 //var allWine: WineInventory?
 
 
-enum NetworkError: Error {
-    case url
-    case server
-}
-
-var availabilityArray = [[String]]()
-var inventoryArray = [[String]]()
-var availabilityHeader = [String?]()
-
-struct Availability{
-    let iWine: Int
-    let available: Int
-    let linear: Int
-    let bell: Int
-    let early: Int
-    let fast: Int
-    let twinPeak: Int
-    let simple: Int
-    
-    init(data: [Int]) {
-        iWine = data[0]
-        available = data[1]
-        linear = data[2]
-        bell = data[3]
-        early = data[4]
-        fast = data[5]
-        twinPeak = data[6]
-        simple = data[7]
-    }
-}
+//enum NetworkError: Error {
+//    case url
+//    case server
+//}
+//
+//var availabilityArray = [[String]]()
+//var inventoryArray = [[String]]()
+//var availabilityHeader = [String?]()
+//
+//struct Availability{
+//    let iWine: Int
+//    let available: Int
+//    let linear: Int
+//    let bell: Int
+//    let early: Int
+//    let fast: Int
+//    let twinPeak: Int
+//    let simple: Int
+//
+//    init(data: [Int]) {
+//        iWine = data[0]
+//        available = data[1]
+//        linear = data[2]
+//        bell = data[3]
+//        early = data[4]
+//        fast = data[5]
+//        twinPeak = data[6]
+//        simple = data[7]
+//    }
+//}
 
 
 
@@ -54,120 +54,121 @@ class ViewController: UIViewController {
 //       let timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
 //            self.hideSpinner()
 //        })
-        load()
+        API.load()
         print("done")
         hideSpinner()
     }
-    
-    func load() {
-        print("load")
-        DispatchQueue.global(qos: .utility).async {
-            let result = self.availabilityAPICall()
-                .flatMap { self.inventoryAPICall($0) }
-
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(data):
-                    for row in data{
-                        print(row)
-                    }
-                    break
-                case let .failure(error):
-                    print(error)
-                    break
-                }
-            }
-        }
-    }
-    
-    func inventoryAPICall(_ param: [[String?]]) -> Result<[[String?]], NetworkError> {
-        print("inventoryAPICall")
-        var iWine = String()
-
-        let path = "http://10.0.1.9/angular/git/wine/resources/dataservices/csv.php?User=&Password=&Format=csv&Table=Inventory&Location=1"
-
-        guard let url = URL(string: path) else {
-            return .failure(.url)
-        }
-        var result: Result<[[String?]], NetworkError>!
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-            if let data = data {
-                var csvInventory = String(data: data, encoding: .ascii)
-                csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
-                inventoryArray = DataServices.parseCsv(data:csvInventory!)
-                
-                availabilityHeader = param[0]
-                let availibilityFields = DataServices.locateAvailabilityFields(availabilityHeader:availabilityHeader)
-                let positionOf = Availability(data:availibilityFields)
-                var drinkByFields = availibilityFields
-                drinkByFields.removeFirst()
-                
-                for fieldIndex in drinkByFields{
-                    inventoryArray[0].append(param[0][fieldIndex]!)
-                }
-                
-                
-//                po param.firstIndex(where: { $0[positionOf.iWine] == "2584284" })
-                
-                if let iWineIndex = inventoryArray[0].firstIndex(of: "iWine") {
-                    for (index,row) in inventoryArray.enumerated() where index > 0{
-                        iWine = row[iWineIndex]
-                        if let availibilityIndex = param.firstIndex(where: { $0[positionOf.iWine] == iWine }){
-                            for fieldIndex in drinkByFields{
-                                inventoryArray[index].append(param[availibilityIndex][fieldIndex]!)
-                            }
-                        }
-                        
-                    }
-
-                }
-                
-                result = .success(inventoryArray)
-                
-            } else {
-                result = .failure(.server)
-            }
-            semaphore.signal()
-        }.resume()
-        
-        _ = semaphore.wait(wallTimeout: .distantFuture)
-
-        return result
-    }
-    
-    func availabilityAPICall() -> Result<[[String?]], NetworkError> {
-        print("availabilityAPICall")
-        let path = "http://10.0.1.9/angular/git/wine/resources/dataservices/csv.php?User=&Password=&Format=csv&Table=Availability&Location=1"
-
-        guard let url = URL(string: path) else {
-            return .failure(.url)
-        }
-        var result: Result<[[String?]], NetworkError>!
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-            if let data = data {
-                var csvAvailability = String(data: data, encoding: .ascii)
-                csvAvailability = csvAvailability!.replacingOccurrences(of: "Unknown", with: "")
-                availabilityArray = DataServices.parseCsv(data:csvAvailability!)
-
-                result = .success(availabilityArray)
-            } else {
-                result = .failure(.server)
-            }
-            semaphore.signal()
-        }.resume()
-        
-        _ = semaphore.wait(wallTimeout: .distantFuture)
-
-        return result
-    }
-    
 }
+    
+//    func load() {
+//        print("load")
+//        DispatchQueue.global(qos: .utility).async {
+//            let result = self.availabilityAPICall()
+//                .flatMap { self.inventoryAPICall($0) }
+//
+//            DispatchQueue.main.async {
+//                switch result {
+//                case let .success(data):
+//                    for row in data{
+//                        print(row)
+//                    }
+//                    break
+//                case let .failure(error):
+//                    print(error)
+//                    break
+//                }
+//            }
+//        }
+//    }
+//
+//    func inventoryAPICall(_ param: [[String?]]) -> Result<[[String?]], NetworkError> {
+//        print("inventoryAPICall")
+//        var iWine = String()
+//
+//        let path = "http://10.0.1.9/angular/git/wine/resources/dataservices/csv.php?User=&Password=&Format=csv&Table=Inventory&Location=1"
+//
+//        guard let url = URL(string: path) else {
+//            return .failure(.url)
+//        }
+//        var result: Result<[[String?]], NetworkError>!
+//
+//        let semaphore = DispatchSemaphore(value: 0)
+//
+//        URLSession.shared.dataTask(with: url) { (data, _, _) in
+//            if let data = data {
+//                var csvInventory = String(data: data, encoding: .ascii)
+//                csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
+//                inventoryArray = DataServices.parseCsv(data:csvInventory!)
+//
+//                availabilityHeader = param[0]
+//                let availibilityFields = DataServices.locateAvailabilityFields(availabilityHeader:availabilityHeader)
+//                let positionOf = Availability(data:availibilityFields)
+//                var drinkByFields = availibilityFields
+//                drinkByFields.removeFirst()
+//
+//                for fieldIndex in drinkByFields{
+//                    inventoryArray[0].append(param[0][fieldIndex]!)
+//                }
+//
+//
+////                po param.firstIndex(where: { $0[positionOf.iWine] == "2584284" })
+//
+//                if let iWineIndex = inventoryArray[0].firstIndex(of: "iWine") {
+//                    for (index,row) in inventoryArray.enumerated() where index > 0{
+//                        iWine = row[iWineIndex]
+//                        if let availibilityIndex = param.firstIndex(where: { $0[positionOf.iWine] == iWine }){
+//                            for fieldIndex in drinkByFields{
+//                                inventoryArray[index].append(param[availibilityIndex][fieldIndex]!)
+//                            }
+//                        }
+//
+//                    }
+//
+//                }
+//
+//                result = .success(inventoryArray)
+//
+//            } else {
+//                result = .failure(.server)
+//            }
+//            semaphore.signal()
+//        }.resume()
+//
+//        _ = semaphore.wait(wallTimeout: .distantFuture)
+//
+//        return result
+//    }
+//
+//    func availabilityAPICall() -> Result<[[String?]], NetworkError> {
+//        print("availabilityAPICall")
+//        let path = "http://10.0.1.9/angular/git/wine/resources/dataservices/csv.php?User=&Password=&Format=csv&Table=Availability&Location=1"
+//
+//        guard let url = URL(string: path) else {
+//            return .failure(.url)
+//        }
+//        var result: Result<[[String?]], NetworkError>!
+//
+//        let semaphore = DispatchSemaphore(value: 0)
+//
+//        URLSession.shared.dataTask(with: url) { (data, _, _) in
+//            if let data = data {
+//                var csvAvailability = String(data: data, encoding: .ascii)
+//                csvAvailability = csvAvailability!.replacingOccurrences(of: "Unknown", with: "")
+//                availabilityArray = DataServices.parseCsv(data:csvAvailability!)
+//
+//                result = .success(availabilityArray)
+//            } else {
+//                result = .failure(.server)
+//            }
+//            semaphore.signal()
+//        }.resume()
+//
+//        _ = semaphore.wait(wallTimeout: .distantFuture)
+//
+//        return result
+//    }
+//
+//}
 
 //var boxView = UIView()
 //
