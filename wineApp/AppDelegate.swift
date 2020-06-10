@@ -1,10 +1,12 @@
 //
 //  AppDelegate.swift
-//  TabbarApp
+//  Wine Detective
 //
 //  Created by adynak on 12/6/18.
 //  Copyright © 2018 Al Dynak. All rights reserved.
-//  vinos olvidados
+//
+//
+//  git update-index --skip-worktree /wineApp.xcodeproj/project.pbxproj
 
 import UIKit
 
