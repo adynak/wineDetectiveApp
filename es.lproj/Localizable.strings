@@ -21,7 +21,12 @@
 "save" = "Salvar";
 "cancel" = "Cancelar";
 
+"producerTitle" = "Productor";
+"varietalTitle" = "Variedad";
+"drinkByTitle" = "Beber";
+"searchTitle" = "Buscar";
 "reconcileTitle" = "Conciliar";
+
 "markAsDrankTitle" = "Quitar Botellas";
 
 "okBtn" = "Aceptar";

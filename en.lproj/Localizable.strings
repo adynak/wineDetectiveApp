@@ -21,7 +21,12 @@
 "save" = "Save";
 "cancel" = "Cancel";
 
+"producerTitle" = "Producer";
+"varietalTitle" = "Varietal";
+"drinkByTitle" = "Drink";
+"searchTitle" = "Search";
 "reconcileTitle" = "Reconcile";
+
 "markAsDrankTitle" = "Remove Bottles";
 
 "okBtn" = "OK";

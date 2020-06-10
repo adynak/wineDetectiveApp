@@ -1,14 +1,15 @@
 //
-//  UserCell.swift
+//  TableCell.swift
 //  wineApp
 //
 //  Created by adynak on 5/7/20.
 //  Copyright © 2020 Al Dynak. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class UserCell: UITableViewCell {
+class TableCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

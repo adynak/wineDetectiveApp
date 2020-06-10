@@ -8,44 +8,22 @@
 
 import UIKit
 
-class ProducerViewController:UITableViewController {
+class DrinkByViewController :UITableViewController {
     
-    let cellID = "cellId123123"
+    let cellID = "drinkByCellId123123"
     
     var allWines: WineInventory?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let spinnerText = NSLocalizedString("runAPI", comment: "")
-        setupLoadingBar(localizedText: spinnerText)
-        self.showSpinner(localizedText: spinnerText)
-        tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
-        
-        fetchWineInventory { (wineInventory) -> () in
-            self.allWines = wineInventory
-            
-            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
-                self.setupNavBar()
-                self.hideSpinner()
-                self.tableView.reloadData()
-            })
-            
-//            self.tableView.reloadData()
-            allWine = wineInventory
-        }
-        
-    }
-    
-    func setupLoadingBar(localizedText: String){
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = localizedText
-
+        setupNavBar()
+        tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
+        allWines = allWine        
     }
     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        
-        navigationItem.title = "Producer"
+        navigationItem.title = "Drink By"
         
         let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
                                          target: self,
@@ -66,10 +44,13 @@ class ProducerViewController:UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let sectionName = (allWines!.producers?[section].name)!
-        let bottleCount = (allWines!.producers?[section].bottleCount)!
+        
+        let bottleCount = (allWines!.drinkBy?[section].bottleCount)!
 
-        let sectionTitle = sectionName + " (\(bottleCount))"
+        let sectionName = (allWines!.drinkBy?[section].name! == "") ? "Missing" : allWines!.drinkBy![section].name!
+        let sectionCount = " (\(bottleCount))"
+        
+        let sectionTitle = sectionName + sectionCount
         let colorOdd = UIColor(r:184, g:206, b:249)
         let colorEven = UIColor(r:202, g:227, b:255)
         
@@ -93,14 +74,14 @@ class ProducerViewController:UITableViewController {
         
         // we'll try to close the section first by deleting the rows
         var indexPaths = [IndexPath]()
-        for row in allWines!.producers![section].wines!.indices {
+        for row in allWines!.drinkBy![section].wines!.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
         
-        let isRowExpanded = allWines?.producers?[section].isExpanded
+        let isRowExpanded = allWines?.drinkBy?[section].isExpanded
         // set this for call to numberOfRowsInSection to toggle display of these rows
-        allWines?.producers?[section].isExpanded = !isRowExpanded!
+        allWines?.drinkBy?[section].isExpanded = !isRowExpanded!
         
         if isRowExpanded! {
             tableView.deleteRows(at: indexPaths, with: .fade)
@@ -117,15 +98,15 @@ class ProducerViewController:UITableViewController {
         if allWines == nil {
             return 0
         } else {
-            return (allWines?.producers?.count)!
+            return (allWines?.drinkBy?.count)!
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !(allWines?.producers?[section].isExpanded)! {
+        if !(allWines?.drinkBy?[section].isExpanded)! {
             return 0
         }
-        return (allWines?.producers![section].wines!.count)!
+        return (allWines?.drinkBy![section].wines!.count)!
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -137,18 +118,18 @@ class ProducerViewController:UITableViewController {
         let row = indexPath![1]
         
         //getting the current cell from the index path
-        wineSelected.vintage = allWines!.producers![section].wines![row].vintage!
-        wineSelected.varietal = allWines!.producers![section].wines![row].varietal!
-        wineSelected.drinkBy = allWines!.producers![section].wines![row].drinkBy!
-        wineSelected.locale = allWines!.producers![section].wines![row].locale!
-        wineSelected.producer = allWines!.producers![section].name!
-        wineSelected.ava = allWines!.producers![section].wines![row].ava!
-        wineSelected.designation = allWines!.producers![section].wines![row].designation!
-        wineSelected.region = allWines!.producers![section].wines![row].region!
-        wineSelected.country = allWines!.producers![section].wines![row].country!
-        wineSelected.type = allWines!.producers![section].wines![row].type!
-        wineSelected.vineyard = allWines!.producers![section].wines![row].vineyard!
-        wineSelected.storageBins = allWines!.producers![section].wines![row].storageBins
+        wineSelected.vintage = allWines!.drinkBy![section].wines![row].vintage!
+        wineSelected.varietal = allWines!.drinkBy![section].wines![row].producer!
+        wineSelected.drinkBy = allWines!.drinkBy![section].wines![row].drinkBy!
+        wineSelected.locale = allWines!.drinkBy![section].wines![row].locale!
+        wineSelected.producer = allWines!.drinkBy![section].wines![row].varietal!
+        wineSelected.ava = allWines!.drinkBy![section].wines![row].ava!
+        wineSelected.designation = allWines!.drinkBy![section].wines![row].designation!
+        wineSelected.region = allWines!.drinkBy![section].wines![row].region!
+        wineSelected.country = allWines!.drinkBy![section].wines![row].country!
+        wineSelected.type = allWines!.drinkBy![section].wines![row].type!
+        wineSelected.vineyard = allWines!.drinkBy![section].wines![row].vineyard!
+        wineSelected.storageBins = allWines!.drinkBy![section].wines![row].storageBins
         
         let wineDetailController = wineDetailViewController()
         wineDetailController.passedValue = wineSelected
@@ -161,31 +142,33 @@ class ProducerViewController:UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var bottleCount: Int = 0
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let varietal = allWines?.producers?[indexPath.section].wines?[indexPath.row].varietal
-        let vintage = allWines?.producers?[indexPath.section].wines?[indexPath.row].vintage
+        let varietal = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].varietal
+        let vintage = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].vintage
 //        var designation = allWines?.producers?[indexPath.section].wines?[indexPath.row].designation
-        let ava = allWines?.producers?[indexPath.section].wines?[indexPath.row].ava
+//        let ava = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].ava
 //        let type = allWines?.producers?[indexPath.section].wines?[indexPath.row].type
-        let vineyard = allWines?.producers?[indexPath.section].wines?[indexPath.row].vineyard
+//        let vineyard = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].vineyard
+
+        let producer = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].producer
 
         
-        let bottleLocations = allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins
+        let bottleLocations = allWines?.drinkBy?[indexPath.section].wines?[indexPath.row].storageBins
         for bin in bottleLocations! {
             bottleCount += bin.bottleCount!
         }
         
-        var collective = " bottles)"
-        if (bottleCount == 1){
-            collective = " bottle)"
+        var collective = " bottle)"
+        if (bottleCount > 1){
+            collective = " bottles)"
         }
         
         cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + collective
-        if vineyard == "" {
-            cell.detailTextLabel?.text = ava
-        } else {
-            cell.detailTextLabel?.text = ava! + " - " + vineyard!
-        }
-        
+//        if vineyard == "" {
+//            cell.detailTextLabel?.text = ava
+//        } else {
+//            cell.detailTextLabel?.text = ava! + " - " + vineyard!
+//        }
+        cell.detailTextLabel?.text = producer
         return cell
     }
     
@@ -216,14 +199,13 @@ class ProducerViewController:UITableViewController {
     
 }
 
-
-extension ProducerViewController: BottleCountDelegate{
+extension DrinkByViewController: BottleCountDelegate{
     
     func passBackBinsAndBottlesInThem(newBinData:[StorageBins]){
         let indexPath = tableView.indexPathForSelectedRow
         let section = indexPath![0]
         let row = indexPath![1]
-        allWines!.producers![section].wines![row].storageBins = newBinData
+        allWines!.drinkBy![section].wines![row].storageBins = newBinData
         tableView.reloadData()
     }
     

@@ -38,28 +38,32 @@ class MainTabBarController: UITabBarController {
     func setupTabBar() {
         
         let reconcileTitle = NSLocalizedString("reconcileTitle", comment: "")
+        let producerTitle = NSLocalizedString("producerTitle", comment: "")
+        let varietalTitle = NSLocalizedString("varietalTitle", comment: "")
+        let drinkByTitle = NSLocalizedString("drinkByTitle", comment: "")
+        let searchTitle = NSLocalizedString("searchTitle", comment: "")
 
         
         let drinkByController = createNavController(viewController: DrinkByViewController(),
                                                     selected: #imageLiteral(resourceName: "drinkDark"),
                                                     unselected: #imageLiteral(resourceName: "drinkLight"),
-                                                    title: "Drink")
-        
+                                                    title: drinkByTitle)
+
         let producerController = createNavController(viewController: ProducerViewController(),
                                                      selected: #imageLiteral(resourceName: "farmDark"),
                                                      unselected: #imageLiteral(resourceName: "farmLight"),
-                                                     title: "Producer")
-        
+                                                     title: producerTitle)
+
         let varietalController = createNavController(viewController: VarietalViewController(),
                                                      selected: #imageLiteral(resourceName: "grapesDark"),
                                                      unselected: #imageLiteral(resourceName: "grapesLight"),
-                                                     title: "Varietal")
-        
+                                                     title: varietalTitle)
+
         let searchController = createNavController(viewController: SearchViewController(),
                                                      selected: #imageLiteral(resourceName: "search"),
                                                      unselected: #imageLiteral(resourceName: "search"),
-                                                     title: "Search")
-        
+                                                     title: searchTitle)
+
         let reconcileController = createNavController(
             viewController: ReconcileViewController(),
             selected: #imageLiteral(resourceName: "reconcileDark"),

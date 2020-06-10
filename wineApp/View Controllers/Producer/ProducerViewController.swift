@@ -6,24 +6,47 @@
 //  Copyright © 2018 Al Dynak. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class VarietalViewController :UITableViewController {
+class ProducerViewController:UITableViewController {
     
-    let cellID = "varietalCellId123123"
+    let cellID = "cellId123123"
     
-    var varietals: [Producers]?
-
+    var allWines: WineInventory?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavBar()
-        tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
-        varietals = allWine?.varietals
+        let spinnerText = NSLocalizedString("runAPI", comment: "")
+        setupLoadingBar(localizedText: spinnerText)
+        self.showSpinner(localizedText: spinnerText)
+        tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
+        
+        fetchWineInventory { (wineInventory) -> () in
+            self.allWines = wineInventory
+            
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
+                self.setupNavBar()
+                self.hideSpinner()
+                self.tableView.reloadData()
+            })
+            
+//            self.tableView.reloadData()
+            allWine = wineInventory
+        }
+        
+    }
+    
+    func setupLoadingBar(localizedText: String){
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = localizedText
+
     }
     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = "Varietal"
+        
+        navigationItem.title = "Producer"
         
         let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
                                          target: self,
@@ -44,8 +67,8 @@ class VarietalViewController :UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let sectionName = (varietals?[section].name)!
-        let bottleCount = (varietals?[section].bottleCount)!
+        let sectionName = (allWines!.producers?[section].name)!
+        let bottleCount = (allWines!.producers?[section].bottleCount)!
 
         let sectionTitle = sectionName + " (\(bottleCount))"
         let colorOdd = UIColor(r:184, g:206, b:249)
@@ -71,14 +94,14 @@ class VarietalViewController :UITableViewController {
         
         // we'll try to close the section first by deleting the rows
         var indexPaths = [IndexPath]()
-        for row in varietals![section].wines!.indices {
+        for row in allWines!.producers![section].wines!.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
         
-        let isRowExpanded = varietals?[section].isExpanded
+        let isRowExpanded = allWines?.producers?[section].isExpanded
         // set this for call to numberOfRowsInSection to toggle display of these rows
-        varietals?[section].isExpanded = !isRowExpanded!
+        allWines?.producers?[section].isExpanded = !isRowExpanded!
         
         if isRowExpanded! {
             tableView.deleteRows(at: indexPaths, with: .fade)
@@ -92,18 +115,18 @@ class VarietalViewController :UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if varietals == nil {
+        if allWines == nil {
             return 0
         } else {
-            return (varietals?.count)!
+            return (allWines?.producers?.count)!
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !(varietals?[section].isExpanded)! {
+        if !(allWines?.producers?[section].isExpanded)! {
             return 0
         }
-        return (varietals![section].wines!.count)
+        return (allWines?.producers![section].wines!.count)!
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -115,18 +138,18 @@ class VarietalViewController :UITableViewController {
         let row = indexPath![1]
         
         //getting the current cell from the index path
-        wineSelected.vintage = varietals![section].wines![row].vintage!
-        wineSelected.varietal = varietals![section].wines![row].producer!
-        wineSelected.drinkBy = varietals![section].wines![row].drinkBy!
-        wineSelected.locale = varietals![section].wines![row].locale!
-        wineSelected.producer = varietals![section].name!
-        wineSelected.ava = varietals![section].wines![row].ava!
-        wineSelected.designation = varietals![section].wines![row].designation!
-        wineSelected.region = varietals![section].wines![row].region!
-        wineSelected.country = varietals![section].wines![row].country!
-        wineSelected.type = varietals![section].wines![row].type!
-        wineSelected.vineyard = varietals![section].wines![row].vineyard!
-        wineSelected.storageBins = varietals![section].wines![row].storageBins
+        wineSelected.vintage = allWines!.producers![section].wines![row].vintage!
+        wineSelected.varietal = allWines!.producers![section].wines![row].varietal!
+        wineSelected.drinkBy = allWines!.producers![section].wines![row].drinkBy!
+        wineSelected.locale = allWines!.producers![section].wines![row].locale!
+        wineSelected.producer = allWines!.producers![section].name!
+        wineSelected.ava = allWines!.producers![section].wines![row].ava!
+        wineSelected.designation = allWines!.producers![section].wines![row].designation!
+        wineSelected.region = allWines!.producers![section].wines![row].region!
+        wineSelected.country = allWines!.producers![section].wines![row].country!
+        wineSelected.type = allWines!.producers![section].wines![row].type!
+        wineSelected.vineyard = allWines!.producers![section].wines![row].vineyard!
+        wineSelected.storageBins = allWines!.producers![section].wines![row].storageBins
         
         let wineDetailController = wineDetailViewController()
         wineDetailController.passedValue = wineSelected
@@ -139,22 +162,22 @@ class VarietalViewController :UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var bottleCount: Int = 0
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let varietal = varietals?[indexPath.section].wines?[indexPath.row].producer
-        let vintage = varietals?[indexPath.section].wines?[indexPath.row].vintage
-//        var designation = producers?[indexPath.section].wines?[indexPath.row].designation
-        let ava = varietals?[indexPath.section].wines?[indexPath.row].ava
-//        let type = producers?[indexPath.section].wines?[indexPath.row].type
-        let vineyard = varietals?[indexPath.section].wines?[indexPath.row].vineyard
+        let varietal = allWines?.producers?[indexPath.section].wines?[indexPath.row].varietal
+        let vintage = allWines?.producers?[indexPath.section].wines?[indexPath.row].vintage
+//        var designation = allWines?.producers?[indexPath.section].wines?[indexPath.row].designation
+        let ava = allWines?.producers?[indexPath.section].wines?[indexPath.row].ava
+//        let type = allWines?.producers?[indexPath.section].wines?[indexPath.row].type
+        let vineyard = allWines?.producers?[indexPath.section].wines?[indexPath.row].vineyard
 
         
-        let bottleLocations = varietals?[indexPath.section].wines?[indexPath.row].storageBins
+        let bottleLocations = allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins
         for bin in bottleLocations! {
             bottleCount += bin.bottleCount!
         }
         
-        var collective = " bottle)"
-        if (bottleCount > 1){
-            collective = " bottles)"
+        var collective = " bottles)"
+        if (bottleCount == 1){
+            collective = " bottle)"
         }
         
         cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + collective
@@ -194,13 +217,14 @@ class VarietalViewController :UITableViewController {
     
 }
 
-extension VarietalViewController: BottleCountDelegate{
+
+extension ProducerViewController: BottleCountDelegate{
     
     func passBackBinsAndBottlesInThem(newBinData:[StorageBins]){
         let indexPath = tableView.indexPathForSelectedRow
         let section = indexPath![0]
         let row = indexPath![1]
-        varietals![section].wines![row].storageBins = newBinData
+        allWines!.producers![section].wines![row].storageBins = newBinData
         tableView.reloadData()
     }
     
