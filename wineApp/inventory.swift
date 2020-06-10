@@ -64,8 +64,6 @@ struct WineInventory {
     var varietals: [Producers]?
     var drinkBy: [Producers]?
     var reconcile: [Level0]?
-    var reconcile1: [Producers]?
-
 }
 
 struct Producers: Codable {
@@ -179,15 +177,11 @@ struct StorageBins: Codable {
                 
                 let drinkBySort = DataServices.buildProducersArray(fields: fields,
                                                                    sortKey: "drinkBy")
-                
-                let reconcileSort1 = DataServices.buildProducersArray(fields: fields,
-                                                                     sortKey: "reconcile")
-                
+                                
                 let newInventory = WineInventory(producers: producerSort,
                                                  varietals: varietalSort,
                                                  drinkBy: drinkBySort,
-                                                 reconcile: reconcileSort,
-                                                 reconcile1: reconcileSort1)
+                                                 reconcile: reconcileSort)
 
                 DispatchQueue.main.async(execute: { () -> Void in
                     completionHandler(newInventory)

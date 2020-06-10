@@ -100,7 +100,7 @@ class ViewController: UIViewController {
                 inventoryArray = DataServices.parseCsv(data:csvInventory!)
                 
                 availabilityHeader = param[0]
-                var availibilityFields = DataServices.locateAvailabilityFields(availabilityHeader:availabilityHeader)
+                let availibilityFields = DataServices.locateAvailabilityFields(availabilityHeader:availabilityHeader)
                 let positionOf = Availability(data:availibilityFields)
                 var drinkByFields = availibilityFields
                 drinkByFields.removeFirst()

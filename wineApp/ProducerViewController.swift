@@ -24,7 +24,7 @@ class ProducerViewController:UITableViewController {
         fetchWineInventory { (wineInventory) -> () in
             self.allWines = wineInventory
             
-            let timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
                 self.setupNavBar()
                 self.hideSpinner()
                 self.tableView.reloadData()

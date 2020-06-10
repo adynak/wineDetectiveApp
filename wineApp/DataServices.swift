@@ -223,7 +223,6 @@ class DataServices {
         for row in dataArray{
             // special transformations
             locationBin = row[positionOf.location] + row[positionOf.bin]
-            let varietal0 = ((sortKey == "producer") || (sortKey == "drinkBy")) ? buildVarietal(row: row, positionOf: positionOf) : (sortKey == "reconcile") ? row[positionOf.bin] : row[firstSortBy]
             let varietal = buildVarietal(row: row, positionOf: positionOf)
             let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
                         
