@@ -24,10 +24,12 @@ class DrinkByViewController :UITableViewController {
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Drink By"
-        
-        let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
-                                         target: self,
-                                         action: #selector(handleActionMenu))
+                
+        let moreMenu = UIBarButtonItem(image: UIImage(named: "moreMenu"),
+                                       style: .plain,
+                                       target: self,
+                                       action: #selector(handleActionMenu))
+                
         navigationItem.rightBarButtonItem = moreMenu
         
 //        let addWine = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
@@ -172,10 +174,15 @@ class DrinkByViewController :UITableViewController {
         return cell
     }
     
-    @objc func handleActionMenu(){
-        Alert.showActionMenuAlert(on: self)
-    }
+    let settingsLauncher = SettingsLauncher()
     
+    @objc func handleActionMenu(){
+        settingsLauncher.showSettings()
+        
+        Alert.showActionMenuAlert(on: self)
+        
+    }
+        
     @objc func handleAddWine(){
 //        let addWineController = AddWineController()
 ////        wineDetailController.passedValue = wineSelected
