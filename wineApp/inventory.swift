@@ -107,6 +107,7 @@ struct Label{
     let beginConsume: Int
     let endConsume: Int
     let barcode: Int
+    let available: Int
     
     init(data: [Int]) {
         vintage = data[0]
@@ -125,6 +126,7 @@ struct Label{
         beginConsume = data[13]
         endConsume = data[14]
         barcode = data[15]
+        available = data[16]
     }
 }
 var fields = [Int]()

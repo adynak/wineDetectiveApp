@@ -112,7 +112,7 @@ class DataServices {
     static func locateDataPositions(dataHeader: [String]) -> [Int]{
         
         var fields = [Int]()
-        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume","Barcode"]
+        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume","Barcode","Available"]
 
         for field in fieldsWeCareAbout{
             if let i = dataHeader.firstIndex(where: { $0 == field }) {

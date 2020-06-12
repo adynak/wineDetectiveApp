@@ -14,12 +14,12 @@ class ProducerViewController:UITableViewController {
     let cellID = "cellId123123"
     
     var allWines: WineInventory?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         let spinnerText = NSLocalizedString("runAPI", comment: "")
         setupLoadingBar(localizedText: spinnerText)
-//        self.showSpinner(localizedText: spinnerText)
+        showSpinner(localizedText: spinnerText)
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
         
 //        fetchWineInventory { (wineInventory) -> () in
@@ -36,6 +36,8 @@ class ProducerViewController:UITableViewController {
 //        }
         
 //        self.tableView.reloadData()
+                API.load()
+        
         self.setupNavBar()
         self.hideSpinner()
         self.tableView.reloadData()
