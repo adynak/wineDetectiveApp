@@ -19,22 +19,30 @@ class ProducerViewController:UITableViewController {
         super.viewDidLoad()
         let spinnerText = NSLocalizedString("runAPI", comment: "")
         setupLoadingBar(localizedText: spinnerText)
-        self.showSpinner(localizedText: spinnerText)
+//        self.showSpinner(localizedText: spinnerText)
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
         
-        fetchWineInventory { (wineInventory) -> () in
-            self.allWines = wineInventory
-            
-            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
-                self.setupNavBar()
-                self.hideSpinner()
-                self.tableView.reloadData()
-            })
-            
+//        fetchWineInventory { (wineInventory) -> () in
+//            self.allWines = wineInventory
+//            
+//            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
+//                self.setupNavBar()
+//                self.hideSpinner()
+//                self.tableView.reloadData()
+//            })
+//            
 //            self.tableView.reloadData()
-            allWine = wineInventory
-        }
+//            allWine = wineInventory
+//        }
         
+//        self.tableView.reloadData()
+        self.setupNavBar()
+        self.hideSpinner()
+        self.tableView.reloadData()
+        allWines = allWine
+        
+
+
     }
     
     func setupLoadingBar(localizedText: String){

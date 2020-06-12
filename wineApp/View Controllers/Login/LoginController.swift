@@ -198,9 +198,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     func finishLoggingIn() {
-        
-//        API.load()
-        
+                
         let userName = UserDefaults.standard.getUserName()
         let userPword = UserDefaults.standard.getUserPword()
         if (userName.isEmpty || userPword.isEmpty) {
@@ -209,7 +207,13 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             UserDefaults.standard.setIsLoggedIn(value: true)
             let rootViewController = UIApplication.shared.keyWindow?.rootViewController
             guard let mainNavigationController = rootViewController as? MainTabBarController else { return }
+            
+            self.showSpinner(localizedText: "abc")
+            API.load()
+//
+            
             dismiss(animated: true, completion: nil)
+            
             
             mainNavigationController.viewControllers = [MainTabBarController()]
             

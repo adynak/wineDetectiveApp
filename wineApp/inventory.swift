@@ -146,6 +146,7 @@ struct StorageBins: Codable {
         
 //        API.load()
         
+        
         let user = UserDefaults.standard.getUserName()
         let pword = UserDefaults.standard.getUserPword()
         
@@ -166,6 +167,7 @@ struct StorageBins: Codable {
                 var csvInventory = String(data: data, encoding: .ascii)
                 csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
                 dataArray = DataServices.parseCsv(data:csvInventory!)
+                
                 dataHeader = dataArray.removeFirst()
                 let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
                 
