@@ -174,13 +174,20 @@ class DrinkByViewController :UITableViewController {
         return cell
     }
     
-    let settingsLauncher = SettingsLauncher()
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
     
     @objc func handleActionMenu(){
-        settingsLauncher.showSettings()
-        
-//        Alert.showActionMenuAlert(on: self)
-        
+        settingsLauncher.showSetting()
+    }
+    
+    func showControllerForSetting(setting: Setting){
+        let dummyViewController = UIViewController()
+        dummyViewController.navigationItem.title = setting.name
+        navigationController?.pushViewController(dummyViewController, animated: true)
     }
         
     @objc func handleAddWine(){

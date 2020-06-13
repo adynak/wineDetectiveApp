@@ -13,10 +13,12 @@ import UIKit
 class Setting: NSObject{
     let name: String
     let imageName: String
+    let isSelected: Bool
     
-    init(name: String, imageName: String){
+    init(name: String, imageName: String, isSelected: Bool){
         self.name = name
         self.imageName = imageName
+        self.isSelected = false
     }
 
 }
@@ -27,15 +29,15 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     let cellID = "cellID"
     let cellHeight: CGFloat = 50
     let settings: [Setting] = {
-        return [Setting(name: "Availability", imageName: "settings"),
-        Setting(name: "Linear", imageName: "settings"),
-        Setting(name: "Bell", imageName: "settings"),
-        Setting(name: "Early", imageName: "settings"),
-        Setting(name: "Late", imageName: "settings"),
-        Setting(name: "Fast", imageName: "settings"),
-        Setting(name: "TwinPeak", imageName: "settings"),
-        Setting(name: "Simple", imageName: "settings"),
-        Setting(name: "Cancel", imageName: "settings")]
+        return [Setting(name: "Availability (Default)", imageName: "settings", isSelected: true),
+        Setting(name: "Linear", imageName: "settings", isSelected: false),
+        Setting(name: "Standard Bell (Red Wines)", imageName: "settings", isSelected: false),
+        Setting(name: "Early Bell (Dry White Wines)", imageName: "settings", isSelected: false),
+        Setting(name: "Late Bell (Bordeaux, Red Northern Rhône and Rioja)", imageName: "settings", isSelected: false),
+        Setting(name: "Fast Maturing (All Rosé, Beaujolais, Moscato d'Asti)", imageName: "settings", isSelected: false),
+        Setting(name: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)", imageName: "settings", isSelected: false),
+        Setting(name: "Drinkability Help", imageName: "settings", isSelected: false),
+        Setting(name: "Cancel", imageName: "settings", isSelected: false)]
         
     }()
     
@@ -46,7 +48,9 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
         return cv
      }()
     
-    func showSettings(){
+    var homeController: DrinkByViewController?
+    
+    func showSetting(){
         
         if let window = UIApplication.shared.keyWindow{
             blackView.backgroundColor =  UIColor(white: 0, alpha: 0.5)
@@ -66,20 +70,24 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
             UIView.animate( withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 1
                 self.collectionView.frame = CGRect(x: 0, y: y, width: self.collectionView.frame.width, height: height)
-            }, completion: nil)        }
+            }, completion: nil)
+            
+        }
 
     }
     
-    @objc func handleDismiss(){
-        UIView.animate(withDuration: 0.5, animations: {
-                       self.blackView.alpha = 0
-            
-            if let window = UIApplication.shared.keyWindow{
-            self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
-                
-        }
-            
+    @objc func handleDismiss(setting: Setting){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.blackView.alpha = 0
+                if let window = UIApplication.shared.keyWindow{
+                    self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+                }
+        }, completion: { finished in
+            if (type(of: setting as Any) != type(of: UITapGestureRecognizer())) && (setting.name == "Drinkability Help") {
+                self.homeController?.showControllerForSetting(setting: setting)
+            }
         })
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -99,6 +107,12 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let setting = self.settings[indexPath.item]
+        handleDismiss(setting: setting)
     }
     
     override init() {
