@@ -179,7 +179,7 @@ class DrinkByViewController :UITableViewController {
     @objc func handleActionMenu(){
         settingsLauncher.showSettings()
         
-        Alert.showActionMenuAlert(on: self)
+//        Alert.showActionMenuAlert(on: self)
         
     }
         
