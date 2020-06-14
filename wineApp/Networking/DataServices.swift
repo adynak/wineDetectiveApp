@@ -168,6 +168,8 @@ class DataServices {
                                              varietal: detail.varietal,
                                              vintage: detail.vintage,
                                              iWine: detail.iWine,
+                                             location: detail.location,
+                                             bin: detail.bin,
                                              barcode: detail.barcode))
                     }
                     

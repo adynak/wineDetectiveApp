@@ -37,9 +37,10 @@ struct Level2 {
     var varietal: String?
     var vintage: String?
     var iWine: String?
+    var location: String?
+    var bin: String?
     var barcode: String?
 }
-
 
 struct wineDetail {
     var varietal = "123"
