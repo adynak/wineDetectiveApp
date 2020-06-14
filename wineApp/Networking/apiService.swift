@@ -79,6 +79,7 @@ class API {
 
             dataArray = inventoryArray
             print("inventory")
+            print("debug = \(debug)")
             
             dataHeader = dataArray.removeFirst()
             let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
