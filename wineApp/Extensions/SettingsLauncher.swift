@@ -27,13 +27,13 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     
     let blackView = UIView()
     let cellID = "cellID"
-    let cellHeight: CGFloat = 50
+    let cellHeight: CGFloat = 35
     let settings: [Setting] = {
         return [Setting(name: "Availability (Default)", imageName: "settings", isSelected: true),
         Setting(name: "Linear", imageName: "settings", isSelected: false),
         Setting(name: "Standard Bell (Red Wines)", imageName: "settings", isSelected: false),
         Setting(name: "Early Bell (Dry White Wines)", imageName: "settings", isSelected: false),
-        Setting(name: "Late Bell (Bordeaux, Red Northern Rhône and Rioja)", imageName: "settings", isSelected: false),
+        Setting(name: "Late Bell (Red Bordeaux, Red Northern Rhône and Rioja)", imageName: "settings", isSelected: false),
         Setting(name: "Fast Maturing (All Rosé, Beaujolais, Moscato d'Asti)", imageName: "settings", isSelected: false),
         Setting(name: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)", imageName: "settings", isSelected: false),
         Setting(name: "Drinkability Help", imageName: "settings", isSelected: false),
@@ -59,7 +59,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
             
             window.addSubview(blackView)
             window.addSubview(collectionView)
-            let height: CGFloat = CGFloat(settings.count + 1) * cellHeight
+            let height: CGFloat = CGFloat(settings.count + 2) * cellHeight
             let y = window.frame.height - height
 
             collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)

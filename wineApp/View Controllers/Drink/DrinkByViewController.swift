@@ -25,7 +25,8 @@ class DrinkByViewController :UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Drink By"
                 
-        let moreMenu = UIBarButtonItem(image: UIImage(named: "moreMenu"),
+        let moreMenu = UIBarButtonItem(title: "Sort",
+//                                       image: UIImage(named: "moreMenu"),
                                        style: .plain,
                                        target: self,
                                        action: #selector(handleActionMenu))
@@ -185,8 +186,10 @@ class DrinkByViewController :UITableViewController {
     }
     
     func showControllerForSetting(setting: Setting){
-        let dummyViewController = UIViewController()
-        dummyViewController.navigationItem.title = setting.name
+//        Alert.showActionMenuAlert(on: self)
+
+        let dummyViewController = SettingsHelpController()
+//        dummyViewController.navigationItem.title = setting.name
         navigationController?.pushViewController(dummyViewController, animated: true)
     }
         
