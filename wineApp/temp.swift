@@ -8,9 +8,6 @@
 
 import Foundation
 
-var varietals: [Producers]?
-
-
 struct Country {
     let vintage: String
     let producer: String
@@ -35,6 +32,7 @@ struct Country {
                 let searchKey = wine.vintage! + " " +
                                 wine.varietal! + " " +
                                 wine.producer! + " " +
+                                wine.vineyard! + " " +
                                 wine.ava! + " "
                     
                 searchWines.append(Country(vintage: wine.vintage!,
