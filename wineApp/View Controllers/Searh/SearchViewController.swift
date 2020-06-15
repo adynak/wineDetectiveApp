@@ -39,8 +39,8 @@ class SearchBarContainerView: UIView {
 class SearchViewController: UIViewController {
     
     let cellID = "cell123"
-    var countries = [Country]()
-    var filteredCountries = [Country]()
+    var searchKeys = [SearchKeys]()
+    var filteredBottles = [SearchKeys]()
     var searchString: String = ""
     
     var varietals: [Producers]?
@@ -90,9 +90,9 @@ class SearchViewController: UIViewController {
         handleShowSearchBar()
         searchBar.resignFirstResponder()
         varietals = allWine?.varietals
-        countries = Country.GetAllCountries(varietals: &(varietals)!)
+        searchKeys = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
 
-        footerView.text = countBottles(bins: countries)
+        footerView.text = countBottles(bins: searchKeys)
     }
     
     @objc func handleShowSearchBar() {
@@ -100,7 +100,7 @@ class SearchViewController: UIViewController {
         search(shouldShow: true)
     }
     
-    func countBottles(bins: [Country])-> String{
+    func countBottles(bins: [SearchKeys])-> String{
         var totalBottles: Int = 0
         
         for (bin) in bins {
@@ -177,16 +177,16 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("Search text is \(searchText)")
         if searchText.isEmpty {
-            filteredCountries = countries
+            filteredBottles = searchKeys
         } else {
-            filteredCountries = countries.filter({( country: Country) -> Bool in
+            filteredBottles = searchKeys.filter({( country: SearchKeys) -> Bool in
                 
                 return country.searckKey.localizedCaseInsensitiveContains(searchText)
                 
             })
         }
         
-        footerView.text = countBottles(bins: filteredCountries)
+        footerView.text = countBottles(bins: filteredBottles)
 
         tableView.reloadData()
 
@@ -215,9 +215,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchBar.text!.isEmpty{
-            return countries.count
+            return searchKeys.count
         } else {
-            return filteredCountries.count
+            return filteredBottles.count
         }
     }
 
@@ -229,12 +229,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
 
         var wineSelected = wineDetail()
         
-        let bottle: Country
+        let bottle: SearchKeys
         
         if searchBar.text!.isEmpty{
-            bottle = countries[indexPath.row]
+            bottle = searchKeys[indexPath.row]
         } else {
-            bottle = filteredCountries[indexPath.row]
+            bottle = filteredBottles[indexPath.row]
         }
         
         wineSelected.vintage = bottle.vintage
@@ -267,13 +267,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
-        let bottle: Country
+        let bottle: SearchKeys
         
         
         if searchBar.text!.isEmpty{
-            bottle = countries[indexPath.row]
+            bottle = searchKeys[indexPath.row]
         } else {
-            bottle = filteredCountries[indexPath.row]
+            bottle = filteredBottles[indexPath.row]
         }
         
         for (bottles) in bottle.storageBins! {

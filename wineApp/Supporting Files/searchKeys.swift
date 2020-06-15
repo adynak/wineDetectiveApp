@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Country {
+struct SearchKeys {
     let vintage: String
     let producer: String
     let varietal: String
@@ -23,9 +23,9 @@ struct Country {
     let searckKey: String
     var storageBins: [StorageBins]?
     
-    static func GetAllCountries(varietals: inout [Producers]) -> [Country] {
+    static func BuildSearchKeys(varietals: inout [Producers]) -> [SearchKeys] {
         
-        var searchWines = [Country]()
+        var searchWines = [SearchKeys]()
         
         varietals.forEach {
             for (wine) in $0.wines!{
@@ -35,7 +35,7 @@ struct Country {
                                 wine.vineyard! + " " +
                                 wine.ava! + " "
                     
-                searchWines.append(Country(vintage: wine.vintage!,
+                searchWines.append(SearchKeys(vintage: wine.vintage!,
                                            producer: wine.producer!,
                                            varietal: wine.varietal!,
                                            appellation: wine.ava!,
