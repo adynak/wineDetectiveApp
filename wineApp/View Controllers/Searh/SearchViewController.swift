@@ -68,6 +68,7 @@ class SearchViewController: UIViewController {
         tv.textColor = .white
         return tv
     }()
+    
     let searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.searchTextField.backgroundColor = .white
@@ -77,8 +78,6 @@ class SearchViewController: UIViewController {
         sb.placeholder = "Search"
         sb.subviews.first?.layer.cornerRadius = 10
         sb.subviews.first?.clipsToBounds = true
-
-
         return sb
     }()
 
@@ -292,6 +291,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
+        
+        let selectedView = UIView()
+        selectedView.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
+        cell.selectedBackgroundView = selectedView
+        
+//        cell.selectionStyle = .none
 
         return cell
         

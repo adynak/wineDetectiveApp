@@ -14,11 +14,13 @@ class Setting: NSObject{
     let name: String
     let imageName: String
     let isSelected: Bool
+    let settingCode: String
     
-    init(name: String, imageName: String, isSelected: Bool){
+    init(name: String, imageName: String, isSelected: Bool, settingCode: String){
         self.name = name
         self.imageName = imageName
         self.isSelected = false
+        self.settingCode = settingCode
     }
 
 }
@@ -29,15 +31,48 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     let cellID = "cellID"
     let cellHeight: CGFloat = 35
     let settings: [Setting] = {
-        return [Setting(name: "Availability (Default)", imageName: "settings", isSelected: true),
-        Setting(name: "Linear", imageName: "settings", isSelected: false),
-        Setting(name: "Standard Bell (Red Wines)", imageName: "settings", isSelected: false),
-        Setting(name: "Early Bell (Dry White Wines)", imageName: "settings", isSelected: false),
-        Setting(name: "Late Bell (Red Bordeaux, Red Northern Rhône and Rioja)", imageName: "settings", isSelected: false),
-        Setting(name: "Fast Maturing (All Rosé, Beaujolais, Moscato d'Asti)", imageName: "settings", isSelected: false),
-        Setting(name: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)", imageName: "settings", isSelected: false),
-        Setting(name: "Drinkability Help", imageName: "settings", isSelected: false),
-        Setting(name: "Cancel", imageName: "settings", isSelected: false)]
+        return [
+            Setting(name: "Availability (Default)",
+                    imageName: "settings",
+                    isSelected: true,
+                    settingCode: "Available"),
+            Setting(name: "Linear",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Linear"),
+            Setting(name: "Standard Bell (Red Wines)",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Bell"),
+            Setting(name: "Early Bell (Dry White Wines)",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Early"),
+            Setting(name: "Late Bell (Red Bordeaux, Red Northern Rhône and Rioja)",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Late"),
+            Setting(name: "Fast Maturing (All Rosé, Beaujolais, Moscato d'Asti)",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Fast"),
+            Setting(name: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "TwinPeak"),
+            Setting(name: "Wines Missing A Drinking Window",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Missing"),
+            Setting(name: "Drinkability Help",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Help"),
+            Setting(name: "Cancel",
+                    imageName: "settings",
+                    isSelected: false,
+                    settingCode: "Cancel")
+        ]
         
     }()
     
@@ -83,8 +118,9 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
                     self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
                 }
         }, completion: { finished in
-            if (type(of: setting as Any) != type(of: UITapGestureRecognizer())) && (setting.name == "Drinkability Help") {
+            if (type(of: setting as Any) != type(of: UITapGestureRecognizer())) && (setting.settingCode == "Help") {
                 self.homeController?.showControllerForSetting(setting: setting)
+                print(setting.settingCode)
             }
         })
 

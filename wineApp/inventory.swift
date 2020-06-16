@@ -17,6 +17,15 @@ struct Bottle {
     let vintage: String
     let iWine: String
     let barcode: String
+    let available: String
+    let linear: String
+    let bell: String
+    let early: String
+    let late: String
+    let fast: String
+    let twinpeak: String
+    let simple: String
+    
 }
 
 struct Level0 {
@@ -109,6 +118,14 @@ struct Label{
     let endConsume: Int
     let barcode: Int
     let available: Int
+    let linear: Int
+    let bell: Int
+    let early: Int
+    let late: Int
+    let fast: Int
+    let twinpeak: Int
+    let simple: Int
+    
     
     init(data: [Int]) {
         vintage = data[0]
@@ -128,6 +145,14 @@ struct Label{
         endConsume = data[14]
         barcode = data[15]
         available = data[16]
+        linear = data[17]
+        bell = data[18]
+        early = data[19]
+        late = data[20]
+        fast = data[21]
+        twinpeak = data[22]
+        simple = data[23]
+
     }
 }
 var fields = [Int]()

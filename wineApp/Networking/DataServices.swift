@@ -112,7 +112,7 @@ class DataServices {
     static func locateDataPositions(dataHeader: [String]) -> [Int]{
         
         var fields = [Int]()
-        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume","Barcode","Available"]
+        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume","Barcode","Available","Linear","Bell","Early","Late","Fast","TwinPeak","Simple"]
 
         for field in fieldsWeCareAbout{
             if let i = dataHeader.firstIndex(where: { $0 == field }) {
@@ -144,8 +144,25 @@ class DataServices {
         let positionOf = Label(data:fields)
 
         for row in dataArray{
-            
-            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.varietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode])
+                        
+            let bottle = Bottle(
+                producer: row[positionOf.producer],
+                varietal: row[positionOf.varietal],
+                location: row[positionOf.location],
+                bin: row[positionOf.bin],
+                vintage: row[positionOf.vintage],
+                iWine: row[positionOf.iWine],
+                barcode: row[positionOf.barcode],
+                available: row[positionOf.available],
+                linear: row[positionOf.linear],
+                bell: row[positionOf.bell],
+                early: row[positionOf.early],
+                late: row[positionOf.late],
+                fast: row[positionOf.fast],
+                twinpeak: row[positionOf.twinpeak],
+                simple: row[positionOf.simple]
+
+            )
 
             wines.append(bottle)
         }
