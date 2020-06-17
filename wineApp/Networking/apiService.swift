@@ -28,10 +28,10 @@ class API {
 
             let data = try fetchRemoteDataAsyncAwait(url: dataUrl)
             
-            var csvAvailability = String(decoding: data!, as: UTF8.self)
-            
-            csvAvailability = csvAvailability.replacingOccurrences(of: "Unknown", with: "")
-            availabilityArray = DataServices.parseCsv(data:csvAvailability)
+            var csvAvailability = String(data: data!, encoding: String.Encoding.ascii)
+
+            csvAvailability = csvAvailability!.replacingOccurrences(of: "Unknown", with: "")
+            availabilityArray = DataServices.parseCsv(data:csvAvailability!)
             
             print("availability")
         } catch {
@@ -50,9 +50,10 @@ class API {
 
             let data = try fetchRemoteDataAsyncAwait(url: dataUrl)
             
-            var csvInventory = String(decoding: data!, as: UTF8.self)
-            csvInventory = csvInventory.replacingOccurrences(of: "Unknown", with: "")
-            inventoryArray = DataServices.parseCsv(data:csvInventory)
+            var csvInventory = String(data: data!, encoding: String.Encoding.ascii)
+            
+            csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
+            inventoryArray = DataServices.parseCsv(data:csvInventory!)
             availabilityHeader = availabilityArray[0]
             
             let availibilityFields = DataServices.locateAvailabilityFields(availabilityHeader:availabilityHeader)
