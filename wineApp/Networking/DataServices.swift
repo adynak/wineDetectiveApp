@@ -86,14 +86,17 @@ class DataServices {
             let path: String
             
         }
+        var urlComponents = URLComponents()
+
         var url: URL
         if (debug == true){
-            url = URL.init(scheme: "http", host: "10.0.1.9", path: "/angular/git/wine/resources/dataservices/csv.php")
+            url = URL.init(scheme: "http", host: "73.25.25.100", path: "/wine/resources/dataservices/csv.php")
+            urlComponents.port = 88
+
         } else {
             url = URL.init(scheme: "https", host: "www.cellartracker.com", path: "/xlquery.asp")
         }
         
-        var urlComponents = URLComponents()
         urlComponents.scheme = url.scheme
         urlComponents.host = url.host
         urlComponents.path = url.path
