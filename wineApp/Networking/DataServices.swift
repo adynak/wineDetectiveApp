@@ -90,8 +90,10 @@ class DataServices {
 
         var url: URL
         if (debug == true){
-            url = URL.init(scheme: "http", host: "73.25.25.100", path: "/wine/resources/dataservices/csv.php")
-            urlComponents.port = 88
+//            url = URL.init(scheme: "http", host: "73.25.25.100", path: "/wine/resources/dataservices/csv.php")
+//            urlComponents.port = 88
+            url = URL.init(scheme: "http", host: "localhost", path: "/angular/git/wine/resources/dataservices/csv.php")
+
 
         } else {
             url = URL.init(scheme: "https", host: "www.cellartracker.com", path: "/xlquery.asp")
@@ -163,7 +165,9 @@ class DataServices {
                 late: row[positionOf.late],
                 fast: row[positionOf.fast],
                 twinpeak: row[positionOf.twinpeak],
-                simple: row[positionOf.simple]
+                simple: row[positionOf.simple],
+                beginConsume: row[positionOf.beginConsume],
+                endConsume: row[positionOf.endConsume]
 
             )
 

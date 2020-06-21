@@ -25,6 +25,8 @@ struct Bottle {
     let fast: String
     let twinpeak: String
     let simple: String
+    let beginConsume: String
+    let endConsume: String
     
 }
 
