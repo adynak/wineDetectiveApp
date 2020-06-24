@@ -27,7 +27,7 @@ struct Bottle {
     let simple: String
     let beginConsume: String
     let endConsume: String
-    
+    let sortKey: String
 }
 
 struct Level0 {
@@ -127,6 +127,7 @@ struct Label{
     let fast: Int
     let twinpeak: Int
     let simple: Int
+//    let sortKey: Int
     
     
     init(data: [Int]) {
@@ -154,7 +155,7 @@ struct Label{
         fast = data[21]
         twinpeak = data[22]
         simple = data[23]
-
+//        sortKey = data[24]
     }
 }
 var fields = [Int]()

@@ -143,6 +143,48 @@ class DataServices {
         return varietal
     }
     
+    static func buildDrinkByArray(fields:[Int], sortKey: String){
+        var wines: [Bottle] = []
+        let positionOf = Label(data:fields)
+        var sortIndex: Int = 0
+        
+        let mirror = Mirror(reflecting: positionOf)
+        for child in mirror.children  {
+            if child.label == sortKey{
+                sortIndex = child.value as! Int
+            }
+        }
+
+        for row in dataArray{
+                        
+            let bottle = Bottle(
+                producer: row[positionOf.producer],
+                varietal: row[positionOf.varietal],
+                location: row[positionOf.location],
+                bin: row[positionOf.bin],
+                vintage: row[positionOf.vintage],
+                iWine: row[positionOf.iWine],
+                barcode: row[positionOf.barcode],
+                available: row[positionOf.available],
+                linear: row[positionOf.linear],
+                bell: row[positionOf.bell],
+                early: row[positionOf.early],
+                late: row[positionOf.late],
+                fast: row[positionOf.fast],
+                twinpeak: row[positionOf.twinpeak],
+                simple: row[positionOf.simple],
+                beginConsume: row[positionOf.beginConsume],
+                endConsume: row[positionOf.endConsume],
+                sortKey: row[sortIndex]
+            )
+
+            wines.append(bottle)
+        }
+
+        let groupLevel0 = Dictionary(grouping: wines, by: { $0.location })
+    }
+
+    
     static func buildReconcileArray(fields:[Int])->[Level0]{
         
         var wines: [Bottle] = []
@@ -167,7 +209,8 @@ class DataServices {
                 twinpeak: row[positionOf.twinpeak],
                 simple: row[positionOf.simple],
                 beginConsume: row[positionOf.beginConsume],
-                endConsume: row[positionOf.endConsume]
+                endConsume: row[positionOf.endConsume],
+                sortKey: row[positionOf.available]
 
             )
 

@@ -33,7 +33,8 @@ struct SearchKeys {
                                 wine.varietal! + " " +
                                 wine.producer! + " " +
                                 wine.vineyard! + " " +
-                                wine.ava! + " "
+                                wine.ava! + " " +
+                                wine.designation!
                     
                 searchWines.append(SearchKeys(vintage: wine.vintage!,
                                            producer: wine.producer!,
