@@ -1,3 +1,4 @@
+//this is closest
 //
 //  ViewController.swift
 //  SearchBar
@@ -78,6 +79,10 @@ class SearchViewController: UIViewController {
         sb.placeholder = "Search"
         sb.subviews.first?.layer.cornerRadius = 10
         sb.subviews.first?.clipsToBounds = true
+
+//        sb.widthAnchor.constraint(equalToConstant: 10).isActive = true
+//        sb.heightAnchor.constraint(equalToConstant: 44).isActive = true
+
         return sb
     }()
 
@@ -85,9 +90,9 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         setupElements()
-//        setupNavigationBar()
-        handleShowSearchBar()
+        setupNavigationBar()
         searchBar.resignFirstResponder()
+                
         varietals = allWine?.varietals
         searchKeys = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
 
@@ -97,6 +102,22 @@ class SearchViewController: UIViewController {
     @objc func handleShowSearchBar() {
         searchBar.becomeFirstResponder()
         search(shouldShow: true)
+    }
+    
+    @objc func handleLogOut(){
+        UserDefaults.standard.setIsLoggedIn(value: false)
+        
+        let loginController = LoginController()
+        present(loginController, animated: true, completion: nil)
+    }
+    
+    func setupNavigationBar() {
+        navigationItem.title = NSLocalizedString("searchTitle", comment: "")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+                                                title: "Log Out",
+                                                style: UIBarButtonItem.Style.plain,
+                                                target: self,
+                                                action: #selector(handleLogOut))
     }
     
     func countBottles(bins: [SearchKeys])-> String{
@@ -115,44 +136,45 @@ class SearchViewController: UIViewController {
 
     
     func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .green
         setupNavigationBar()
-        
         searchBar.delegate = self
-        
-        navigationController?.navigationBar.barTintColor = UIColor(r: 61,  g: 91,  b: 151) // background
-        navigationController?.navigationBar.tintColor = .white
-        
+        searchBar.sizeToFit()
         showSearchBarButton(shouldShow: true)
-
     }
     
     func showSearchBarButton(shouldShow: Bool) {
         if shouldShow {
-            navigationItem.rightBarButtonItem = nil
-//
-//            navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                                                  barButtonSystemItem: .search,
-//                                                  target: self,
-//                                                  action:#selector(handleShowSearchBar))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                                                  title: "Log Out",
+                                                  style: UIBarButtonItem.Style.plain,
+                                                  target: self,
+                                                  action: #selector(handleLogOut))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                                                  barButtonSystemItem: .search,
+                                                  target: self,
+                                                  action:#selector(handleShowSearchBar))
         } else {
+            navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         }
     }
     
     func search(shouldShow: Bool) {
         let searchBarContainer = SearchBarContainerView(customSearchBar: searchBar)
-        searchBarContainer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 24)
-
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar!.translatesAutoresizingMaskIntoConstraints = false
+        textFieldInsideSearchBar!.widthAnchor.constraint(equalToConstant: view.frame.width - 100).isActive = true
+        textFieldInsideSearchBar!.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        textFieldInsideSearchBar!.topAnchor.constraint(equalTo: searchBarContainer.topAnchor, constant: 10).isActive = true
+        
+//        searchBarContainer.frame = CGRect(x: 0, y: 0, width: view.frame.width , height: 24)
+        showSearchBarButton(shouldShow: !shouldShow)
+        searchBar.showsCancelButton = shouldShow
         navigationItem.titleView = shouldShow ? searchBarContainer : nil
-
     }
     
-    func setupNavigationBar() {
-           let searchBarContainer = SearchBarContainerView(customSearchBar: searchBar)
-           searchBarContainer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 24)
-           navigationItem.titleView = searchBarContainer
-       }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -171,6 +193,10 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         search(shouldShow: false)
+        searchBar.searchTextField.text = ""
+        filteredBottles = searchKeys
+        footerView.text = countBottles(bins: filteredBottles)
+        tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -307,3 +333,4 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
 }
+

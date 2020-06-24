@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barTintColor = UIColor(r: 61,  g: 91,  b: 151) // background
         UINavigationBar.appearance().tintColor =    UIColor(r: 255, g: 255, b: 255) // buttons and icons
+        UINavigationBar.appearance().prefersLargeTitles = false
+
         
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
