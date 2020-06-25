@@ -76,13 +76,9 @@ class SearchViewController: UIViewController {
         sb.searchTextField.font = UIFont.systemFont(ofSize: 12)
         sb.searchTextField.addDoneButtonOnKeyboard()
         sb.autocapitalizationType = .none
-        sb.placeholder = "Search"
+        sb.placeholder = NSLocalizedString("searchTitle", comment: "")
         sb.subviews.first?.layer.cornerRadius = 10
         sb.subviews.first?.clipsToBounds = true
-
-//        sb.widthAnchor.constraint(equalToConstant: 10).isActive = true
-//        sb.heightAnchor.constraint(equalToConstant: 44).isActive = true
-
         return sb
     }()
 
@@ -185,6 +181,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchString = searchBar.searchTextField.text!
         searchBar.resignFirstResponder()
+        print("searchBarSearchButtonClicked")
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -197,6 +194,8 @@ extension SearchViewController: UISearchBarDelegate {
         filteredBottles = searchKeys
         footerView.text = countBottles(bins: filteredBottles)
         tableView.reloadData()
+        searchBar.endEditing(true)
+
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

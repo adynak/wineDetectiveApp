@@ -80,6 +80,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .white
+        cv.layer.cornerRadius = 10
         return cv
      }()
     
@@ -94,17 +95,17 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
             
             window.addSubview(blackView)
             window.addSubview(collectionView)
-            let height: CGFloat = CGFloat(settings.count + 2) * cellHeight
-            let y = window.frame.height - height
+            let height: CGFloat = CGFloat(settings.count) * cellHeight + 10
+            let y = window.frame.height - height - 20
 
-            collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
+            collectionView.frame = CGRect(x: 20, y: window.frame.height - 50, width: window.frame.width - 40, height: height)
             
             blackView.frame = window.frame
             blackView.alpha = 0
             
             UIView.animate( withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 1
-                self.collectionView.frame = CGRect(x: 0, y: y, width: self.collectionView.frame.width, height: height)
+                self.collectionView.frame = CGRect(x: 20, y: y - 50, width: self.collectionView.frame.width, height: height)
             }, completion: nil)
             
         }

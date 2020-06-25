@@ -208,8 +208,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             let rootViewController = UIApplication.shared.keyWindow?.rootViewController
             guard let mainNavigationController = rootViewController as? MainTabBarController else { return }
             
-//            API.load()
-//
+            API.load()
+
             dismiss(animated: true, completion: nil)
             
             mainNavigationController.viewControllers = [MainTabBarController()]

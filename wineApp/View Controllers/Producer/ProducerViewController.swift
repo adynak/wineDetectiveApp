@@ -36,7 +36,7 @@ class ProducerViewController:UITableViewController {
 //        }
         
 //        self.tableView.reloadData()
-                API.load()
+//                API.load()
         
         self.setupNavBar()
         self.hideSpinner()
