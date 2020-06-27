@@ -28,7 +28,42 @@ struct Bottle {
     let beginConsume: String
     let endConsume: String
     let sortKey: String
+    let ava: String
+    let designation: String
+    let bottleSort: String
+    let binSort: String
 }
+
+struct AllLevel0 {
+    var isExpanded: Bool = false
+    var label: [bottleDetail]
+    var storage: [AllLevel1]
+}
+
+struct AllLevel1 {
+    var location: String
+    var bin: String
+    var barcode: String
+    var binSort: String
+}
+
+struct bottleDetail {
+    var vvp: String
+    var vintage: String
+    var varietal: String
+    var producer: String
+    var vineyard: String
+    var ava: String
+    var designation: String
+    var region: String
+    var country: String
+    var locale: String
+    var type: String
+    var drinkBy: String
+    var linear: Float
+    var bottleCount: Int
+}
+
 
 struct Level0 {
     var name: String?
@@ -77,6 +112,7 @@ struct WineInventory {
     var varietals: [Producers]?
     var drinkBy: [Producers]?
     var reconcile: [Level0]?
+    var search: [AllLevel0]?
 }
 
 struct Producers: Codable {

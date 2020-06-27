@@ -41,10 +41,13 @@ class SearchViewController: UIViewController {
     
     let cellID = "cell123"
     var searchKeys = [SearchKeys]()
+    var searchKeys0 = [SearchKeys]()
+
     var filteredBottles = [SearchKeys]()
     var searchString: String = ""
     
     var varietals: [Producers]?
+    var searchWines: [AllLevel0]?
 
     lazy var tableView: UITableView = {
         let tv = UITableView()
@@ -90,8 +93,12 @@ class SearchViewController: UIViewController {
         searchBar.resignFirstResponder()
                 
         varietals = allWine?.varietals
+        searchWines = allWine?.search
         searchKeys = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
 
+        searchKeys0 = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
+
+        
         footerView.text = countBottles(bins: searchKeys)
     }
     

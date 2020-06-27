@@ -143,45 +143,67 @@ class DataServices {
         return varietal
     }
     
-    static func buildDrinkByArray(fields:[Int], sortKey: String){
-        var wines: [Bottle] = []
-        let positionOf = Label(data:fields)
-        var sortIndex: Int = 0
+    
+    
+    static func buildAllBottlesArray(fields:[Int])->[AllLevel0]{
         
-        let mirror = Mirror(reflecting: positionOf)
-        for child in mirror.children  {
-            if child.label == sortKey{
-                sortIndex = child.value as! Int
-            }
-        }
-
+        var level0: [AllLevel0] = []
+        var level1: [AllLevel1] = []
+        var wines: [Bottle] = []
+        var label: [bottleDetail] = []
+        let positionOf = Label(data:fields)
+        
         for row in dataArray{
-                        
-            let bottle = Bottle(
-                producer: row[positionOf.producer],
-                varietal: row[positionOf.varietal],
-                location: row[positionOf.location],
-                bin: row[positionOf.bin],
-                vintage: row[positionOf.vintage],
-                iWine: row[positionOf.iWine],
-                barcode: row[positionOf.barcode],
-                available: row[positionOf.available],
-                linear: row[positionOf.linear],
-                bell: row[positionOf.bell],
-                early: row[positionOf.early],
-                late: row[positionOf.late],
-                fast: row[positionOf.fast],
-                twinpeak: row[positionOf.twinpeak],
-                simple: row[positionOf.simple],
-                beginConsume: row[positionOf.beginConsume],
-                endConsume: row[positionOf.endConsume],
-                sortKey: row[sortIndex]
-            )
-
+            let bottleSort = row[positionOf.varietal] + " " + row[positionOf.vintage] + " " + row[positionOf.producer]
+            let binSort = row[positionOf.location] + row[positionOf.bin]
+            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.varietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort)
             wines.append(bottle)
         }
+        
+        let groupLevel0 = Dictionary(grouping: wines, by: { $0.bottleSort })
+        for (item0) in groupLevel0{
+            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.binSort })
+            for (item1) in groupLevel1{
+                for (detail) in item1.value {
+                    level1.append(AllLevel1(
+                        location: detail.location,
+                        bin: detail.bin,
+                        barcode: detail.barcode,
+                        binSort: detail.binSort))
+                }
+                level1 =  level1.sorted(by: {
+                    ($0.binSort.lowercased()) < ($1.binSort.lowercased())
+                })
+            }
+            for (item) in item0.value {
+                label.append(bottleDetail(vvp: item.varietal + " " +
+                                               item.vintage + " " +
+                                               item.producer,
+                                          vintage: item.vintage,
+                                          varietal: item.varietal,
+                                          producer: item.producer,
+                                          vineyard: "",
+                                          ava: item.ava,
+                                          designation: item.designation,
+                                          region: "",
+                                          country: "",
+                                          locale: "",
+                                          type: "",
+                                          drinkBy: item.beginConsume,
+                                          linear: item.linear.floatValue,
+                                          bottleCount: level1.count))
+                break
+            }
+            level0.append(AllLevel0(label: label, storage: level1))
+            level1.removeAll()
+            label.removeAll()
+        }
 
-        let groupLevel0 = Dictionary(grouping: wines, by: { $0.location })
+        level0 = level0.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
+
+        return level0
     }
 
     
@@ -210,7 +232,11 @@ class DataServices {
                 simple: row[positionOf.simple],
                 beginConsume: row[positionOf.beginConsume],
                 endConsume: row[positionOf.endConsume],
-                sortKey: row[positionOf.available]
+                sortKey: row[positionOf.available],
+                ava: row[positionOf.designation],
+                designation: row[positionOf.designation],
+                bottleSort: "",
+                binSort: ""
 
             )
 

@@ -87,6 +87,13 @@ class API {
             
             let reconcileSort = DataServices.buildReconcileArray(fields: fields)
             
+            let searchSort = DataServices.buildAllBottlesArray(fields: fields)
+                        
+//            let catsanddogs = teainchina.sorted(by: {
+//                ($0.label[0].linear) > ($1.label[0].linear)
+//            })
+            
+            
             let producerSort = DataServices.buildProducersArray(fields: fields,
                                                                 sortKey: "producer")
             
@@ -99,7 +106,8 @@ class API {
             let newInventory = WineInventory(producers: producerSort,
                                              varietals: varietalSort,
                                              drinkBy: drinkBySort,
-                                             reconcile: reconcileSort)
+                                             reconcile: reconcileSort,
+                                             search: searchSort)
             
             print("build data arrays complete")
             allWine = newInventory

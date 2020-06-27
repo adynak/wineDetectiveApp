@@ -23,6 +23,44 @@ struct SearchKeys {
     let searckKey: String
     var storageBins: [StorageBins]?
     
+    static func BuildSearchKeys0(wines: inout [AllLevel0]) -> [SearchKeys] {
+        var searchWines = [SearchKeys]()
+        
+        for wine in wines{
+            print(wine.label[0].vintage)
+        }
+        
+        wines.forEach {
+            for wine in $0.label{
+//                let searchKey = wine.vintage + " " +
+//                                wine.varietal + " " +
+//                                wine.producer + " " +
+//                                wine.vineyard + " " +
+//                                wine.ava + " " +
+//                                wine.designation
+//
+//                searchWines.append(SearchKeys(vintage: wine.vintage,
+//                                           producer: wine.producer,
+//                                           varietal: wine.varietal,
+//                                           appellation: wine.ava,
+//                                           region: wine.region,
+//                                           country: wine.country,
+//                                           locale: wine.locale,
+//                                           type: wine.type,
+//                                           designation: wine.designation,
+//                                           vineyard: wine.vineyard,
+//                                           drinkBy: wine.drinkBy,
+//                                           searckKey: searchKey)
+////                                           storageBins: wine.storageBins)
+//                )
+
+            }
+
+        }
+        return searchWines
+
+    }
+    
     static func BuildSearchKeys(varietals: inout [Producers]) -> [SearchKeys] {
         
         var searchWines = [SearchKeys]()
