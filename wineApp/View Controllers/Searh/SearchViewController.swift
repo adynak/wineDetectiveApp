@@ -9,8 +9,6 @@
 
 import UIKit
 
-var allWines: WineInventory?
-
 class SearchBarContainerView: UIView {
 
     let searchBar: UISearchBar
@@ -94,11 +92,14 @@ class SearchViewController: UIViewController {
                 
         varietals = allWine?.varietals
         searchWines = allWine?.search
-        searchKeys = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
-
-        searchKeys0 = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
-
+        searchKeys0 = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
         
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
+        
+        searchKeys = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
+
         footerView.text = countBottles(bins: searchKeys)
     }
     

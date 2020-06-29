@@ -25,40 +25,37 @@ struct SearchKeys {
     
     static func BuildSearchKeys0(wines: inout [AllLevel0]) -> [SearchKeys] {
         var searchWines = [SearchKeys]()
+        var searchBins = [StorageBins]()
         
         for wine in wines{
-            print(wine.label[0].vintage)
-        }
-        
-        wines.forEach {
-            for wine in $0.label{
-//                let searchKey = wine.vintage + " " +
-//                                wine.varietal + " " +
-//                                wine.producer + " " +
-//                                wine.vineyard + " " +
-//                                wine.ava + " " +
-//                                wine.designation
-//
-//                searchWines.append(SearchKeys(vintage: wine.vintage,
-//                                           producer: wine.producer,
-//                                           varietal: wine.varietal,
-//                                           appellation: wine.ava,
-//                                           region: wine.region,
-//                                           country: wine.country,
-//                                           locale: wine.locale,
-//                                           type: wine.type,
-//                                           designation: wine.designation,
-//                                           vineyard: wine.vineyard,
-//                                           drinkBy: wine.drinkBy,
-//                                           searckKey: searchKey)
-////                                           storageBins: wine.storageBins)
-//                )
-
+            let searchKey = wine.label[0].vintage + " " +
+                            wine.label[0].varietal + " " +
+                            wine.label[0].producer + " " +
+                            wine.label[0].vineyard + " " +
+                            wine.label[0].ava + " " +
+                            wine.label[0].designation
+            
+            for storage in wine.storage{
+                searchBins.append(StorageBins(binName: storage.bin, bottleCount: 1, binLocation: storage.location, barcode: storage.barcode))
             }
-
+            
+            searchWines.append(SearchKeys(vintage: wine.label[0].vintage,
+                                       producer: wine.label[0].producer,
+                                       varietal: wine.label[0].varietal,
+                                       appellation: wine.label[0].ava,
+                                       region: wine.label[0].region,
+                                       country: wine.label[0].country,
+                                       locale: wine.label[0].locale,
+                                       type: wine.label[0].type,
+                                       designation: wine.label[0].designation,
+                                       vineyard: wine.label[0].vineyard,
+                                       drinkBy: wine.label[0].drinkBy,
+                                       searckKey: searchKey,
+                                       storageBins: searchBins)
+            )
+            searchBins.removeAll()
         }
         return searchWines
-
     }
     
     static func BuildSearchKeys(varietals: inout [Producers]) -> [SearchKeys] {

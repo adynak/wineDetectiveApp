@@ -48,6 +48,12 @@ class MainTabBarController: UITabBarController {
                                                     selected: #imageLiteral(resourceName: "drinkDark"),
                                                     unselected: #imageLiteral(resourceName: "drinkLight"),
                                                     title: drinkByTitle)
+        
+        let drinkByController0 = createTabController(viewController: DrinkByViewController0(),
+                                                    selected: #imageLiteral(resourceName: "drinkDark"),
+                                                    unselected: #imageLiteral(resourceName: "drinkLight"),
+                                                    title: drinkByTitle)
+
 
         let producerController = createTabController(viewController: ProducerViewController(),
                                                      selected: #imageLiteral(resourceName: "farmDark"),
@@ -74,9 +80,8 @@ class MainTabBarController: UITabBarController {
         viewControllers = [searchController,
                            producerController,
                            varietalController,
-                           drinkByController,
-                           reconcileController,
-        varietalController,varietalController,varietalController]
+                           drinkByController0,
+                           reconcileController]
         
 //        guard let items = tabBar.items else { return }
         

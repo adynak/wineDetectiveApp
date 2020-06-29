@@ -32,6 +32,11 @@ struct Bottle {
     let designation: String
     let bottleSort: String
     let binSort: String
+    let region: String
+    let country: String
+    let vineyard: String
+    let locale: String
+    let type: String
 }
 
 struct AllLevel0 {
@@ -202,11 +207,10 @@ var designation: String = ""
 var dataHeader = [String]()
 
 struct StorageBins: Codable {
-    
     var binName: String?
     var bottleCount: Int?
     var binLocation: String?
-    
+    var barcode: String?
 }
 
     func fetchWineInventory(_ completionHandler: @escaping (WineInventory) -> ()) {
