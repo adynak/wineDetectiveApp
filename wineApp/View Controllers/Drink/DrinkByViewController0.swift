@@ -408,7 +408,8 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         cell.detailTextLabel?.numberOfLines = 2;
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-        let line2 = "  " + bottle.producer + "\n  " + bottle.appellation
+        let line2 = "  \(bottle.producer) - \(bottle.appellation)" +
+                    "\n  " + NSLocalizedString("drinkByTitle", comment: "") + " \(bottle.drinkBy)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2
