@@ -65,7 +65,14 @@ struct bottleDetail {
     var locale: String
     var type: String
     var drinkBy: String
+    var available: Float
     var linear: Float
+    var bell: Float
+    var early: Float
+    var late: Float
+    var fast: Float
+    var twinPeak: Float
+    var simple: Float
     var bottleCount: Int
 }
 

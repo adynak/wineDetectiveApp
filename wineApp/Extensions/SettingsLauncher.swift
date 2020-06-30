@@ -119,9 +119,17 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
                     self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
                 }
         }, completion: { finished in
-            if (type(of: setting as Any) != type(of: UITapGestureRecognizer())) && (setting.settingCode == "Help") {
-                self.homeController?.showControllerForSetting(setting: setting)
-                print(setting.settingCode)
+            if (type(of: setting as Any) != type(of: UITapGestureRecognizer())){
+                if (setting.settingCode == "Help") {
+                    self.homeController?.showControllerForSetting(setting: setting)
+                    print(setting.settingCode)
+                } else {
+                NotificationCenter.default.post(name: Notification.Name("changeDrinkBySort"),
+                                                object: nil,
+                                                userInfo:[
+                                                    "settingCode": setting.settingCode,
+                                                    "key1": 1234])
+                }
             }
         })
 

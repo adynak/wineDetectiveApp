@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrinkByViewController :UITableViewController {
+class DrinkByViewController19 :UITableViewController {
     
     let cellID = "drinkByCellId123123"
     
@@ -177,7 +177,7 @@ class DrinkByViewController :UITableViewController {
     
     lazy var settingsLauncher: SettingsLauncher = {
         let launcher = SettingsLauncher()
-        launcher.homeController = self
+//        launcher.homeController = self
         return launcher
     }()
     
@@ -216,7 +216,7 @@ class DrinkByViewController :UITableViewController {
     
 }
 
-extension DrinkByViewController: BottleCountDelegate{
+extension DrinkByViewController19: BottleCountDelegate{
     
     func passBackBinsAndBottlesInThem(newBinData:[StorageBins]){
         let indexPath = tableView.indexPathForSelectedRow

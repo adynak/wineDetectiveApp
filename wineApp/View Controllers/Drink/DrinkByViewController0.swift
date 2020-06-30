@@ -35,7 +35,7 @@ class SearchBarContainerView0: UIView {
     }
 }
 
-class DrinkByViewController0: UIViewController {
+class DrinkByViewController: UIViewController {
     
     let cellID = "cell123"
     var searchKeys = [SearchKeys]()
@@ -94,13 +94,65 @@ class DrinkByViewController0: UIViewController {
         searchWines = allWine?.search
         searchKeys0 = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(changeDrinkBySort),
+                                               name: Notification.Name("changeDrinkBySort"),
+                                               object: nil)
+
+        
         searchWines = searchWines!.sorted(by: {
-            ($0.label[0].linear) > ($1.label[0].linear)
+            ($0.label[0].available) > ($1.label[0].available)
         })
         
         searchKeys = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
 
         footerView.text = countBottles(bins: searchKeys)
+    }
+    
+    @objc func changeDrinkBySort(_ notification: Notification) {
+        let settingCode = (notification.userInfo?["settingCode"])! as! String
+        let info1 = notification.userInfo?["key1"]
+        
+        switch settingCode {
+        case "Linear":
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].linear) > ($1.label[0].linear)
+            })
+        case "Bell":
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].bell) > ($1.label[0].bell)
+        })
+        case "Early":
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].early) > ($1.label[0].early)
+        })
+        case "Late":
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].late) > ($1.label[0].late)
+        })
+        case "Fast":
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].fast) > ($1.label[0].fast)
+        })
+        case "TwinPeak":
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].twinPeak) > ($1.label[0].twinPeak)
+        })
+        case "Simple":
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].simple) > ($1.label[0].simple)
+        })
+            
+        default:
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].available) > ($1.label[0].available)
+            })
+        }
+        
+        searchKeys = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
+
+        self.tableView.reloadData()
+
     }
     
     @objc func handleShowSearchBar() {
@@ -183,7 +235,6 @@ class DrinkByViewController0: UIViewController {
     }
     
     @objc func toggleDrinkByActions(_ sender: AnyObject) {
-        Swift.debugPrint("CustomRightViewController IBAction invoked")
         if sender.selectedSegmentIndex == 0 {
             handleShowSearchBar()
         } else {
@@ -193,18 +244,14 @@ class DrinkByViewController0: UIViewController {
     
     lazy var settingsLauncher: SettingsLauncher = {
         let launcher = SettingsLauncher()
-//        launcher.homeController = self
+        launcher.homeController = self
         return launcher
     }()
     
     func showControllerForSetting(setting: Setting){
-//        Alert.showActionMenuAlert(on: self)
-
-        let dummyViewController = SettingsHelpController()
-//        dummyViewController.navigationItem.title = setting.name
-        navigationController?.pushViewController(dummyViewController, animated: true)
+        let settingsViewController = SettingsHelpController()
+        navigationController?.pushViewController(settingsViewController, animated: true)
     }
-
     
     func search(shouldShow: Bool) {
         let searchBarContainer = SearchBarContainerView0(customSearchBar: searchBar)
@@ -223,7 +270,7 @@ class DrinkByViewController0: UIViewController {
     
 }
 
-extension DrinkByViewController0: UISearchBarDelegate {
+extension DrinkByViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("Search bar editing did begin..")
     }
@@ -267,7 +314,7 @@ extension DrinkByViewController0: UISearchBarDelegate {
     }
 }
 
-extension DrinkByViewController0{
+extension DrinkByViewController{
     func setupElements(){
         view.addSubview(tableView)
         view.addSubview(footerView)
@@ -285,7 +332,7 @@ extension DrinkByViewController0{
     }
 }
 
-extension DrinkByViewController0: UITableViewDelegate, UITableViewDataSource{
+extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchBar.text!.isEmpty{

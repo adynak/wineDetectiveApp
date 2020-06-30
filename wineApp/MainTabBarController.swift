@@ -44,12 +44,12 @@ class MainTabBarController: UITabBarController {
         let searchTitle = NSLocalizedString("searchTitle", comment: "")
 
         
-        let drinkByController = createTabController(viewController: DrinkByViewController(),
+        let drinkByController19 = createTabController(viewController: DrinkByViewController19(),
                                                     selected: #imageLiteral(resourceName: "drinkDark"),
                                                     unselected: #imageLiteral(resourceName: "drinkLight"),
                                                     title: drinkByTitle)
         
-        let drinkByController0 = createTabController(viewController: DrinkByViewController0(),
+        let drinkByController = createTabController(viewController: DrinkByViewController(),
                                                     selected: #imageLiteral(resourceName: "drinkDark"),
                                                     unselected: #imageLiteral(resourceName: "drinkLight"),
                                                     title: drinkByTitle)
@@ -80,7 +80,7 @@ class MainTabBarController: UITabBarController {
         viewControllers = [searchController,
                            producerController,
                            varietalController,
-                           drinkByController0,
+                           drinkByController,
                            reconcileController]
         
 //        guard let items = tabBar.items else { return }

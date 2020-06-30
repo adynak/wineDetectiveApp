@@ -192,7 +192,14 @@ class DataServices {
                                           locale: item.locale,
                                           type: item.type,
                                           drinkBy: buildDrinkBy(beginConsume: item.beginConsume, endConsume: item.endConsume),
+                                          available: item.available.floatValue,
                                           linear: item.linear.floatValue,
+                                          bell: item.bell.floatValue,
+                                          early: item.early.floatValue,
+                                          late: item.late.floatValue,
+                                          fast: item.fast.floatValue,
+                                          twinPeak: item.twinpeak.floatValue,
+                                          simple: item.simple.floatValue,
                                           bottleCount: level1.count))
                 break
             }
