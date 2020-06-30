@@ -427,7 +427,7 @@ class DataServices {
         let reconcileSort = DataServices.buildReconcileArray(fields: fields)
         
         allWine?.reconcile = reconcileSort
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UserlistUpdate"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
     

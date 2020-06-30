@@ -21,7 +21,7 @@ class ReconcileViewController :UITableViewController {
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
         bottles = allWine?.reconcile
-        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "UserlistUpdate"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
                     
