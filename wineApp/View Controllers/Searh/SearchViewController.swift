@@ -282,7 +282,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         wineSelected.vineyard = bottle.vineyard
         wineSelected.storageBins = bottle.storageBins
 
-        let wineDetailController = wineDetailViewController()
+        let wineDetailController = WineDetailViewController()
         wineDetailController.passedValue = wineSelected
         let navController = UINavigationController(rootViewController: wineDetailController)
 //        wineDetailController.myUpdater = (self as BottleCountDelegate)
@@ -319,7 +319,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         cell.detailTextLabel?.numberOfLines = 2;
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-        let line2 = "  " + bottle.producer + "\n  " + bottle.appellation
+        let line2 = "  \(bottle.producer) - \(bottle.appellation)" +
+                    "\n  " + NSLocalizedString("drinkByTitle", comment: "") + " \(bottle.drinkBy)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2

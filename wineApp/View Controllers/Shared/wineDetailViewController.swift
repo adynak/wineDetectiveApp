@@ -12,13 +12,13 @@ protocol BottleCountDelegate {
     func passBackBinsAndBottlesInThem(newBinData:[StorageBins])
 }
 
-class wineDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class WineDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var myUpdater: BottleCountDelegate!
     
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
-    let tableRowHeight:CGFloat = 50
+    let tableRowHeight:CGFloat = 66
     let sortBins:Bool = true
     
     var cellID = "cellID123"
@@ -275,7 +275,7 @@ extension Int {
     }
 }
 
-extension wineDetailViewController : BinCellDelegate {
+extension WineDetailViewController : BinCellDelegate {
     func didTapStepper(direction: String){
         let minus = "minus" as String
         let plus = "plus" as String

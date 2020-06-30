@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let debug: Bool = true
+let debug: Bool = false
 
 class DataServices {
         
@@ -90,9 +90,9 @@ class DataServices {
 
         var url: URL
         if (debug == true){
-//            url = URL.init(scheme: "http", host: "73.25.25.100", path: "/wine/resources/dataservices/csv.php")
-//            urlComponents.port = 88
-            url = URL.init(scheme: "http", host: "localhost", path: "/angular/git/wine/resources/dataservices/csv.php")
+            url = URL.init(scheme: "http", host: "73.25.25.100", path: "/wine/resources/dataservices/csv.php")
+            urlComponents.port = 88
+//            url = URL.init(scheme: "http", host: "localhost", path: "/angular/git/wine/resources/dataservices/csv.php")
 
 
         } else {

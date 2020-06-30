@@ -24,7 +24,8 @@ class BinTableViewCell : UITableViewCell {
             guard let binItem = bin else {return}
 
             if let binName = binItem.binName {
-                binNameLabel.text =  " \(binItem.binLocation ?? "")" + " \(binName) "
+                binNameLabel.text = " \(binItem.binLocation!) \(binName)"
+                barcodeLabel.text = " \(binItem.barcode!)"
             }
             
             if let bottleCount = binItem.bottleCount {
@@ -44,6 +45,14 @@ class BinTableViewCell : UITableViewCell {
     }()
     
     let bottleCountLabel:UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.italicSystemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let barcodeLabel:UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.italicSystemFont(ofSize: 16)
@@ -71,6 +80,7 @@ class BinTableViewCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         containerView.addSubview(binNameLabel)
+        containerView.addSubview(barcodeLabel)
         containerView.addSubview(bottleCountLabel)
         contentView.addSubview(containerView)
         contentView.addSubview(stepperView)
@@ -79,7 +89,7 @@ class BinTableViewCell : UITableViewCell {
             containerView.centerYAnchor.constraint(equalTo:self.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant:10),
             containerView.trailingAnchor.constraint(equalTo:self.trailingAnchor, constant:-10),
-            containerView.heightAnchor.constraint(equalToConstant:40)
+            containerView.heightAnchor.constraint(equalToConstant:64)
         ])
         
         NSLayoutConstraint.activate([
@@ -89,7 +99,12 @@ class BinTableViewCell : UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            bottleCountLabel.topAnchor.constraint(equalTo:binNameLabel.bottomAnchor),
+            barcodeLabel.topAnchor.constraint(equalTo:binNameLabel.bottomAnchor),
+            barcodeLabel.leadingAnchor.constraint(equalTo:binNameLabel.leadingAnchor, constant: 10),
+        ])
+        
+        NSLayoutConstraint.activate([
+            bottleCountLabel.topAnchor.constraint(equalTo:barcodeLabel.bottomAnchor),
             bottleCountLabel.leadingAnchor.constraint(equalTo:binNameLabel.leadingAnchor, constant: 10),
         ])
         

@@ -371,7 +371,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         wineSelected.vineyard = bottle.vineyard
         wineSelected.storageBins = bottle.storageBins
 
-        let wineDetailController = wineDetailViewController()
+        let wineDetailController = WineDetailViewController()
         wineDetailController.passedValue = wineSelected
         let navController = UINavigationController(rootViewController: wineDetailController)
 //        wineDetailController.myUpdater = (self as BottleCountDelegate)

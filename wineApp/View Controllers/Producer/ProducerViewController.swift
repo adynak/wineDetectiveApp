@@ -161,7 +161,7 @@ class ProducerViewController:UITableViewController {
         wineSelected.vineyard = allWines!.producers![section].wines![row].vineyard!
         wineSelected.storageBins = allWines!.producers![section].wines![row].storageBins
         
-        let wineDetailController = wineDetailViewController()
+        let wineDetailController = WineDetailViewController()
         wineDetailController.passedValue = wineSelected
         let navController = UINavigationController(rootViewController: wineDetailController)
         wineDetailController.myUpdater = (self as BottleCountDelegate)

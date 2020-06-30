@@ -316,10 +316,10 @@ func buildDrinkBy(beginConsume: String, endConsume: String) -> String{
         drinkBy = ""
     }
     else if (beginConsume == "" && endConsume != "") {
-        drinkBy = "before " + endConsume
+        drinkBy = endConsume
     }
     else {
-        drinkBy = beginConsume + " - " + endConsume
+        drinkBy = "\(beginConsume) - \(endConsume)"
     }
     return drinkBy
 }

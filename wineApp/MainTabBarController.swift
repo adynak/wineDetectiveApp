@@ -43,12 +43,6 @@ class MainTabBarController: UITabBarController {
         let drinkByTitle = NSLocalizedString("drinkByTitle", comment: "")
         let searchTitle = NSLocalizedString("searchTitle", comment: "")
 
-        
-        let drinkByController19 = createTabController(viewController: DrinkByViewController19(),
-                                                    selected: #imageLiteral(resourceName: "drinkDark"),
-                                                    unselected: #imageLiteral(resourceName: "drinkLight"),
-                                                    title: drinkByTitle)
-        
         let drinkByController = createTabController(viewController: DrinkByViewController(),
                                                     selected: #imageLiteral(resourceName: "drinkDark"),
                                                     unselected: #imageLiteral(resourceName: "drinkLight"),
