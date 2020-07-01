@@ -12,7 +12,7 @@ class ReconcileViewController :UITableViewController {
     
     let cellID = "cellId"
 
-    var bottles: [Level0]?
+    var bottles: [DrillLevel0]?
     var reconcileLocations:Set = Set<Int>()
 
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class ReconcileViewController :UITableViewController {
         
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
-        bottles = allWine?.reconcile
+        bottles = allWine?.reconcile0
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
@@ -62,7 +62,7 @@ class ReconcileViewController :UITableViewController {
     }
     
     @objc func handleReload() {
-        bottles = allWine?.reconcile
+        bottles = allWine?.reconcile0
         self.tableView.reloadData()
         for row in reconcileLocations{
             if (row < bottles!.count){
@@ -128,6 +128,7 @@ class ReconcileViewController :UITableViewController {
         
         let reconcileDetailController = ReconcileViewDetailController()
         reconcileDetailController.passedValue = wineSelected
+        reconcileDetailController.title = NSLocalizedString("reconcileTitle", comment: "title for reconcile")
         let navController = UINavigationController(rootViewController: reconcileDetailController)
         present(navController, animated: true, completion: nil)
 

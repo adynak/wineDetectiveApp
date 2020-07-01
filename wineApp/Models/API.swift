@@ -23,9 +23,11 @@ struct Availability{
     let linear: Int
     let bell: Int
     let early: Int
+    let late: Int
     let fast: Int
     let twinPeak: Int
     let simple: Int
+    let wdVarietal: Int
     
     init(data: [Int]) {
         iWine = data[0]
@@ -33,8 +35,10 @@ struct Availability{
         linear = data[2]
         bell = data[3]
         early = data[4]
-        fast = data[5]
-        twinPeak = data[6]
-        simple = data[7]
+        late = data[5]
+        fast = data[6]
+        twinPeak = data[7]
+        simple = data[8]
+        wdVarietal = data[9]
     }
 }

@@ -39,6 +39,31 @@ struct Bottle {
     let type: String
 }
 
+struct DrillBottle {
+    let producer: String
+    let varietal: String
+    let location: String
+    let bin: String
+    let vintage: String
+    let iWine: String
+    let barcode: String
+    let available: String
+    let linear: String
+    let bell: String
+    let early: String
+    let late: String
+    let fast: String
+    let twinpeak: String
+    let simple: String
+    let designation: String
+    let ava: String
+    let beginConsume: String
+    let endConsume: String
+    let sortKey0: String
+    let sortKey1: String
+}
+
+
 struct AllLevel0 {
     var isExpanded: Bool = false
     var label: [bottleDetail]
@@ -76,6 +101,33 @@ struct bottleDetail {
     var bottleCount: Int
 }
 
+struct DrillLevel0 {
+    var name: String?
+    var bottleCount: Int?
+    var isExpanded: Bool = false
+    var data: [DrillLevel1]
+}
+
+struct DrillLevel1 {
+    var name: String?
+    var bottleCount: Int?
+    var data: [DrillLevel2]
+}
+
+struct DrillLevel2 {
+    var producer: String?
+    var varietal: String?
+    var vintage: String?
+    var iWine: String?
+    var location: String?
+    var bin: String?
+    var barcode: String?
+    var designation: String?
+    var ava: String?
+    var sortKey: String?
+    var beginConsume: String?
+    var endConsume: String?
+}
 
 struct Level0 {
     var name: String?
@@ -114,17 +166,18 @@ struct wineDetail {
     var country = "123"
     var type = "123"
     var storageBins: [StorageBins]?
-    var bottles: [Level2]?
+    var bottles: [DrillLevel2]?
     var location: String?
     var bin: String?
 }
 
 struct WineInventory {
-    var producers: [Producers]?
+    var producers: [DrillLevel0]?
     var varietals: [Producers]?
     var drinkBy: [Producers]?
     var reconcile: [Level0]?
     var search: [AllLevel0]?
+    var reconcile0: [DrillLevel0]?
 }
 
 struct Producers: Codable {
@@ -175,7 +228,7 @@ struct Label{
     let fast: Int
     let twinpeak: Int
     let simple: Int
-//    let sortKey: Int
+    let wdVarietal: Int
     
     
     init(data: [Int]) {
@@ -203,7 +256,7 @@ struct Label{
         fast = data[21]
         twinpeak = data[22]
         simple = data[23]
-//        sortKey = data[24]
+        wdVarietal = data[24]
     }
 }
 var fields = [Int]()
@@ -219,89 +272,6 @@ struct StorageBins: Codable {
     var binLocation: String?
     var barcode: String?
 }
-
-    func fetchWineInventory(_ completionHandler: @escaping (WineInventory) -> ()) {
-        
-//        API.load()
-        
-        
-        let user = UserDefaults.standard.getUserName()
-        let pword = UserDefaults.standard.getUserPword()
-        
-        var dataUrl = DataServices.getDataUrl(user: user,pword: pword, table: "Inventory")
-
-        URLSession.shared.dataTask(with: URL(string: dataUrl)!, completionHandler: { (data, response, error) -> Void in
-            
-            guard let data = data else {
-                return
-            }
-            
-            if let error = error {
-                print(error)
-                return
-            }
-
-            do {
-                var csvInventory = String(data: data, encoding: .ascii)
-                csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
-                dataArray = DataServices.parseCsv(data:csvInventory!)
-                
-                dataHeader = dataArray.removeFirst()
-                let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
-                
-                let reconcileSort = DataServices.buildReconcileArray(fields: fields)
-                
-                let producerSort = DataServices.buildProducersArray(fields: fields,
-                                                                    sortKey: "producer")
-                
-                let varietalSort = DataServices.buildProducersArray(fields: fields,
-                                                                    sortKey: "varietal")
-                
-                let drinkBySort = DataServices.buildProducersArray(fields: fields,
-                                                                   sortKey: "drinkBy")
-                                
-                let newInventory = WineInventory(producers: producerSort,
-                                                 varietals: varietalSort,
-                                                 drinkBy: drinkBySort,
-                                                 reconcile: reconcileSort)
-
-                DispatchQueue.main.async(execute: { () -> Void in
-                    completionHandler(newInventory)
-                })
-                
-            }
-
-        }) .resume()
-        
-        dataUrl = DataServices.getDataUrl(user: user,pword: pword, table: "Availability")
-
-//        URLSession.shared.dataTask(with: URL(string: dataUrl)!, completionHandler: { (data, response, error) -> Void in
-//            
-//            guard let data = data else {
-//                return
-//            }
-//            
-//            if let error = error {
-//                print(error)
-//                return
-//            }
-//
-//            do {
-//                var csvDrinkBy = String(data: data, encoding: .ascii)
-//                
-//                let newInventory1 = WineInventory()
-//                
-//                DispatchQueue.main.async(execute: { () -> Void in
-//                    completionHandler(newInventory1)
-//                })
-//                
-//            }
-//
-//        }) .resume()
-
-
-    }
-
 
 func addNewStorage(binName: String, binLocation: String, bin: inout [StorageBins]) {
     let storage = StorageBins(binName:binName, bottleCount:1, binLocation:binLocation)

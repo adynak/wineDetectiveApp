@@ -32,7 +32,19 @@ class API {
 
             csvAvailability = csvAvailability!.replacingOccurrences(of: "Unknown", with: "")
             availabilityArray = DataServices.parseCsv(data:csvAvailability!)
+            availabilityArray[0].append("wdVarietal")
             
+            availabilityHeader = availabilityArray[0]
+                        
+            let positionOfVarietal = availabilityHeader.firstIndex(where:{$0 == "Varietal"})
+            let positionOfType = availabilityHeader.firstIndex(where:{$0 == "Type"})
+            
+            for (index,row) in availabilityArray.enumerated() where index > 0{
+                let varietal = DataServices.buildAvailabilityVarietal(row: row, positionOfVarietal: positionOfVarietal!, positionOfType: positionOfType!)
+                availabilityArray[index].append(varietal)
+                
+            }
+
             print("availability")
         } catch {
             print("Failed to fetch availability:", error)
@@ -87,10 +99,23 @@ class API {
             
             let reconcileSort = DataServices.buildReconcileArray(fields: fields)
             
+            let reconcileSort0 = DataServices.buildDrillIntoBottlesArray(
+                                    fields: fields,
+                                    sortKeys: ["location","bin"])
+
+            
             let searchSort = DataServices.buildAllBottlesArray(fields: fields)
                                                 
-            let producerSort = DataServices.buildProducersArray(fields: fields,
+            let producerSort0 = DataServices.buildProducersArray(fields: fields,
                                                                 sortKey: "producer")
+            
+            let producerSort = DataServices.buildDrillIntoBottlesArray(
+                                fields: fields,
+                                sortKeys: ["producer","wdVarietal"])
+
+            let varietalSort0 = DataServices.buildDrillIntoBottlesArray(
+            fields: fields,
+            sortKeys: ["wdVarietal","producer"])
             
             let varietalSort = DataServices.buildProducersArray(fields: fields,
                                                                 sortKey: "varietal")
@@ -102,7 +127,8 @@ class API {
                                              varietals: varietalSort,
                                              drinkBy: drinkBySort,
                                              reconcile: reconcileSort,
-                                             search: searchSort)
+                                             search: searchSort,
+                                             reconcile0: reconcileSort0)
             
             print("build data arrays complete")
             allWine = newInventory

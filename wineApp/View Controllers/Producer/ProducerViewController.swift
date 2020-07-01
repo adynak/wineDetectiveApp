@@ -1,73 +1,36 @@
 //
-//  FavoriteViewController.swift
-//  TabbarApp
+//  ReconcileViewController.swift
+//  wineApp
 //
 //  Created by adynak on 12/6/18.
 //  Copyright © 2018 Al Dynak. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class ProducerViewController:UITableViewController {
+class ProducerViewController :UITableViewController {
     
-    let cellID = "cellId123123"
-    
-    var allWines: WineInventory?
-        
+    let cellID = "cellId"
+
+    var bottles: [DrillLevel0]?
+    var reconcileLocations:Set = Set<Int>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let spinnerText = NSLocalizedString("runAPI", comment: "")
-        setupLoadingBar(localizedText: spinnerText)
-        showSpinner(localizedText: spinnerText)
+        
+        setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
-        
-//        fetchWineInventory { (wineInventory) -> () in
-//            self.allWines = wineInventory
-//            
-//            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { timer in
-//                self.setupNavBar()
-//                self.hideSpinner()
-//                self.tableView.reloadData()
-//            })
-//            
-//            self.tableView.reloadData()
-//            allWine = wineInventory
-//        }
-        
-//        self.tableView.reloadData()
-//                API.load()
-        
-        self.setupNavBar()
-        self.hideSpinner()
-        self.tableView.reloadData()
-        allWines = allWine
-        
-
+        bottles = allWine?.producers
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
-    
-    func setupLoadingBar(localizedText: String){
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = localizedText
-
-    }
-    
+                    
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        
-        navigationItem.title = "Producer"
-        
-        let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
-                                         target: self,
-                                         action: #selector(handleActionMenu))
-        navigationItem.rightBarButtonItem = moreMenu
-        
-//        let addWine = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
-//                                      target: self,
-//                                      action: #selector(handleAddWine))
-        
-        let cancelButton = UIBarButtonItem(title: "Log Out",
+        navigationItem.title = NSLocalizedString("producerTitle", comment: "title for reconcile")
+        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+                
+        let cancelButton = UIBarButtonItem(title: logOutBtn,
                                            style: UIBarButtonItem.Style.plain,
                                            target: self,
                                            action: #selector(handleLogOut))
@@ -77,10 +40,10 @@ class ProducerViewController:UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let sectionName = (allWines!.producers?[section].name)!
-        let bottleCount = (allWines!.producers?[section].bottleCount)!
+        let sectionName = (bottles?[section].name)!
+        let bottleCount = (bottles?[section].bottleCount)!
 
-        let sectionTitle = sectionName + " (\(bottleCount))"
+        let sectionTitle = "\(sectionName) (\(bottleCount))"
         let colorOdd = UIColor(r:184, g:206, b:249)
         let colorEven = UIColor(r:202, g:227, b:255)
         
@@ -97,21 +60,32 @@ class ProducerViewController:UITableViewController {
         
         return button
     }
+    
+    @objc func handleReload() {
+        bottles = allWine?.reconcile0
+        self.tableView.reloadData()
+        for row in reconcileLocations{
+            if (row < bottles!.count){
+                let button = UIButton(type: .system)
+                button.tag = row
+                handleExpandClose(button: button)
+            }
+        }
+    }
 
     @objc func handleExpandClose(button: UIButton) {
         
         let section = button.tag
+        reconcileLocations.insert(section)
         
-        // we'll try to close the section first by deleting the rows
         var indexPaths = [IndexPath]()
-        for row in allWines!.producers![section].wines!.indices {
+        for row in bottles![section].data.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
         
-        let isRowExpanded = allWines?.producers?[section].isExpanded
-        // set this for call to numberOfRowsInSection to toggle display of these rows
-        allWines?.producers?[section].isExpanded = !isRowExpanded!
+        let isRowExpanded = bottles?[section].isExpanded
+        bottles?[section].isExpanded = !isRowExpanded!
         
         if isRowExpanded! {
             tableView.deleteRows(at: indexPaths, with: .fade)
@@ -125,18 +99,18 @@ class ProducerViewController:UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if allWines == nil {
+        if bottles == nil {
             return 0
         } else {
-            return (allWines?.producers?.count)!
+            return (bottles?.count)!
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !(allWines?.producers?[section].isExpanded)! {
+        if !(bottles?[section].isExpanded)! {
             return 0
         }
-        return (allWines?.producers![section].wines!.count)!
+        return (bottles![section].data.count)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -147,76 +121,34 @@ class ProducerViewController:UITableViewController {
         let section = indexPath![0]
         let row = indexPath![1]
         
-        //getting the current cell from the index path
-        wineSelected.vintage = allWines!.producers![section].wines![row].vintage!
-        wineSelected.varietal = allWines!.producers![section].wines![row].varietal!
-        wineSelected.drinkBy = allWines!.producers![section].wines![row].drinkBy!
-        wineSelected.locale = allWines!.producers![section].wines![row].locale!
-        wineSelected.producer = allWines!.producers![section].name!
-        wineSelected.ava = allWines!.producers![section].wines![row].ava!
-        wineSelected.designation = allWines!.producers![section].wines![row].designation!
-        wineSelected.region = allWines!.producers![section].wines![row].region!
-        wineSelected.country = allWines!.producers![section].wines![row].country!
-        wineSelected.type = allWines!.producers![section].wines![row].type!
-        wineSelected.vineyard = allWines!.producers![section].wines![row].vineyard!
-        wineSelected.storageBins = allWines!.producers![section].wines![row].storageBins
+        wineSelected.bottles = bottles![section].data[row].data
+        wineSelected.location = bottles![section].name
+        wineSelected.bin = bottles![section].data[row].name
+        wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
         
-        let wineDetailController = WineDetailViewController()
-        wineDetailController.passedValue = wineSelected
-        let navController = UINavigationController(rootViewController: wineDetailController)
-        wineDetailController.myUpdater = (self as BottleCountDelegate)
+        let reconcileDetailController = ReconcileViewDetailController()
+        reconcileDetailController.passedValue = wineSelected
+        reconcileDetailController.title = NSLocalizedString("producerTitle", comment: "title for reconcile")
+        let navController = UINavigationController(rootViewController: reconcileDetailController)
         present(navController, animated: true, completion: nil)
 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var bottleCount: Int = 0
+        var bottleCount: Int
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let varietal = allWines?.producers?[indexPath.section].wines?[indexPath.row].varietal
-        let vintage = allWines?.producers?[indexPath.section].wines?[indexPath.row].vintage
-//        var designation = allWines?.producers?[indexPath.section].wines?[indexPath.row].designation
-        let ava = allWines?.producers?[indexPath.section].wines?[indexPath.row].ava
-//        let type = allWines?.producers?[indexPath.section].wines?[indexPath.row].type
-        let vineyard = allWines?.producers?[indexPath.section].wines?[indexPath.row].vineyard
-
+        let bin = bottles?[indexPath.section].data[indexPath.row].name
+        let colorOdd = UIColor(r:255, g:255, b:255) //white
+        let colorEven = UIColor(r:240, g:240, b:240)
+                
+        bottleCount = bottles![indexPath.section].data[indexPath.row].bottleCount!
         
-        let bottleLocations = allWines?.producers?[indexPath.section].wines?[indexPath.row].storageBins
-        for bin in bottleLocations! {
-            bottleCount += bin.bottleCount!
-        }
-        
-        var collective = " bottles)"
-        if (bottleCount == 1){
-            collective = " bottle)"
-        }
-        
-        cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + collective
-        if vineyard == "" {
-            cell.detailTextLabel?.text = ava
-        } else {
-            cell.detailTextLabel?.text = ava! + " - " + vineyard!
-        }
-        
+        cell.textLabel?.text = "\(bin!) (\(bottleCount))"
+        cell.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         return cell
     }
-    
-    @objc func handleActionMenu(){
-        Alert.showActionMenuAlert(on: self)
-    }
-    
-    @objc func handleAddWine(){
-//        let addWineController = AddWineController()
-////        wineDetailController.passedValue = wineSelected
-//        let navController = UINavigationController(rootViewController: addWineController)
-//        present(navController, animated: true, completion: nil)
-        
-        UserDefaults.standard.setIsLoggedIn(value: false)
-        
-        let loginController = LoginController()
-        present(loginController, animated: true, completion: nil)
-        
-    }
-    
+            
     @objc func handleLogOut(){
         UserDefaults.standard.setIsLoggedIn(value: false)
         
@@ -224,18 +156,5 @@ class ProducerViewController:UITableViewController {
         present(loginController, animated: true, completion: nil)
         
     }
-    
-}
-
-
-extension ProducerViewController: BottleCountDelegate{
-    
-    func passBackBinsAndBottlesInThem(newBinData:[StorageBins]){
-        let indexPath = tableView.indexPathForSelectedRow
-        let section = indexPath![0]
-        let row = indexPath![1]
-        allWines!.producers![section].wines![row].storageBins = newBinData
-        tableView.reloadData()
-    }
-    
+        
 }

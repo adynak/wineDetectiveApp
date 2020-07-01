@@ -12,11 +12,11 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
-    let tableRowHeight:CGFloat = 50
+//    let tableRowHeight:CGFloat = 60
     let sortBins:Bool = true
     
     let cellID = "cellId"
-    var wineBins = [Level2]()
+    var wineBins = [DrillLevel2]()
     
     var cells = [ReconcileTableViewCell]() //initialize array at class level
 
@@ -64,6 +64,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         wineBins = passedValue.bottles!
 
         view.backgroundColor = UIColor(r:202, g:227, b:255)
@@ -91,9 +92,9 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     }
     
     func setupWineLabelLayout(){
-        let locationAndBin = NSLocalizedString("locationAndBin", comment: "")
+        let locationAndBin = ""
         let bottles = NSLocalizedString("bottles", comment: "")
-        storageLabel.text = "\(locationAndBin): \(passedValue.location!) \(passedValue.bin!)\n\(bottles): \(passedValue.bottleCount)"
+        storageLabel.text = "\(locationAndBin)\(passedValue.location!) \(passedValue.bin!)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
             storageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -121,7 +122,11 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         
         wineBinsTableView.dataSource = self
         wineBinsTableView.register(ReconcileTableViewCell.self, forCellReuseIdentifier: cellID)
-        wineBinsTableView.rowHeight = tableRowHeight
+        if showBarcode {
+            wineBinsTableView.rowHeight = CGFloat(80)
+        } else {
+            wineBinsTableView.rowHeight = CGFloat(80)
+        }
         
     }
     
@@ -141,9 +146,28 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         let iWine = wineBins[indexPath.row].iWine
         let barcode = wineBins[indexPath.row].barcode
         
+        let location = wineBins[indexPath.row].location
+        let bin = wineBins[indexPath.row].bin
+        
+        let designation = wineBins[indexPath.row].designation
+        let ava = wineBins[indexPath.row].ava
+        let beginConsume = wineBins[indexPath.row].beginConsume
+        let endConsume = wineBins[indexPath.row].endConsume
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ReconcileTableViewCell
         
-        cell.bin = Level2(producer: producer, varietal: varietal, vintage: vintage, iWine: iWine, barcode: barcode)
+        cell.bin = DrillLevel2(
+                    producer: producer,
+                    varietal: varietal,
+                    vintage: vintage,
+                    iWine: iWine,
+                    location: location,
+                    bin: bin,
+                    barcode: barcode,
+                    designation: designation,
+                    ava: ava,
+                    beginConsume: beginConsume,
+                    endConsume: endConsume)
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         cell.delegate = self
         
@@ -156,7 +180,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     
     private func setupNavigationBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("reconcileTitle", comment: "")
+        navigationItem.title = title
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title:   NSLocalizedString("cancel", comment: ""),
@@ -172,15 +196,15 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
     }
     
     @objc func addTapped(sender: UIBarButtonItem){
-        var markAsDrank = [Level2]()
+        var markAsDrank = [DrillLevel2]()
 
         if (sender.title == NSLocalizedString("save", comment: "")){
             for cell in cells {
                 if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
                     if bottles == 0{
-                        markAsDrank.append(Level2(
+                        markAsDrank.append(DrillLevel2(
                             producer: cell.producerLabel.text!,
-                            varietal: cell.varietalLabel.text!,
+                            varietal: cell.locationAndBinLabel.text!,
                             vintage: cell.vintageLabel.text!,
                             iWine: cell.iWineLabel.text!,
                             barcode: cell.barcodeLabel.text!))
@@ -197,7 +221,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
 
                 markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
                     self.dismiss(animated: true, completion:{
-                        DataServices.removeBottles(bottles: markAsDrank)
+                        DataServices.removeDrillBottles(bottles: markAsDrank)
                     })
                 })
 
@@ -223,7 +247,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
         return String(totalBottles) + bottleString
     }
     
-    func buildRemoveMessage(bottles: [Level2])->String{
+    func buildRemoveMessage(bottles: [DrillLevel2])->String{
         let confirmBtn = NSLocalizedString("confirmBtn", comment: "")
 
         var message: String = ""

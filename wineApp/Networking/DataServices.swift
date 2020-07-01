@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-let debug: Bool = false
+let debug: Bool = true
+let showBarcode = true
 
 class DataServices {
         
@@ -90,10 +91,9 @@ class DataServices {
 
         var url: URL
         if (debug == true){
-            url = URL.init(scheme: "http", host: "73.25.25.100", path: "/wine/resources/dataservices/csv.php")
-            urlComponents.port = 88
-//            url = URL.init(scheme: "http", host: "localhost", path: "/angular/git/wine/resources/dataservices/csv.php")
-
+//            url = URL.init(scheme: "http", host: "73.25.25.100", path: "/wine/resources/dataservices/csv.php")
+//            urlComponents.port = 88
+            url = URL.init(scheme: "http", host: "localhost", path: "/angular/git/wine/resources/dataservices/csv.php")
 
         } else {
             url = URL.init(scheme: "https", host: "www.cellartracker.com", path: "/xlquery.asp")
@@ -117,7 +117,7 @@ class DataServices {
     static func locateDataPositions(dataHeader: [String]) -> [Int]{
         
         var fields = [Int]()
-        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume","Barcode","Available","Linear","Bell","Early","Late","Fast","TwinPeak","Simple"]
+        let fieldsWeCareAbout: [String] = ["Vintage","Varietal","iWine","Producer","Location","Bin","Vineyard","Designation","Appellation","Locale","Type","Region","Country","BeginConsume","EndConsume","Barcode","Available","Linear","Bell","Early","Late","Fast","TwinPeak","Simple", "wdVarietal"]
 
         for field in fieldsWeCareAbout{
             if let i = dataHeader.firstIndex(where: { $0 == field }) {
@@ -143,7 +143,129 @@ class DataServices {
         return varietal
     }
     
+    static func buildAvailabilityVarietal( row: [String], positionOfVarietal: Int, positionOfType: Int) -> String{
+        
+        var varietal = row[positionOfVarietal]
+        let type = row[positionOfType]
+                
+        if (type.localizedCaseInsensitiveContains("Ros")) {
+            if(varietal.contains("Ros")) {
+
+            } else {
+                varietal = type + " of " + varietal
+            }
+        }
+
+        return varietal
+    }
+
     
+    static func buildDrillIntoBottlesArray(fields:[Int], sortKeys: [String])->[DrillLevel0]{
+        
+        let positionOf = Label(data:fields)
+        
+        let mirror = Mirror(reflecting: positionOf)
+        var sortIndex0: Int = 0
+        var sortIndex1: Int = 0
+        
+        var level0: [DrillLevel0] = []
+        var level1: [DrillLevel1] = []
+        var level2: [DrillLevel2] = []
+
+        var bottleCount: Int = 0
+        
+        for child in mirror.children  {
+            if child.label == sortKeys[0]{
+                sortIndex0 = child.value as! Int
+            }
+        }
+        
+        for child in mirror.children  {
+            if child.label == sortKeys[1]{
+                sortIndex1 = child.value as! Int
+            }
+        }
+
+        var wines: [DrillBottle] = []
+        
+        for row in dataArray{
+                              
+            let bottle = DrillBottle(
+                producer: row[positionOf.producer],
+                varietal: row[positionOf.wdVarietal],
+                location: row[positionOf.location],
+                bin: row[positionOf.bin],
+                vintage: row[positionOf.vintage],
+                iWine: row[positionOf.iWine],
+                barcode: row[positionOf.barcode],
+                available: row[positionOf.available],
+                linear: row[positionOf.linear],
+                bell: row[positionOf.bell],
+                early: row[positionOf.early],
+                late: row[positionOf.late],
+                fast: row[positionOf.fast],
+                twinpeak: row[positionOf.twinpeak],
+                simple: row[positionOf.simple],
+                designation: row[positionOf.designation],
+                ava: row[positionOf.ava],
+                beginConsume: row[positionOf.beginConsume],
+                endConsume: row[positionOf.endConsume],
+                sortKey0: row[sortIndex0],
+                sortKey1: row[sortIndex1]
+            )
+
+            wines.append(bottle)
+        }
+
+        let groupLevel0 = Dictionary(grouping: wines, by: { $0.sortKey0 })
+
+        for (item0) in groupLevel0{
+            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.sortKey1 })
+            for (item1) in groupLevel1{
+                let groupLevel2 = Dictionary(grouping: item1.value, by: { $0.sortKey1 })
+                for (item2) in groupLevel2{
+                    for (detail) in item2.value {
+                        bottleCount += 1
+                        var sortKey = designation == "" ? detail.ava : "\(detail.designation) \(detail.ava)"
+                        sortKey = "\(detail.vintage) \(sortKey)"
+                        level2.append(DrillLevel2(producer: detail.producer,
+                                             varietal: detail.varietal,
+                                             vintage: detail.vintage,
+                                             iWine: detail.iWine,
+                                             location: detail.location,
+                                             bin: detail.bin,
+                                             barcode: detail.barcode,
+                                             designation: detail.designation,
+                                             ava: detail.ava,
+                                             sortKey: sortKey,
+                                             beginConsume: detail.beginConsume,
+                                             endConsume: detail.endConsume))
+                    }
+                    
+                    level2 =  level2.sorted(by: {
+                        ($0.sortKey!.lowercased()) < ($1.sortKey!.lowercased())
+                    })
+
+                    level1.append(DrillLevel1(name: item1.key, bottleCount: level2.count, data: level2))
+                    level2.removeAll()
+                }
+            }
+            
+            level1 =  level1.sorted(by: {
+                ($0.name!.lowercased()) < ($1.name!.lowercased())
+            })
+            level0.append(DrillLevel0(name: item0.key, bottleCount: bottleCount, data: level1))
+            bottleCount = 0
+            level1.removeAll()
+
+        }
+
+        level0 =  level0.sorted(by: {
+            ($0.name!.lowercased()) < ($1.name!.lowercased())
+        })
+
+        return level0
+    }
     
     static func buildAllBottlesArray(fields:[Int])->[AllLevel0]{
         
@@ -421,6 +543,26 @@ class DataServices {
 
     }
     
+    static func removeDrillBottles(bottles: [DrillLevel2]){
+        let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+        var dataArrayFiltered = [[String]]()
+        
+        for bottle in bottles{
+            let barcode = bottle.barcode
+            dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode!) }
+            dataArray = dataArrayFiltered
+        }
+                
+        let reconcileSort0 = DataServices.buildDrillIntoBottlesArray(fields: fields,
+                                                     sortKeys: ["producer","wdVarietal"])
+        let reconcileSort = DataServices.buildReconcileArray(fields: fields)
+
+
+        allWine?.reconcile = reconcileSort
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+
+    }
+
     static func removeBottles(bottles: [Level2]){
         let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         var dataArrayFiltered = [[String]]()
@@ -431,17 +573,22 @@ class DataServices {
             dataArray = dataArrayFiltered
         }
                 
+        let reconcileSort0 = DataServices.buildDrillIntoBottlesArray(fields: fields,
+                                                     sortKeys: ["producer","wdVarietal"])
         let reconcileSort = DataServices.buildReconcileArray(fields: fields)
-        
+
+
         allWine?.reconcile = reconcileSort
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
+
+    
     
     static func locateAvailabilityFields(availabilityHeader: [String?]) -> [Int]{
         
         var fields = [Int]()
-        let fieldsWeCareAbout: [String] = ["iWine","Available","Linear","Bell","Early","Late","Fast","TwinPeak","Simple"]
+        let fieldsWeCareAbout: [String] = ["iWine","Available","Linear","Bell","Early","Late","Fast","TwinPeak","Simple", "wdVarietal"]
 
         for field in fieldsWeCareAbout{
             if let i = availabilityHeader.firstIndex(where: { $0 == field }) {

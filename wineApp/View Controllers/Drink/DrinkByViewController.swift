@@ -85,7 +85,7 @@ class DrinkByViewController: UIViewController {
     
     @objc func changeDrinkBySort(_ notification: Notification) {
         let settingCode = (notification.userInfo?["settingCode"])! as! String
-        let info1 = notification.userInfo?["key1"]
+//        let info1 = notification.userInfo?["key1"]
         
         switch settingCode {
         case "Linear":
