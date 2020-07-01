@@ -173,10 +173,11 @@ struct wineDetail {
 
 struct WineInventory {
     var producers: [DrillLevel0]?
-    var varietals: [Producers]?
+    var varietals: [DrillLevel0]?
     var drinkBy: [Producers]?
     var reconcile0: [Level0]?
     var search: [AllLevel0]?
+    var searchVarietals: [Producers]?
     var reconcile: [DrillLevel0]?
 }
 

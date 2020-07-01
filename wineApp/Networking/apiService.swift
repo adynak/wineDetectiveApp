@@ -119,9 +119,10 @@ class API {
                                                                sortKey: "drinkBy")
                             
             let newInventory = WineInventory(producers: producerSort,
-                                             varietals: varietalSort,
+                                             varietals: varietalSort0,
                                              drinkBy: drinkBySort,
                                              search: searchSort,
+                                             searchVarietals: varietalSort,
                                              reconcile: reconcileSort)
             
             print("build data arrays complete")

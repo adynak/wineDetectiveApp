@@ -64,7 +64,7 @@ class DrinkByViewController: UIViewController {
         setupNavigationBar()
         searchBar.resignFirstResponder()
                 
-        varietals = allWine?.varietals
+        varietals = allWine?.searchVarietals
         searchWines = allWine?.search
         searchKeys0 = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
         

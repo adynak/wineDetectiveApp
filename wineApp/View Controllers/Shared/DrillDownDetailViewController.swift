@@ -1,5 +1,5 @@
 //
-//  DrillCownDetailViewController.swift
+//  DrillDownDetailViewController.swift
 //  wineApp
 //
 //  Created by adynak on 12/6/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrillCownDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
         
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
@@ -261,7 +261,7 @@ class DrillCownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
 }
 
-extension DrillCownDetailViewController : DrillDownStepperCellDelegate {
+extension DrillDownDetailViewController : DrillDownStepperCellDelegate {
     func didTapStepper(direction: String){
         let singularBottle = NSLocalizedString("singularBottle", comment: "")
         let pluralBottle = NSLocalizedString("pluralBottle", comment: "")

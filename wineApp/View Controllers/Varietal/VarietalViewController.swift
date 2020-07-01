@@ -1,6 +1,6 @@
 //
-//  FavoriteViewController.swift
-//  TabbarApp
+//  ReconcileViewController.swift
+//  wineApp
 //
 //  Created by adynak on 12/6/18.
 //  Copyright © 2018 Al Dynak. All rights reserved.
@@ -8,33 +8,29 @@
 
 import UIKit
 
-class VarietalViewController :UITableViewController {
+class VarietalViewController : UITableViewController {
     
-    let cellID = "varietalCellId123123"
-    
-    var varietals: [Producers]?
+    let cellID = "cellId"
+
+    var bottles: [DrillLevel0]?
+    var reconcileLocations:Set = Set<Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
-        varietals = allWine?.varietals
+        bottles = allWine?.varietals
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+
     }
-    
+                    
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = "Varietal"
-        
-        let moreMenu =   UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action,
-                                         target: self,
-                                         action: #selector(handleActionMenu))
-        navigationItem.rightBarButtonItem = moreMenu
-        
-//        let addWine = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel,
-//                                      target: self,
-//                                      action: #selector(handleAddWine))
-        
-        let cancelButton = UIBarButtonItem(title: "Log Out",
+        navigationItem.title = NSLocalizedString("producerTitle", comment: "title for reconcile")
+        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+                
+        let cancelButton = UIBarButtonItem(title: logOutBtn,
                                            style: UIBarButtonItem.Style.plain,
                                            target: self,
                                            action: #selector(handleLogOut))
@@ -44,10 +40,10 @@ class VarietalViewController :UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let sectionName = (varietals?[section].name)!
-        let bottleCount = (varietals?[section].bottleCount)!
+        let sectionName = (bottles?[section].name)!
+        let bottleCount = (bottles?[section].bottleCount)!
 
-        let sectionTitle = sectionName + " (\(bottleCount))"
+        let sectionTitle = "\(sectionName) (\(bottleCount))"
         let colorOdd = UIColor(r:184, g:206, b:249)
         let colorEven = UIColor(r:202, g:227, b:255)
         
@@ -64,21 +60,32 @@ class VarietalViewController :UITableViewController {
         
         return button
     }
+    
+    @objc func handleReload() {
+        bottles = allWine?.reconcile
+        self.tableView.reloadData()
+        for row in reconcileLocations{
+            if (row < bottles!.count){
+                let button = UIButton(type: .system)
+                button.tag = row
+                handleExpandClose(button: button)
+            }
+        }
+    }
 
     @objc func handleExpandClose(button: UIButton) {
         
         let section = button.tag
+        reconcileLocations.insert(section)
         
-        // we'll try to close the section first by deleting the rows
         var indexPaths = [IndexPath]()
-        for row in varietals![section].wines!.indices {
+        for row in bottles![section].data.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
         
-        let isRowExpanded = varietals?[section].isExpanded
-        // set this for call to numberOfRowsInSection to toggle display of these rows
-        varietals?[section].isExpanded = !isRowExpanded!
+        let isRowExpanded = bottles?[section].isExpanded
+        bottles?[section].isExpanded = !isRowExpanded!
         
         if isRowExpanded! {
             tableView.deleteRows(at: indexPaths, with: .fade)
@@ -92,18 +99,18 @@ class VarietalViewController :UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if varietals == nil {
+        if bottles == nil {
             return 0
         } else {
-            return (varietals?.count)!
+            return (bottles?.count)!
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !(varietals?[section].isExpanded)! {
+        if !(bottles?[section].isExpanded)! {
             return 0
         }
-        return (varietals![section].wines!.count)
+        return (bottles![section].data.count)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -114,76 +121,34 @@ class VarietalViewController :UITableViewController {
         let section = indexPath![0]
         let row = indexPath![1]
         
-        //getting the current cell from the index path
-        wineSelected.vintage = varietals![section].wines![row].vintage!
-        wineSelected.varietal = varietals![section].wines![row].producer!
-        wineSelected.drinkBy = varietals![section].wines![row].drinkBy!
-        wineSelected.locale = varietals![section].wines![row].locale!
-        wineSelected.producer = varietals![section].name!
-        wineSelected.ava = varietals![section].wines![row].ava!
-        wineSelected.designation = varietals![section].wines![row].designation!
-        wineSelected.region = varietals![section].wines![row].region!
-        wineSelected.country = varietals![section].wines![row].country!
-        wineSelected.type = varietals![section].wines![row].type!
-        wineSelected.vineyard = varietals![section].wines![row].vineyard!
-        wineSelected.storageBins = varietals![section].wines![row].storageBins
+        wineSelected.bottles = bottles![section].data[row].data
+        wineSelected.location = bottles![section].name
+        wineSelected.bin = bottles![section].data[row].name
+        wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
         
-        let wineDetailController = WineDetailViewController()
-        wineDetailController.passedValue = wineSelected
-        let navController = UINavigationController(rootViewController: wineDetailController)
-        wineDetailController.myUpdater = (self as BottleCountDelegate)
+        let detailController = DrillDownDetailViewController()
+        detailController.passedValue = wineSelected
+        detailController.title = NSLocalizedString("varietalsTitle", comment: "title for reconcile")
+        let navController = UINavigationController(rootViewController: detailController)
         present(navController, animated: true, completion: nil)
 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var bottleCount: Int = 0
+        var bottleCount: Int
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let varietal = varietals?[indexPath.section].wines?[indexPath.row].producer
-        let vintage = varietals?[indexPath.section].wines?[indexPath.row].vintage
-//        var designation = producers?[indexPath.section].wines?[indexPath.row].designation
-        let ava = varietals?[indexPath.section].wines?[indexPath.row].ava
-//        let type = producers?[indexPath.section].wines?[indexPath.row].type
-        let vineyard = varietals?[indexPath.section].wines?[indexPath.row].vineyard
-
+        let bin = bottles?[indexPath.section].data[indexPath.row].name
+        let colorOdd = UIColor(r:255, g:255, b:255) //white
+        let colorEven = UIColor(r:240, g:240, b:240)
+                
+        bottleCount = bottles![indexPath.section].data[indexPath.row].bottleCount!
         
-        let bottleLocations = varietals?[indexPath.section].wines?[indexPath.row].storageBins
-        for bin in bottleLocations! {
-            bottleCount += bin.bottleCount!
-        }
-        
-        var collective = " bottle)"
-        if (bottleCount > 1){
-            collective = " bottles)"
-        }
-        
-        cell.textLabel?.text = vintage! + " " + varietal! + " (" + String(bottleCount) + collective
-        if vineyard == "" {
-            cell.detailTextLabel?.text = ava
-        } else {
-            cell.detailTextLabel?.text = ava! + " - " + vineyard!
-        }
-        
+        cell.textLabel?.text = "\(bin!) (\(bottleCount))"
+        cell.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         return cell
     }
-    
-    @objc func handleActionMenu(){
-        Alert.showActionMenuAlert(on: self)
-    }
-    
-    @objc func handleAddWine(){
-//        let addWineController = AddWineController()
-////        wineDetailController.passedValue = wineSelected
-//        let navController = UINavigationController(rootViewController: addWineController)
-//        present(navController, animated: true, completion: nil)
-        
-        UserDefaults.standard.setIsLoggedIn(value: false)
-        
-        let loginController = LoginController()
-        present(loginController, animated: true, completion: nil)
-        
-    }
-    
+            
     @objc func handleLogOut(){
         UserDefaults.standard.setIsLoggedIn(value: false)
         
@@ -191,17 +156,5 @@ class VarietalViewController :UITableViewController {
         present(loginController, animated: true, completion: nil)
         
     }
-    
-}
-
-extension VarietalViewController: BottleCountDelegate{
-    
-    func passBackBinsAndBottlesInThem(newBinData:[StorageBins]){
-        let indexPath = tableView.indexPathForSelectedRow
-        let section = indexPath![0]
-        let row = indexPath![1]
-        varietals![section].wines![row].storageBins = newBinData
-        tableView.reloadData()
-    }
-    
+        
 }
