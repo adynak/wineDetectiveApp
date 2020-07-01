@@ -62,7 +62,7 @@ class ProducerViewController :UITableViewController {
     }
     
     @objc func handleReload() {
-        bottles = allWine?.reconcile0
+        bottles = allWine?.reconcile
         self.tableView.reloadData()
         for row in reconcileLocations{
             if (row < bottles!.count){

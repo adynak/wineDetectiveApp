@@ -20,7 +20,7 @@ class ReconcileViewController :UITableViewController {
         
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
-        bottles = allWine?.reconcile0
+        bottles = allWine?.reconcile
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
@@ -62,7 +62,7 @@ class ReconcileViewController :UITableViewController {
     }
     
     @objc func handleReload() {
-        bottles = allWine?.reconcile0
+        bottles = allWine?.reconcile
         self.tableView.reloadData()
         for row in reconcileLocations{
             if (row < bottles!.count){

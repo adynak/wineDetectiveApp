@@ -553,11 +553,10 @@ class DataServices {
             dataArray = dataArrayFiltered
         }
                 
-        let reconcileSort0 = DataServices.buildDrillIntoBottlesArray(fields: fields,
-                                                     sortKeys: ["producer","wdVarietal"])
-        let reconcileSort = DataServices.buildReconcileArray(fields: fields)
-
-
+        let reconcileSort = DataServices.buildDrillIntoBottlesArray(
+                                fields: fields,
+                                sortKeys: ["producer","wdVarietal"])
+        
         allWine?.reconcile = reconcileSort
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
@@ -573,11 +572,10 @@ class DataServices {
             dataArray = dataArrayFiltered
         }
                 
-        let reconcileSort0 = DataServices.buildDrillIntoBottlesArray(fields: fields,
-                                                     sortKeys: ["producer","wdVarietal"])
-        let reconcileSort = DataServices.buildReconcileArray(fields: fields)
-
-
+        let reconcileSort = DataServices.buildDrillIntoBottlesArray(
+                                fields: fields,
+                                sortKeys: ["producer","wdVarietal"])
+        
         allWine?.reconcile = reconcileSort
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 

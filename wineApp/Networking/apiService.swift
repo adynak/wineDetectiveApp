@@ -96,26 +96,21 @@ class API {
             
             dataHeader = dataArray.removeFirst()
             let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
-            
-            let reconcileSort = DataServices.buildReconcileArray(fields: fields)
-            
-            let reconcileSort0 = DataServices.buildDrillIntoBottlesArray(
+                        
+            let reconcileSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
                                     sortKeys: ["location","bin"])
 
             
             let searchSort = DataServices.buildAllBottlesArray(fields: fields)
-                                                
-            let producerSort0 = DataServices.buildProducersArray(fields: fields,
-                                                                sortKey: "producer")
-            
+                                                            
             let producerSort = DataServices.buildDrillIntoBottlesArray(
-                                fields: fields,
-                                sortKeys: ["producer","wdVarietal"])
+                                    fields: fields,
+                                    sortKeys: ["producer","wdVarietal"])
 
             let varietalSort0 = DataServices.buildDrillIntoBottlesArray(
-            fields: fields,
-            sortKeys: ["wdVarietal","producer"])
+                                    fields: fields,
+                                    sortKeys: ["wdVarietal","producer"])
             
             let varietalSort = DataServices.buildProducersArray(fields: fields,
                                                                 sortKey: "varietal")
@@ -126,9 +121,8 @@ class API {
             let newInventory = WineInventory(producers: producerSort,
                                              varietals: varietalSort,
                                              drinkBy: drinkBySort,
-                                             reconcile: reconcileSort,
                                              search: searchSort,
-                                             reconcile0: reconcileSort0)
+                                             reconcile: reconcileSort)
             
             print("build data arrays complete")
             allWine = newInventory

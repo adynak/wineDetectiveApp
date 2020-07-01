@@ -175,9 +175,9 @@ struct WineInventory {
     var producers: [DrillLevel0]?
     var varietals: [Producers]?
     var drinkBy: [Producers]?
-    var reconcile: [Level0]?
+    var reconcile0: [Level0]?
     var search: [AllLevel0]?
-    var reconcile0: [DrillLevel0]?
+    var reconcile: [DrillLevel0]?
 }
 
 struct Producers: Codable {
