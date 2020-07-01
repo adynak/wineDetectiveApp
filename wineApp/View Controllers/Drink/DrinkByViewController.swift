@@ -9,32 +9,6 @@
 
 import UIKit
 
-class SearchBarContainerView0: UIView {
-
-    let searchBar: UISearchBar
-
-    init(customSearchBar: UISearchBar) {
-        searchBar = customSearchBar
-        super.init(frame: CGRect.zero)
-
-        addSubview(searchBar)
-    }
-
-    override convenience init(frame: CGRect) {
-        self.init(customSearchBar: UISearchBar())
-        self.frame = frame
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        searchBar.frame = bounds
-    }
-}
-
 class DrinkByViewController: UIViewController {
     
     let cellID = "cell123"
@@ -254,7 +228,7 @@ class DrinkByViewController: UIViewController {
     }
     
     func search(shouldShow: Bool) {
-        let searchBarContainer = SearchBarContainerView0(customSearchBar: searchBar)
+        let searchBarContainer = SearchBarContainerView(customSearchBar: searchBar)
         
         let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar!.translatesAutoresizingMaskIntoConstraints = false
