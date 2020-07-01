@@ -1,5 +1,5 @@
 //
-//  ReconcileViewDetailController.swift
+//  DrillCownDetailViewController.swift
 //  wineApp
 //
 //  Created by adynak on 12/6/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class DrillCownDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
         
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
@@ -261,7 +261,7 @@ class ReconcileViewDetailController: UIViewController, UITableViewDelegate, UITa
 
 }
 
-extension ReconcileViewDetailController : ReconcileBinCellDelegate {
+extension DrillCownDetailViewController : ReconcileBinCellDelegate {
     func didTapStepper(direction: String){
         let singularBottle = NSLocalizedString("singularBottle", comment: "")
         let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
