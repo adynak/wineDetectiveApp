@@ -18,7 +18,7 @@ class DrillCownDetailViewController: UIViewController, UITableViewDelegate, UITa
     let cellID = "cellId"
     var wineBins = [DrillLevel2]()
     
-    var cells = [ReconcileTableViewCell]() //initialize array at class level
+    var cells = [DrillDownTableViewCell]() //initialize array at class level
 
     var passedValue = wineDetail()
     
@@ -121,7 +121,7 @@ class DrillCownDetailViewController: UIViewController, UITableViewDelegate, UITa
         ])
         
         wineBinsTableView.dataSource = self
-        wineBinsTableView.register(ReconcileTableViewCell.self, forCellReuseIdentifier: cellID)
+        wineBinsTableView.register(DrillDownTableViewCell.self, forCellReuseIdentifier: cellID)
         if showBarcode {
             wineBinsTableView.rowHeight = CGFloat(80)
         } else {
@@ -154,7 +154,7 @@ class DrillCownDetailViewController: UIViewController, UITableViewDelegate, UITa
         let beginConsume = wineBins[indexPath.row].beginConsume
         let endConsume = wineBins[indexPath.row].endConsume
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ReconcileTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! DrillDownTableViewCell
         
         cell.bin = DrillLevel2(
                     producer: producer,
@@ -261,7 +261,7 @@ class DrillCownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
 }
 
-extension DrillCownDetailViewController : ReconcileBinCellDelegate {
+extension DrillCownDetailViewController : DrillDownStepperCellDelegate {
     func didTapStepper(direction: String){
         let singularBottle = NSLocalizedString("singularBottle", comment: "")
         let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
