@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol ReconcileBinCellDelegate{
+protocol DrillDownStepperCellDelegate{
     func didTapStepper(direction: String)
 }
 
-class ReconcileTableViewCell : UITableViewCell {
+class DrillDownTableViewCell : UITableViewCell {
     
     let singularText = NSLocalizedString("singularBottle", comment: "")
     let pluralText = NSLocalizedString("pluralBottle", comment: "plural")
     
-    var delegate: ReconcileBinCellDelegate?
+    var delegate: DrillDownStepperCellDelegate?
 
     var bin:DrillLevel2! {
         didSet {
