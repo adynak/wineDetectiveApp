@@ -126,7 +126,7 @@ class ProducerViewController :UITableViewController {
         wineSelected.bin = bottles![section].data[row].name
         wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
         
-        let reconcileDetailController = ReconcileViewDetailController()
+        let reconcileDetailController = DrillCownDetailViewController()
         reconcileDetailController.passedValue = wineSelected
         reconcileDetailController.title = NSLocalizedString("producerTitle", comment: "title for reconcile")
         let navController = UINavigationController(rootViewController: reconcileDetailController)
