@@ -19,7 +19,7 @@ class DrinkByMenuCell: BaseCell {
         }
     }
     
-    var setting: Setting?{
+    var setting: DrinkByMenuItem?{
         didSet {
             nameLabel.text = setting?.name
 //            if let imageName = setting?.imageName{

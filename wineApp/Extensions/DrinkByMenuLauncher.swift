@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class Setting: NSObject{
+class DrinkByMenuItem: NSObject{
     let name: String
     let imageName: String
     let isSelected: Bool
@@ -30,45 +30,45 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     let blackView = UIView()
     let cellID = "cellID"
     let cellHeight: CGFloat = 35
-    let drinkByMenuItems: [Setting] = {
+    let drinkByMenuItems: [DrinkByMenuItem] = {
         return [
-            Setting(name: "Availability (Default)",
+            DrinkByMenuItem(name: "Availability (Default)",
                     imageName: "settings",
                     isSelected: true,
                     drinkByMenuCode: "Available"),
-            Setting(name: "Linear",
+            DrinkByMenuItem(name: "Linear",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Linear"),
-            Setting(name: "Standard Bell (Red Wines)",
+            DrinkByMenuItem(name: "Standard Bell (Red Wines)",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Bell"),
-            Setting(name: "Early Bell (Dry White Wines)",
+            DrinkByMenuItem(name: "Early Bell (Dry White Wines)",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Early"),
-            Setting(name: "Late Bell (Red Bordeaux, Red Northern Rhône and Rioja)",
+            DrinkByMenuItem(name: "Late Bell (Red Bordeaux, Red Northern Rhône and Rioja)",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Late"),
-            Setting(name: "Fast Maturing (All Rosé, Beaujolais, Moscato d'Asti)",
+            DrinkByMenuItem(name: "Fast Maturing (All Rosé, Beaujolais, Moscato d'Asti)",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Fast"),
-            Setting(name: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)",
+            DrinkByMenuItem(name: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "TwinPeak"),
-            Setting(name: "Wines Missing A Drinking Window",
+            DrinkByMenuItem(name: "Wines Missing A Drinking Window",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Missing"),
-            Setting(name: "Drinkability Help",
+            DrinkByMenuItem(name: "Drinkability Help",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Help"),
-            Setting(name: "Cancel",
+            DrinkByMenuItem(name: "Cancel",
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Cancel")
@@ -112,7 +112,7 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
 
     }
     
-    @objc func handleDismiss(setting: Setting){
+    @objc func handleDismiss(setting: DrinkByMenuItem){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 0
                 if let window = UIApplication.shared.keyWindow{
