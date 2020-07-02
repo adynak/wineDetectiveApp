@@ -140,7 +140,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! SettingCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! DrinkByMenuCell
         let setting = settings[indexPath.item]
         cell.setting = setting
         return cell
@@ -165,6 +165,6 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.register(SettingCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(DrinkByMenuCell.self, forCellWithReuseIdentifier: cellID)
     }
 }
