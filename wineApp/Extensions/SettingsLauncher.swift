@@ -30,7 +30,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     let blackView = UIView()
     let cellID = "cellID"
     let cellHeight: CGFloat = 35
-    let settings: [Setting] = {
+    let drinkByMenuItems: [Setting] = {
         return [
             Setting(name: "Availability (Default)",
                     imageName: "settings",
@@ -95,7 +95,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
             
             window.addSubview(blackView)
             window.addSubview(collectionView)
-            let height: CGFloat = CGFloat(settings.count) * cellHeight + 10
+            let height: CGFloat = CGFloat(drinkByMenuItems.count) * cellHeight + 10
             let y = window.frame.height - height - 20
 
             collectionView.frame = CGRect(x: 20, y: window.frame.height - 50, width: window.frame.width - 40, height: height)
@@ -136,12 +136,12 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return settings.count
+        return drinkByMenuItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! DrinkByMenuCell
-        let setting = settings[indexPath.item]
+        let setting = drinkByMenuItems[indexPath.item]
         cell.setting = setting
         return cell
     }
@@ -156,7 +156,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let setting = self.settings[indexPath.item]
+        let setting = self.drinkByMenuItems[indexPath.item]
         handleDismiss(setting: setting)
     }
     
