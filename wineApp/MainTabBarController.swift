@@ -44,32 +44,36 @@ class MainTabBarController: UITabBarController {
         let searchTitle = NSLocalizedString("searchTitle", comment: "")
 
         let drinkByController = createTabController(viewController: DrinkByViewController(),
-                                                    selected: #imageLiteral(resourceName: "drinkDark"),
-                                                    unselected: #imageLiteral(resourceName: "drinkLight"),
-                                                    title: drinkByTitle)
+            selected: #imageLiteral(resourceName: "drinkDark"),
+            unselected: #imageLiteral(resourceName: "drinkLight"),
+            title: drinkByTitle)
 
 
         let producerController = createTabController(viewController: ProducerViewController(),
-                                                     selected: #imageLiteral(resourceName: "farmDark"),
-                                                     unselected: #imageLiteral(resourceName: "farmLight"),
-                                                     title: producerTitle)
+            selected: #imageLiteral(resourceName: "farmDark"),
+            unselected: #imageLiteral(resourceName: "farmLight"),
+            title: producerTitle)
 
         let varietalController = createTabController(viewController: VarietalViewController(),
-                                                     selected: #imageLiteral(resourceName: "grapesDark"),
-                                                     unselected: #imageLiteral(resourceName: "grapesLight"),
-                                                     title: varietalTitle)
+            selected: #imageLiteral(resourceName: "grapesDark"),
+            unselected: #imageLiteral(resourceName: "grapesLight"),
+            title: varietalTitle)
 
         let searchController = createTabController(viewController: SearchViewController(),
-                                                     selected: #imageLiteral(resourceName: "search"),
-                                                     unselected: #imageLiteral(resourceName: "search"),
-                                                     title: searchTitle)
+            selected: #imageLiteral(resourceName: "search"),
+            unselected: #imageLiteral(resourceName: "search"),
+            title: searchTitle)
+        
+        let moreController = createTabController(viewController: SearchViewController(),
+            selected: #imageLiteral(resourceName: "more"),
+            unselected: #imageLiteral(resourceName: "more"),
+            title: searchTitle)
 
         let reconcileController = createTabController(
             viewController: ReconcileViewController(),
             selected: #imageLiteral(resourceName: "reconcileDark"),
             unselected: #imageLiteral(resourceName: "reconcileLight"),
             title: reconcileTitle)
-        
         
         viewControllers = [searchController,
                            producerController,
