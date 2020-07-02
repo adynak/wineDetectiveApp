@@ -14,13 +14,13 @@ class Setting: NSObject{
     let name: String
     let imageName: String
     let isSelected: Bool
-    let settingCode: String
+    let drinkByMenuCode: String
     
-    init(name: String, imageName: String, isSelected: Bool, settingCode: String){
+    init(name: String, imageName: String, isSelected: Bool, drinkByMenuCode: String){
         self.name = name
         self.imageName = imageName
         self.isSelected = false
-        self.settingCode = settingCode
+        self.drinkByMenuCode = drinkByMenuCode
     }
 
 }
@@ -35,43 +35,43 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
             Setting(name: "Availability (Default)",
                     imageName: "settings",
                     isSelected: true,
-                    settingCode: "Available"),
+                    drinkByMenuCode: "Available"),
             Setting(name: "Linear",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Linear"),
+                    drinkByMenuCode: "Linear"),
             Setting(name: "Standard Bell (Red Wines)",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Bell"),
+                    drinkByMenuCode: "Bell"),
             Setting(name: "Early Bell (Dry White Wines)",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Early"),
+                    drinkByMenuCode: "Early"),
             Setting(name: "Late Bell (Red Bordeaux, Red Northern Rhône and Rioja)",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Late"),
+                    drinkByMenuCode: "Late"),
             Setting(name: "Fast Maturing (All Rosé, Beaujolais, Moscato d'Asti)",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Fast"),
+                    drinkByMenuCode: "Fast"),
             Setting(name: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "TwinPeak"),
+                    drinkByMenuCode: "TwinPeak"),
             Setting(name: "Wines Missing A Drinking Window",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Missing"),
+                    drinkByMenuCode: "Missing"),
             Setting(name: "Drinkability Help",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Help"),
+                    drinkByMenuCode: "Help"),
             Setting(name: "Cancel",
                     imageName: "settings",
                     isSelected: false,
-                    settingCode: "Cancel")
+                    drinkByMenuCode: "Cancel")
         ]
         
     }()
@@ -120,14 +120,14 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
                 }
         }, completion: { finished in
             if (type(of: setting as Any) != type(of: UITapGestureRecognizer())){
-                if (setting.settingCode == "Help") {
+                if (setting.drinkByMenuCode == "Help") {
                     self.homeController?.showControllerForSetting(setting: setting)
-                    print(setting.settingCode)
+                    print(setting.drinkByMenuCode)
                 } else {
                 NotificationCenter.default.post(name: Notification.Name("changeDrinkBySort"),
                                                 object: nil,
                                                 userInfo:[
-                                                    "settingCode": setting.settingCode,
+                                                    "drinkByMenuCode": setting.drinkByMenuCode,
                                                     "key1": 1234])
                 }
             }
