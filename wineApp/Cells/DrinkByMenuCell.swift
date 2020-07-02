@@ -1,5 +1,5 @@
 //
-//  SettingCell.swift
+//  DrinkByMenuCell.swift
 //  wineApp
 //
 //  Created by adynak on 6/12/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingCell: BaseCell {
+class DrinkByMenuCell: BaseCell {
     
     override var isHighlighted: Bool{
         
