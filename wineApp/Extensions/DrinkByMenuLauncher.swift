@@ -121,7 +121,7 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
         }, completion: { finished in
             if (type(of: setting as Any) != type(of: UITapGestureRecognizer())){
                 if (setting.drinkByMenuCode == "Help") {
-                    self.homeController?.showControllerForSetting(setting: setting)
+                    self.homeController?.showControllerForDrinkByMenu(setting: setting)
                     print(setting.drinkByMenuCode)
                 } else {
                 NotificationCenter.default.post(name: Notification.Name("changeDrinkBySort"),

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsHelpController: UIViewController{
+class DrinkByHelpController: UIViewController{
     
     let helpLabel: UILabel = {
         let label = UILabel()

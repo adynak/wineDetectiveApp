@@ -222,8 +222,8 @@ class DrinkByViewController: UIViewController {
         return launcher
     }()
     
-    func showControllerForSetting(setting: DrinkByMenuItem){
-        let settingsViewController = SettingsHelpController()
+    func showControllerForDrinkByMenu(setting: DrinkByMenuItem){
+        let settingsViewController = DrinkByHelpController()
         navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
