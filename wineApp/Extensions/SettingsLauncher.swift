@@ -1,5 +1,5 @@
 //
-//  SettingsLauncher.swift
+//  DrinkByMenuLauncher.swift
 //  wineApp
 //
 //  Created by adynak on 6/12/20.
@@ -25,7 +25,7 @@ class Setting: NSObject{
 
 }
 
-class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     let blackView = UIView()
     let cellID = "cellID"

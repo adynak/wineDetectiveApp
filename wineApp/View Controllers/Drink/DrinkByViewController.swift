@@ -212,12 +212,12 @@ class DrinkByViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             handleShowSearchBar()
         } else {
-            settingsLauncher.showSetting()
+            drinkByMenuLauncher.showSetting()
         }
     }
     
-    lazy var settingsLauncher: SettingsLauncher = {
-        let launcher = SettingsLauncher()
+    lazy var drinkByMenuLauncher: DrinkByMenuLauncher = {
+        let launcher = DrinkByMenuLauncher()
         launcher.homeController = self
         return launcher
     }()
