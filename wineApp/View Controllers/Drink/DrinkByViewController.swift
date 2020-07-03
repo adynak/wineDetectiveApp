@@ -212,7 +212,7 @@ class DrinkByViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             handleShowSearchBar()
         } else {
-            drinkByMenuLauncher.showSetting()
+            drinkByMenuLauncher.showDrinkByMenu()
         }
     }
     

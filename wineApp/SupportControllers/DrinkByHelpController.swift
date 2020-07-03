@@ -1,5 +1,5 @@
 //
-//  SettingsHelp.swift
+//  DrinkByHelpController.swift
 //  wineApp
 //
 //  Created by adynak on 6/14/20.

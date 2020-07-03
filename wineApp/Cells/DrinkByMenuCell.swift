@@ -31,7 +31,7 @@ class DrinkByMenuCell: BaseCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Setting"
+        label.text = "MenuItem"
         label.font = UIFont.systemFont(ofSize: 13)
         label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping

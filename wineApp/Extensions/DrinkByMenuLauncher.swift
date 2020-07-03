@@ -86,7 +86,7 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     
     var homeController: DrinkByViewController?
     
-    func showSetting(){
+    func showDrinkByMenu(){
         
         if let window = UIApplication.shared.keyWindow{
             blackView.backgroundColor =  UIColor(white: 0, alpha: 0.5)
