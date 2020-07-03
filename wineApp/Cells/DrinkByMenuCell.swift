@@ -19,10 +19,10 @@ class DrinkByMenuCell: BaseCell {
         }
     }
     
-    var setting: DrinkByMenuItem?{
+    var drinkByMenuItem: DrinkByMenuItem?{
         didSet {
-            nameLabel.text = setting?.name
-//            if let imageName = setting?.imageName{
+            nameLabel.text = drinkByMenuItem?.name
+//            if let imageName = drinkByMenuItem?.imageName{
 //                iconImageView.image = UIImage(named: imageName)
 //                iconImageView.tintColor = .darkGray
 //            }

@@ -112,22 +112,22 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
 
     }
     
-    @objc func handleDismiss(setting: DrinkByMenuItem){
+    @objc func handleDismiss(drinkByMenuItem: DrinkByMenuItem){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 0
                 if let window = UIApplication.shared.keyWindow{
                     self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
                 }
         }, completion: { finished in
-            if (type(of: setting as Any) != type(of: UITapGestureRecognizer())){
-                if (setting.drinkByMenuCode == "Help") {
-                    self.homeController?.showControllerForDrinkByMenu(setting: setting)
-                    print(setting.drinkByMenuCode)
+            if (type(of: drinkByMenuItem as Any) != type(of: UITapGestureRecognizer())){
+                if (drinkByMenuItem.drinkByMenuCode == "Help") {
+                    self.homeController?.showControllerForDrinkByMenu(drinkByMenuItem: drinkByMenuItem)
+                    print(drinkByMenuItem.drinkByMenuCode)
                 } else {
                 NotificationCenter.default.post(name: Notification.Name("changeDrinkBySort"),
                                                 object: nil,
                                                 userInfo:[
-                                                    "drinkByMenuCode": setting.drinkByMenuCode,
+                                                    "drinkByMenuCode": drinkByMenuItem.drinkByMenuCode,
                                                     "key1": 1234])
                 }
             }
@@ -141,8 +141,8 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! DrinkByMenuCell
-        let setting = drinkByMenuItems[indexPath.item]
-        cell.setting = setting
+        let drinkByMenuItem = drinkByMenuItems[indexPath.item]
+        cell.drinkByMenuItem = drinkByMenuItem
         return cell
     }
     
@@ -156,8 +156,8 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let setting = self.drinkByMenuItems[indexPath.item]
-        handleDismiss(setting: setting)
+        let drinkByMenuItem = self.drinkByMenuItems[indexPath.item]
+        handleDismiss(drinkByMenuItem: drinkByMenuItem)
     }
     
     override init() {

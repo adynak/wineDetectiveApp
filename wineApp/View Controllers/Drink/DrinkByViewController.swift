@@ -222,9 +222,9 @@ class DrinkByViewController: UIViewController {
         return launcher
     }()
     
-    func showControllerForDrinkByMenu(setting: DrinkByMenuItem){
-        let settingsViewController = DrinkByHelpController()
-        navigationController?.pushViewController(settingsViewController, animated: true)
+    func showControllerForDrinkByMenu(drinkByMenuItem: DrinkByMenuItem){
+        let drinkByHelpController = DrinkByHelpController()
+        navigationController?.pushViewController(drinkByHelpController, animated: true)
     }
     
     func search(shouldShow: Bool) {
