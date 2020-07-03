@@ -22,7 +22,7 @@ class MoreMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(r:242, g:242, b:247) //white
+        view.backgroundColor = UIColor(r:242, g:242, b:247)
         configureUI()
 
     }
@@ -36,7 +36,7 @@ class MoreMenuViewController: UIViewController {
         view.addSubview(tableView)
         
         let tableFrameHeight = calcTableHeight()
-        let frame = CGRect(x: 10, y: 20, width: view.frame.width - 20, height: CGFloat(tableFrameHeight))
+        let frame = CGRect(x: 10, y: 100, width: view.frame.width - 20, height: CGFloat(tableFrameHeight))
         
         tableView.frame = frame
         tableView.layer.cornerRadius = CGFloat(10)
@@ -50,23 +50,38 @@ class MoreMenuViewController: UIViewController {
     func configureUI() {
         configureTableView()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barStyle = .black
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = "Menu"
-    }
+        navigationItem.title = NSLocalizedString("moreTitle", comment: "title for reconcile")
+        navigationController?.navigationBar.barTintColor = UIColor(r:90,g:115,b:166)
+        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+                
+        let cancelButton = UIBarButtonItem(title: logOutBtn,
+                                           style: UIBarButtonItem.Style.plain,
+                                           target: self,
+                                           action: #selector(handleLogOut))
+        
+        navigationItem.leftBarButtonItem = cancelButton    }
     
     func calcTableHeight() -> Int{
         var numberOfRows: Int = 0
         let numberofHeaders = MoreMenuSections.allCases.count
-        for (index,section) in MoreMenuSections.allCases.enumerated(){
+        for (_,section) in MoreMenuSections.allCases.enumerated(){
             numberOfRows += section.sectionRowCount
         }
         let spaceForHeader = numberofHeaders * tableHeaderHeight
         let spaceForFooter = numberofHeaders * tableFooterHeight
         let spaceForRows = numberOfRows * tableRowHeight
         return spaceForHeader + spaceForFooter + spaceForRows
+    }
+    
+    @objc func handleLogOut(){
+        UserDefaults.standard.setIsLoggedIn(value: false)
+        
+        let loginController = LoginController()
+        present(loginController, animated: true, completion: nil)
+        
     }
 
 }
