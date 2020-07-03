@@ -42,7 +42,9 @@ class MainTabBarController: UITabBarController {
         let varietalTitle = NSLocalizedString("varietalTitle", comment: "")
         let drinkByTitle = NSLocalizedString("drinkByTitle", comment: "")
         let searchTitle = NSLocalizedString("searchTitle", comment: "")
+        let moreTitle = NSLocalizedString("moreTitle", comment: "")
 
+        
         let drinkByController = createTabController(viewController: DrinkByViewController(),
             selected: #imageLiteral(resourceName: "drinkDark"),
             unselected: #imageLiteral(resourceName: "drinkLight"),
@@ -64,10 +66,10 @@ class MainTabBarController: UITabBarController {
             unselected: #imageLiteral(resourceName: "search"),
             title: searchTitle)
         
-        let moreController = createTabController(viewController: SearchViewController(),
+        let moreController = createTabController(viewController: MoreMenuViewController(),
             selected: #imageLiteral(resourceName: "more"),
             unselected: #imageLiteral(resourceName: "more"),
-            title: searchTitle)
+            title: moreTitle)
 
         let reconcileController = createTabController(
             viewController: ReconcileViewController(),
@@ -76,10 +78,11 @@ class MainTabBarController: UITabBarController {
             title: reconcileTitle)
         
         viewControllers = [searchController,
-                           producerController,
-                           varietalController,
+//                           producerController,
+//                           varietalController,
                            drinkByController,
-                           reconcileController]
+//                           reconcileController,
+                           moreController]
         
 //        guard let items = tabBar.items else { return }
         
