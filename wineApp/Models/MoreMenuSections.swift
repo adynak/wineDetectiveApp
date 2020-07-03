@@ -52,6 +52,17 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return "Reconcile Inventory"
         }
     }
+    
+    var controller: String{
+        switch self{
+        case .producer:
+            return "producer"
+        case .varietal:
+            return "varietal"
+        case .reconcile:
+            return "reconcile"
+        }
+    }
 }
 
 enum AppOptions: Int, CaseIterable, SectionType{

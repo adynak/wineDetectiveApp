@@ -36,10 +36,10 @@ class MoreMenuViewController: UIViewController {
         view.addSubview(tableView)
         
         let tableFrameHeight = calcTableHeight()
-        let frame = CGRect(x: 10, y: 100, width: view.frame.width - 20, height: CGFloat(tableFrameHeight))
+        let frame = CGRect(x: 0, y: 100, width: view.frame.width, height: CGFloat(tableFrameHeight))
         
         tableView.frame = frame
-        tableView.layer.cornerRadius = CGFloat(10)
+        tableView.layer.cornerRadius = CGFloat(0)
         
 //        userInfoHeader = UserInfoHeader(frame: frame)
 //        tableView.tableHeaderView = userInfoHeader
@@ -116,7 +116,7 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         title.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = 0
         
         return view
         
@@ -138,10 +138,22 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let section = MoreMenuSections(rawValue: indexPath.section) else {return}
+        
+        let moreController: UITableViewController
 
         switch section {
         case .Reports:
-            print(ReportNames(rawValue: indexPath.row)!.description)
+            switch ReportNames(rawValue: indexPath.row)!.controller{
+            case "producer":
+                moreController = ProducerViewController()
+            case "varietal":
+                moreController = VarietalViewController()
+            case "reconcile":
+                moreController = ReconcileViewController()
+            default:
+                return
+            }
+            navigationController?.pushViewController(moreController, animated: true)
         case .Settings:
             print(AppOptions(rawValue: indexPath.row)!.description)
         }
@@ -164,7 +176,6 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
                 let appOption = AppOptions(rawValue: indexPath.row)
                 cell.sectionType = appOption
         }
-        cell.layer.cornerRadius = 100
                 
         return cell
     }

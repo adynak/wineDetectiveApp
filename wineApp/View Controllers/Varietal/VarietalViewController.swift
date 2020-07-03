@@ -27,7 +27,7 @@ class VarietalViewController : UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("producerTitle", comment: "title for reconcile")
+        navigationItem.title = NSLocalizedString("varietalTitle", comment: "title for reconcile")
         let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
