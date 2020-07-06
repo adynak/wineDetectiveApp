@@ -6,6 +6,8 @@
 //  Copyright © 2020 Stephan Dowless. All rights reserved.
 //
 
+import UIKit
+
 protocol SectionType : CustomStringConvertible {
     var containsSwitch: Bool {get}
 }
@@ -17,9 +19,9 @@ enum MoreMenuSections: Int, CaseIterable, CustomStringConvertible{
     var description: String{
         switch self{
         case .Reports:
-            return "Reports"
+            return NSLocalizedString("menuReports", comment: "").uppercased()
         case .Settings:
-            return "Settings"
+            return NSLocalizedString("menuSettings", comment: "").uppercased()
         }
     }
     
@@ -45,11 +47,11 @@ enum ReportNames: Int, CaseIterable, SectionType{
     var description: String{
         switch self{
         case .producer:
-            return "Sort By Producer"
+            return NSLocalizedString("reportProducer", comment: "")
         case .varietal:
-            return "Sort By Varietal"
+            return NSLocalizedString("reportVarietal", comment: "")
         case .reconcile:
-            return "Reconcile Inventory"
+            return NSLocalizedString("reportReconcile", comment: "")
         }
     }
     
@@ -81,9 +83,9 @@ enum AppOptions: Int, CaseIterable, SectionType{
     var description: String{
         switch self{
         case .showBarcode:
-            return "Show Bottle Barcode"
+            return NSLocalizedString("settingBarcode", comment: "")
         case .help:
-            return "Help"
+            return NSLocalizedString("settingSupport", comment: "")
         }
     }
 }

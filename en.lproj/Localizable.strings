@@ -36,4 +36,12 @@
 "logOutBtn" = "Log Out";
 "agingBtn" = "Aging";
 
+"reportProducer" = "Sort By Producer";
+"reportVarietal" = "Sort By Varietal";
+"reportReconcile" = "Reconcile Inventory";
 
+"settingBarcode" = "Show Bottle Barcode";
+"settingSupport" = "Support";
+
+"menuReports" = "Reports";
+"menuSettings" = "Settings";

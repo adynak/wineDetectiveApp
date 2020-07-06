@@ -50,11 +50,8 @@ class MoreMenuViewController: UIViewController {
     func configureUI() {
         configureTableView()
         
-//        navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("moreTitle", comment: "title for reconcile")
-        navigationController?.navigationBar.barTintColor = UIColor(r:90,g:115,b:166)
+        navigationItem.title = NSLocalizedString("moreTitle", comment: "")
         let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -105,11 +102,11 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(r:90, g:115, b:166)
+        view.backgroundColor = UIColor(r:212, g:212, b:219)
         
         let title = UILabel()
-        title.font = UIFont.boldSystemFont(ofSize: 20)
-        title.textColor = .white
+        title.font = UIFont.systemFont(ofSize: 14)
+        title.textColor = .black
         title.text = MoreMenuSections(rawValue: section)?.description
         view.addSubview(title)
         
