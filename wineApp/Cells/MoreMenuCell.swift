@@ -15,7 +15,12 @@ class MoreMenuCell: UITableViewCell {
     var sectionType: SectionType? {
         didSet {
             guard let sectionType = sectionType else {return}            
-            textLabel?.text = "            " + sectionType.description
+            textLabel?.text = "" + sectionType.description
+            
+            textLabel?.translatesAutoresizingMaskIntoConstraints = false
+            textLabel?.centerYAnchor.constraint(equalTo:self.centerYAnchor).isActive = true
+            textLabel?.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 60).isActive = true
+            
             switchControl.isHidden = !sectionType.containsSwitch
         }
     }

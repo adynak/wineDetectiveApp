@@ -22,7 +22,7 @@ class MoreMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(r:242, g:242, b:247)
+        view.backgroundColor = UIColor(r:212, g:212, b:219)
         configureUI()
 
     }
@@ -36,7 +36,7 @@ class MoreMenuViewController: UIViewController {
         view.addSubview(tableView)
         
         let tableFrameHeight = calcTableHeight()
-        let frame = CGRect(x: 0, y: 100, width: view.frame.width, height: CGFloat(tableFrameHeight))
+        let frame = CGRect(x: 0, y: 80, width: view.frame.width, height: CGFloat(tableFrameHeight))
         
         tableView.frame = frame
         tableView.layer.cornerRadius = CGFloat(0)
@@ -121,7 +121,7 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(r:242, g:242, b:247) //white
+        view.backgroundColor = UIColor(r:212, g:212, b:219)
         return view
     }
     
@@ -131,6 +131,16 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        let cell  = tableView.cellForRow(at: indexPath)
+        cell!.contentView.backgroundColor = .white
+    }
+
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        let cell  = tableView.cellForRow(at: indexPath)
+        cell!.contentView.backgroundColor = .white
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
