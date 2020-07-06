@@ -164,13 +164,15 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MoreMenuCell
         
         guard let section = MoreMenuSections(rawValue: indexPath.section) else {return UITableViewCell()}
-
+        
         switch section {
             case .Reports:
                 let report = ReportNames(rawValue: indexPath.row)
                 cell.sectionType = report
+                cell.moreImageView.image = UIImage(named:ReportNames(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
             case .Settings:
                 let appOption = AppOptions(rawValue: indexPath.row)
+                cell.moreImageView.image = UIImage(named:AppOptions(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
                 cell.sectionType = appOption
         }
                 

@@ -14,8 +14,8 @@ class MoreMenuCell: UITableViewCell {
     
     var sectionType: SectionType? {
         didSet {
-            guard let sectionType = sectionType else {return}
-            textLabel?.text = sectionType.description
+            guard let sectionType = sectionType else {return}            
+            textLabel?.text = "            " + sectionType.description
             switchControl.isHidden = !sectionType.containsSwitch
         }
     }
@@ -29,10 +29,28 @@ class MoreMenuCell: UITableViewCell {
         return sc
     }()
     
+    let moreImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 5
+        imageView.layer.borderWidth = 0
+        imageView.layer.masksToBounds = true
+//        imageView.layer.backgroundColor = UIColor.lightGray.cgColor
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         switchIndex += 1
+        
+        addSubview(moreImageView)
+        moreImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+        moreImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        moreImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        moreImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
         addSubview(switchControl)
         switchControl.tag = switchIndex
         switchControl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
