@@ -8,37 +8,63 @@
 
 import UIKit
 
-protocol SectionType : CustomStringConvertible {
-    var containsSwitch: Bool {get}
-}
-
-enum MoreMenuSections: Int, CaseIterable, CustomStringConvertible{
-    case Reports
-    case Settings
+enum SupportMenuSections: Int, CaseIterable, CustomStringConvertible{
+    case Contact
+    case Version
     
     var description: String{
         switch self{
-        case .Reports:
-            return NSLocalizedString("menuReports", comment: "").uppercased()
-        case .Settings:
-            return NSLocalizedString("menuSettings", comment: "").uppercased()
+        case .Contact:
+            return NSLocalizedString("menuContacts", comment: "").uppercased()
+        case .Version:
+            return NSLocalizedString("menuVersion", comment: "").uppercased()
         }
     }
     
     var sectionRowCount: Int{
         switch self{
-        case .Reports:
-            return ReportNames.allCases.count
-        case .Settings:
-            return AppOptions.allCases.count
+        case .Contact:
+            return ContactNames.allCases.count
+        case .Version:
+            return VersionOptions.allCases.count
         }
     }
 }
 
-enum ReportNames: Int, CaseIterable, SectionType{
-    case producer
-    case varietal
-    case reconcile
+enum ContactNames: Int, CaseIterable , SectionType {
+    
+    case support
+    
+    var containsSwitch: Bool {
+        return false
+    }
+        
+    var description: String{
+        switch self{
+        case .support:
+            return NSLocalizedString("contactEmail", comment: "")
+        }
+    }
+    
+    var thumbnail: String{
+        switch self{
+        case .support:
+            return "mail.png"
+        }
+    }
+    
+    var controller: String{
+        switch self{
+        case .support:
+            return "sendEmail"
+        }
+    }
+
+    
+}
+
+enum VersionOptions: Int, CaseIterable, SectionType{
+    case version
     
     var containsSwitch: Bool {
         return false
@@ -46,77 +72,16 @@ enum ReportNames: Int, CaseIterable, SectionType{
     
     var description: String{
         switch self{
-        case .producer:
-            return NSLocalizedString("reportProducer", comment: "")
-        case .varietal:
-            return NSLocalizedString("reportVarietal", comment: "")
-        case .reconcile:
-            return NSLocalizedString("reportReconcile", comment: "")
+        case .version:
+            return NSLocalizedString("versionNumber", comment: "")
         }
     }
     
     var thumbnail: String{
         switch self{
-        case .producer:
-            return "producer.png"
-        case .varietal:
-            return "varietal.png"
-        case .reconcile:
-            return "reconcile.png"
+        case .version:
+            return "bottleLogo.png"
         }
     }
-    
-    var controller: String{
-        switch self{
-        case .producer:
-            return "producer"
-        case .varietal:
-            return "varietal"
-        case .reconcile:
-            return "reconcile"
-        }
-    }
-}
-
-enum AppOptions: Int, CaseIterable, SectionType{
-    case showBarcode
-    case support
-    
-    var containsSwitch: Bool {
-        switch self{
-            case .showBarcode:
-                return true
-            case .support:
-                return false
-        }
-    }
-    
-    var description: String{
-        switch self{
-        case .showBarcode:
-            return NSLocalizedString("settingBarcode", comment: "")
-        case .support:
-            return NSLocalizedString("settingSupport", comment: "")
-        }
-    }
-    
-    var thumbnail: String{
-        switch self{
-        case .showBarcode:
-            return "barcode.png"
-        case .support:
-            return "support.png"
-        }
-    }
-    
-    var controller: String{
-        switch self{
-        case .showBarcode:
-            return ""
-        case .support:
-            return "support"
-        }
-    }
-
-    
+        
 }

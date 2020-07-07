@@ -27,6 +27,7 @@
 "searchTitle" = "Search";
 "reconcileTitle" = "Reconcile";
 "moreTitle" = "More";
+"supportTitle" = "Support";
 
 "markAsDrankTitle" = "Remove Bottles";
 
@@ -45,3 +46,9 @@
 
 "menuReports" = "Reports";
 "menuSettings" = "Settings";
+"menuContacts" = "Contact Us";
+"menuVersion" = "Version";
+
+"contactEmail" = "wineDetective@gmail.com";
+"versionNumber" = "1.0.0 (Build 19)";
+

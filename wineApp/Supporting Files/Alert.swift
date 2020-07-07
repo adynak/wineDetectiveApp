@@ -50,6 +50,11 @@ struct Alert{
     }
 
     
+    static func showEmailFailedsAlert(on vc: UIViewController){
+        showBasicAlert(on: vc, with: "eMail", message: "Email is not configured to work with this application.")
+    }
+
+    
     
     static func showWineDetailAlert(on vc: UIViewController, with bottleInfo:String){
         showBasicAlert(on: vc,

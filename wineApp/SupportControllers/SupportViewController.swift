@@ -8,8 +8,10 @@
 
 import UIKit
 
+import MessageUI
 
-class SupportViewController: UIViewController {
+
+class SupportViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     let cellID = "cell123"
         
@@ -45,21 +47,14 @@ class SupportViewController: UIViewController {
     func configureUI() {
         configureTableView()
         
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("moreTitle", comment: "")
-        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
-                
-        let cancelButton = UIBarButtonItem(title: "Back",
-                                           style: UIBarButtonItem.Style.plain,
-                                           target: self,
-                                           action: #selector(handleLogOut))
-        
-        navigationItem.leftBarButtonItem = cancelButton    }
+        navigationItem.title = NSLocalizedString("supportTitle", comment: "")
+
+    }
     
     func calcTableHeight() -> Int{
         var numberOfRows: Int = 0
-        let numberofHeaders = MoreMenuSections.allCases.count
-        for (_,section) in MoreMenuSections.allCases.enumerated(){
+        let numberofHeaders = SupportMenuSections.allCases.count
+        for (_,section) in SupportMenuSections.allCases.enumerated(){
             numberOfRows += section.sectionRowCount
         }
         let spaceForHeader = numberofHeaders * tableHeaderHeight
@@ -68,29 +63,22 @@ class SupportViewController: UIViewController {
         return spaceForHeader + spaceForFooter + spaceForRows
     }
     
-    @objc func handleLogOut(){
-        
-        var backController = MoreMenuViewController()
-//        present(backController, animated: true, completion: nil)
-        
-    }
-
 }
 
 extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return SupportMenuSections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = MoreMenuSections(rawValue: section) else {return 0}
+        guard let section = SupportMenuSections(rawValue: section) else {return 0}
         
         switch section {
-            case .Reports:
-                return ReportNames.allCases.count
-            case .Settings:
-                return AppOptions.allCases.count
+            case .Contact:
+                return ContactNames.allCases.count
+            case .Version:
+                return VersionOptions.allCases.count
         }
     }
     
@@ -101,7 +89,7 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
         let title = UILabel()
         title.font = UIFont.systemFont(ofSize: 14)
         title.textColor = .black
-        title.text = MoreMenuSections(rawValue: section)?.description
+        title.text = SupportMenuSections(rawValue: section)?.description
         view.addSubview(title)
         
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -138,33 +126,20 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let section = MoreMenuSections(rawValue: indexPath.section) else {return}
+        guard let section = SupportMenuSections(rawValue: indexPath.section) else {return}
         
-        let moreController: UITableViewController
-        let supportController : UIViewController
-
         switch section {
-        case .Reports:
-            switch ReportNames(rawValue: indexPath.row)!.controller{
-                case "producer":
-                    moreController = ProducerViewController()
-                case "varietal":
-                    moreController = VarietalViewController()
-                case "reconcile":
-                    moreController = ReconcileViewController()
-                default:
-                    return
+            case .Contact:
+                switch ContactNames(rawValue: indexPath.row)!.controller{
+                    case "sendEmail":
+                        sendEmail()
+                    default:
+                        return
                 }
-            navigationController?.pushViewController(moreController, animated: true)
-        case .Settings:
-            switch AppOptions(rawValue: indexPath.row)!.controller{
-            case "support":
-                supportController = DrinkByHelpController()
-                navigationController?.pushViewController(supportController, animated: true)
             default:
                 return
-            }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -174,20 +149,39 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MoreMenuCell
         
-        guard let section = MoreMenuSections(rawValue: indexPath.section) else {return UITableViewCell()}
+        guard let section = SupportMenuSections(rawValue: indexPath.section) else {return UITableViewCell()}
         
         switch section {
-            case .Reports:
-                let report = ReportNames(rawValue: indexPath.row)
+            case .Contact:
+                let report = ContactNames(rawValue: indexPath.row)
                 cell.sectionType = report
-                cell.moreImageView.image = UIImage(named:ReportNames(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
-            case .Settings:
-                let appOption = AppOptions(rawValue: indexPath.row)
-                cell.moreImageView.image = UIImage(named:AppOptions(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
+                cell.moreImageView.image = UIImage(named:ContactNames(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
+            case .Version:
+                let appOption = VersionOptions(rawValue: indexPath.row)
+                cell.moreImageView.image = UIImage(named:VersionOptions(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
                 cell.sectionType = appOption
         }
                 
         return cell
+    }
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["you@yoursite.com"])
+            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+            Alert.showEmailFailedsAlert(on: self)
+
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
     
 }
