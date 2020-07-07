@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 let debug: Bool = true
-let showBarcode = true
 
 class DataServices {
         
@@ -422,126 +421,6 @@ class DataServices {
         return level0
     }
         
-    static func buildProducersArray(fields: [Int],
-                                    sortKey: String) -> [Producers]{
-        
-        let positionOf = Label(data:fields)
-        var locationBin: String
-        var checkLocation: [StorageBins]
-        var producer = [Producers]()
-        var firstSortBy: Int
-        var sortName: String
-        
-        switch sortKey {
-            case "producer":
-                firstSortBy = positionOf.producer
-            case "varietal":
-                firstSortBy = positionOf.varietal
-            case "drinkBy":
-                firstSortBy = positionOf.endConsume
-            case "reconcile":
-                firstSortBy = positionOf.location
-            default:
-                firstSortBy = positionOf.producer
-        }
-        
-//        var x = (sortKey == "reconcile") ? row[positionOf.bin] : row[firstSortBy]
-        
-        for row in dataArray{
-            // special transformations
-            locationBin = row[positionOf.location] + row[positionOf.bin]
-            let varietal = buildVarietal(row: row, positionOf: positionOf)
-            let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
-                        
-            if sortKey == "varietal"{
-                sortName = varietal
-            } else {
-                sortName = row[firstSortBy]
-            }
-            
-            if let producerIndex = producer.firstIndex(where: { $0.name == sortName }) {
-                if let iWineIndex = producer[producerIndex].wines!.firstIndex(where: { $0.iWine == row[positionOf.iWine] }) {
-                    checkLocation = producer[producerIndex].wines![iWineIndex].storageBins!
-                    // existing iWine, is it in the same bin as the existing bottle?
-                    if let storageIndex = checkLocation.firstIndex(where: { ($0.binLocation! + $0.binName!) == locationBin }) {
-                            // bottle is in the same bin, bump the bottle count
-                        producer[producerIndex].wines![iWineIndex].storageBins![storageIndex].bottleCount! += 1
-                        } else {
-                            // bottle is in a new bin, add a new storage struct
-                            bin.removeAll()
-                            addNewStorage(binName: row[positionOf.bin], binLocation: row[positionOf.location], bin: &bin)
-                            producer[producerIndex].wines![iWineIndex].storageBins!.append(contentsOf: bin)
-                        }
-                    producer[producerIndex].bottleCount! += 1
-                } else {
-                    // new wine for existing producer
-                    wine.removeAll()
-                    wine.append(Wines(iWine: row[positionOf.iWine],
-                                      varietal: varietal,
-                                      vineyard: row[positionOf.vineyard],
-                                      vintage: vintage,
-                                      designation: row[positionOf.designation],
-                                      ava: row[positionOf.ava],
-                                      region: row[positionOf.region],
-                                      country: row[positionOf.country],
-                                      locale: row[positionOf.locale],
-                                      type: row[positionOf.type],
-                                      drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume]),
-                                      producer: row[positionOf.producer],
-                                      storageBins: bin))
-                    // keep wines sorted by using insert
-                    producer[producerIndex].bottleCount! += 1
-                    let searchKey = row[positionOf.varietal] + row[positionOf.vintage]
-                    if let index = producer[producerIndex].wines!.firstIndex(where: { $0.varietal! + $0.vintage! > searchKey}) {
-                        producer[producerIndex].wines!.insert(contentsOf: wine, at: index)
-                    } else {
-                        producer[producerIndex].wines!.append(contentsOf:wine)
-                    }
-
-                }
-
-            } else {
-                // new producer
-                wine.removeAll()
-                bin.removeAll()
-                addNewStorage(binName: row[positionOf.bin], binLocation: row[positionOf.location], bin: &bin)
-                wine.append(Wines(iWine: row[positionOf.iWine],
-                                  varietal: varietal,
-                                  vineyard: row[positionOf.vineyard],
-                                  vintage: vintage,
-                                  designation: row[positionOf.designation],
-                                  ava: row[positionOf.ava],
-                                  region: row[positionOf.region],
-                                  country: row[positionOf.country],
-                                  locale: row[positionOf.locale],
-                                  type: row[positionOf.type],
-                                  drinkBy: buildDrinkBy(beginConsume: row[positionOf.beginConsume],endConsume: row[positionOf.endConsume]),
-                                  producer: row[positionOf.producer],
-                                  storageBins: bin))
-                if sortKey == "varietal"{
-                    sortName = varietal
-                } else {
-                    sortName = row[firstSortBy]
-                }
-                producer.append(Producers(name: sortName,
-                                          isExpanded: false,
-                                          bottleCount: 1,
-                                          wines: wine))
-            }
-
-        }
-        
-        producer = producer.sorted {
-            var isSorted = false
-            if let first = $0.name, let second = $1.name {
-                isSorted = first < second
-            }
-            return isSorted
-        }
-        
-        return producer
-
-    }
     
     static func removeDrillBottles(bottles: [DrillLevel2]){
         let fields = DataServices.locateDataPositions(dataHeader:dataHeader)

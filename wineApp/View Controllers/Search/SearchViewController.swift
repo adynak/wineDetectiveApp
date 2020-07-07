@@ -92,13 +92,12 @@ class SearchViewController: UIViewController {
                 
         varietals = allWine?.searchVarietals
         searchWines = allWine?.search
-        searchKeys0 = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
         
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
         })
         
-        searchKeys = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
 
         footerView.text = countBottles(bins: searchKeys)
     }

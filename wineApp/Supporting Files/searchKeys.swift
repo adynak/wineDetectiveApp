@@ -23,7 +23,7 @@ struct SearchKeys {
     let searckKey: String
     var storageBins: [StorageBins]?
     
-    static func BuildSearchKeys0(wines: inout [AllLevel0]) -> [SearchKeys] {
+    static func BuildSearchKeys(wines: inout [AllLevel0]) -> [SearchKeys] {
         var searchWines = [SearchKeys]()
         var searchBins = [StorageBins]()
         
@@ -38,7 +38,7 @@ struct SearchKeys {
             for storage in wine.storage{
                 searchBins.append(StorageBins(binName: storage.bin, bottleCount: 1, binLocation: storage.location, barcode: storage.barcode))
             }
-            
+                        
             searchWines.append(SearchKeys(vintage: wine.label[0].vintage,
                                        producer: wine.label[0].producer,
                                        varietal: wine.label[0].varietal,
@@ -58,37 +58,4 @@ struct SearchKeys {
         return searchWines
     }
     
-    static func BuildSearchKeys(varietals: inout [Producers]) -> [SearchKeys] {
-        
-        var searchWines = [SearchKeys]()
-        
-        varietals.forEach {
-            for (wine) in $0.wines!{
-                let searchKey = wine.vintage! + " " +
-                                wine.varietal! + " " +
-                                wine.producer! + " " +
-                                wine.vineyard! + " " +
-                                wine.ava! + " " +
-                                wine.designation!
-                    
-                searchWines.append(SearchKeys(vintage: wine.vintage!,
-                                           producer: wine.producer!,
-                                           varietal: wine.varietal!,
-                                           appellation: wine.ava!,
-                                           region: wine.region!,
-                                           country: wine.country!,
-                                           locale: wine.locale!,
-                                           type: wine.type!,
-                                           designation: wine.designation!,
-                                           vineyard: wine.vineyard!,
-                                           drinkBy: wine.drinkBy!,
-                                           searckKey: searchKey,
-                                           storageBins: wine.storageBins)
-                )
-            }
-            
-        }
-
-        return searchWines
-    }
 }

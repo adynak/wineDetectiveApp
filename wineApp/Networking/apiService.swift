@@ -101,28 +101,19 @@ class API {
                                     fields: fields,
                                     sortKeys: ["location","bin"])
 
-            
             let searchSort = DataServices.buildAllBottlesArray(fields: fields)
                                                             
             let producerSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
                                     sortKeys: ["producer","wdVarietal"])
 
-            let varietalSort0 = DataServices.buildDrillIntoBottlesArray(
+            let varietalSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
                                     sortKeys: ["wdVarietal","producer"])
-            
-            let varietalSort = DataServices.buildProducersArray(fields: fields,
-                                                                sortKey: "varietal")
-            
-            let drinkBySort = DataServices.buildProducersArray(fields: fields,
-                                                               sortKey: "drinkBy")
-                            
+                                                    
             let newInventory = WineInventory(producers: producerSort,
-                                             varietals: varietalSort0,
-                                             drinkBy: drinkBySort,
+                                             varietals: varietalSort,
                                              search: searchSort,
-                                             searchVarietals: varietalSort,
                                              reconcile: reconcileSort)
             
             print("build data arrays complete")

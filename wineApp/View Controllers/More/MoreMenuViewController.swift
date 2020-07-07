@@ -14,7 +14,6 @@ class MoreMenuViewController: UIViewController {
     let cellID = "cell123"
         
     var tableView: UITableView!
-//    var userInfoHeader: UserInfoHeader!
     
     let tableHeaderHeight = 40
     let tableRowHeight = 40
@@ -41,10 +40,6 @@ class MoreMenuViewController: UIViewController {
         tableView.frame = frame
         tableView.layer.cornerRadius = CGFloat(0)
         
-//        userInfoHeader = UserInfoHeader(frame: frame)
-//        tableView.tableHeaderView = userInfoHeader
-//        tableView.tableFooterView = UIView()
-//        tableView.tableFooterView?.backgroundColor = .red
     }
     
     func configureUI() {
@@ -147,23 +142,31 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
         guard let section = MoreMenuSections(rawValue: indexPath.section) else {return}
         
         let moreController: UITableViewController
+        let supportController : UIViewController
 
         switch section {
         case .Reports:
             switch ReportNames(rawValue: indexPath.row)!.controller{
-            case "producer":
-                moreController = ProducerViewController()
-            case "varietal":
-                moreController = VarietalViewController()
-            case "reconcile":
-                moreController = ReconcileViewController()
+                case "producer":
+                    moreController = ProducerViewController()
+                case "varietal":
+                    moreController = VarietalViewController()
+                case "reconcile":
+                    moreController = ReconcileViewController()
+                default:
+                    return
+                }
+            navigationController?.pushViewController(moreController, animated: true)
+        case .Settings:
+            switch AppOptions(rawValue: indexPath.row)!.controller{
+            case "support":
+                supportController = SupportViewController()
+                navigationController?.pushViewController(supportController, animated: true)
             default:
                 return
             }
-            navigationController?.pushViewController(moreController, animated: true)
-        case .Settings:
-            print(AppOptions(rawValue: indexPath.row)!.description)
         }
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

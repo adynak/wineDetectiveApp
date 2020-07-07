@@ -128,7 +128,7 @@ class VarietalViewController : UITableViewController {
         
         let detailController = DrillDownDetailViewController()
         detailController.passedValue = wineSelected
-        detailController.title = NSLocalizedString("varietalsTitle", comment: "title for reconcile")
+        detailController.title = NSLocalizedString("varietalTitle", comment: "title for reconcile")
         let navController = UINavigationController(rootViewController: detailController)
         present(navController, animated: true, completion: nil)
 

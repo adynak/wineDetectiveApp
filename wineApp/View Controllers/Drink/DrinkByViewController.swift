@@ -66,7 +66,6 @@ class DrinkByViewController: UIViewController {
                 
         varietals = allWine?.searchVarietals
         searchWines = allWine?.search
-        searchKeys0 = SearchKeys.BuildSearchKeys(varietals: &(varietals)!)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(changeDrinkBySort),
@@ -78,7 +77,7 @@ class DrinkByViewController: UIViewController {
             ($0.label[0].available) > ($1.label[0].available)
         })
         
-        searchKeys = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
 
         footerView.text = countBottles(bins: searchKeys)
     }
@@ -123,7 +122,7 @@ class DrinkByViewController: UIViewController {
             })
         }
         
-        searchKeys = SearchKeys.BuildSearchKeys0(wines: &searchWines!)
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
 
         self.tableView.reloadData()
 
@@ -186,7 +185,7 @@ class DrinkByViewController: UIViewController {
             ])
             
             segmentedControl.addTarget(self, action: #selector(toggleDrinkByActions), for: .valueChanged)
-            segmentedControl.frame = CGRect(x: 0, y: 0, width: 0, height: 30)
+            segmentedControl.frame = CGRect(x: 10, y: 0, width: 0, height: 30)
             segmentedControl.isMomentary = true
             
             navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -194,11 +193,7 @@ class DrinkByViewController: UIViewController {
                                                   style: UIBarButtonItem.Style.plain,
                                                   target: self,
                                                   action: #selector(handleLogOut))
-//            navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                                                  barButtonSystemItem: .search,
-//                                                  target: self,
-//                                                  action:#selector(handleShowSearchBar))
-//
+            
             let segmentBarItem = UIBarButtonItem(customView: segmentedControl)
             navigationItem.rightBarButtonItem = segmentBarItem
             

@@ -108,6 +108,15 @@ enum AppOptions: Int, CaseIterable, SectionType{
             return "support.png"
         }
     }
+    
+    var controller: String{
+        switch self{
+        case .showBarcode:
+            return ""
+        case .support:
+            return "support"
+        }
+    }
 
     
 }
