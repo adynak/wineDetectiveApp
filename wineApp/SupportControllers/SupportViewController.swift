@@ -170,6 +170,7 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients(["you@yoursite.com"])
+            mail.setSubject(NSLocalizedString("emailSubject", comment: ""))
             mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
 
             present(mail, animated: true)

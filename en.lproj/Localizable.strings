@@ -52,3 +52,6 @@
 "contactEmail" = "wineDetective@gmail.com";
 "versionNumber" = "1.0.0 (Build 19)";
 
+"emailSubject" = "Wine Detective Feedback";
+"emailBody" = "---------<p>";
+
