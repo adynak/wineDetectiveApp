@@ -65,7 +65,7 @@ class DrillDownTableViewCell : UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.isHidden = !showBarcode
+        label.isHidden = !UserDefaults.standard.getShowBarcode()
         return label
     }()
 
@@ -128,7 +128,7 @@ class DrillDownTableViewCell : UITableViewCell {
         containerView.addSubview(drinkByLabel)
         containerView.addSubview(locationAndBinLabel)
         
-        if showBarcode {
+        if UserDefaults.standard.getShowBarcode() {
             containerView.addSubview(barcodeLabel)
         }
         
@@ -165,7 +165,7 @@ class DrillDownTableViewCell : UITableViewCell {
             locationAndBinLabel.trailingAnchor.constraint(equalTo:containerView.trailingAnchor)
         ])
         
-        if showBarcode {
+        if UserDefaults.standard.getShowBarcode() {
             NSLayoutConstraint.activate([
                 barcodeLabel.topAnchor.constraint(equalTo:locationAndBinLabel.bottomAnchor),
                 barcodeLabel.leadingAnchor.constraint(equalTo:drinkByLabel.leadingAnchor, constant: 10),

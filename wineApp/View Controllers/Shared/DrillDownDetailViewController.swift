@@ -122,7 +122,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         
         wineBinsTableView.dataSource = self
         wineBinsTableView.register(DrillDownTableViewCell.self, forCellReuseIdentifier: cellID)
-        if showBarcode {
+        if UserDefaults.standard.getShowBarcode() {
             wineBinsTableView.rowHeight = CGFloat(80)
         } else {
             wineBinsTableView.rowHeight = CGFloat(80)

@@ -27,7 +27,7 @@ class MoreMenuCell: UITableViewCell {
     
     lazy var switchControl: UISwitch = {
         let sc = UISwitch()
-        sc.isOn = true
+        sc.isOn = UserDefaults.standard.getShowBarcode()
         sc.onTintColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1)
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.addTarget(self, action: #selector(handleSwitchAction), for: .valueChanged)
@@ -69,8 +69,14 @@ class MoreMenuCell: UITableViewCell {
     @objc func handleSwitchAction(sender: UISwitch){
         if sender.isOn{
             print("SwitchOn \(sender.tag)")
+            if sender.tag == 3 {
+                UserDefaults.standard.set(true, forKey: "showBarcode")
+            }
         } else {
             print("SwitchOff \(sender.tag)")
+            if sender.tag == 3 {
+                UserDefaults.standard.set(false, forKey: "showBarcode")
+            }
         }
         
     }

@@ -52,6 +52,9 @@
 "contactEmail" = "wineDetective@gmail.com";
 "versionNumber" = "1.0.0 (Build 19)";
 
+"removeBottles" = "Remove Bottles";
+"loadingWebPage" = "Loading Web Page";
+
 "emailSubject" = "Wine Detective Feedback";
 "emailBody" = "&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>
                ----------<br>

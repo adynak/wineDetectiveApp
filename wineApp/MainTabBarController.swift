@@ -8,8 +8,6 @@
 
 import UIKit
 
-var showBarcode: Bool = UserDefaults.standard.getShowBarcode()
-
 class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
