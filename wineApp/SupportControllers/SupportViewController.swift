@@ -167,15 +167,21 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
     
     func sendEmail() {
         if MFMailComposeViewController.canSendMail() {
+            let emailBody = DeviceInfo.buldEmailBody()
+
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["you@yoursite.com"])
+            mail.setToRecipients([NSLocalizedString("contactEmail", comment: "")])
             mail.setSubject(NSLocalizedString("emailSubject", comment: ""))
-            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            mail.setMessageBody(emailBody, isHTML: true)
 
             present(mail, animated: true)
         } else {
             // show failure alert
+            let emailBody = DeviceInfo.buldEmailBody()
+
+
+
             Alert.showEmailFailedsAlert(on: self)
 
         }
