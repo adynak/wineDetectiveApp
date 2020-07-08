@@ -53,5 +53,9 @@
 "versionNumber" = "1.0.0 (Build 19)";
 
 "emailSubject" = "Wine Detective Feedback";
-"emailBody" = "&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>----------<br>Device: %1<br>iOS Version: %2<br>Wine Detective Version: %3<br>Storage Memory: %4 Used/ %5 Total";
-
+"emailBody" = "&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>
+               ----------<br>
+               Device: %1<br>
+               iOS Version: %2<br>
+               Wine Detective Version: %3<br>
+               Storage Memory: %4 Used/ %5 Total";
