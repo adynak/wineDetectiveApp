@@ -446,8 +446,8 @@ class DataServices {
         var dataArrayFiltered = [[String]]()
         
         for bottle in bottles{
-            let barcode = bottle.barcode
-            dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode!) }
+            let barcode = bottle.barcode!.components(separatedBy:CharacterSet.decimalDigits.inverted).joined()
+            dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode) }
             dataArray = dataArrayFiltered
         }
                 
