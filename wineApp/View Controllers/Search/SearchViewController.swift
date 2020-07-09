@@ -207,13 +207,14 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("Search text is \(searchText)")
+// smart quotes on the keyboard, not in the download, fool!
+        let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
+
         if searchText.isEmpty {
             filteredBottles = searchKeys
         } else {
-            filteredBottles = searchKeys.filter({( country: SearchKeys) -> Bool in
-                
-                return country.searckKey.localizedCaseInsensitiveContains(searchText)
-                
+            filteredBottles = searchKeys.filter({( text: SearchKeys) -> Bool in
+                return text.searckKey.localizedCaseInsensitiveContains(searchText)
             })
         }
         
