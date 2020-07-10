@@ -44,7 +44,7 @@ class SearchViewController: UIViewController {
     var filteredBottles = [SearchKeys]()
     var searchString: String = ""
     
-    var varietals: [Producers]?
+//    var varietals: [Producers]?
     var searchWines: [AllLevel0]?
 
     lazy var tableView: UITableView = {
@@ -90,7 +90,7 @@ class SearchViewController: UIViewController {
         setupNavigationBar()
         searchBar.resignFirstResponder()
                 
-        varietals = allWine?.searchVarietals
+//        varietals = allWine?.searchVarietals
         searchWines = allWine?.search
         
         searchWines = searchWines!.sorted(by: {
@@ -281,6 +281,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         wineSelected.type = bottle.type
         wineSelected.vineyard = bottle.vineyard
         wineSelected.storageBins = bottle.storageBins
+
 
         let wineDetailController = WineDetailViewController()
         wineDetailController.passedValue = wineSelected
