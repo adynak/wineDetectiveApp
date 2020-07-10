@@ -426,17 +426,34 @@ class DataServices {
         let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         var dataArrayFiltered = [[String]]()
         
-        for bottle in bottles{
-            let barcode = bottle.barcode
-            dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode!) }
+        for bottle in bottles{            
+            let barcode = bottle.barcode!.components(separatedBy:CharacterSet.decimalDigits.inverted).joined()
+            
+            dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode) }
             dataArray = dataArrayFiltered
         }
                 
         let reconcileSort = DataServices.buildDrillIntoBottlesArray(
                                 fields: fields,
+                                sortKeys: ["location","bin"])
+
+        let searchSort = DataServices.buildAllBottlesArray(fields: fields)
+                                                        
+        let producerSort = DataServices.buildDrillIntoBottlesArray(
+                                fields: fields,
                                 sortKeys: ["producer","wdVarietal"])
+
+        let varietalSort = DataServices.buildDrillIntoBottlesArray(
+                                fields: fields,
+                                sortKeys: ["wdVarietal","producer"])
+                                                
+        let newInventory = WineInventory(producers: producerSort,
+                                         varietals: varietalSort,
+                                         search: searchSort,
+                                         reconcile: reconcileSort)
         
-        allWine?.reconcile = reconcileSort
+        print("build data arrays complete")
+        allWine = newInventory
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }

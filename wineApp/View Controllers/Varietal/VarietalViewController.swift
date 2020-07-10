@@ -62,7 +62,7 @@ class VarietalViewController : UITableViewController {
     }
     
     @objc func handleReload() {
-        bottles = allWine?.reconcile
+        bottles = allWine?.varietals
         self.tableView.reloadData()
         for row in reconcileLocations{
             if (row < bottles!.count){

@@ -196,13 +196,13 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     @objc func addTapped(sender: UIBarButtonItem){
-        var markAsDrank = [Level2]()
+        var markAsDrank = [DrillLevel2]()
 
         if (sender.title == NSLocalizedString("save", comment: "")){
             for cell in cells {
                 if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
                     if bottles == 0{
-                        markAsDrank.append(Level2(
+                        markAsDrank.append(DrillLevel2(
                             producer: cell.producerLabel.text!,
                             varietal: cell.locationAndBinLabel.text!,
                             vintage: cell.vintageLabel.text!,
@@ -222,7 +222,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
                 markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
                     self.dismiss(animated: true, completion:{
-                        DataServices.removeBottles(bottles: markAsDrank)
+                        DataServices.removeDrillBottles(bottles: markAsDrank)
                     })
                 })
 
