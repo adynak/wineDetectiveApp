@@ -138,6 +138,8 @@ class ProducerViewController :UITableViewController {
         wineSelected.location = bottles![section].name
         wineSelected.bin = bottles![section].data[row].name
         wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
+        wineSelected.topLeft = bottles![section].data[row].data[0].producer
+        wineSelected.topRight = bottles![section].data[row].data[0].varietal
         
         let reconcileDetailController = DrillDownDetailViewController()
         reconcileDetailController.passedValue = wineSelected

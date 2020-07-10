@@ -125,6 +125,8 @@ class ReconcileViewController :UITableViewController {
         wineSelected.location = bottles![section].name
         wineSelected.bin = bottles![section].data[row].name
         wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
+        wineSelected.topLeft = bottles![section].name
+        wineSelected.topRight = bottles![section].data[row].name
         
         let reconcileDetailController = DrillDownDetailViewController()
         reconcileDetailController.passedValue = wineSelected

@@ -92,9 +92,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func setupWineLabelLayout(){
-        let locationAndBin = ""
         let bottles = NSLocalizedString("bottles", comment: "")
-        storageLabel.text = "\(locationAndBin)\(passedValue.location!) \(passedValue.bin!)\n\(bottles): \(passedValue.bottleCount)"
+        storageLabel.text = "\(passedValue.topLeft!) \(passedValue.topRight!)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
             storageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

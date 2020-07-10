@@ -169,6 +169,8 @@ struct wineDetail {
     var bottles: [DrillLevel2]?
     var location: String?
     var bin: String?
+    var topLeft: String?
+    var topRight: String?
 }
 
 struct WineInventory {
