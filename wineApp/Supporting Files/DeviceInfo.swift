@@ -60,7 +60,7 @@ class DeviceInfo {
     }
     
     static func buldEmailBody() -> String {
-        let swVersion = NSLocalizedString("versionNumber", comment: "")
+        let swVersion = Bundle.main.versionAndBuildPretty
         var emailBody = NSLocalizedString("emailBody", comment: "")
         
         let usedStorage = getUsedStorageMemory()
@@ -71,10 +71,6 @@ class DeviceInfo {
         emailBody = emailBody.replacingOccurrences(of: "%4", with: usedStorage)
         emailBody = emailBody.replacingOccurrences(of: "%5", with: totalStorage)
 
-        
-
-
-        
         return emailBody
         
     }

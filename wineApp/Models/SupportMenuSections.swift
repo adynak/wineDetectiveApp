@@ -73,7 +73,7 @@ enum VersionOptions: Int, CaseIterable, SectionType{
     var description: String{
         switch self{
         case .version:
-            return NSLocalizedString("versionNumber", comment: "")
+            return Bundle.main.versionAndBuildPretty
         }
     }
     

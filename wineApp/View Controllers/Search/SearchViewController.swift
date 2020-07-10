@@ -44,7 +44,6 @@ class SearchViewController: UIViewController {
     var filteredBottles = [SearchKeys]()
     var searchString: String = ""
     
-//    var varietals: [Producers]?
     var searchWines: [AllLevel0]?
 
     lazy var tableView: UITableView = {
@@ -89,8 +88,9 @@ class SearchViewController: UIViewController {
         setupElements()
         setupNavigationBar()
         searchBar.resignFirstResponder()
-                
-//        varietals = allWine?.searchVarietals
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+
         searchWines = allWine?.search
         
         searchWines = searchWines!.sorted(by: {
@@ -98,13 +98,23 @@ class SearchViewController: UIViewController {
         })
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-
         footerView.text = countBottles(bins: searchKeys)
     }
     
     @objc func handleShowSearchBar() {
         searchBar.becomeFirstResponder()
         search(shouldShow: true)
+    }
+    
+    @objc func handleReload(){
+        searchWines = allWine?.search
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
+        
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+        footerView.text = countBottles(bins: searchKeys)
+        self.tableView.reloadData()
     }
     
     @objc func handleLogOut(){

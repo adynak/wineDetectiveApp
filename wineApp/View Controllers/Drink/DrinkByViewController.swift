@@ -18,7 +18,7 @@ class DrinkByViewController: UIViewController {
     var filteredBottles = [SearchKeys]()
     var searchString: String = ""
     
-    var varietals: [Producers]?
+//    var varietals: [Producers]?
     var searchWines: [AllLevel0]?
 
     lazy var tableView: UITableView = {
@@ -64,8 +64,11 @@ class DrinkByViewController: UIViewController {
         setupNavigationBar()
         searchBar.resignFirstResponder()
                 
-        varietals = allWine?.searchVarietals
+//        varietals = allWine?.searchVarietals
         searchWines = allWine?.search
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(changeDrinkBySort),
@@ -81,6 +84,18 @@ class DrinkByViewController: UIViewController {
 
         footerView.text = countBottles(bins: searchKeys)
     }
+    
+    @objc func handleReload(){
+        searchWines = allWine?.search
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
+        
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+        footerView.text = countBottles(bins: searchKeys)
+        self.tableView.reloadData()
+    }
+
     
     @objc func changeDrinkBySort(_ notification: Notification) {
         let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String

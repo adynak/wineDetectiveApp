@@ -44,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height + 50
         let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
+        
+        let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
 
         window = UIWindow(frame: frame)
         window?.makeKeyAndVisible()

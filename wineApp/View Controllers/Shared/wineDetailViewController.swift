@@ -197,20 +197,66 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-    @objc func addTapped(sender: UIBarButtonItem){
-        var newBinData = [StorageBins]()
+//    @objc func addTapped(sender: UIBarButtonItem){
+//        var newBinData = [StorageBins]()
+//
+//        if (sender.title == "Save"){
+//            for cell in cells {
+//                if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
+//                    newBinData.append(StorageBins(binName: cell.binNameLabel.text!, bottleCount:bottles))
+//                }
+//
+//            }
+////            myUpdater.passBackBinsAndBottlesInThem(newBinData: newBinData)
+//        }
+//        dismiss(animated: true, completion: nil)
+//    }
+    
+        @objc func addTapped(sender: UIBarButtonItem){
+            var markAsDrank = [DrillLevel2]()
 
-        if (sender.title == "Save"){
-            for cell in cells {
-                if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
-                    newBinData.append(StorageBins(binName: cell.binNameLabel.text!, bottleCount:bottles))
+            if (sender.title == NSLocalizedString("save", comment: "")){
+                for cell in cells {
+                    if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
+                        if bottles == 0{
+                            markAsDrank.append(DrillLevel2(
+                                producer: passedValue.producer,
+                                varietal: passedValue.varietal,
+                                vintage: passedValue.vintage,
+//                                iWine: cell.iWineLabel.text!,
+                                barcode: cell.barcodeLabel.text!
+                            ))
+                        }
+                    }
                 }
-                
+                if markAsDrank.count > 0{
+                    let alertTitle = NSLocalizedString("markAsDrankTitle", comment: "")
+                    let okBtn = NSLocalizedString("okBtn", comment: "")
+                    let cancelBtn = NSLocalizedString("cancelBtn", comment: "")
+    //                let message = buildRemoveMessage(bottles: markAsDrank)
+                    let message = ""
+
+                    let markAsDrankAlert = UIAlertController.init(title: alertTitle, message: message, preferredStyle:.alert)
+
+                    markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
+                        self.dismiss(animated: true, completion:{
+                            DataServices.removeDrillBottles(bottles: markAsDrank)
+                        })
+                    })
+
+                    markAsDrankAlert.addAction(UIAlertAction.init(title: cancelBtn, style: .cancel, handler: nil))
+
+                    present(markAsDrankAlert, animated: true, completion: nil)
+
+                } else {
+                    dismiss(animated: true, completion: nil)
+                }
+
+            } else {
+                dismiss(animated: true, completion: nil)
             }
-            myUpdater.passBackBinsAndBottlesInThem(newBinData: newBinData)
         }
-        dismiss(animated: true, completion: nil)
-    }
+
     
     private func assignPassedValuesToTextarea(){
         
