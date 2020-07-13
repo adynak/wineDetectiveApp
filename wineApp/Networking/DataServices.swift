@@ -275,9 +275,9 @@ class DataServices {
         let positionOf = Label(data:fields)
         
         for row in dataArray{
-            let bottleSort = row[positionOf.varietal] + " " + row[positionOf.vintage] + " " + row[positionOf.producer]
+            let bottleSort = row[positionOf.wdVarietal] + " " + row[positionOf.vintage] + " " + row[positionOf.producer]
             let binSort = row[positionOf.location] + row[positionOf.bin]
-            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.varietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort, region: row[positionOf.region], country: row[positionOf.country], vineyard: row[positionOf.vineyard], locale: row[positionOf.locale], type: row[positionOf.type])
+            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.wdVarietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort, region: row[positionOf.region], country: row[positionOf.country], vineyard: row[positionOf.vineyard], locale: row[positionOf.locale], type: row[positionOf.type])
             wines.append(bottle)
         }
         
