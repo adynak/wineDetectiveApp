@@ -51,15 +51,15 @@ class MainTabBarController: UITabBarController {
             title: drinkByTitle)
 
 
-        let producerController = createTabController(viewController: ProducerViewController(),
-            selected: #imageLiteral(resourceName: "farmDark"),
-            unselected: #imageLiteral(resourceName: "farmLight"),
-            title: producerTitle)
-
-        let varietalController = createTabController(viewController: VarietalViewController(),
-            selected: #imageLiteral(resourceName: "grapesDark"),
-            unselected: #imageLiteral(resourceName: "grapesLight"),
-            title: varietalTitle)
+//        let producerController = createTabController(viewController: ProducerViewController(),
+//            selected: #imageLiteral(resourceName: "farmDark"),
+//            unselected: #imageLiteral(resourceName: "farmLight"),
+//            title: producerTitle)
+//
+//        let varietalController = createTabController(viewController: VarietalViewController(),
+//            selected: #imageLiteral(resourceName: "grapesDark"),
+//            unselected: #imageLiteral(resourceName: "grapesLight"),
+//            title: varietalTitle)
 
         let searchController = createTabController(viewController: SearchViewController(),
             selected: #imageLiteral(resourceName: "search"),
@@ -71,11 +71,11 @@ class MainTabBarController: UITabBarController {
             unselected: #imageLiteral(resourceName: "more"),
             title: moreTitle)
 
-        let reconcileController = createTabController(
-            viewController: ReconcileViewController(),
-            selected: #imageLiteral(resourceName: "reconcileDark"),
-            unselected: #imageLiteral(resourceName: "reconcileLight"),
-            title: reconcileTitle)
+//        let reconcileController = createTabController(
+//            viewController: ReconcileViewController(),
+//            selected: #imageLiteral(resourceName: "reconcileDark"),
+//            unselected: #imageLiteral(resourceName: "reconcileLight"),
+//            title: reconcileTitle)
         
         viewControllers = [searchController,
 //                           producerController,
