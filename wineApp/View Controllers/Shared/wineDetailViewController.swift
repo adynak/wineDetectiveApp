@@ -44,7 +44,7 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         tv.text = "Location and Bin:"
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.backgroundColor = UIColor(r:202, g:227, b:255)
+        tv.backgroundColor = storageLabelBackgroundColor
         tv.textAlignment = .left
         tv.isEditable = false
         tv.isScrollEnabled = true
@@ -81,7 +81,7 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(r:202, g:227, b:255)
+        view.backgroundColor = storageLabelBackgroundColor
         
         setupNavigationBar()
         
@@ -172,8 +172,8 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // want to stripe the table's rows?
-        let colorOdd = UIColor(r:255, g:255, b:255) //white
-        let colorEven = UIColor(r:255, g:255, b:255)
+        let colorOdd = tableStripeWhite
+        let colorEven = tableStripeGray
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! BinTableViewCell
         cell.bin = wineBins[indexPath.row]

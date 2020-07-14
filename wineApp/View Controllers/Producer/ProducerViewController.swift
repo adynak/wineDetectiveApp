@@ -57,8 +57,8 @@ class ProducerViewController :UITableViewController {
         let bottleCount = (bottles?[section].bottleCount)!
 
         let sectionTitle = "\(sectionName) (\(bottleCount))"
-        let colorOdd = UIColor(r:184, g:206, b:249)
-        let colorEven = UIColor(r:202, g:227, b:255)
+        let colorOdd = tableStripeOdd
+        let colorEven = tableStripeEven
         
         let button = UIButton(type: .system)
         button.setTitle(sectionTitle, for: .normal)
@@ -153,8 +153,8 @@ class ProducerViewController :UITableViewController {
         var bottleCount: Int
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let bin = bottles?[indexPath.section].data[indexPath.row].name
-        let colorOdd = UIColor(r:255, g:255, b:255) //white
-        let colorEven = UIColor(r:240, g:240, b:240)
+        let colorOdd = tableStripeWhite
+        let colorEven = tableStripeGray
                 
         bottleCount = bottles![indexPath.section].data[indexPath.row].bottleCount!
         

@@ -27,7 +27,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         tv.text = NSLocalizedString("locationAndBin", comment: "")
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.backgroundColor = UIColor(r:202, g:227, b:255)
+        tv.backgroundColor = storageLabelBackgroundColor
         tv.textAlignment = .left
         tv.isEditable = false
         tv.isScrollEnabled = true
@@ -67,7 +67,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         
         wineBins = passedValue.bottles!
 
-        view.backgroundColor = UIColor(r:202, g:227, b:255)
+        view.backgroundColor = storageLabelBackgroundColor
         view.addSubview(storageLabel)
         view.addSubview(tableContainer)
         tableContainer.addSubview(wineBinsTableView)
@@ -136,8 +136,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // want to stripe the table's rows?
-        let colorOdd = UIColor(r:255, g:255, b:255) //white
-        let colorEven = UIColor(r:240, g:240, b:240)
+        let colorOdd = tableStripeWhite
+        let colorEven = tableStripeGray
         
         let vintage = wineBins[indexPath.row].vintage
         let producer = wineBins[indexPath.row].producer

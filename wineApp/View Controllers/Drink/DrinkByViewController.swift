@@ -40,7 +40,7 @@ class DrinkByViewController: UIViewController {
         tv.layer.masksToBounds = true
         tv.text = "Total Bottles"
         tv.textAlignment = .center
-        tv.backgroundColor = UIColor(r: 61,  g: 91,  b: 151)
+        tv.backgroundColor = barTintColor
         tv.textColor = .white
         return tv
     }()
@@ -367,8 +367,8 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         
         var totalBottles: Int = 0
         
-        let colorOdd = UIColor(r:184, g:206, b:249)
-        let colorEven = UIColor(r:202, g:227, b:255)
+        let colorOdd = tableStripeOdd
+        let colorEven = tableStripeEven
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         

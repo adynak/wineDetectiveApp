@@ -21,7 +21,7 @@ class MoreMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(r:212, g:212, b:219)
+        view.backgroundColor = moreViewBackgroundColor
         configureUI()
 
     }
@@ -97,7 +97,7 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(r:212, g:212, b:219)
+        view.backgroundColor = moreViewBackgroundColor
         
         let title = UILabel()
         title.font = UIFont.systemFont(ofSize: 14)
@@ -116,7 +116,7 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = UIColor(r:212, g:212, b:219)
+        view.backgroundColor = moreViewBackgroundColor
         return view
     }
     

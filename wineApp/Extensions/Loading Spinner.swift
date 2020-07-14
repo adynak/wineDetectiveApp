@@ -34,7 +34,7 @@ extension UIViewController{
         let box: UIView = {
             let b =  UIView()
             b.frame = CGRect(x: 0, y: 200, width: 180, height: 100)
-            b.backgroundColor = UIColor(r:80, g:102, b:144)
+            b.backgroundColor = spinnerBoxColor
             b.alpha = 0.8
             b.layer.cornerRadius = 10
             return b

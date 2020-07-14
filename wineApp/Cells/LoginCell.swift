@@ -14,7 +14,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     var productNameView: UILabel = {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
-        label.textColor = UIColor(r:80, g:102, b:144)
+        label.textColor = productNameColor
         label.textAlignment = .left
         label.numberOfLines = 3
         label.text = "Wine Detective"
@@ -35,7 +35,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.textContentType = .username
-        let placeholderString = NSAttributedString.init(string: "User Name", attributes: [NSAttributedString.Key.foregroundColor : UIColor(r:80, g:102, b:144)])
+        let placeholderString = NSAttributedString.init(string: "User Name", attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField
@@ -47,7 +47,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.layer.borderWidth = 1
         textField.isSecureTextEntry = true
         textField.textContentType = .password
-        let placeholderString = NSAttributedString.init(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(r:80, g:102, b:144)])
+        let placeholderString = NSAttributedString.init(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField
@@ -55,7 +55,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     
     lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor(r:80, g:102, b:144)
+        button.backgroundColor = loginButtonColor
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
