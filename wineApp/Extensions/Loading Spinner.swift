@@ -16,24 +16,25 @@ extension UIViewController{
         
         let loadingView: UIView = {
             let v =  UIView()
-            v.frame = CGRect(x: 0, y: 0, width: 180, height: 340)
+            v.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
             v.tag = 19
             v.backgroundColor = .white
+            v.translatesAutoresizingMaskIntoConstraints = false
             v.center.x = view.center.x
-            v.center.y = view.center.y - 100
+            v.center.y = view.center.y
             return v
         }()
 
         let logo: UIImageView = {
             let image = UIImage(named: "logo")
             let iv = UIImageView(image: image)
-            iv.frame = CGRect(x: 0, y: 0, width: 180, height: 180)
+            iv.frame = CGRect(x: view.frame.width/2 - 90, y: 100, width: 180, height: 180)
             return iv
         }()
 
         let box: UIView = {
             let b =  UIView()
-            b.frame = CGRect(x: 0, y: 200, width: 180, height: 100)
+            b.frame = CGRect(x: view.frame.width/2 - 90, y: 300, width: 180, height: 100)
             b.backgroundColor = spinnerBoxColor
             b.alpha = 0.8
             b.layer.cornerRadius = 10
@@ -61,14 +62,17 @@ extension UIViewController{
             l.center.y = box.center.y + 20
             return l
         }()
-                
+             
+//        let topLeft = view.frame.width / 2 - loadingView.width / 2
+        
         loadingView.addSubview(logo)
         loadingView.addSubview(box)
         loadingView.addSubview(spinner)
         loadingView.addSubview(text)
+        
 
-        logo.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor).isActive = true
-        logo.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor).isActive = true
+//        logo.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor).isActive = true
+//        logo.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor).isActive = true
         
         view.addSubview(loadingView)
 

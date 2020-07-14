@@ -30,6 +30,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     
     let cellId = "cellId"
     let loginCellId = "loginCellId"
+    var dataLoaded = false
     
     let pages: [Page] = {
 //        let firstPage = Page(title: "Share a great listen", message: "It's free to send your books to the people in your life. Every recipient's first book is on us.", imageName: "page1")
@@ -99,7 +100,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        observeKeyboardNotifications()
+        observeNotifications()
         
         view.addSubview(collectionView)
         view.addSubview(pageControl)
@@ -118,10 +119,17 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         registerCells()
     }
     
-    fileprivate func observeKeyboardNotifications() {
+    fileprivate func observeNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(APILoaded), name: NSNotification.Name(rawValue: "APILoaded"), object: nil)
+        
+    }
+    
+    @objc func APILoaded(){
+        dataLoaded = true
     }
     
     @objc func keyboardHide() {
@@ -208,11 +216,39 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             let rootViewController = UIApplication.shared.keyWindow?.rootViewController
             guard let mainNavigationController = rootViewController as? MainTabBarController else { return }
             
-            API.load()
-
-            dismiss(animated: true, completion: nil)
+            let spinnerText = NSLocalizedString("runAPI", comment: "")
+            showSpinner(localizedText: spinnerText)
+//            API.load()
             
-            mainNavigationController.viewControllers = [MainTabBarController()]
+            var timeLeft = 20
+            
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                print("timer fired!")
+                if timeLeft == 20 {
+                    API.load()
+                    timeLeft -= 1
+                } else {
+                    timeLeft -= 1
+                    print(timeLeft)
+
+                    if(timeLeft==0 || self.dataLoaded == true){
+                        timer.invalidate()
+                        self.hideSpinner()
+                        self.dismiss(animated: true, completion: nil)
+                        mainNavigationController.viewControllers = [MainTabBarController()]
+                    }
+                    if(timeLeft==0 && self.dataLoaded == false){
+                        timer.invalidate()
+                        self.hideSpinner()
+//                        self.dismiss(animated: true, completion: nil)
+//                        mainNavigationController.viewControllers = [MainTabBarController()]
+                    }
+                }
+            }
+
+//            dismiss(animated: true, completion: nil)
+//
+//            mainNavigationController.viewControllers = [MainTabBarController()]
             
         }
     }

@@ -117,6 +117,8 @@ class API {
                                              location: locationSort)
             
             print("build data arrays complete")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APILoaded"), object: nil)
+
             allWine = newInventory
 
         } catch {

@@ -9,7 +9,7 @@
  
 */
 
-"runAPI" = "Fetching Bottles";
+"runAPI" = "Getting Your Wines";
 
 "singularBottle" = " bottle remaining";
 "pluralBottle" = " bottles remaining";
