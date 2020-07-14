@@ -139,10 +139,8 @@ class BinTableViewCell : UITableViewCell {
         var responseMessages = ["direction": "OK"]
         
         let stepDirection = sender.tag > Int(sender.value) ? "minus" : "plus"
-        if (stepDirection == "minus"){
-            sender.tag = Int(sender.value)
-            bottleCountLabel.text = setLabelText(count: Int(sender.value))
-        }
+        sender.tag = Int(sender.value)
+        bottleCountLabel.text = setLabelText(count: Int(sender.value))
         
         responseMessages["direction"] = stepDirection
         delegate?.didTapStepper(direction: stepDirection)

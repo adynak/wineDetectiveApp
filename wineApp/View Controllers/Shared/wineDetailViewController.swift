@@ -60,7 +60,7 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         tv.isScrollEnabled = false
         tv.layer.cornerRadius = 5
         tv.layer.masksToBounds = true
-        tv.text = "total Bottles"
+        tv.text = NSLocalizedString("totalBottles", comment: "")
         tv.contentInset=UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0);
         return tv
     }()
@@ -311,12 +311,11 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func getTotalBottles()  -> String {
-        var totalBottles = 0
-        for bin in wineBins
-        {
-            totalBottles += bin.bottleCount!
-        }
-        let bottleString = (totalBottles > 1) ? " bottles" : " bottle"
+        let singularBottle = NSLocalizedString("singularBottle", comment: "")
+        let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
+        let totalBottles = wineBins.count
+        let bottleString = (totalBottles > 1) ? pluralBottle : singularBottle
+        
         return String(totalBottles) + bottleString
     }
 
@@ -330,6 +329,8 @@ extension Int {
 
 extension WineDetailViewController : BinCellDelegate {
     func didTapStepper(direction: String){
+        let singularBottle = NSLocalizedString("singularBottle", comment: "")
+        let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
         let minus = "minus" as String
         let plus = "plus" as String
         
@@ -340,13 +341,10 @@ extension WineDetailViewController : BinCellDelegate {
             count = number! - 1
         }
         if (direction == plus){
-            count = number!
-            let addWineController = AddWineController()
-            addWineController.passedValue = passedValue
-            let navController = UINavigationController(rootViewController: addWineController)
-            present(navController, animated: true, completion: nil)
+            count = number! + 1
         }
-        
-        inventoryFooter.text = String(count) + " bottles"
+        let bottleString = (count == 1) ? singularBottle : pluralBottle
+
+        inventoryFooter.text = String(count) + bottleString
     }
 }
