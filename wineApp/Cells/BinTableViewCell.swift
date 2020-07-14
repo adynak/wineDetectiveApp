@@ -75,7 +75,7 @@ class BinTableViewCell : UITableViewCell {
         let s = UIStepper()
         s.translatesAutoresizingMaskIntoConstraints = false
         s.minimumValue = 0
-        s.maximumValue = 1200
+        s.maximumValue = 1
         s.value = 1
         return s
     }()
