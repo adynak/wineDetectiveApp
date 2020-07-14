@@ -1,5 +1,5 @@
 //
-//  ReconcileViewController.swift
+//  LocationViewController.swift
 //  wineApp
 //
 //  Created by adynak on 12/6/18.
@@ -8,26 +8,26 @@
 
 import UIKit
 
-class ReconcileViewController :UITableViewController {
+class LocationViewController :UITableViewController {
     
     let cellID = "cellId"
 
     var bottles: [DrillLevel0]?
-    var reconcileLocations:Set = Set<Int>()
+    var locationLocations:Set = Set<Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
-        bottles = allWine?.reconcile
+        bottles = allWine?.location
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("reconcileTitle", comment: "title for reconcile")
+        navigationItem.title = NSLocalizedString("locationTitle", comment: "title for location")
         let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -62,9 +62,9 @@ class ReconcileViewController :UITableViewController {
     }
     
     @objc func handleReload() {
-        bottles = allWine?.reconcile
+        bottles = allWine?.location
         self.tableView.reloadData()
-        for row in reconcileLocations{
+        for row in locationLocations{
             if (row < bottles!.count){
                 let button = UIButton(type: .system)
                 button.tag = row
@@ -76,7 +76,7 @@ class ReconcileViewController :UITableViewController {
     @objc func handleExpandClose(button: UIButton) {
         
         let section = button.tag
-        reconcileLocations.insert(section)
+        locationLocations.insert(section)
         
         var indexPaths = [IndexPath]()
         for row in bottles![section].data.indices {
@@ -128,10 +128,10 @@ class ReconcileViewController :UITableViewController {
         wineSelected.topLeft = bottles![section].name
         wineSelected.topRight = bottles![section].data[row].name
         
-        let reconcileDetailController = DrillDownDetailViewController()
-        reconcileDetailController.passedValue = wineSelected
-        reconcileDetailController.title = NSLocalizedString("reconcileTitle", comment: "title for reconcile")
-        let navController = UINavigationController(rootViewController: reconcileDetailController)
+        let locationDetailController = DrillDownDetailViewController()
+        locationDetailController.passedValue = wineSelected
+        locationDetailController.title = NSLocalizedString("locationTitle", comment: "title for location")
+        let navController = UINavigationController(rootViewController: locationDetailController)
         present(navController, animated: true, completion: nil)
 
     }

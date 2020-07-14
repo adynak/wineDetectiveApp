@@ -1,5 +1,5 @@
 //
-//  ReconcileViewController.swift
+//  LocationViewController.swift
 //  wineApp
 //
 //  Created by adynak on 12/6/18.
@@ -13,7 +13,7 @@ class VarietalViewController : UITableViewController {
     let cellID = "cellId"
 
     var bottles: [DrillLevel0]?
-    var reconcileLocations:Set = Set<Int>()
+    var locationLocations:Set = Set<Int>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class VarietalViewController : UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("varietalTitle", comment: "title for reconcile")
+        navigationItem.title = NSLocalizedString("varietalTitle", comment: "title for location")
         let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -64,7 +64,7 @@ class VarietalViewController : UITableViewController {
     @objc func handleReload() {
         bottles = allWine?.varietals
         self.tableView.reloadData()
-        for row in reconcileLocations{
+        for row in locationLocations{
             if (row < bottles!.count){
                 let button = UIButton(type: .system)
                 button.tag = row
@@ -76,7 +76,7 @@ class VarietalViewController : UITableViewController {
     @objc func handleExpandClose(button: UIButton) {
         
         let section = button.tag
-        reconcileLocations.insert(section)
+        locationLocations.insert(section)
         
         var indexPaths = [IndexPath]()
         for row in bottles![section].data.indices {
@@ -130,7 +130,7 @@ class VarietalViewController : UITableViewController {
         
         let detailController = DrillDownDetailViewController()
         detailController.passedValue = wineSelected
-        detailController.title = NSLocalizedString("varietalTitle", comment: "title for reconcile")
+        detailController.title = NSLocalizedString("varietalTitle", comment: "title for location")
         let navController = UINavigationController(rootViewController: detailController)
         present(navController, animated: true, completion: nil)
 

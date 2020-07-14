@@ -333,7 +333,7 @@ class DataServices {
     }
 
     
-    static func buildReconcileArray(fields:[Int])->[Level0]{
+    static func buildLocationArray(fields:[Int])->[Level0]{
         
         var wines: [Bottle] = []
         let positionOf = Label(data:fields)
@@ -433,7 +433,7 @@ class DataServices {
             dataArray = dataArrayFiltered
         }
                 
-        let reconcileSort = DataServices.buildDrillIntoBottlesArray(
+        let locationSort = DataServices.buildDrillIntoBottlesArray(
                                 fields: fields,
                                 sortKeys: ["location","bin"])
 
@@ -450,7 +450,7 @@ class DataServices {
         let newInventory = WineInventory(producers: producerSort,
                                          varietals: varietalSort,
                                          search: searchSort,
-                                         reconcile: reconcileSort)
+                                         location: locationSort)
         
         print("build data arrays complete")
         allWine = newInventory
@@ -468,11 +468,11 @@ class DataServices {
             dataArray = dataArrayFiltered
         }
                 
-        let reconcileSort = DataServices.buildDrillIntoBottlesArray(
+        let locationSort = DataServices.buildDrillIntoBottlesArray(
                                 fields: fields,
                                 sortKeys: ["producer","wdVarietal"])
         
-        allWine?.reconcile = reconcileSort
+        allWine?.location = locationSort
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }

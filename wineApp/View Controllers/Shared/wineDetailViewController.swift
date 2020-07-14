@@ -18,7 +18,6 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
-    let tableRowHeight:CGFloat = 66
     let sortBins:Bool = true
     
     var cellID = "cellID123"
@@ -136,6 +135,14 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func setupWineBinsTableViewLayout(){
+        var tableRowHeight: CGFloat
+        
+        if UserDefaults.standard.getShowBarcode() {
+            tableRowHeight = 66
+        } else {
+            tableRowHeight = 46
+        }
+
         tableContainer.backgroundColor = .white
         NSLayoutConstraint.activate([
             tableContainer.topAnchor.constraint(equalTo:storageLabel.bottomAnchor, constant:10),
@@ -285,19 +292,19 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         attributedText.append(NSAttributedString(
             string: passedValue.ava + vineyard + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.gray])
+                         NSAttributedString.Key.foregroundColor: UIColor.black])
         )
         
         attributedText.append(NSAttributedString(
             string: passedValue.locale + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.gray])
+                         NSAttributedString.Key.foregroundColor: UIColor.black])
         )
         
         attributedText.append(NSAttributedString(
             string: "Drinking Window: " + passedValue.drinkBy + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.gray])
+                         NSAttributedString.Key.foregroundColor: UIColor.black])
         )
                 
         wineLabel.attributedText = attributedText

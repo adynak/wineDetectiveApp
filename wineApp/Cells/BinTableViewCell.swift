@@ -25,7 +25,11 @@ class BinTableViewCell : UITableViewCell {
 
             if let binName = binItem.binName {
                 binNameLabel.text = " \(binItem.binLocation!) \(binName)"
-                barcodeLabel.text = " \(binItem.barcode!)"
+                if UserDefaults.standard.getShowBarcode() {
+                    barcodeLabel.text = " \(binItem.barcode!)"
+                } else {
+                    barcodeLabel.text = ""
+                }
             }
             
             if let bottleCount = binItem.bottleCount {
@@ -79,6 +83,13 @@ class BinTableViewCell : UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        var cellHeight: CGFloat
+        if UserDefaults.standard.getShowBarcode() {
+            cellHeight = 64
+        } else {
+            cellHeight = 40
+        }
+        
         containerView.addSubview(binNameLabel)
         containerView.addSubview(barcodeLabel)
         containerView.addSubview(bottleCountLabel)
@@ -89,7 +100,7 @@ class BinTableViewCell : UITableViewCell {
             containerView.centerYAnchor.constraint(equalTo:self.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant:10),
             containerView.trailingAnchor.constraint(equalTo:self.trailingAnchor, constant:-10),
-            containerView.heightAnchor.constraint(equalToConstant:64)
+            containerView.heightAnchor.constraint(equalToConstant:cellHeight)
         ])
         
         NSLayoutConstraint.activate([

@@ -38,7 +38,7 @@ enum MoreMenuSections: Int, CaseIterable, CustomStringConvertible{
 enum ReportNames: Int, CaseIterable, SectionType{
     case producer
     case varietal
-    case reconcile
+    case location
     
     var containsSwitch: Bool {
         return false
@@ -50,8 +50,8 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return NSLocalizedString("reportProducer", comment: "")
         case .varietal:
             return NSLocalizedString("reportVarietal", comment: "")
-        case .reconcile:
-            return NSLocalizedString("reportReconcile", comment: "")
+        case .location:
+            return NSLocalizedString("reportLocation", comment: "")
         }
     }
     
@@ -61,8 +61,8 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return "producer.png"
         case .varietal:
             return "varietal.png"
-        case .reconcile:
-            return "reconcile.png"
+        case .location:
+            return "location.png"
         }
     }
     
@@ -72,8 +72,8 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return "producer"
         case .varietal:
             return "varietal"
-        case .reconcile:
-            return "reconcile"
+        case .location:
+            return "location"
         }
     }
 }

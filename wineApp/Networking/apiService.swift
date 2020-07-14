@@ -97,7 +97,7 @@ class API {
             dataHeader = dataArray.removeFirst()
             let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
                         
-            let reconcileSort = DataServices.buildDrillIntoBottlesArray(
+            let locationSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
                                     sortKeys: ["location","bin"])
 
@@ -114,7 +114,7 @@ class API {
             let newInventory = WineInventory(producers: producerSort,
                                              varietals: varietalSort,
                                              search: searchSort,
-                                             reconcile: reconcileSort)
+                                             location: locationSort)
             
             print("build data arrays complete")
             allWine = newInventory

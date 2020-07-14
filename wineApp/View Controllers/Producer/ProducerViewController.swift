@@ -1,5 +1,5 @@
 //
-//  ReconcileViewController.swift
+//  LocationViewController.swift
 //  wineApp
 //
 //  Created by adynak on 12/6/18.
@@ -15,7 +15,7 @@ class ProducerViewController :UITableViewController {
     var dig: Int = 0
 
     var bottles: [DrillLevel0]?
-    var reconcileLocations:Set = Set<Int>()
+    var locationLocations:Set = Set<Int>()
     
 //    override func viewWillAppear(_ animated: Bool) {
 //        if dig > 0{
@@ -40,7 +40,7 @@ class ProducerViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("producerTitle", comment: "title for reconcile")
+        navigationItem.title = NSLocalizedString("producerTitle", comment: "title for location")
         let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -77,7 +77,7 @@ class ProducerViewController :UITableViewController {
     @objc func handleReload() {
         bottles = allWine?.producers
         self.tableView.reloadData()
-        for row in reconcileLocations{
+        for row in locationLocations{
             if (row < bottles!.count){
                 let button = UIButton(type: .system)
                 button.tag = row
@@ -89,7 +89,7 @@ class ProducerViewController :UITableViewController {
     @objc func handleExpandClose(button: UIButton) {
         
         let section = button.tag
-        reconcileLocations.insert(section)
+        locationLocations.insert(section)
         
         var indexPaths = [IndexPath]()
         for row in bottles![section].data.indices {
@@ -141,10 +141,10 @@ class ProducerViewController :UITableViewController {
         wineSelected.topLeft = bottles![section].data[row].data[0].producer
         wineSelected.topRight = bottles![section].data[row].data[0].varietal
         
-        let reconcileDetailController = DrillDownDetailViewController()
-        reconcileDetailController.passedValue = wineSelected
-        reconcileDetailController.title = NSLocalizedString("producerTitle", comment: "title for reconcile")
-        let navController = UINavigationController(rootViewController: reconcileDetailController)
+        let locationDetailController = DrillDownDetailViewController()
+        locationDetailController.passedValue = wineSelected
+        locationDetailController.title = NSLocalizedString("producerTitle", comment: "title for location")
+        let navController = UINavigationController(rootViewController: locationDetailController)
         present(navController, animated: true, completion: nil)
 
     }

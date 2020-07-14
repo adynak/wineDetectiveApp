@@ -151,8 +151,8 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
                     moreController = ProducerViewController()
                 case "varietal":
                     moreController = VarietalViewController()
-                case "reconcile":
-                    moreController = ReconcileViewController()
+                case "location":
+                    moreController = LocationViewController()
                 default:
                     return
                 }
