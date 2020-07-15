@@ -69,7 +69,7 @@ class API {
 
             let data = try fetchRemoteDataAsyncAwait(url: dataUrl)
             
-            var csvInventory = String(data: data!, encoding: String.Encoding.ascii)
+            var csvInventory = String(data: data!, encoding: String.Encoding.utf8)
             
             csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
             inventoryArray = DataServices.parseCsv(data:csvInventory!)

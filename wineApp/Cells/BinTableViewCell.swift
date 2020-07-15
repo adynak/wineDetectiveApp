@@ -24,11 +24,12 @@ class BinTableViewCell : UITableViewCell {
             guard let binItem = bin else {return}
 
             if let binName = binItem.binName {
-                binNameLabel.text = " \(binItem.binLocation!) \(binName)"
+                binNameLabel.text = "\(binItem.binLocation!) \(binName)"
+                barcodeLabel.text = "\(binItem.barcode!)"
                 if UserDefaults.standard.getShowBarcode() {
-                    barcodeLabel.text = " \(binItem.barcode!)"
+                    barcodeLabel.isHidden = false
                 } else {
-                    barcodeLabel.text = ""
+                    barcodeLabel.isHidden = true
                 }
             }
             
@@ -114,8 +115,13 @@ class BinTableViewCell : UITableViewCell {
             barcodeLabel.leadingAnchor.constraint(equalTo:binNameLabel.leadingAnchor, constant: 10),
         ])
         
+        var bottleCountLabelTopAnchor = binNameLabel.bottomAnchor
+        if UserDefaults.standard.getShowBarcode() {
+            bottleCountLabelTopAnchor = barcodeLabel.bottomAnchor
+        }
+
         NSLayoutConstraint.activate([
-            bottleCountLabel.topAnchor.constraint(equalTo:barcodeLabel.bottomAnchor),
+            bottleCountLabel.topAnchor.constraint(equalTo:bottleCountLabelTopAnchor),
             bottleCountLabel.leadingAnchor.constraint(equalTo:binNameLabel.leadingAnchor, constant: 10),
         ])
         

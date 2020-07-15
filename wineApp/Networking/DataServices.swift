@@ -290,7 +290,8 @@ class DataServices {
                         location: detail.location,
                         bin: detail.bin,
                         barcode: detail.barcode,
-                        binSort: detail.binSort))
+                        binSort: detail.binSort,
+                        iwine: detail.iWine))
                 }
                 level1 =  level1.sorted(by: {
                     ($0.binSort.lowercased()) < ($1.binSort.lowercased())
@@ -422,12 +423,14 @@ class DataServices {
     }
         
     
-    static func removeDrillBottles(bottles: [DrillLevel2]){
+    static func removeBottles(bottles: [DrillLevel2]){
         let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         var dataArrayFiltered = [[String]]()
         
         for bottle in bottles{            
             let barcode = bottle.barcode!.components(separatedBy:CharacterSet.decimalDigits.inverted).joined()
+            let iwine = bottle.iWine!.components(separatedBy:CharacterSet.decimalDigits.inverted).joined()
+            print(barcode + " " + iwine)
             
             dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode) }
             dataArray = dataArrayFiltered
@@ -458,27 +461,6 @@ class DataServices {
 
     }
 
-    static func removeBottles(bottles: [Level2]){
-        let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
-        var dataArrayFiltered = [[String]]()
-        
-        for bottle in bottles{
-            let barcode = bottle.barcode!.components(separatedBy:CharacterSet.decimalDigits.inverted).joined()
-            dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode) }
-            dataArray = dataArrayFiltered
-        }
-                
-        let locationSort = DataServices.buildDrillIntoBottlesArray(
-                                fields: fields,
-                                sortKeys: ["producer","wdVarietal"])
-        
-        allWine?.location = locationSort
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
-
-    }
-
-    
-    
     static func locateAvailabilityFields(availabilityHeader: [String?]) -> [Int]{
         
         var fields = [Int]()

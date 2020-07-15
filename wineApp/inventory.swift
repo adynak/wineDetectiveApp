@@ -75,6 +75,7 @@ struct AllLevel1 {
     var bin: String
     var barcode: String
     var binSort: String
+    var iwine: String
 }
 
 struct bottleDetail {
@@ -274,6 +275,7 @@ struct StorageBins: Codable {
     var bottleCount: Int?
     var binLocation: String?
     var barcode: String?
+    var iwine: String?
 }
 
 func addNewStorage(binName: String, binLocation: String, bin: inout [StorageBins]) {

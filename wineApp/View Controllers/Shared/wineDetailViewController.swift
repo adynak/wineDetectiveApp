@@ -221,16 +221,24 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
         @objc func addTapped(sender: UIBarButtonItem){
             var markAsDrank = [DrillLevel2]()
+            var iwine: String = ""
 
             if (sender.title == NSLocalizedString("save", comment: "")){
                 for cell in cells {
                     if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
                         if bottles == 0{
+                            
+                            for bin in passedValue.storageBins!{
+                                if bin.barcode == cell.barcodeLabel.text {
+                                    iwine = bin.iwine!
+                                }
+                            }
+                            
                             markAsDrank.append(DrillLevel2(
                                 producer: passedValue.producer,
                                 varietal: passedValue.varietal,
                                 vintage: passedValue.vintage,
-//                                iWine: cell.iWineLabel.text!,
+                                iWine: iwine,
                                 barcode: cell.barcodeLabel.text!
                             ))
                         }
@@ -247,7 +255,7 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
                     markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
                         self.dismiss(animated: true, completion:{
-                            DataServices.removeDrillBottles(bottles: markAsDrank)
+                            DataServices.removeBottles(bottles: markAsDrank)
                         })
                     })
 

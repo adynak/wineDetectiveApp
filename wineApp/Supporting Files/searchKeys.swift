@@ -36,7 +36,11 @@ struct SearchKeys {
                             wine.label[0].designation
             
             for storage in wine.storage{
-                searchBins.append(StorageBins(binName: storage.bin, bottleCount: 1, binLocation: storage.location, barcode: storage.barcode))
+                searchBins.append(StorageBins(binName: storage.bin,
+                                              bottleCount: 1,
+                                              binLocation: storage.location,
+                                              barcode: storage.barcode,
+                                              iwine: storage.iwine))
             }
                         
             searchWines.append(SearchKeys(vintage: wine.label[0].vintage,

@@ -221,7 +221,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
                 markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
                     self.dismiss(animated: true, completion:{
-                        DataServices.removeDrillBottles(bottles: markAsDrank)
+                        DataServices.removeBottles(bottles: markAsDrank)
                     })
                 })
 
