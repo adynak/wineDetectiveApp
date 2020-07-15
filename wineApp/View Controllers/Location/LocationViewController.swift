@@ -27,7 +27,7 @@ class LocationViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("locationTitle", comment: "title for location")
+        navigationItem.title = NSLocalizedString("locationAndBin", comment: "title for location")
         let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -139,7 +139,10 @@ class LocationViewController :UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var bottleCount: Int
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let bin = bottles?[indexPath.section].data[indexPath.row].name
+        var bin = bottles?[indexPath.section].data[indexPath.row].name
+        if bin == "" {
+            bin = NSLocalizedString("noBin", comment: "")
+        }
         let colorOdd = tableStripeWhite
         let colorEven = tableStripeGray
                 

@@ -67,3 +67,5 @@
 
 "noInternetTitle" = "Connection Failed";
 "noInternetMessage" = "Wine Detective cannot update your wine because it is not connected to the internet";
+
+"noBin" = "unassigned";
