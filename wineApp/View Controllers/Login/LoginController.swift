@@ -14,6 +14,12 @@ protocol LoginControllerDelegate: class {
     func finishLoggingIn()
 }
 
+enum apiResults: String {
+    case NoInternet
+    case Success
+    case Failed
+}
+
 class LoginController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LoginControllerDelegate {
     
     lazy var collectionView: UICollectionView = {
@@ -220,36 +226,40 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             showSpinner(localizedText: spinnerText)
 //            API.load()
             
-            var timeLeft = 20
+            var timeLeft = 21
             
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                print("timer fired!")
+//                print("timer fired!")
+                timeLeft -= 1
                 if timeLeft == 20 {
-                    API.load()
-                    timeLeft -= 1
+                    let results = API.load()
+                    switch apiResults(rawValue: results)! {
+                        case .Failed :
+                            Alert.showAPIFailedsAlert(on: self)
+                            timer.invalidate()
+                            self.hideSpinner()
+                        case .NoInternet:
+                            Alert.noInternetAlert(on: self)
+                            timer.invalidate()
+                            self.hideSpinner()
+                        case .Success:
+                            break
+                    }
                 } else {
-                    timeLeft -= 1
                     print(timeLeft)
-
-                    if(timeLeft==0 || self.dataLoaded == true){
+                    if(self.dataLoaded == true){
                         timer.invalidate()
                         self.hideSpinner()
                         self.dismiss(animated: true, completion: nil)
                         mainNavigationController.viewControllers = [MainTabBarController()]
                     }
-                    if(timeLeft==0 && self.dataLoaded == false){
+                    if(timeLeft == 0 && self.dataLoaded == false){
                         timer.invalidate()
                         self.hideSpinner()
-//                        self.dismiss(animated: true, completion: nil)
-//                        mainNavigationController.viewControllers = [MainTabBarController()]
+                        Alert.showAPIFailedsAlert(on: self)
                     }
                 }
             }
-
-//            dismiss(animated: true, completion: nil)
-//
-//            mainNavigationController.viewControllers = [MainTabBarController()]
-            
         }
     }
     

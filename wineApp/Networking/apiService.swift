@@ -14,8 +14,15 @@ import UIKit
 
 class API {
     
-    static func load() {
+    static func load() -> String {
         print("load")
+        
+        if Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+        }else{
+            print("Internet Connection not Available!")
+            return "NoInternet"
+        }
 
         do {
 
@@ -48,7 +55,7 @@ class API {
             print("availability")
         } catch {
             print("Failed to fetch availability:", error)
-            return
+            return "Failed"
         }
         
         do {
@@ -120,10 +127,11 @@ class API {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APILoaded"), object: nil)
 
             allWine = newInventory
+            return "Success"
 
         } catch {
             print("Failed to fetch inventory:", error)
-            return
+            return "Failed"
         }
 
     }

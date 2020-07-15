@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-var boxView = UIView()
 
 extension UIViewController{
     
@@ -80,8 +79,8 @@ extension UIViewController{
     }
     
     func hideSpinner(){
-        if let subview = self.view.viewWithTag(19) {
-        subview.removeFromSuperview()
+        if var subview = self.view.viewWithTag(19) {
+            subview.removeFromSuperview()
         }
     }
     

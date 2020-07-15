@@ -61,3 +61,9 @@
                iOS Version: %2<br>
                Wine Detective Version: %3<br>
                Storage Memory: %4 Used/ %5 Total";
+
+"dataLoadFailedTitle" = "Cannot Display Wines";
+"dataLoadFailedMessage" = "The download of your wines did not complete.";
+
+"noInternetTitle" = "Connection Failed";
+"noInternetMessage" = "Wine Detective cannot update your wine because it is not connected to the internet";

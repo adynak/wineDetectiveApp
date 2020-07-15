@@ -55,7 +55,15 @@ struct Alert{
     }
 
     static func showAPIFailedsAlert(on vc: UIViewController){
-        showBasicAlert(on: vc, with: "Login", message: "Failed to load your wines from the remote source")
+        let title = NSLocalizedString("dataLoadFailedTitle", comment: "")
+        let message = NSLocalizedString("dataLoadFailedMessage", comment: "")
+        showBasicAlert(on: vc, with: title, message: message)
+    }
+
+    static func noInternetAlert(on vc: UIViewController){
+        let title = NSLocalizedString("noInternetTitle", comment: "")
+        let message = NSLocalizedString("noInternetMessage", comment: "")
+        showBasicAlert(on: vc, with: title, message: message)
     }
 
     
