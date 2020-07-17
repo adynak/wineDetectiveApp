@@ -188,13 +188,14 @@ class DataServices {
         var wines: [DrillBottle] = []
         
         for row in dataArray{
-                              
+            let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
+
             let bottle = DrillBottle(
                 producer: row[positionOf.producer],
                 varietal: row[positionOf.wdVarietal],
                 location: row[positionOf.location],
                 bin: row[positionOf.bin],
-                vintage: row[positionOf.vintage],
+                vintage: vintage,
                 iWine: row[positionOf.iWine],
                 barcode: row[positionOf.barcode],
                 available: row[positionOf.available],
