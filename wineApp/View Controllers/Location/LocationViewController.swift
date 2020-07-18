@@ -127,6 +127,7 @@ class LocationViewController :UITableViewController {
         wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
         wineSelected.topLeft = bottles![section].name
         wineSelected.topRight = bottles![section].data[row].name
+        wineSelected.viewName = "location"
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected

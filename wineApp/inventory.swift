@@ -128,6 +128,7 @@ struct DrillLevel2 {
     var sortKey: String?
     var beginConsume: String?
     var endConsume: String?
+    var viewName: String?
 }
 
 struct Level0 {
@@ -172,6 +173,7 @@ struct wineDetail {
     var bin: String?
     var topLeft: String?
     var topRight: String?
+    var viewName: String?
 }
 
 struct WineInventory {

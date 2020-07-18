@@ -122,9 +122,9 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         wineBinsTableView.dataSource = self
         wineBinsTableView.register(DrillDownTableViewCell.self, forCellReuseIdentifier: cellID)
         if UserDefaults.standard.getShowBarcode() {
-            wineBinsTableView.rowHeight = CGFloat(80)
+            wineBinsTableView.rowHeight = CGFloat(76)
         } else {
-            wineBinsTableView.rowHeight = CGFloat(80)
+            wineBinsTableView.rowHeight = CGFloat(62)
         }
         
     }
@@ -166,7 +166,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                     designation: designation,
                     ava: ava,
                     beginConsume: beginConsume,
-                    endConsume: endConsume)
+                    endConsume: endConsume,
+                    viewName: passedValue.viewName)
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         cell.delegate = self
         

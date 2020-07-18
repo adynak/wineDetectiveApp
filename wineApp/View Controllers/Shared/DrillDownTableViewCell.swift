@@ -27,14 +27,25 @@ class DrillDownTableViewCell : UITableViewCell {
                 let designation = binItem.designation!
                 let ava = binItem.ava!
                 let description = designation == "" ? ava : "\(designation) \(ava)"
-                vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description) "
-                producerLabel.text = producer
+                vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
+                
+                let drinkBy = buildDrinkBy(beginConsume: binItem.beginConsume!, endConsume: binItem.endConsume!)
+                
+                
+                if binItem.viewName == "location"{
+                    vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer)"
+                    drinkByLabel.text = binItem.varietal
+                    locationAndBinLabel.text = "Drinking Window: \(drinkBy)"
+
+                } else {
+                    vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
+                    drinkByLabel.text = "Drinking Window: \(drinkBy)"
+                    locationAndBinLabel.text = "Location: \(binItem.location!) \(binItem.bin!)"
+
+                }
             }
             
-            locationAndBinLabel.text = "Location: \(binItem.location!) \(binItem.bin!)"
             barcodeLabel.text = "Barcode: \(binItem.barcode!)"
-            let drinkBy = buildDrinkBy(beginConsume: binItem.beginConsume!, endConsume: binItem.endConsume!)
-            drinkByLabel.text = "Drinking Window: \(drinkBy)"
 
             let bottleCount: Int = 1
             bottleCountLabel.text = setLabelText(count:bottleCount)
@@ -124,6 +135,8 @@ class DrillDownTableViewCell : UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        var rowHeight: CGFloat = 0
+        
         containerView.addSubview(vintageAndDescriptionLabel)
         containerView.addSubview(drinkByLabel)
         containerView.addSubview(locationAndBinLabel)
@@ -137,11 +150,18 @@ class DrillDownTableViewCell : UITableViewCell {
         contentView.addSubview(containerView)
         contentView.addSubview(stepperView)
         
+        if UserDefaults.standard.getShowBarcode() {
+            rowHeight = CGFloat(76)
+        } else {
+            rowHeight = CGFloat(62)
+        }
+        
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo:self.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo:self.leadingAnchor, constant:0),
             containerView.trailingAnchor.constraint(equalTo:self.trailingAnchor, constant:-10),
-            containerView.heightAnchor.constraint(equalToConstant:80)
+            containerView.topAnchor.constraint(equalTo:self.topAnchor, constant:4),
+            containerView.heightAnchor.constraint(equalToConstant:rowHeight),
         ])
         
         NSLayoutConstraint.activate([
