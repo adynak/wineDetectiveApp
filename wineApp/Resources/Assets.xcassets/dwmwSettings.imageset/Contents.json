@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "dwmwSettings.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "page1_landscape@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
