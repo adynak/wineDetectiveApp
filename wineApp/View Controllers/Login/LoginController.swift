@@ -52,8 +52,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     
     lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
-        pc.pageIndicatorTintColor = .red
-        pc.currentPageIndicatorTintColor = .red
+        pc.pageIndicatorTintColor = tableStripeEven
+        pc.currentPageIndicatorTintColor = barTintColor
         pc.numberOfPages = self.pages.count + 1
         return pc
     }()
@@ -188,7 +188,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     fileprivate func moveControlConstraintsOffScreen() {
-        pageControlBottomAnchor?.constant = 40
+        pageControlBottomAnchor?.constant = 400
         skipButtonTopAnchor?.constant = -40
         nextButtonTopAnchor?.constant = -40
     }
