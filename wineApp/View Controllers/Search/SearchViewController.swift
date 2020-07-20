@@ -149,7 +149,8 @@ class SearchViewController: UIViewController {
 
     
     func configureUI() {
-        view.backgroundColor = .green
+        view.backgroundColor = barTintColor
+        view.tintColor = .black
         setupNavigationBar()
         searchBar.delegate = self
         searchBar.sizeToFit()

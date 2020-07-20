@@ -10,6 +10,7 @@ import UIKit
 
 protocol SectionType : CustomStringConvertible {
     var containsSwitch: Bool {get}
+    var switchNumber: Int {get}
 }
 
 enum MoreMenuSections: Int, CaseIterable, CustomStringConvertible{
@@ -76,6 +77,17 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return "location"
         }
     }
+    
+    var switchNumber: Int{
+        switch self{
+        case .producer:
+            return 0
+        case .varietal:
+            return 1
+        case .location:
+            return 2
+        }
+    }
 }
 
 enum AppOptions: Int, CaseIterable, SectionType{
@@ -124,6 +136,17 @@ enum AppOptions: Int, CaseIterable, SectionType{
             return ""
         case .support:
             return "support"
+        }
+    }
+    
+    var switchNumber: Int{
+        switch self{
+        case .showBarcode:
+            return 3
+        case .showMeHow:
+            return 4
+        case .support:
+            return 5
         }
     }
 

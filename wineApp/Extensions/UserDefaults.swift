@@ -18,6 +18,10 @@ extension UserDefaults {
         case showPages
     }
     
+    static func contains(_ key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
+    
     func setIsLoggedIn(value: Bool) {
         set(value, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
         synchronize()

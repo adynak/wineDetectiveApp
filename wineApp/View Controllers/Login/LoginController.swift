@@ -112,6 +112,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             pages.removeAll()
             nextButton.isHidden = true
             skipButton.isHidden = true
+            pageControl.isHidden = true
         }
 
         observeNotifications()

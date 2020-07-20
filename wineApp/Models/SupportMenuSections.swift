@@ -59,6 +59,14 @@ enum ContactNames: Int, CaseIterable , SectionType {
             return "sendEmail"
         }
     }
+    
+    var switchNumber: Int{
+        switch self{
+        case .support:
+            return 0
+        }
+    }
+
 
     
 }
@@ -81,6 +89,13 @@ enum VersionOptions: Int, CaseIterable, SectionType{
         switch self{
         case .version:
             return "bottleLogo.png"
+        }
+    }
+    
+    var switchNumber: Int{
+        switch self{
+        case .version:
+            return 0
         }
     }
         

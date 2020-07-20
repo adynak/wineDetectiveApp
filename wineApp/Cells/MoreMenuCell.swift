@@ -8,8 +8,6 @@
 
 import UIKit
 
-var switchIndex: Int = -1
-
 class MoreMenuCell: UITableViewCell {
     
     var sectionType: SectionType? {
@@ -20,6 +18,24 @@ class MoreMenuCell: UITableViewCell {
             textLabel?.translatesAutoresizingMaskIntoConstraints = false
             textLabel?.centerYAnchor.constraint(equalTo:self.centerYAnchor).isActive = true
             textLabel?.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 60).isActive = true
+            switchControl.tag = sectionType.switchNumber
+            
+            switch sectionType.switchNumber{
+            case 3:
+                if UserDefaults.standard.getShowBarcode(){
+                    switchControl.isOn = true
+                } else {
+                    switchControl.isOn = false
+                }
+            case 4:
+                if UserDefaults.standard.getShowPages(){
+                    switchControl.isOn = true
+                } else {
+                    switchControl.isOn = false
+                }
+            default:
+                switchControl.isOn = false
+            }
             
             switchControl.isHidden = !sectionType.containsSwitch
         }
@@ -27,8 +43,11 @@ class MoreMenuCell: UITableViewCell {
     
     lazy var switchControl: UISwitch = {
         let sc = UISwitch()
-        sc.isOn = UserDefaults.standard.getShowBarcode()
-        sc.onTintColor = UIColor(red: 55/255, green: 120/255, blue: 250/255, alpha: 1)
+        sc.onTintColor = switchOnColor
+        sc.tintColor = switchOffColor
+        sc.backgroundColor = switchOffColor
+        sc.layer.cornerRadius = 16
+        
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.addTarget(self, action: #selector(handleSwitchAction), for: .valueChanged)
         return sc
@@ -47,9 +66,7 @@ class MoreMenuCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        switchIndex += 1
-        
+                
         addSubview(moreImageView)
         moreImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
         moreImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
@@ -57,7 +74,6 @@ class MoreMenuCell: UITableViewCell {
         moreImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
         addSubview(switchControl)
-        switchControl.tag = switchIndex
         switchControl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         switchControl.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
     }

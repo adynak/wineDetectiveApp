@@ -188,7 +188,8 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.moreImageView.image = UIImage(named:AppOptions(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
                 cell.sectionType = appOption
         }
-                
+           
+        cell.largeContentTitle = "123"
         return cell
     }
     

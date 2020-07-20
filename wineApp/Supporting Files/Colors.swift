@@ -22,4 +22,8 @@ let tableStripeEven =             UIColor(r: 202, g: 227, b: 255)
 let tableStripeWhite =            UIColor(r: 255, g: 255, b: 255)
 let tableStripeGray =             UIColor(r: 240, g: 240, b: 240)
 let storageLabelBackgroundColor = UIColor(r: 202, g: 227, b: 255)
+let viewBackgroundColor =         UIColor(r: 255, g: 255, b: 255)
+let switchOnColor =               UIColor(r: 52,  g: 199, b:  89)
+let switchOffColor =              UIColor(r: 255, g:  91, b: 110)
+
 

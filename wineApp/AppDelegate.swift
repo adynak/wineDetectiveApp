@@ -35,12 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14)!,
                 NSAttributedString.Key.foregroundColor : foregroundColor,
             ], for: .normal)
-        
+//        UserDefaults.resetStandardUserDefaults()
+
         UserDefaults.standard.set("", forKey: "userName")
         UserDefaults.standard.set("", forKey: "userPword")
         UserDefaults.standard.setIsLoggedIn(value: false)
-        UserDefaults.standard.set(true, forKey: "showBarcode")
-        UserDefaults.standard.set(true, forKey: "showPages")
+        if !UserDefaults.contains("showBarcode"){
+            UserDefaults.standard.set(true, forKey: "showBarcode")
+        }
+        if !UserDefaults.contains("showPages"){
+            UserDefaults.standard.set(true, forKey: "showPages")
+        }
 
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height + 50
