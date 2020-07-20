@@ -41,11 +41,13 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     var pages: [Page] = {
         let firstPage = Page(title: "Dude, where's my wine?", message: "You liked it, bought it, and brought it home.  What happened to it next?", imageName: "dwmw")
 
-        let secondPage = Page(title: "Send from your library", message: "Tap the More menu next to any book. Choose \"Send this Book\"", imageName: "page2")
+        let secondPage = Page(title: "You can search for it.", message: "Search by Producer, Varietal, Vineyard, AVA, or Designation", imageName: "dwmwSearch")
 
-        let thirdPage = Page(title: "Send from the player", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"", imageName: "page3")
+        let thirdPage = Page(title: "The More menu has other views", message: "Sort by Producer, Varietal, or by Location, great to use for physical inventory.", imageName: "dwmwMore")
         
-        return [firstPage, secondPage, thirdPage]
+        let fourthPage = Page(title: "Don't forget to check settings", message: "Don't use \"Barcode\", just turn it off!", imageName: "dwmwSettings")
+        
+        return [firstPage, secondPage, thirdPage, fourthPage]
     }()
     
     lazy var pageControl: UIPageControl = {
