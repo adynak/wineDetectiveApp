@@ -67,15 +67,23 @@ class MoreMenuCell: UITableViewCell {
     }
     
     @objc func handleSwitchAction(sender: UISwitch){
+        let showBarcode: Int = 3
+        let showPages: Int = 4
         if sender.isOn{
             print("SwitchOn \(sender.tag)")
-            if sender.tag == 3 {
+            if sender.tag == showBarcode {
                 UserDefaults.standard.set(true, forKey: "showBarcode")
+            }
+            if sender.tag == showPages {
+                UserDefaults.standard.set(true, forKey: "showPages")
             }
         } else {
             print("SwitchOff \(sender.tag)")
-            if sender.tag == 3 {
+            if sender.tag == showBarcode {
                 UserDefaults.standard.set(false, forKey: "showBarcode")
+            }
+            if sender.tag == showPages {
+                UserDefaults.standard.set(false, forKey: "showPages")
             }
         }
         

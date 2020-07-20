@@ -42,6 +42,7 @@
 "reportLocation" = "Sort By Location";
 
 "settingBarcode" = "Show Bottle Barcode";
+"settingShowMe" = "Show Introduction";
 "settingSupport" = "Support";
 
 "menuReports" = "Reports";

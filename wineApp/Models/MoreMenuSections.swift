@@ -80,11 +80,14 @@ enum ReportNames: Int, CaseIterable, SectionType{
 
 enum AppOptions: Int, CaseIterable, SectionType{
     case showBarcode
+    case showMeHow
     case support
     
     var containsSwitch: Bool {
         switch self{
             case .showBarcode:
+                return true
+            case .showMeHow:
                 return true
             case .support:
                 return false
@@ -95,6 +98,8 @@ enum AppOptions: Int, CaseIterable, SectionType{
         switch self{
         case .showBarcode:
             return NSLocalizedString("settingBarcode", comment: "")
+        case .showMeHow:
+            return NSLocalizedString("settingShowMe", comment: "")
         case .support:
             return NSLocalizedString("settingSupport", comment: "")
         }
@@ -104,6 +109,8 @@ enum AppOptions: Int, CaseIterable, SectionType{
         switch self{
         case .showBarcode:
             return "barcode.png"
+        case .showMeHow:
+            return "pages.png"
         case .support:
             return "support.png"
         }
@@ -112,6 +119,8 @@ enum AppOptions: Int, CaseIterable, SectionType{
     var controller: String{
         switch self{
         case .showBarcode:
+            return ""
+        case .showMeHow:
             return ""
         case .support:
             return "support"

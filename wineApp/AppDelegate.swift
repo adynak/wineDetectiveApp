@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set("", forKey: "userPword")
         UserDefaults.standard.setIsLoggedIn(value: false)
         UserDefaults.standard.set(true, forKey: "showBarcode")
+        UserDefaults.standard.set(true, forKey: "showPages")
 
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height + 50

@@ -25,7 +25,7 @@ class PageCell: UICollectionViewCell {
             
             imageView.image = UIImage(named: imageName)
             
-            let color = UIColor(white: 0.7, alpha: 1)
+            let color = UIColor(white: 0.2, alpha: 1)
             
             let attributedText = NSMutableAttributedString(string: page.title, attributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font): UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium), convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): color]))
             
@@ -73,16 +73,16 @@ class PageCell: UICollectionViewCell {
     func setupViews() {
         addSubview(imageView)
         addSubview(textView)
-//        addSubview(lineSeparatorView)
+        addSubview(lineSeparatorView)
         
-//        imageView.anchorToTop(topAnchor, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
-//
-//        textView.anchorWithConstantsToTop(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
+        imageView.anchorToTop(topAnchor, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
+        
+        textView.anchorWithConstantsToTop(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
         
         textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
         
-//        lineSeparatorView.anchorToTop(nil, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
-//        lin÷eSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        lineSeparatorView.anchorToTop(nil, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
+        lineSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,12 +90,6 @@ class PageCell: UICollectionViewCell {
     }
     
 }
-
-
-
-
-
-
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {

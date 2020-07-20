@@ -15,6 +15,7 @@ extension UserDefaults {
         case userName
         case userPword
         case showBarcode
+        case showPages
     }
     
     func setIsLoggedIn(value: Bool) {
@@ -46,5 +47,9 @@ extension UserDefaults {
     
     func getShowBarcode() -> Bool{
         return bool(forKey: UserDefaultsKeys.showBarcode.rawValue)
+    }
+    
+    func getShowPages() -> Bool{
+        return bool(forKey: UserDefaultsKeys.showPages.rawValue)
     }
 }
