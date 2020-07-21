@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let height = UIScreen.main.bounds.height + 50
         let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
         
-        let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
+//        let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
 
         window = UIWindow(frame: frame)
         window?.makeKeyAndVisible()

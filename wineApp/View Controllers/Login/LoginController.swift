@@ -43,7 +43,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
 
         let secondPage = Page(title: "You can search for it.", message: "Search by Producer, Varietal, Vineyard, AVA, or Designation", imageName: "dwmwSearch")
 
-        let thirdPage = Page(title: "The More menu has other views", message: "Sort by Producer, Varietal, or by Location, great to use for physical inventory.", imageName: "dwmwMore")
+        let thirdPage = Page(title: "The More menu has other views", message: "Sort by Producer or by Varietal. The sort by Location is a great tool for physical inventory.", imageName: "dwmwMore")
         
         let fourthPage = Page(title: "Don't forget to check settings", message: "Don't use \"Barcode\", just turn it off!", imageName: "dwmwSettings")
         
@@ -228,7 +228,9 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             Alert.showLoginCredentialsAlert(on: self)
         } else {
             UserDefaults.standard.setIsLoggedIn(value: true)
-            let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+//            let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+            let rootViewController = self.view.window!.rootViewController
+            
             guard let mainNavigationController = rootViewController as? MainTabBarController else { return }
             
             let spinnerText = NSLocalizedString("runAPI", comment: "")

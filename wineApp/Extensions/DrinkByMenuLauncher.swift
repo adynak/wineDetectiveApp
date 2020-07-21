@@ -88,7 +88,9 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     
     func showDrinkByMenu(){
         
-        if let window = UIApplication.shared.keyWindow{
+//        if let window = UIApplication.shared.keyWindow {
+        if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
+
             blackView.backgroundColor =  UIColor(white: 0, alpha: 0.5)
             
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
@@ -115,7 +117,8 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     @objc func handleDismiss(drinkByMenuItem: DrinkByMenuItem){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 0
-                if let window = UIApplication.shared.keyWindow{
+//                if let window = UIApplication.shared.keyWindow {
+                if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
                     self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
                 }
         }, completion: { finished in

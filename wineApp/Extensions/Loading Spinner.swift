@@ -79,7 +79,7 @@ extension UIViewController{
     }
     
     func hideSpinner(){
-        if var subview = self.view.viewWithTag(19) {
+        if let subview = self.view.viewWithTag(19) {
             subview.removeFromSuperview()
         }
     }
