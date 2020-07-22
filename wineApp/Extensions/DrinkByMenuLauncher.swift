@@ -27,7 +27,7 @@ class DrinkByMenuItem: NSObject{
 
 class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
-    let blackView = UIView()
+    let backgroundView = UIView()
     let cellID = "cellID"
     let cellHeight: CGFloat = 35
     let drinkByMenuItems: [DrinkByMenuItem] = {
@@ -91,22 +91,22 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
 //        if let window = UIApplication.shared.keyWindow {
         if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
 
-            blackView.backgroundColor =  UIColor(white: 0, alpha: 0.5)
+            backgroundView.backgroundColor =  UIColor(white: 0, alpha: 0.5)
             
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
             
-            window.addSubview(blackView)
+            window.addSubview(backgroundView)
             window.addSubview(collectionView)
             let height: CGFloat = CGFloat(drinkByMenuItems.count) * cellHeight + 10
             let y = window.frame.height - height - 20
 
             collectionView.frame = CGRect(x: 20, y: window.frame.height - 50, width: window.frame.width - 40, height: height)
             
-            blackView.frame = window.frame
-            blackView.alpha = 0
+            backgroundView.frame = window.frame
+            backgroundView.alpha = 0
             
             UIView.animate( withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.blackView.alpha = 1
+                self.backgroundView.alpha = 1
                 self.collectionView.frame = CGRect(x: 20, y: y - 50, width: self.collectionView.frame.width, height: height)
             }, completion: nil)
             
@@ -116,7 +116,7 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     
     @objc func handleDismiss(drinkByMenuItem: DrinkByMenuItem){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.blackView.alpha = 0
+                self.backgroundView.alpha = 0
 //                if let window = UIApplication.shared.keyWindow {
                 if let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first {
                     self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)

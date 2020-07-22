@@ -99,38 +99,52 @@ class DrinkByViewController: UIViewController {
     
     @objc func changeDrinkBySort(_ notification: Notification) {
         let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
-//        let info1 = notification.userInfo?["key1"]
         
+        searchWines = allWine?.search
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].available) > ($1.label[0].available)
+        })
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+        footerView.text = countBottles(bins: searchKeys)
+
         switch drinkByMenuCode {
         case "Linear":
             searchWines = searchWines!.sorted(by: {
                 ($0.label[0].linear) > ($1.label[0].linear)
             })
         case "Bell":
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].bell) > ($1.label[0].bell)
-        })
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].bell) > ($1.label[0].bell)
+            })
         case "Early":
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].early) > ($1.label[0].early)
-        })
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].early) > ($1.label[0].early)
+            })
         case "Late":
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].late) > ($1.label[0].late)
-        })
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].late) > ($1.label[0].late)
+            })
         case "Fast":
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].fast) > ($1.label[0].fast)
-        })
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].fast) > ($1.label[0].fast)
+            })
         case "TwinPeak":
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].twinPeak) > ($1.label[0].twinPeak)
-        })
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].twinPeak) > ($1.label[0].twinPeak)
+            })
         case "Simple":
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].simple) > ($1.label[0].simple)
-        })
-            
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].simple) > ($1.label[0].simple)
+            })
+        case "Missing":
+            searchWines = searchWines!.filter{
+                $0.label[0].drinkBy == ""
+            }
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].producer) < ($1.label[0].producer)
+            })
+            searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+            footerView.text = countBottles(bins: searchKeys)
         default:
             searchWines = searchWines!.sorted(by: {
                 ($0.label[0].available) > ($1.label[0].available)
