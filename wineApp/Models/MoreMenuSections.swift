@@ -40,6 +40,7 @@ enum ReportNames: Int, CaseIterable, SectionType{
     case producer
     case varietal
     case location
+    case missingDates
     
     var containsSwitch: Bool {
         return false
@@ -53,6 +54,8 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return NSLocalizedString("reportVarietal", comment: "")
         case .location:
             return NSLocalizedString("reportLocation", comment: "")
+        case .missingDates:
+            return NSLocalizedString("reportMissingDates", comment: "")
         }
     }
     
@@ -64,6 +67,8 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return "varietal.png"
         case .location:
             return "location.png"
+        case .missingDates:
+            return "calendar.png"
         }
     }
     
@@ -75,6 +80,9 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return "varietal"
         case .location:
             return "location"
+        case .missingDates:
+            return "missingDates"
+
         }
     }
     
@@ -86,6 +94,8 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return 1
         case .location:
             return 2
+        case .missingDates:
+            return 0
         }
     }
 }

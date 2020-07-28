@@ -40,6 +40,7 @@
 "reportProducer" = "Sort By Producer";
 "reportVarietal" = "Sort By Varietal";
 "reportLocation" = "Sort By Location";
+"reportMissingDates" = "Missing Drink By Dates";
 
 "settingBarcode" = "Show Bottle Barcode";
 "settingShowMe" = "Show Introduction";
