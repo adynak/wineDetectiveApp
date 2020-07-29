@@ -13,7 +13,7 @@ class ProducerViewController :UITableViewController {
     let cellID = "cellId"
     
     var dig: Int = 0
-
+    
     var bottles: [DrillLevel0]?
     var locationLocations:Set = Set<Int>()
     

@@ -184,6 +184,7 @@ struct WineInventory {
     var search: [AllLevel0]?
     var searchVarietals: [Producers]?
     var location: [DrillLevel0]?
+    var missing: [DrillLevel0]?
 }
 
 struct Producers: Codable {

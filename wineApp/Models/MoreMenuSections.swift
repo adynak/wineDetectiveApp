@@ -82,7 +82,6 @@ enum ReportNames: Int, CaseIterable, SectionType{
             return "location"
         case .missingDates:
             return "missingDates"
-
         }
     }
     

@@ -106,22 +106,31 @@ class API {
                         
             let locationSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
-                                    sortKeys: ["location","bin"])
+                                    sortKeys: ["location","bin"],
+                                    missingOnly: false)
 
             let searchSort = DataServices.buildAllBottlesArray(fields: fields)
                                                             
             let producerSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
-                                    sortKeys: ["producer","wdVarietal"])
+                                    sortKeys: ["producer","wdVarietal"],
+                                    missingOnly: false)
 
             let varietalSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
-                                    sortKeys: ["wdVarietal","producer"])
+                                    sortKeys: ["wdVarietal","producer"],
+                                    missingOnly: false)
+            
+            let missingSort = DataServices.buildDrillIntoBottlesArray(
+                                    fields: fields,
+                                    sortKeys: ["producer","wdVarietal"],
+                                    missingOnly: true)
                                                     
             let newInventory = WineInventory(producers: producerSort,
                                              varietals: varietalSort,
                                              search: searchSort,
-                                             location: locationSort)
+                                             location: locationSort,
+                                             missing: missingSort)
             
             print("build data arrays complete")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APILoaded"), object: nil)

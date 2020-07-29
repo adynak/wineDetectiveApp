@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProducerViewController :UITableViewController {
+class MissingDrinkByViewController :UITableViewController {
     
     let cellID = "cellId"
     
@@ -33,14 +33,15 @@ class ProducerViewController :UITableViewController {
         
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
-        bottles = allWine?.producers
+        bottles = allWine?.missing
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("producerTitle", comment: "title for location")
+        navigationItem.title = NSLocalizedString("missingTitle", comment: "title for location")
         let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,

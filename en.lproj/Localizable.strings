@@ -26,6 +26,7 @@
 "drinkByTitle" = "Drink By";
 "searchTitle" = "Search";
 "locationTitle" = "Location";
+"missingTitle" = "Consume Dates Missing";
 "moreTitle" = "More";
 "supportTitle" = "Support";
 

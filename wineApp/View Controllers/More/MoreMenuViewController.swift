@@ -153,6 +153,8 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
                     moreController = VarietalViewController()
                 case "location":
                     moreController = LocationViewController()
+                case "missingDates":
+                    moreController = MissingDrinkByViewController()
                 default:
                     return
                 }

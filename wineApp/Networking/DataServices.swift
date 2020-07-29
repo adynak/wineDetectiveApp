@@ -159,7 +159,7 @@ class DataServices {
     }
 
     
-    static func buildDrillIntoBottlesArray(fields:[Int], sortKeys: [String])->[DrillLevel0]{
+    static func buildDrillIntoBottlesArray(fields:[Int], sortKeys: [String], missingOnly: Bool)->[DrillLevel0]{
         
         let positionOf = Label(data:fields)
         
@@ -213,8 +213,14 @@ class DataServices {
                 sortKey0: row[sortIndex0],
                 sortKey1: row[sortIndex1]
             )
-
-            wines.append(bottle)
+            
+            if missingOnly {
+                if row[positionOf.beginConsume] == "" && row[positionOf.endConsume] == ""{
+                    wines.append(bottle)
+                }
+            } else {
+                wines.append(bottle)
+            }
         }
 
         let groupLevel0 = Dictionary(grouping: wines, by: { $0.sortKey0 })
@@ -439,17 +445,20 @@ class DataServices {
                 
         let locationSort = DataServices.buildDrillIntoBottlesArray(
                                 fields: fields,
-                                sortKeys: ["location","bin"])
+                                sortKeys: ["location","bin"],
+                                missingOnly: false)
 
         let searchSort = DataServices.buildAllBottlesArray(fields: fields)
                                                         
         let producerSort = DataServices.buildDrillIntoBottlesArray(
                                 fields: fields,
-                                sortKeys: ["producer","wdVarietal"])
+                                sortKeys: ["producer","wdVarietal"],
+                                missingOnly: false)
 
         let varietalSort = DataServices.buildDrillIntoBottlesArray(
                                 fields: fields,
-                                sortKeys: ["wdVarietal","producer"])
+                                sortKeys: ["wdVarietal","producer"],
+                                missingOnly: false)
                                                 
         let newInventory = WineInventory(producers: producerSort,
                                          varietals: varietalSort,
