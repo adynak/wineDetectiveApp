@@ -46,8 +46,8 @@ class MoreMenuViewController: UIViewController {
         configureTableView()
         
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("moreTitle", comment: "")
-        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+        navigationItem.title = NSLocalizedString("titleMore", comment: "navigation title: More")
+        let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
                                            style: UIBarButtonItem.Style.plain,

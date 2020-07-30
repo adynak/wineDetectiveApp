@@ -38,7 +38,7 @@ class DrinkByViewController: UIViewController {
         tv.isEditable = false
         tv.isScrollEnabled = false
         tv.layer.masksToBounds = true
-        tv.text = "Total Bottles"
+        tv.text = NSLocalizedString("totalBottles", comment: "plural : total bottles")
         tv.textAlignment = .center
         tv.backgroundColor = barTintColor
         tv.textColor = .white
@@ -51,7 +51,7 @@ class DrinkByViewController: UIViewController {
         sb.searchTextField.font = UIFont.systemFont(ofSize: 12)
         sb.searchTextField.addDoneButtonOnKeyboard()
         sb.autocapitalizationType = .none
-        sb.placeholder = NSLocalizedString("drinkByTitle", comment: "")
+        sb.placeholder = NSLocalizedString("titleSearch", comment: "navigation title: search")
         sb.subviews.first?.layer.cornerRadius = 10
         sb.subviews.first?.clipsToBounds = true
         return sb
@@ -170,9 +170,9 @@ class DrinkByViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = NSLocalizedString("drinkByTitle", comment: "")
+        navigationItem.title = NSLocalizedString("titleDrinkBy", comment: "navigation: drink By")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-                                                title: "Log Out",
+                                                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
                                                 style: UIBarButtonItem.Style.plain,
                                                 target: self,
                                                 action: #selector(handleLogOut))
@@ -187,7 +187,7 @@ class DrinkByViewController: UIViewController {
             }
         }
         
-        let plural = totalBottles == 1 ? " Bottle" : " Bottles"
+        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
         
         return "\(totalBottles)" + plural
     }
@@ -218,7 +218,7 @@ class DrinkByViewController: UIViewController {
             segmentedControl.isMomentary = true
             
             navigationItem.leftBarButtonItem = UIBarButtonItem(
-                                                  title: "Log Out",
+                                                  title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
                                                   style: UIBarButtonItem.Style.plain,
                                                   target: self,
                                                   action: #selector(handleLogOut))
@@ -399,7 +399,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
             totalBottles += bottles.bottleCount!
         }
         
-        var bottleCount = totalBottles == 1 ? " bottle" : " bottles"
+        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
         bottleCount = " (\(totalBottles) " + bottleCount + ")"
                 
         cell.textLabel?.numberOfLines = 1
@@ -407,7 +407,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
         let line2 = "  \(bottle.producer) - \(bottle.appellation)" +
-                    "\n  " + NSLocalizedString("drinkByTitle", comment: "") + " \(bottle.drinkBy)"
+                    "\n  " + NSLocalizedString("drinkByWindow", comment: "drinking window") + " \(bottle.drinkBy)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2

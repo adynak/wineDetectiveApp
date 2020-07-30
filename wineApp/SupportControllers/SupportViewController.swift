@@ -47,7 +47,7 @@ class SupportViewController: UIViewController, MFMailComposeViewControllerDelega
     func configureUI() {
         configureTableView()
         
-        navigationItem.title = NSLocalizedString("supportTitle", comment: "")
+        navigationItem.title = NSLocalizedString("titleSupport", comment: "navigation title : Support")
 
     }
     
@@ -171,8 +171,8 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
 
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients([NSLocalizedString("contactEmail", comment: "")])
-            mail.setSubject(NSLocalizedString("emailSubject", comment: ""))
+            mail.setToRecipients([NSLocalizedString("contactEmailAddress", comment: "email address for support")])
+            mail.setSubject(NSLocalizedString("emailSubject", comment: "email support subject"))
             mail.setMessageBody(emailBody, isHTML: true)
             present(mail, animated: true)
         } else {

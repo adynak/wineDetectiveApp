@@ -39,13 +39,21 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     var dataLoaded = false
     
     var pages: [Page] = {
-        let firstPage = Page(title: "Dude, where's my wine?", message: "You liked it, bought it, and brought it home.  What happened to it next?", imageName: "dwmw")
+        let firstPage = Page(title: NSLocalizedString("page1Title", comment: "Dude, Where's My Wine?"),
+                             message: NSLocalizedString("page1Message", comment: "You liked it, bought it, and brought it home.  What happened to it next?"),
+                             imageName: "dwmw")
 
-        let secondPage = Page(title: "You can search for it.", message: "Search by Producer, Varietal, Vineyard, AVA, or Designation", imageName: "dwmwSearch")
+        let secondPage = Page(title: NSLocalizedString("page2Title", comment: "You can search for it."),
+                              message: NSLocalizedString("page2Message", comment: "Search by Producer, Varietal, Vineyard, AVA, or Designation"),
+                              imageName: "dwmwSearch")
 
-        let thirdPage = Page(title: "The More menu has other views", message: "Sort by Producer or by Varietal. The sort by Location is a great tool for physical inventory.", imageName: "dwmwMore")
-        
-        let fourthPage = Page(title: "Don't forget to check settings", message: "Don't use \"Barcode\", just turn it off!", imageName: "dwmwSettings")
+        let thirdPage = Page(title: NSLocalizedString("page3Title", comment: "The More menu has other views"),
+                              message: NSLocalizedString("page3Message", comment: "Sort by Producer or by Varietal. The Sort by Location is a great tool for physical inventory."),
+                              imageName: "dwmwMore")
+
+        let fourthPage = Page(title: NSLocalizedString("page4Title", comment: "Don't forget to check settings"),
+                              message: NSLocalizedString("page4Message", comment: "Don't use \"Barcode\", just turn it off!"),
+                              imageName: "dwmwSettings")
         
         return [firstPage, secondPage, thirdPage, fourthPage]
     }()
@@ -60,21 +68,20 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     
     lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Skip", for: .normal)
+        button.setTitle(NSLocalizedString("buttonSkip", comment: "Skip"), for: .normal)
         button.setTitleColor(loginButtonColor, for: .normal)
         button.addTarget(self, action: #selector(skip), for: .touchUpInside)
         return button
     }()
 
     @objc func skip() {
-        // we only need to lines to do this
         pageControl.currentPage = pages.count - 1
         nextPage()
     }
     
     lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Next", for: .normal)
+        button.setTitle(NSLocalizedString("buttonNext", comment: "Next"), for: .normal)
         button.setTitleColor(loginButtonColor, for: .normal)
         button.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
         return button
@@ -233,14 +240,12 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             
             guard let mainNavigationController = rootViewController as? MainTabBarController else { return }
             
-            let spinnerText = NSLocalizedString("runAPI", comment: "")
+            let spinnerText = NSLocalizedString("runAPI", comment: "waiting for API to return")
             showSpinner(localizedText: spinnerText)
-//            API.load()
             
             var timeLeft = 21
             
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-//                print("timer fired!")
                 timeLeft -= 1
                 if timeLeft == 20 {
                     let results = API.load()

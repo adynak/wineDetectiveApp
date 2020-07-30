@@ -15,9 +15,9 @@ enum SupportMenuSections: Int, CaseIterable, CustomStringConvertible{
     var description: String{
         switch self{
         case .Contact:
-            return NSLocalizedString("menuContacts", comment: "").uppercased()
+            return NSLocalizedString("menuContacts", comment: "contacts menu item").uppercased()
         case .Version:
-            return NSLocalizedString("menuVersion", comment: "").uppercased()
+            return NSLocalizedString("menuVersion", comment: "version menu item").uppercased()
         }
     }
     
@@ -42,7 +42,7 @@ enum ContactNames: Int, CaseIterable , SectionType {
     var description: String{
         switch self{
         case .support:
-            return NSLocalizedString("contactEmail", comment: "")
+            return NSLocalizedString("contactEmail", comment: "email menu item")
         }
     }
     

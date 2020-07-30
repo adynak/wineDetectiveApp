@@ -76,7 +76,7 @@ class SearchViewController: UIViewController {
         sb.searchTextField.font = UIFont.systemFont(ofSize: 12)
         sb.searchTextField.addDoneButtonOnKeyboard()
         sb.autocapitalizationType = .none
-        sb.placeholder = NSLocalizedString("searchTitle", comment: "")
+        sb.placeholder = NSLocalizedString("titleSearch", comment: "navigation title: search")
         sb.subviews.first?.layer.cornerRadius = 10
         sb.subviews.first?.clipsToBounds = true
         return sb
@@ -125,9 +125,9 @@ class SearchViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = NSLocalizedString("searchTitle", comment: "")
+        navigationItem.title = NSLocalizedString("titleSearch", comment: "navigation title: search")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-                                                title: "Log Out",
+                                                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
                                                 style: UIBarButtonItem.Style.plain,
                                                 target: self,
                                                 action: #selector(handleLogOut))
@@ -142,7 +142,7 @@ class SearchViewController: UIViewController {
             }
         }
         
-        let plural = totalBottles == 1 ? " Bottle" : " Bottles"
+        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
         
         return "\(totalBottles)" + plural
     }
@@ -160,10 +160,10 @@ class SearchViewController: UIViewController {
     func showSearchBarButton(shouldShow: Bool) {
         if shouldShow {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
-                                                  title: "Log Out",
-                                                  style: UIBarButtonItem.Style.plain,
-                                                  target: self,
-                                                  action: #selector(handleLogOut))
+                                                    title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+                                                    style: UIBarButtonItem.Style.plain,
+                                                    target: self,
+                                                    action: #selector(handleLogOut))
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                                                   barButtonSystemItem: .search,
                                                   target: self,
@@ -324,7 +324,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
             totalBottles += bottles.bottleCount!
         }
         
-        var bottleCount = totalBottles == 1 ? " bottle" : " bottles"
+        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
         bottleCount = " (\(totalBottles) " + bottleCount + ")"
                 
         cell.textLabel?.numberOfLines = 1
@@ -332,7 +332,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
         let line2 = "  \(bottle.producer) - \(bottle.appellation)" +
-                    "\n  " + NSLocalizedString("drinkByTitle", comment: "") + " \(bottle.drinkBy)"
+                    "\n  " + NSLocalizedString("drinkByWindow", comment: "drinking window") + " \(bottle.drinkBy)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2

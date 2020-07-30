@@ -27,8 +27,8 @@ class VarietalViewController : UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("varietalTitle", comment: "title for location")
-        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+        navigationItem.title = NSLocalizedString("titleVarietal", comment: "title for varietal")
+        let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
                                            style: UIBarButtonItem.Style.plain,
@@ -131,7 +131,7 @@ class VarietalViewController : UITableViewController {
 
         let detailController = DrillDownDetailViewController()
         detailController.passedValue = wineSelected
-        detailController.title = NSLocalizedString("varietalTitle", comment: "title for location")
+        detailController.title = NSLocalizedString("titleVarietal", comment: "title for varietal")
         let navController = UINavigationController(rootViewController: detailController)
         present(navController, animated: true, completion: nil)
 

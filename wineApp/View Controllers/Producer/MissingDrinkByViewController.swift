@@ -41,8 +41,8 @@ class MissingDrinkByViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("missingTitle", comment: "title for location")
-        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+        navigationItem.title = NSLocalizedString("titleMissing", comment: "title for missing bottles")
+        let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
                                            style: UIBarButtonItem.Style.plain,
@@ -76,7 +76,7 @@ class MissingDrinkByViewController :UITableViewController {
     }
     
     @objc func handleReload() {
-        bottles = allWine?.producers
+        bottles = allWine?.missing
         self.tableView.reloadData()
         for row in locationLocations{
             if (row < bottles!.count){
@@ -145,7 +145,7 @@ class MissingDrinkByViewController :UITableViewController {
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected
-        locationDetailController.title = NSLocalizedString("producerTitle", comment: "title for location")
+        locationDetailController.title = NSLocalizedString("titleMissing", comment: "title for missing bottles")
         let navController = UINavigationController(rootViewController: locationDetailController)
         present(navController, animated: true, completion: nil)
 

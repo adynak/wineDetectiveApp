@@ -69,7 +69,7 @@ class API {
 
             let data = try fetchRemoteDataAsyncAwait(url: dataUrl)
             
-            var csvInventory = String(data: data!, encoding: String.Encoding.ascii)
+            var csvInventory = String(data: data!, encoding: String.Encoding.utf8)
             
             csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
             inventoryArray = DataServices.parseCsv(data:csvInventory!)
@@ -123,7 +123,7 @@ class API {
             
             let missingSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
-                                    sortKeys: ["producer","wdVarietal"],
+                                    sortKeys: ["producer","iWine"],
                                     missingOnly: true)
                                                     
             let newInventory = WineInventory(producers: producerSort,

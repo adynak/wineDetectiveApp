@@ -14,7 +14,8 @@ struct Alert{
     private static func showBasicAlert(on vc: UIViewController,
                                        with title:String,
                                        message: String,
-                                       buttonText: String = "OK"){
+                                       buttonText: String = NSLocalizedString("alertTextHelp", comment: "alert button text: Help")
+){
         
         let alert = UIAlertController(title: title,
                                       message: message,
@@ -27,51 +28,39 @@ struct Alert{
         DispatchQueue.main.async {
             vc.present(alert,animated: true)
 //            vc.navigationController?.popViewController(animated: true)
-
-            
         }
         
     }
-    
-    static func showAddBottleAlert(on vc: UIViewController){
-        showBasicAlert(on: vc,
-                       with: "Add New Bottle",
-                       message: "add bottle requested",
-                       buttonText: "Add")
-    }
-    
+        
     static func showActionMenuAlert(on vc: UIViewController){
         showBasicAlert(on: vc, with: "Action Menu", message: "action menu requested")
         
     }
 
     static func showLoginCredentialsAlert(on vc: UIViewController){
-        showBasicAlert(on: vc, with: "Login", message: "User Name and Password are required")
+        showBasicAlert(on: vc, with: "Login", message: NSLocalizedString("alertTextMissingCredentials", comment: "alert text: Username and password are required"))
     }
 
-    
     static func showEmailFailedsAlert(on vc: UIViewController){
-        showBasicAlert(on: vc, with: "eMail", message: "Email is not configured to work with this application.")
+        showBasicAlert(on: vc, with: "eMail", message: NSLocalizedString("alertTextEmail", comment: "alert text: email not configured for this application"))
     }
 
     static func showAPIFailedsAlert(on vc: UIViewController){
-        let title = NSLocalizedString("dataLoadFailedTitle", comment: "")
-        let message = NSLocalizedString("dataLoadFailedMessage", comment: "")
+        let title = NSLocalizedString("alertTextDataLoadFailedTitle", comment: "alert button text: data download failed title")
+        let message = NSLocalizedString("alertTextDataLoadFailedMessage", comment: "alert text: data download failed message")
         showBasicAlert(on: vc, with: title, message: message)
     }
 
     static func noInternetAlert(on vc: UIViewController){
-        let title = NSLocalizedString("noInternetTitle", comment: "")
-        let message = NSLocalizedString("noInternetMessage", comment: "")
+        let title = NSLocalizedString("alertTextNoInternetTitle", comment: "alert button text: no internet title")
+        let message = NSLocalizedString("alertTextNoInternetMessage", comment: "alert text: no internet message")
         showBasicAlert(on: vc, with: title, message: message)
     }
 
-    
-    
     static func showWineDetailAlert(on vc: UIViewController, with bottleInfo:String){
         showBasicAlert(on: vc,
-                       with: "Wine Details",
-                       message: "wine detail requested for \n" + bottleInfo )
+                       with: NSLocalizedString("alertTextWineDetailsTitle", comment: "alert title: Wine Details"),
+                       message: NSLocalizedString("alertTextWineDetailsText", comment: "alert button text: wine details for these bottles") + bottleInfo )
     }
 
 }

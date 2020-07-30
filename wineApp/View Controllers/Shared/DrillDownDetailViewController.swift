@@ -24,7 +24,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     let storageLabel: UITextView = {
         let tv = UITextView()
-        tv.text = NSLocalizedString("locationAndBin", comment: "")
+        tv.text = NSLocalizedString("locationAndBin", comment: "location and bin")
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = storageLabelBackgroundColor
@@ -43,7 +43,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         tv.isScrollEnabled = false
         tv.layer.cornerRadius = 5
         tv.layer.masksToBounds = true
-        tv.text = NSLocalizedString("totalBottles", comment: "")
+        tv.text = NSLocalizedString("totalBottles", comment: "plural : total bottles")
         tv.contentInset=UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0);
         return tv
     }()
@@ -92,7 +92,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func setupWineLabelLayout(){
-        let bottles = NSLocalizedString("bottles", comment: "")
+        let bottles = NSLocalizedString("bottles", comment: "plural bottles")
         storageLabel.text = "\(passedValue.topLeft!) \(passedValue.topRight!)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
@@ -183,13 +183,13 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         navigationItem.title = title
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title:   NSLocalizedString("cancel", comment: ""),
+            title: NSLocalizedString("buttonCancel", comment: "cancel button"),
             style: .plain,
             target: self,
             action: #selector(addTapped))
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title:   NSLocalizedString("save", comment: ""),
+            title: NSLocalizedString("buttonSave", comment: "navigation save button"),
             style: .plain,
             target: self,
             action: #selector(addTapped))
@@ -198,7 +198,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     @objc func addTapped(sender: UIBarButtonItem){
         var markAsDrank = [DrillLevel2]()
 
-        if (sender.title == NSLocalizedString("save", comment: "")){
+        if (sender.title == NSLocalizedString("buttonSave", comment: "navigation save button")){
             for cell in cells {
                 if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
                     if bottles == 0{
@@ -212,9 +212,9 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
             if markAsDrank.count > 0{
-                let alertTitle = NSLocalizedString("markAsDrankTitle", comment: "")
-                let okBtn = NSLocalizedString("okBtn", comment: "")
-                let cancelBtn = NSLocalizedString("cancelBtn", comment: "")
+                let alertTitle = NSLocalizedString("markAsDrankTitle", comment: "alert title mark as drank")
+                let okBtn = NSLocalizedString("okBtn", comment: "OK button")
+                let cancelBtn = NSLocalizedString("buttonCancel", comment: "cancel button")
 //                let message = buildRemoveMessage(bottles: markAsDrank)
                 let message = ""
 
@@ -240,8 +240,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
         
     private func getTotalBottles()  -> String {
-        let singularBottle = NSLocalizedString("singularBottle", comment: "")
-        let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
+        let singularBottle = NSLocalizedString("singularBottle", comment: "bottle remaining")
+        let pluralBottle = NSLocalizedString("pluralBottle", comment: "bottles remaining")
         let totalBottles = wineBins.count
         let bottleString = (totalBottles > 1) ? pluralBottle : singularBottle
         
@@ -249,7 +249,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func buildRemoveMessage(bottles: [DrillLevel2])->String{
-        let confirmBtn = NSLocalizedString("confirmBtn", comment: "")
+        let confirmBtn = NSLocalizedString("buttonConfirm", comment: "confirm buttom")
 
         var message: String = ""
         for bottle in bottles{
@@ -263,8 +263,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
 extension DrillDownDetailViewController : DrillDownStepperCellDelegate {
     func didTapStepper(direction: String){
-        let singularBottle = NSLocalizedString("singularBottle", comment: "")
-        let pluralBottle = NSLocalizedString("pluralBottle", comment: "")
+        let singularBottle = NSLocalizedString("singularBottle", comment: "bottle remaining")
+        let pluralBottle = NSLocalizedString("pluralBottle", comment: "bottles remaining")
         let minus = "minus" as String
         let plus = "plus" as String
         

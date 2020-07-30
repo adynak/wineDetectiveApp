@@ -30,19 +30,15 @@ class MainTabBarController: UITabBarController {
     @objc func showLoginController() {
         let loginController = LoginController()
         present(loginController, animated: true, completion: {
-            //perhaps we'll do something here later
         })
     }
 
     
     func setupTabBar() {
         
-//        let locationTitle = NSLocalizedString("locationTitle", comment: "")
-//        let producerTitle = NSLocalizedString("producerTitle", comment: "")
-//        let varietalTitle = NSLocalizedString("varietalTitle", comment: "")
-        let drinkByTitle = NSLocalizedString("drinkByTitle", comment: "")
-        let searchTitle = NSLocalizedString("searchTitle", comment: "")
-        let moreTitle = NSLocalizedString("moreTitle", comment: "")
+        let drinkByTitle = NSLocalizedString("titleDrinkBy", comment: "navigation: drink By")
+        let searchTitle = NSLocalizedString("titleSearch", comment: "navigation title: search")
+        let moreTitle = NSLocalizedString("titleMore", comment: "navigation title: More")
 
         
         let drinkByController = createTabController(viewController: DrinkByViewController(),

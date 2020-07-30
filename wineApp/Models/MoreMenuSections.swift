@@ -20,9 +20,9 @@ enum MoreMenuSections: Int, CaseIterable, CustomStringConvertible{
     var description: String{
         switch self{
         case .Reports:
-            return NSLocalizedString("menuReports", comment: "").uppercased()
+            return NSLocalizedString("menuReports", comment: "reports menu item").uppercased()
         case .Settings:
-            return NSLocalizedString("menuSettings", comment: "").uppercased()
+            return NSLocalizedString("menuSettings", comment: "settings menu item").uppercased()
         }
     }
     
@@ -49,13 +49,13 @@ enum ReportNames: Int, CaseIterable, SectionType{
     var description: String{
         switch self{
         case .producer:
-            return NSLocalizedString("reportProducer", comment: "")
+            return NSLocalizedString("reportProducer", comment: "report producer menu item")
         case .varietal:
-            return NSLocalizedString("reportVarietal", comment: "")
+            return NSLocalizedString("reportVarietal", comment: "report varietal menu item")
         case .location:
-            return NSLocalizedString("reportLocation", comment: "")
+            return NSLocalizedString("reportLocation", comment: "report location menu item")
         case .missingDates:
-            return NSLocalizedString("reportMissingDates", comment: "")
+            return NSLocalizedString("reportMissingDates", comment: "report missing dates menu item")
         }
     }
     
@@ -118,11 +118,11 @@ enum AppOptions: Int, CaseIterable, SectionType{
     var description: String{
         switch self{
         case .showBarcode:
-            return NSLocalizedString("settingBarcode", comment: "")
+            return NSLocalizedString("settingBarcode", comment: "barcode menu item")
         case .showMeHow:
-            return NSLocalizedString("settingShowMe", comment: "")
+            return NSLocalizedString("settingShowMe", comment: "show me menu item")
         case .support:
-            return NSLocalizedString("settingSupport", comment: "")
+            return NSLocalizedString("settingSupport", comment: "support menu item")
         }
     }
     

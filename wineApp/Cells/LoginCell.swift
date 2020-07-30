@@ -17,7 +17,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         label.textColor = productNameColor
         label.textAlignment = .left
         label.numberOfLines = 3
-        label.text = "Wine Detective"
+        label.text = NSLocalizedString("productName", comment: "product name")
         label.font = UIFont(name: "Papyrus", size: 32)
         return label
     }()
@@ -35,7 +35,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.textContentType = .username
-        let placeholderString = NSAttributedString.init(string: "User Name", attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
+        let placeholderString = NSAttributedString.init(string: NSLocalizedString("userName", comment: "login prompt for user name"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField
@@ -47,7 +47,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.layer.borderWidth = 1
         textField.isSecureTextEntry = true
         textField.textContentType = .password
-        let placeholderString = NSAttributedString.init(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
+        let placeholderString = NSAttributedString.init(string: NSLocalizedString("password", comment: "login prompt for password"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField
@@ -56,7 +56,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = loginButtonColor
-        button.setTitle("Log in", for: .normal)
+        button.setTitle(NSLocalizedString("buttonLogin", comment: "the command Log In"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         button.isEnabled = true

@@ -14,8 +14,8 @@ protocol DrillDownStepperCellDelegate{
 
 class DrillDownTableViewCell : UITableViewCell {
     
-    let singularText = NSLocalizedString("singularBottle", comment: "")
-    let pluralText = NSLocalizedString("pluralBottle", comment: "plural")
+    let singularText = NSLocalizedString("singularBottle", comment: "bottle remaining")
+    let pluralText = NSLocalizedString("pluralBottle", comment: "bottles remaining")
     
     var delegate: DrillDownStepperCellDelegate?
 
@@ -24,6 +24,7 @@ class DrillDownTableViewCell : UITableViewCell {
             guard let binItem = bin else {return}
 
             if let producer = binItem.producer {
+                producerLabel.text = binItem.producer
                 let designation = binItem.designation!
                 let ava = binItem.ava!
                 let description = designation == "" ? ava : "\(designation) \(ava)"
@@ -35,17 +36,17 @@ class DrillDownTableViewCell : UITableViewCell {
                 if binItem.viewName == "location"{
                     vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer)"
                     drinkByLabel.text = binItem.varietal
-                    locationAndBinLabel.text = "Drinking Window: \(drinkBy)"
+                    locationAndBinLabel.text = NSLocalizedString("drinkingWindow", comment: "drinking window") + ": \(drinkBy)"
 
                 } else {
                     vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
-                    drinkByLabel.text = "Drinking Window: \(drinkBy)"
-                    locationAndBinLabel.text = "Location: \(binItem.location!) \(binItem.bin!)"
+                    drinkByLabel.text = NSLocalizedString("drinkingWindow", comment: "drinking window") + ": \(drinkBy)"
+                    locationAndBinLabel.text = NSLocalizedString("location", comment: "location as in storage bin") + ": \(binItem.location!) \(binItem.bin!)"
 
                 }
             }
             
-            barcodeLabel.text = "Barcode: \(binItem.barcode!)"
+            barcodeLabel.text = NSLocalizedString("barcode", comment: "barcode") + ": \(binItem.barcode!)"
 
             let bottleCount: Int = 1
             bottleCountLabel.text = setLabelText(count:bottleCount)

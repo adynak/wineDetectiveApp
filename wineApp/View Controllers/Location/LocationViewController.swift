@@ -27,8 +27,8 @@ class LocationViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("locationAndBin", comment: "title for location")
-        let logOutBtn = NSLocalizedString("logOutBtn", comment: "")
+        navigationItem.title = NSLocalizedString("locationAndBin", comment: "location and bin")
+        let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
                                            style: UIBarButtonItem.Style.plain,
@@ -131,7 +131,7 @@ class LocationViewController :UITableViewController {
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected
-        locationDetailController.title = NSLocalizedString("locationTitle", comment: "title for location")
+        locationDetailController.title = NSLocalizedString("titleLocation", comment: "title for location")
         let navController = UINavigationController(rootViewController: locationDetailController)
         present(navController, animated: true, completion: nil)
 
@@ -142,7 +142,7 @@ class LocationViewController :UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         var bin = bottles?[indexPath.section].data[indexPath.row].name
         if bin == "" {
-            bin = NSLocalizedString("noBin", comment: "")
+            bin = NSLocalizedString("noBin", comment: "storage bin is missing")
         }
         let colorOdd = tableStripeWhite
         let colorEven = tableStripeGray
