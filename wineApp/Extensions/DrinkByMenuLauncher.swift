@@ -60,7 +60,7 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "TwinPeak"),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByMissing", comment: "Wines Missing A Drinking Window"),
+            DrinkByMenuItem(name: NSLocalizedString("reportMissingDates", comment: "Wines Missing A Drinking Window"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Missing"),
