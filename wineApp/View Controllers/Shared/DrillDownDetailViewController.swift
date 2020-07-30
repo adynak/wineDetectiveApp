@@ -92,7 +92,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func setupWineLabelLayout(){
-        let bottles = NSLocalizedString("bottles", comment: "plural bottles")
+        let bottles = NSLocalizedString("pluralBottle", comment: "plural bottles")
         storageLabel.text = "\(passedValue.topLeft!) \(passedValue.topRight!)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
@@ -212,7 +212,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
             if markAsDrank.count > 0{
-                let alertTitle = NSLocalizedString("markAsDrankTitle", comment: "alert title mark as drank")
+                let alertTitle = NSLocalizedString("alertTitleMarkAsDrank", comment: "alert title mark as drank")
                 let okBtn = NSLocalizedString("okBtn", comment: "OK button")
                 let cancelBtn = NSLocalizedString("buttonCancel", comment: "cancel button")
 //                let message = buildRemoveMessage(bottles: markAsDrank)
@@ -240,10 +240,10 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
         
     private func getTotalBottles()  -> String {
-        let singularBottle = NSLocalizedString("singularBottle", comment: "bottle remaining")
+        let bottleSingular = NSLocalizedString("singularBottle", comment: "bottle remaining")
         let pluralBottle = NSLocalizedString("pluralBottle", comment: "bottles remaining")
         let totalBottles = wineBins.count
-        let bottleString = (totalBottles > 1) ? pluralBottle : singularBottle
+        let bottleString = (totalBottles > 1) ? pluralBottle : bottleSingular
         
         return String(totalBottles) + bottleString
     }
@@ -263,8 +263,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
 extension DrillDownDetailViewController : DrillDownStepperCellDelegate {
     func didTapStepper(direction: String){
-        let singularBottle = NSLocalizedString("singularBottle", comment: "bottle remaining")
-        let pluralBottle = NSLocalizedString("pluralBottle", comment: "bottles remaining")
+        let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
+        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
         let minus = "minus" as String
         let plus = "plus" as String
         
@@ -277,7 +277,7 @@ extension DrillDownDetailViewController : DrillDownStepperCellDelegate {
         if (direction == plus){
             count = number! + 1
         }
-        let bottleString = (count == 1) ? singularBottle : pluralBottle
+        let bottleString = (count == 1) ? bottleSingular : pluralBottle
 
         inventoryFooter.text = String(count) + bottleString
     }

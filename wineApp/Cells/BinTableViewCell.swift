@@ -25,7 +25,7 @@ class BinTableViewCell : UITableViewCell {
 
             if let binName = binItem.binName {
                 binNameLabel.text = "\(binItem.binLocation!) \(binName)"
-                barcodeLabel.text = "\(binItem.barcode!)"
+                barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
                 if UserDefaults.standard.getShowBarcode() {
                     barcodeLabel.isHidden = false
                 } else {

@@ -14,7 +14,7 @@
 "singularBottle" = " botella restante";
 "pluralBottle" = " botellas restantes";
 "totalBottles" = "botellas totales";
-"bottles" = "Botellas";
+"pluralBottle" = "Botellas";
 
 "locationAndBin" = "Ubicación y Compartimiento";
 
@@ -27,7 +27,7 @@
 "searchTitle" = "Buscar";
 "locationTitle" = "Conciliar";
 
-"markAsDrankTitle" = "Quitar Botellas";
+"alertTitleMarkAsDrank" = "Quitar Botellas";
 
 "okBtn" = "Aceptar";
 "cancelBtn" = "Cancelar";

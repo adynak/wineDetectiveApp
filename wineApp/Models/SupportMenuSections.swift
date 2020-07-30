@@ -42,7 +42,7 @@ enum ContactNames: Int, CaseIterable , SectionType {
     var description: String{
         switch self{
         case .support:
-            return NSLocalizedString("contactEmail", comment: "email menu item")
+            return NSLocalizedString("emailContactMenu", comment: "email menu item")
         }
     }
     

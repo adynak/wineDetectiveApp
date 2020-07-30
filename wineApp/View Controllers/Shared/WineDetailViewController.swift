@@ -189,9 +189,6 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func setupNavigationBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("titleInventory", comment: "navigation: Inventory")
-
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("buttonCancel", comment: "cancel button"),
                                                            style: .plain,
                                                            target: self,
@@ -245,7 +242,7 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                     }
                 }
                 if markAsDrank.count > 0{
-                    let alertTitle = NSLocalizedString("markAsDrankTitle", comment: "alert title mark as drank")
+                    let alertTitle = NSLocalizedString("alertTitleMarkAsDrank", comment: "alert title mark as drank")
                     let okBtn = NSLocalizedString("okBtn", comment: "OK button")
                     let cancelBtn = NSLocalizedString("buttonCancel", comment: "cancel button")
     //                let message = buildRemoveMessage(bottles: markAsDrank)
@@ -310,7 +307,7 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         )
         
         attributedText.append(NSAttributedString(
-            string: "Drinking Window: " + passedValue.drinkBy + "\n",
+            string: NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + passedValue.drinkBy + "\n",
             attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
                          NSAttributedString.Key.foregroundColor: UIColor.black])
         )
@@ -319,10 +316,10 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func getTotalBottles()  -> String {
-        let singularBottle = NSLocalizedString("singularBottle", comment: "bottle remaining")
-        let pluralBottle = NSLocalizedString("pluralBottle", comment: "bottles remaining")
+        let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
+        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
         let totalBottles = wineBins.count
-        let bottleString = (totalBottles > 1) ? pluralBottle : singularBottle
+        let bottleString = (totalBottles > 1) ? pluralBottle : bottleSingular
         
         return String(totalBottles) + bottleString
     }
@@ -337,8 +334,8 @@ extension Int {
 
 extension WineDetailViewController : BinCellDelegate {
     func didTapStepper(direction: String){
-        let singularBottle = NSLocalizedString("singularBottle", comment: "bottle remaining")
-        let pluralBottle = NSLocalizedString("pluralBottle", comment: "bottles remaining")
+        let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
+        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
         let minus = "minus" as String
         let plus = "plus" as String
         
@@ -351,7 +348,7 @@ extension WineDetailViewController : BinCellDelegate {
         if (direction == plus){
             count = number! + 1
         }
-        let bottleString = (count == 1) ? singularBottle : pluralBottle
+        let bottleString = (count == 1) ? bottleSingular : pluralBottle
 
         inventoryFooter.text = String(count) + bottleString
     }

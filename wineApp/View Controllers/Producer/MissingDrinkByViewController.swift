@@ -41,7 +41,7 @@ class MissingDrinkByViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("titleMissing", comment: "title for missing bottles")
+        navigationItem.title = NSLocalizedString("titleMissing", comment: "navagation title: missing bottles")
         let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -145,7 +145,7 @@ class MissingDrinkByViewController :UITableViewController {
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected
-        locationDetailController.title = NSLocalizedString("titleMissing", comment: "title for missing bottles")
+        locationDetailController.title = NSLocalizedString("titleMissing", comment: "navagation title: missing bottles")
         let navController = UINavigationController(rootViewController: locationDetailController)
         present(navController, animated: true, completion: nil)
 

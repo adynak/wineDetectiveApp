@@ -40,7 +40,7 @@ class ProducerViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("titleProducer", comment: "title for producer")
+        navigationItem.title = NSLocalizedString("titleProducer", comment: "navagation title: producer")
         let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -144,7 +144,7 @@ class ProducerViewController :UITableViewController {
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected
-        locationDetailController.title = NSLocalizedString("titleProducer", comment: "title for producer")
+        locationDetailController.title = NSLocalizedString("titleProducer", comment: "navagation title: producer")
         let navController = UINavigationController(rootViewController: locationDetailController)
         present(navController, animated: true, completion: nil)
 

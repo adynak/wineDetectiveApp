@@ -36,17 +36,17 @@ class DrillDownTableViewCell : UITableViewCell {
                 if binItem.viewName == "location"{
                     vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer)"
                     drinkByLabel.text = binItem.varietal
-                    locationAndBinLabel.text = NSLocalizedString("drinkingWindow", comment: "drinking window") + ": \(drinkBy)"
+                    locationAndBinLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(drinkBy)"
 
                 } else {
                     vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
-                    drinkByLabel.text = NSLocalizedString("drinkingWindow", comment: "drinking window") + ": \(drinkBy)"
-                    locationAndBinLabel.text = NSLocalizedString("location", comment: "location as in storage bin") + ": \(binItem.location!) \(binItem.bin!)"
+                    drinkByLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(drinkBy)"
+                    locationAndBinLabel.text = NSLocalizedString("labelLocation", comment: "label for location") + ": \(binItem.location!) \(binItem.bin!)"
 
                 }
             }
             
-            barcodeLabel.text = NSLocalizedString("barcode", comment: "barcode") + ": \(binItem.barcode!)"
+            barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
 
             let bottleCount: Int = 1
             bottleCountLabel.text = setLabelText(count:bottleCount)

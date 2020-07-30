@@ -27,7 +27,7 @@ class LocationViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("locationAndBin", comment: "location and bin")
+        navigationItem.title = NSLocalizedString("titleLocation", comment: "location and bin")
         let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,
@@ -131,7 +131,7 @@ class LocationViewController :UITableViewController {
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected
-        locationDetailController.title = NSLocalizedString("titleLocation", comment: "title for location")
+        locationDetailController.title = NSLocalizedString("titleLocation", comment: "navagation title: location")
         let navController = UINavigationController(rootViewController: locationDetailController)
         present(navController, animated: true, completion: nil)
 

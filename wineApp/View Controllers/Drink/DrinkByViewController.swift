@@ -170,7 +170,7 @@ class DrinkByViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = NSLocalizedString("titleDrinkBy", comment: "navigation: drink By")
+        navigationItem.title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
                                                 title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
                                                 style: UIBarButtonItem.Style.plain,
@@ -380,6 +380,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var totalBottles: Int = 0
+        var bottleCount: String = ""
         
         let colorOdd = tableStripeOdd
         let colorEven = tableStripeEven
@@ -399,15 +400,15 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
             totalBottles += bottles.bottleCount!
         }
         
-        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
-        bottleCount = " (\(totalBottles) " + bottleCount + ")"
+//        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
+        bottleCount = " (\(totalBottles))"
                 
         cell.textLabel?.numberOfLines = 1
         cell.detailTextLabel?.numberOfLines = 2;
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
         let line2 = "  \(bottle.producer) - \(bottle.appellation)" +
-                    "\n  " + NSLocalizedString("drinkByWindow", comment: "drinking window") + " \(bottle.drinkBy)"
+                    "\n  " + NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(bottle.drinkBy)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2
