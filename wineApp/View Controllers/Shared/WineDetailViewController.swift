@@ -41,7 +41,7 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     let storageLabel: UITextView = {
         let tv = UITextView()
-        tv.text = NSLocalizedString("locationAndBin", comment: "location and bin")
+        tv.text = NSLocalizedString("labelLocationAndBin", comment: "location and bin")
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = storageLabelBackgroundColor

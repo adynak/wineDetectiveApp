@@ -24,7 +24,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     let storageLabel: UITextView = {
         let tv = UITextView()
-        tv.text = NSLocalizedString("locationAndBin", comment: "location and bin")
+        tv.text = NSLocalizedString("labelLocationAndBin", comment: "location and bin")
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = storageLabelBackgroundColor
@@ -93,7 +93,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     func setupWineLabelLayout(){
         let bottles = NSLocalizedString("pluralBottle", comment: "plural bottles")
-        storageLabel.text = "\(passedValue.topLeft!) \(passedValue.topRight!)\n\(bottles): \(passedValue.bottleCount)"
+        storageLabel.text = " \(passedValue.topLeft!) \(passedValue.topRight!)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
             storageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -240,8 +240,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
         
     private func getTotalBottles()  -> String {
-        let bottleSingular = NSLocalizedString("singularBottle", comment: "bottle remaining")
-        let pluralBottle = NSLocalizedString("pluralBottle", comment: "bottles remaining")
+        let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
+        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
         let totalBottles = wineBins.count
         let bottleString = (totalBottles > 1) ? pluralBottle : bottleSingular
         

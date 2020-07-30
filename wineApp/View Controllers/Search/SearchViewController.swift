@@ -142,7 +142,7 @@ class SearchViewController: UIViewController {
             }
         }
         
-        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
+        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
         
         return "\(totalBottles)" + plural
     }
@@ -325,7 +325,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
             totalBottles += bottles.bottleCount!
         }
         
-//        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "bottle remaining") : NSLocalizedString("pluralBottle", comment: "bottles remaining")
+//        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
         bottleCount = " (\(totalBottles))"
                 
         cell.textLabel?.numberOfLines = 1

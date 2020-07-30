@@ -35,7 +35,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.textContentType = .username
-        let placeholderString = NSAttributedString.init(string: NSLocalizedString("userName", comment: "login prompt for user name"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
+        let placeholderString = NSAttributedString.init(string: NSLocalizedString("loginAccountName", comment: "login prompt for account name"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField
@@ -47,7 +47,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.layer.borderWidth = 1
         textField.isSecureTextEntry = true
         textField.textContentType = .password
-        let placeholderString = NSAttributedString.init(string: NSLocalizedString("password", comment: "login prompt for password"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
+        let placeholderString = NSAttributedString.init(string: NSLocalizedString("loginPassword", comment: "login prompt for password"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField

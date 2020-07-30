@@ -14,8 +14,8 @@ protocol BinCellDelegate{
 
 class BinTableViewCell : UITableViewCell {
     
-    let singularText = NSLocalizedString("singularBottle", comment: "bottle remaining")
-    let pluralText = NSLocalizedString("pluralBottle", comment: "bottles remaining")
+    let singularText = NSLocalizedString("singularBottle", comment: "singular bottle")
+    let pluralText = NSLocalizedString("pluralBottle", comment: "plural bottles")
 
     var delegate: BinCellDelegate?
 

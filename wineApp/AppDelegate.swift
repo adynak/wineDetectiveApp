@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ], for: .normal)
 //        UserDefaults.resetStandardUserDefaults()
 
-        UserDefaults.standard.set("", forKey: "userName")
+        UserDefaults.standard.set("", forKey: "accountName")
         UserDefaults.standard.set("", forKey: "userPword")
         UserDefaults.standard.setIsLoggedIn(value: false)
         if !UserDefaults.contains("showBarcode"){

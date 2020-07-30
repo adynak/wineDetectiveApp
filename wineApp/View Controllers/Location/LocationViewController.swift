@@ -27,7 +27,7 @@ class LocationViewController :UITableViewController {
                     
     func setupNavBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = NSLocalizedString("titleLocation", comment: "location and bin")
+        navigationItem.title = NSLocalizedString("titleLocation", comment: "navagation title: location")
         let logOutBtn = NSLocalizedString("buttonLogOut", comment: "button text: Log Out")
                 
         let cancelButton = UIBarButtonItem(title: logOutBtn,

@@ -16,7 +16,7 @@
 "totalBottles" = "botellas totales";
 "pluralBottle" = "Botellas";
 
-"locationAndBin" = "Ubicación y Compartimiento";
+"labelLocationAndBin" = "Ubicación y Compartimiento";
 
 "save" = "Salvar";
 "cancel" = "Cancelar";
