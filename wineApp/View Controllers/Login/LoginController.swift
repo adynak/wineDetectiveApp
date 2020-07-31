@@ -114,6 +114,10 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
+        
         if UserDefaults.standard.getShowPages() {
         } else {
             pages.removeAll()
