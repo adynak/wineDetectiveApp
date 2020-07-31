@@ -50,7 +50,7 @@ class PageCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.backgroundColor = .yellow
+        iv.backgroundColor = .white
         iv.image = UIImage(named: "page1")
         iv.clipsToBounds = true
         return iv
@@ -60,7 +60,7 @@ class PageCell: UICollectionViewCell {
         let tv = UITextView()
         tv.text = ""
         tv.isEditable = false
-        tv.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return tv
     }()
     
@@ -79,7 +79,7 @@ class PageCell: UICollectionViewCell {
         
         textView.anchorWithConstantsToTop(nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
         
-        textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
+        textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4).isActive = true
         
         lineSeparatorView.anchorToTop(nil, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
         lineSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true

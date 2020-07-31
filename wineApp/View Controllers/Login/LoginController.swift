@@ -41,19 +41,19 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     var pages: [Page] = {
         let firstPage = Page(title: NSLocalizedString("page1Title", comment: "Dude, Where's My Wine?"),
                              message: NSLocalizedString("page1Message", comment: "You liked it, bought it, and brought it home.  What happened to it next?"),
-                             imageName: "dwmw")
+                             imageName: "page1")
 
         let secondPage = Page(title: NSLocalizedString("page2Title", comment: "You can search for it."),
                               message: NSLocalizedString("page2Message", comment: "Search by Producer, Varietal, Vineyard, AVA, or Designation"),
-                              imageName: "dwmwSearch")
+                              imageName: "page2")
 
         let thirdPage = Page(title: NSLocalizedString("page3Title", comment: "The More menu has other views"),
                               message: NSLocalizedString("page3Message", comment: "Sort by Producer or by Varietal. The Sort by Location is a great tool for physical inventory."),
-                              imageName: "dwmwMore")
+                              imageName: "page3")
 
         let fourthPage = Page(title: NSLocalizedString("page4Title", comment: "Don't forget to check settings"),
                               message: NSLocalizedString("page4Message", comment: "Don't use \"Barcode\", just turn it off!"),
-                              imageName: "dwmwSettings")
+                              imageName: "page4")
         
         return [firstPage, secondPage, thirdPage, fourthPage]
     }()
