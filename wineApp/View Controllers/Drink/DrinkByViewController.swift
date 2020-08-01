@@ -166,6 +166,7 @@ class DrinkByViewController: UIViewController {
         UserDefaults.standard.setIsLoggedIn(value: false)
         
         let loginController = LoginController()
+        loginController.modalPresentationStyle = .fullScreen
         present(loginController, animated: true, completion: nil)
     }
     
