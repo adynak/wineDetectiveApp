@@ -12,7 +12,7 @@ protocol BottleCountDelegate {
     func passBackBinsAndBottlesInThem(newBinData:[StorageBins])
 }
 
-class WineDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class WineDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAdaptivePresentationControllerDelegate{
     
     var myUpdater: BottleCountDelegate!
     
@@ -20,10 +20,10 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
     let sortBins:Bool = true
     
-    var cellID = "cellID123"
+    var cellID = "cellIDsearch"
     var wineBins = [StorageBins]()
     
-    var cells = [BinTableViewCell]() //initialize array at class level
+    var cells = [BinTableViewCell]()
 
     var passedValue = wineDetail()
     
@@ -81,6 +81,9 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.presentationController?.delegate = self
+
         view.backgroundColor = storageLabelBackgroundColor
         
         setupNavigationBar()
@@ -216,59 +219,86 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 //        dismiss(animated: true, completion: nil)
 //    }
     
-        @objc func addTapped(sender: UIBarButtonItem){
-            var markAsDrank = [DrillLevel2]()
-            var iwine: String = ""
+    @objc func addTapped(sender: UIBarButtonItem){
+        var markAsDrank = [DrillLevel2]()
+        var iwine: String = ""
+        var message: String = ""
 
-            if (sender.title == NSLocalizedString("buttonSave", comment: "navigation save button")){
-                for cell in cells {
-                    if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
-                        if bottles == 0{
-                            
-                            for bin in passedValue.storageBins!{
-                                if bin.barcode == cell.barcodeLabel.text {
-                                    iwine = bin.iwine!
-                                }
+        if (sender.title == NSLocalizedString("buttonSave", comment: "navigation save button")){
+            for cell in cells {
+                print(cell.binNameLabel.text!)
+                if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
+                    if bottles == 0{
+                        
+                        for bin in passedValue.storageBins!{
+                            if bin.barcode == cell.barcodeLabel.text {
+                                iwine = bin.iwine!
                             }
-                            
-                            markAsDrank.append(DrillLevel2(
-                                producer: passedValue.producer,
-                                varietal: passedValue.varietal,
-                                vintage: passedValue.vintage,
-                                iWine: iwine,
-                                barcode: cell.barcodeLabel.text!
-                            ))
                         }
+                        
+                        markAsDrank.append(DrillLevel2(
+                            producer: passedValue.producer,
+                            varietal: passedValue.varietal,
+                            vintage: passedValue.vintage,
+                            iWine: iwine,
+                            location: cell.binNameLabel.text!,
+                            barcode: cell.barcodeLabel.text!,
+                            designation: passedValue.designation
+                        ))
                     }
                 }
-                if markAsDrank.count > 0{
-                    let alertTitle = NSLocalizedString("alertTitleMarkAsDrank", comment: "alert title mark as drank")
-                    let okBtn = NSLocalizedString("okBtn", comment: "OK button")
-                    let cancelBtn = NSLocalizedString("buttonCancel", comment: "cancel button")
-    //                let message = buildRemoveMessage(bottles: markAsDrank)
-                    let message = ""
+            }
+            if markAsDrank.count > 0{
+                let alertTitle = NSLocalizedString("alertTitleMarkAsDrank", comment: "alert title mark as drank")
+                let okBtn = NSLocalizedString("okBtn", comment: "OK button")
+                let cancelBtn = NSLocalizedString("buttonCancel", comment: "cancel button")
+                message = buildRemoveMessage(bottles: markAsDrank)
+//                message = ""
 
-                    let markAsDrankAlert = UIAlertController.init(title: alertTitle, message: message, preferredStyle:.alert)
+                let markAsDrankAlert = UIAlertController.init(title: alertTitle, message: message, preferredStyle:.alert)
+                
+                markAsDrankAlert.setMessageAlignment(.left)
 
-                    markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
-                        self.dismiss(animated: true, completion:{
-                            DataServices.removeBottles(bottles: markAsDrank)
-                        })
+                markAsDrankAlert.addAction(UIAlertAction.init(title: okBtn, style: .default) { (UIAlertAction) -> Void in
+                    self.dismiss(animated: true, completion:{
+                        DataServices.removeBottles(bottles: markAsDrank)
                     })
+                })
 
-                    markAsDrankAlert.addAction(UIAlertAction.init(title: cancelBtn, style: .cancel, handler: nil))
+                markAsDrankAlert.addAction(UIAlertAction.init(title: cancelBtn, style: .cancel, handler: nil))
 
-                    present(markAsDrankAlert, animated: true, completion: nil)
-
-                } else {
-                    dismiss(animated: true, completion: nil)
-                }
+                present(markAsDrankAlert, animated: true, completion: nil)
 
             } else {
                 dismiss(animated: true, completion: nil)
             }
-        }
 
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func buildRemoveMessage(bottles: [DrillLevel2])->String{
+        var message: String = ""
+        var barcode: String = ""
+        message = "\(bottles[0].vintage!) \(bottles[0].producer!)\n"
+        if bottles[0].designation == "" {
+            message = message + "\(bottles[0].varietal!)"
+        } else {
+            message = message + "\(bottles[0].varietal!) - \(bottles[0].designation!)"
+        }
+        message = message + "\n\n"
+        for bottle in bottles{
+            if UserDefaults.standard.getShowBarcode() {
+                barcode = bottle.barcode!
+                barcode = barcode.digits
+                message += "\(bottle.location!) \(barcode)\n"
+            } else {
+                message += "\(bottle.location!)\n"
+            }
+        }
+        return message
+    }
     
     private func assignPassedValuesToTextarea(){
         
@@ -323,6 +353,27 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         return String(totalBottles) + bottleString
     }
+    
+    func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
+        print("WILL")
+    }
+    
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("DID")
+    }
+
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        print("SHOULD")
+        return true
+    }
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+            
+            // The user pulled down with unsaved changes
+            // Clarify the user's intent by asking whether they intended to cancel or save
+    //        confirmCancel(showingSave: true)
+            print("SFSG")
+        }
 
 }
 
@@ -351,5 +402,24 @@ extension WineDetailViewController : BinCellDelegate {
         let bottleString = (count == 1) ? bottleSingular : pluralBottle
 
         inventoryFooter.text = String(count) + bottleString
+    }
+}
+
+public extension UIAlertController {
+
+    func setMessageAlignment(_ alignment : NSTextAlignment) {
+        let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.alignment = alignment
+
+        let messageText = NSMutableAttributedString(
+            string: self.message ?? "",
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12),
+                NSAttributedString.Key.foregroundColor: UIColor.gray
+            ]
+        )
+
+        self.setValue(messageText, forKey: "attributedMessage")
     }
 }

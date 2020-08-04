@@ -12,5 +12,10 @@ extension String {
     var floatValue: Float {
         return (self as NSString).floatValue
     }
+    
+    var digits: String {
+        return components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined()
+    }
 }
 
