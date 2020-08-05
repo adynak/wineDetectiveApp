@@ -80,7 +80,7 @@ class BinTableViewCell : UITableViewCell {
         s.value = 1
         return s
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
