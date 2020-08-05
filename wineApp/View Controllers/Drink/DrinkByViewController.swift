@@ -195,7 +195,7 @@ class DrinkByViewController: UIViewController {
 
     
     func configureUI() {
-        view.backgroundColor = .green
+        view.backgroundColor = barTintColor
         setupNavigationBar()
         searchBar.delegate = self
         searchBar.sizeToFit()
