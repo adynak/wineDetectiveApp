@@ -116,6 +116,8 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillLayoutSubviews() {
         navigationItem.rightBarButtonItem?.isEnabled = hasChanges
         isModalInPresentation = hasChanges
+        print("isModalInPresentation \(isModalInPresentation)")
+
     }
     
     func setupInventoryFooterLayout(){
@@ -200,15 +202,17 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func setupNavigationBar(){
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("buttonCancel",comment: "cancel button"),
-                              style: .plain,
-                              target: self,
-                              action: #selector(cancelMarkDrank))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("buttonCancel",comment: "cancel button"),
+            style: .plain,
+            target: self,
+            action: #selector(cancelMarkDrank))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("buttonSave",comment: "navigation save button"),
-                               style: .plain,
-                               target: self,
-                               action: #selector(saveMarkDrank))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("buttonSave",comment: "navigation save button"),
+            style: .plain,
+            target: self,
+            action: #selector(saveMarkDrank))
     }
     
     @objc func cancelMarkDrank() {
@@ -224,9 +228,8 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         var markAsDrank = [DrillLevel2]()
 
         for cell in cells {
-            print(cell.bottleCountLabel.text!)
             if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
-                if bottles == 0{
+                if bottles == 0 {
                     
                     for bin in passedValue.storageBins!{
                         if bin.barcode == cell.barcodeLabel.text {
@@ -329,7 +332,6 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return true
     }
     
-
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         confirmCancel(showingSave: true)
     }
@@ -376,8 +378,6 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         })
         
         alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
-
-                
         present(alert, animated: true, completion: nil)
     }
     
@@ -392,7 +392,6 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         if showConfirmAlert {
             confirmCancel(showingSave: true)
         }
-
     }
     
     func shouldShowConfirmAlert(cells: [BinTableViewCell]) -> Bool {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let debug: Bool = true
+let debug: Bool = false
 
 class DataServices {
         
