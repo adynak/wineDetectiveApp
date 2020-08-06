@@ -116,8 +116,6 @@ class WineDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillLayoutSubviews() {
         navigationItem.rightBarButtonItem?.isEnabled = hasChanges
         isModalInPresentation = hasChanges
-        print("isModalInPresentation \(isModalInPresentation)")
-
     }
     
     func setupInventoryFooterLayout(){

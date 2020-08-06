@@ -88,7 +88,6 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     override func viewWillLayoutSubviews() {
         navigationItem.rightBarButtonItem?.isEnabled = hasChanges
         isModalInPresentation = hasChanges
-        print("isModalInPresentation \(isModalInPresentation)")
     }
     
     func setupInventoryFooterLayout(){
@@ -188,10 +187,22 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
         return cell
     }
-    
+        
     private func setupNavigationBar(){
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = title
+        let subtitle: String
+
+        switch passedValue.viewName {
+            case "producer":
+                subtitle = passedValue.topLeft!
+            case "varietal":
+                subtitle = passedValue.topRight!
+            case "location":
+                subtitle = "\(passedValue.topLeft!) \(passedValue.topRight!)"
+            default:
+                subtitle = ""
+        }
+        
+        navigationItem.titleView = DataServices.setupTitleView(title: title!, subTitle: subtitle)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("buttonCancel", comment: "cancel button"),

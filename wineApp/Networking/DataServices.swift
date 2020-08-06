@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let debug: Bool = false
+let debug: Bool = true
 
 class DataServices {
         
@@ -631,7 +631,34 @@ class DataServices {
         }
         return buffer
     }
+    
+    static func setupTitleView(title: String, subTitle: String ) -> UILabel {
+        let topText = title
+        let bottomText = subTitle
 
+        let navTitleParameters = [NSAttributedString.Key.foregroundColor : UIColor.white,
+                               NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16)!]
+        let navSubtitleParameters = [NSAttributedString.Key.foregroundColor : UIColor.white,
+                                  NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 14)!]
+
+        let navTitle: NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: navTitleParameters)
+        let navSubtitle: NSAttributedString = NSAttributedString(string: bottomText, attributes: navSubtitleParameters)
+
+        navTitle.append(NSAttributedString(string: "\n"))
+        navTitle.append(navSubtitle)
+
+        let size = navTitle.size()
+
+        let width = size.width
+        let navigationController = UINavigationController()
+        let height = navigationController.navigationBar.frame.size.height
+
+        let titleLabel = UILabel(frame: CGRect(x: 0,y: 0, width: width, height: height))
+        titleLabel.attributedText = navTitle
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        return titleLabel
+    }
     
 }
 
