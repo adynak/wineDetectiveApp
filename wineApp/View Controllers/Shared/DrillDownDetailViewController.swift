@@ -249,14 +249,15 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
         for cell in cells {
             if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
-                if bottles == 0{
+                if bottles == 0 {
                     markAsDrank.append(DrillLevel2(
                         producer: cell.producerLabel.text!,
                         varietal: cell.locationAndBinLabel.text!,
                         vintage: cell.vintageLabel.text!,
                         iWine: cell.iWineLabel.text!,
                         barcode: cell.barcodeLabel.text!,
-                        designation: cell.vintageAndDescriptionLabel.text))
+                        designation: cell.vintageAndDescriptionLabel.text,
+                        ava: cell.drinkByLabel.text))
                 }
             }
         }
@@ -297,6 +298,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         drinkButtonText = drinkButtonText.replacingOccurrences(of: "%2", with: plural)
         
         let alertTitle = "\(titleText)"
+        let okBtnText = "\(titleText) (\(markAsDrank.count))"
         let cancelBtnText = NSLocalizedString("buttonCancel", comment: "cancel button")
         let discardBtnText = NSLocalizedString("buttonDiscard", comment: "discard button")
 
@@ -354,6 +356,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         var index: Int = 0
         
         for bottle in bottles {
+            print("\(passedValue.bottles![index].producer!) \(passedValue.bottles![index].varietal!)")
             if (index != 0){
                 message += "\n\n"
             }
@@ -361,7 +364,11 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
             if UserDefaults.standard.getShowBarcode() {
                 barcode = "(\(bottle.barcode!.digits))"
             }
-            message += "\(bottle.designation!)\n\(bottle.varietal!) \(barcode)"
+            if passedValue.viewName == "location"{
+                message += "\(bottle.designation!)\n\(bottle.ava!) \(barcode)"
+            } else {
+                message += "\(bottle.designation!)\n\(bottle.varietal!) \(barcode)"
+            }
         }
         return message
     }

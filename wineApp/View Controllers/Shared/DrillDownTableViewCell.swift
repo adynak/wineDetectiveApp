@@ -32,9 +32,13 @@ class DrillDownTableViewCell : UITableViewCell {
                 
                 let drinkBy = buildDrinkBy(beginConsume: binItem.beginConsume!, endConsume: binItem.endConsume!)
                 
-                
                 if binItem.viewName == "location"{
-                    vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer)"
+                    var additionalInfo: String = ""
+                    if binItem.designation != "" {
+                        additionalInfo = binItem.designation!
+                    }
+                    vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer) \(additionalInfo)"
+                    
                     drinkByLabel.text = binItem.varietal
                     locationAndBinLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(drinkBy)"
 
