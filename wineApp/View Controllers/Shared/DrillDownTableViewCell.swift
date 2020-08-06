@@ -48,9 +48,12 @@ class DrillDownTableViewCell : UITableViewCell {
             
             barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
 
-            let bottleCount: Int = 1
-            bottleCountLabel.text = setLabelText(count:bottleCount)
-            
+            var bottleCount: Int = 1
+            if bottleCountLabel.text == nil {
+                bottleCountLabel.text = setLabelText(count:bottleCount)
+            } else {
+                bottleCount = Int(bottleCountLabel.text!.digits)!
+            }
             stepperView.value = Double(bottleCount)
             stepperView.tag = bottleCount
             iWineLabel.text = binItem.iWine

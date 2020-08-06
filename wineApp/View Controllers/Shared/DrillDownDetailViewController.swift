@@ -120,8 +120,6 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 labelTopLine = ""
         }
         
-        
-        
         storageLabel.text = " \(labelTopLine)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
@@ -290,8 +288,15 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         message = buildRemoveMessage(bottles: markAsDrank)
         
         let titleText = NSLocalizedString("alertTitleMarkAsDrank", comment: "alert title mark as drank")
-        let alertTitle = "\(titleText) (\(markAsDrank.count))"
-        let okBtnText = "\(titleText) (\(markAsDrank.count))"
+        
+        var drinkButtonText = NSLocalizedString("buttonDrink", comment: "drink button")
+        drinkButtonText = drinkButtonText.replacingOccurrences(of: "%1", with: String(markAsDrank.count))
+        
+        let plural = markAsDrank.count == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
+        
+        drinkButtonText = drinkButtonText.replacingOccurrences(of: "%2", with: plural)
+        
+        let alertTitle = "\(titleText)"
         let cancelBtnText = NSLocalizedString("buttonCancel", comment: "cancel button")
         let discardBtnText = NSLocalizedString("buttonDiscard", comment: "discard button")
 
@@ -299,7 +304,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         alert.setMessageAlignment(.left)
         
         if showingSave {
-            alert.addAction(UIAlertAction.init(title: okBtnText, style: .default) { (UIAlertAction) -> Void in
+            alert.addAction(UIAlertAction.init(title: drinkButtonText, style: .default) { (UIAlertAction) -> Void in
                 self.dismiss(animated: true, completion:{
                     DataServices.removeBottles(bottles: markAsDrank)
                 })
@@ -346,12 +351,17 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     func buildRemoveMessage(bottles: [DrillLevel2])->String{
         var message: String = ""
         var barcode: String = ""
+        var index: Int = 0
         
-        for bottle in bottles{
+        for bottle in bottles {
+            if (index != 0){
+                message += "\n\n"
+            }
+            index += 1
             if UserDefaults.standard.getShowBarcode() {
                 barcode = "(\(bottle.barcode!.digits))"
             }
-            message += "\(bottle.designation!)\n\(bottle.varietal!) \(barcode)\n\n"
+            message += "\(bottle.designation!)\n\(bottle.varietal!) \(barcode)"
         }
         return message
     }

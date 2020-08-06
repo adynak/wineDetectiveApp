@@ -72,8 +72,6 @@ class DrinkBottlesViewController: UIViewController , WKNavigationDelegate{
         print("finish loading webView")
     }
     
-    
-    
 }
 
 extension WKWebView {
