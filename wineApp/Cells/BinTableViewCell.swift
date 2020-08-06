@@ -33,11 +33,15 @@ class BinTableViewCell : UITableViewCell {
                 }
             }
             
-            if let bottleCount = binItem.bottleCount {
-                bottleCountLabel.text = setLabelText(count:Int(bottleCount))
-                stepperView.value = Double(bottleCount)
-                stepperView.tag = bottleCount
+            var bottleCount: Int = 1
+            if bottleCountLabel.text == nil {
+                bottleCountLabel.text = setLabelText(count:bottleCount)
+            } else {
+                bottleCount = Int(bottleCountLabel.text!.digits)!
             }
+            stepperView.value = Double(bottleCount)
+            stepperView.tag = bottleCount
+            
         }
     }
     

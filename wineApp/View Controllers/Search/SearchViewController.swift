@@ -298,7 +298,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         let wineDetailController = WineDetailViewController()
         wineDetailController.passedValue = wineSelected
         let navController = UINavigationController(rootViewController: wineDetailController)
-//        wineDetailController.myUpdater = (self as BottleCountDelegate)
         present(navController, animated: true, completion: nil)
 
     }
