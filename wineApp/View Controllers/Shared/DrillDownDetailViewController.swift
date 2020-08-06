@@ -102,8 +102,27 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func setupWineLabelLayout(){
+        let labelTopLine: String
+        let labelBottomLine: String
+        
         let bottles = NSLocalizedString("pluralBottle", comment: "plural bottles")
-        storageLabel.text = " \(passedValue.topLeft!) \(passedValue.topRight!)\n\(bottles): \(passedValue.bottleCount)"
+        
+        switch passedValue.viewName {
+            case "producer":
+                labelTopLine = passedValue.topRight!
+            case "varietal":
+                labelTopLine = passedValue.topLeft!
+            case "location":
+                labelTopLine = ""
+            case "missing":
+                labelTopLine = passedValue.topRight!
+            default:
+                labelTopLine = ""
+        }
+        
+        
+        
+        storageLabel.text = " \(labelTopLine)\n\(bottles): \(passedValue.bottleCount)"
         
         NSLayoutConstraint.activate([
             storageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -198,6 +217,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 subtitle = passedValue.topRight!
             case "location":
                 subtitle = "\(passedValue.topLeft!) \(passedValue.topRight!)"
+            case "missing":
+                subtitle = passedValue.topLeft!
             default:
                 subtitle = ""
         }
@@ -236,7 +257,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                         varietal: cell.locationAndBinLabel.text!,
                         vintage: cell.vintageLabel.text!,
                         iWine: cell.iWineLabel.text!,
-                        barcode: cell.barcodeLabel.text!))
+                        barcode: cell.barcodeLabel.text!,
+                        designation: cell.vintageAndDescriptionLabel.text))
                 }
             }
         }
@@ -320,16 +342,17 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         }
 
     }
-
     
     func buildRemoveMessage(bottles: [DrillLevel2])->String{
-        let confirmBtn = NSLocalizedString("buttonConfirm", comment: "confirm buttom")
-
         var message: String = ""
+        var barcode: String = ""
+        
         for bottle in bottles{
-            message += "\(bottle.vintage!) \(bottle.producer!)\n \(bottle.varietal!)\n\n"
+            if UserDefaults.standard.getShowBarcode() {
+                barcode = "(\(bottle.barcode!.digits))"
+            }
+            message += "\(bottle.designation!)\n\(bottle.varietal!) \(barcode)\n\n"
         }
-        message += confirmBtn
         return message
     }
 

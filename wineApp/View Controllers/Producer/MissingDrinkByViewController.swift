@@ -141,7 +141,7 @@ class MissingDrinkByViewController :UITableViewController {
         wineSelected.bottleCount = String(bottles![section].data[row].bottleCount!)
         wineSelected.topLeft = bottles![section].data[row].data[0].producer
         wineSelected.topRight = bottles![section].data[row].data[0].varietal
-        wineSelected.viewName = "producer"
+        wineSelected.viewName = "missing"
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected
