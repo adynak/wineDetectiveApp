@@ -52,14 +52,17 @@ class DrillDownTableViewCell : UITableViewCell {
             
             barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
 
-            var bottleCount: Int = 1
-            if bottleCountLabel.text == nil {
-                bottleCountLabel.text = setLabelText(count:bottleCount)
-            } else {
-                bottleCount = Int(bottleCountLabel.text!.digits)!
-            }
-            stepperView.value = Double(bottleCount)
-            stepperView.tag = bottleCount
+//            var bottleCount: Int = 1
+//            if bottleCountLabel.text == nil {
+//                bottleCountLabel.text = setLabelText(count:bottleCount)
+//            } else {
+//                bottleCount = Int(bottleCountLabel.text!.digits)!
+//            }
+            
+            bottleCountLabel.text = setLabelText(count:binItem.bottleCount!)
+            print("\(binItem.barcode!) \(binItem.bottleCount!)")
+            stepperView.value = Double(binItem.bottleCount!)
+            stepperView.tag = binItem.bottleCount!
             iWineLabel.text = binItem.iWine
             vintageLabel.text = binItem.vintage
         }
@@ -236,8 +239,8 @@ class DrillDownTableViewCell : UITableViewCell {
         
         let stepDirection = sender.tag > Int(sender.value) ? "minus" : "plus"
         sender.tag = Int(sender.value)
-        bottleCountLabel.text = setLabelText(count: Int(sender.value))
-                
+//        bottleCountLabel.text = setLabelText(count: Int(sender.value))
+        bin.bottleCount = Int(sender.value)
         responseMessages["direction"] = stepDirection
         delegate?.didTapStepper(direction: stepDirection)
 

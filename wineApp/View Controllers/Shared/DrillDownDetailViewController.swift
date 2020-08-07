@@ -8,14 +8,14 @@
 
 import UIKit
 
-class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAdaptivePresentationControllerDelegate {
+class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAdaptivePresentationControllerDelegate, UIScrollViewDelegate {
         
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327
 //    let tableRowHeight:CGFloat = 60
     let sortBins:Bool = true
     
-    let cellID = "cellId"
+    let cellID = "cellIdz"
     var wineBins = [DrillLevel2]()
     
     var cells = [DrillDownTableViewCell]() //initialize array at class level
@@ -147,6 +147,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         ])
         
         wineBinsTableView.dataSource = self
+        wineBinsTableView.delegate = self
         wineBinsTableView.register(DrillDownTableViewCell.self, forCellReuseIdentifier: cellID)
         if UserDefaults.standard.getShowBarcode() {
             wineBinsTableView.rowHeight = CGFloat(76)
@@ -154,6 +155,10 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
             wineBinsTableView.rowHeight = CGFloat(62)
         }
         
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("SDSDS")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -179,6 +184,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         let ava = wineBins[indexPath.row].ava
         let beginConsume = wineBins[indexPath.row].beginConsume
         let endConsume = wineBins[indexPath.row].endConsume
+        let bottleCount = wineBins[indexPath.row].bottleCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! DrillDownTableViewCell
         
@@ -194,7 +200,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                     ava: ava,
                     beginConsume: beginConsume,
                     endConsume: endConsume,
-                    viewName: passedValue.viewName)
+                    viewName: passedValue.viewName,
+                    bottleCount: bottleCount)
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         cell.delegate = self
         
@@ -298,7 +305,6 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         drinkButtonText = drinkButtonText.replacingOccurrences(of: "%2", with: plural)
         
         let alertTitle = "\(titleText)"
-        let okBtnText = "\(titleText) (\(markAsDrank.count))"
         let cancelBtnText = NSLocalizedString("buttonCancel", comment: "cancel button")
         let discardBtnText = NSLocalizedString("buttonDiscard", comment: "discard button")
 
@@ -321,9 +327,9 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
                 let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
-                let bottleString = (self.cells.count == 1) ? bottleSingular : pluralBottle
+                let bottleString = (self.wineBins.count == 1) ? bottleSingular : pluralBottle
 
-                self.inventoryFooter.text = String(self.cells.count) + bottleString
+                self.inventoryFooter.text = String(self.wineBins.count) + bottleString
         })
         
         alert.addAction(UIAlertAction.init(title: cancelBtnText, style: .cancel) { (UIAlertAction) -> Void in

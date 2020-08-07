@@ -266,7 +266,6 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
                             break
                     }
                 } else {
-                    print(timeLeft)
                     if(self.dataLoaded == true){
                         timer.invalidate()
                         self.hideSpinner()

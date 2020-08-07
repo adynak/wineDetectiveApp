@@ -247,7 +247,8 @@ class DataServices {
                                              ava: detail.ava,
                                              sortKey: sortKey,
                                              beginConsume: detail.beginConsume,
-                                             endConsume: detail.endConsume))
+                                             endConsume: detail.endConsume,
+                                             bottleCount: 1))
                     }
                     
                     level2 =  level2.sorted(by: {
