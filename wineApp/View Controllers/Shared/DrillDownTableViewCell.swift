@@ -59,9 +59,10 @@ class DrillDownTableViewCell : UITableViewCell {
 //                bottleCount = Int(bottleCountLabel.text!.digits)!
 //            }
             
-            bottleCountLabel.text = setLabelText(count:binItem.bottleCount!)
-            print("\(binItem.barcode!) \(binItem.bottleCount!)")
-            stepperView.value = Double(binItem.bottleCount!)
+//            bottleCountLabel.text = setLabelText(count:Int(stepperView.value))
+            print("\(binItem.barcode!) \(binItem.bottleCount!) \(stepperView.value)")
+            
+//            stepperView.value = Double(binItem.bottleCount!)
             stepperView.tag = binItem.bottleCount!
             iWineLabel.text = binItem.iWine
             vintageLabel.text = binItem.vintage
@@ -124,6 +125,7 @@ class DrillDownTableViewCell : UITableViewCell {
         label.textColor = .black
         label.font = UIFont.italicSystemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "1 Bottle"
         return label
     }()
     
@@ -239,7 +241,7 @@ class DrillDownTableViewCell : UITableViewCell {
         
         let stepDirection = sender.tag > Int(sender.value) ? "minus" : "plus"
         sender.tag = Int(sender.value)
-//        bottleCountLabel.text = setLabelText(count: Int(sender.value))
+        bottleCountLabel.text = setLabelText(count: Int(sender.value))
         bin.bottleCount = Int(sender.value)
         responseMessages["direction"] = stepDirection
         delegate?.didTapStepper(direction: stepDirection)

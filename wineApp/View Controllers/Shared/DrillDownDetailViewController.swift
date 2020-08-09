@@ -158,7 +158,11 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("SDSDS")
+//        print("SDSDS")
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("XX")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -206,7 +210,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         cell.delegate = self
         
         if(!cells.contains(cell)){
-            self.cells.append(cell)
+            cells.append(cell)
         }
 
         return cell
@@ -320,7 +324,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         alert.addAction(UIAlertAction.init(title: discardBtnText, style: .destructive) { (UIAlertAction) -> Void in
-                for cell in self.cells {
+            for cell in self.cells {
                     cell.bottleCountLabel.text = "1 \(NSLocalizedString("singularBottle", comment: "singular bottle"))"
                     cell.stepperView.tag = 1
                     cell.stepperView.value = 1
