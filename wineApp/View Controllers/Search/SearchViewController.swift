@@ -266,7 +266,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 44
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -335,7 +335,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         
         let bottle: SearchKeys
         
-        
         if searchBar.text!.isEmpty{
             bottle = searchKeys[indexPath.row]
         } else {
@@ -346,15 +345,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
             totalBottles += bottles.bottleCount!
         }
         
-//        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
         bottleCount = " (\(totalBottles))"
                 
         cell.textLabel?.numberOfLines = 1
-        cell.detailTextLabel?.numberOfLines = 2;
+        cell.detailTextLabel?.numberOfLines = 1;
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-        let line2 = "  \(bottle.producer) - \(bottle.appellation)" +
-                    "\n  " + NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(bottle.drinkBy)"
+        let line2 = "  \(bottle.producer)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2

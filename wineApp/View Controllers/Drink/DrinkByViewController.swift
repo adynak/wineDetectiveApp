@@ -342,7 +342,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 44
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -425,11 +425,10 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         bottleCount = " (\(totalBottles))"
                 
         cell.textLabel?.numberOfLines = 1
-        cell.detailTextLabel?.numberOfLines = 2;
+        cell.detailTextLabel?.numberOfLines = 1;
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-        let line2 = "  \(bottle.producer) - \(bottle.appellation)" +
-                    "\n  " + NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(bottle.drinkBy)"
+        let line2 = "  \(bottle.producer)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2
