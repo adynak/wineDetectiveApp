@@ -33,7 +33,8 @@ struct SearchKeys {
                             wine.label[0].producer + " " +
                             wine.label[0].vineyard + " " +
                             wine.label[0].ava + " " +
-                            wine.label[0].designation
+                            wine.label[0].designation + " " +
+                            wine.label[0].country
             
             for storage in wine.storage{
                 searchBins.append(StorageBins(binName: storage.bin,

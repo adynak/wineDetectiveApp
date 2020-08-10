@@ -142,10 +142,10 @@ class ProducerViewController :UITableViewController {
         wineSelected.topRight = bottles![section].data[row].data[0].varietal
         wineSelected.viewName = "producer"
         
-        let locationDetailController = DrillDownDetailViewController()
-        locationDetailController.passedValue = wineSelected
-        locationDetailController.title = NSLocalizedString("titleProducer", comment: "navagation title: producer")
-        let navController = UINavigationController(rootViewController: locationDetailController)
+        let wineDetailController = DrillDownDetailViewController()
+        wineDetailController.passedValue = wineSelected
+        wineDetailController.title = NSLocalizedString("titleProducer", comment: "navagation title: producer")
+        let navController = UINavigationController(rootViewController: wineDetailController)
         present(navController, animated: true, completion: nil)
 
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAdaptivePresentationControllerDelegate, UIScrollViewDelegate {
+class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAdaptivePresentationControllerDelegate {
         
     var tableContainerTopAnchor:CGFloat = 200.0
     var tableContainerHeightAnchor:CGFloat = UIScreen.main.bounds.height - 327

@@ -12,7 +12,7 @@ import UIKit
 let debug: Bool = true
 
 class DataServices {
-        
+            
     static func parseCsv(data: String) -> [[String]]{
         // data: String = contents of a CSV file.
         // Returns: [[String]] = two-dimension array [rows][columns].
@@ -157,11 +157,11 @@ class DataServices {
 
         return varietal
     }
-
+    
     static func buildDrillIntoBottlesArray(fields:[Int], sortKeys: [String], missingOnly: Bool)->[DrillLevel0]{
         
         let positionOf = Label(data:fields)
-        
+                
         let mirror = Mirror(reflecting: positionOf)
         var sortIndex0: Int = 0
         var sortIndex1: Int = 0
@@ -414,6 +414,9 @@ class DataServices {
         var label: [bottleDetail] = []
         let positionOf = Label(data:fields)
         
+        getPositionOf()
+
+        
         for row in dataArray{
             let bottleSort = row[positionOf.wdVarietal] + " " + row[positionOf.vintage] + " " + row[positionOf.producer]
             let binSort = row[positionOf.location] + row[positionOf.bin]
@@ -473,12 +476,17 @@ class DataServices {
         return level0
     }
 
+    static func getPositionOf() -> Label{
+        let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+        let positionOf = Label(data:fields)
+        return positionOf
+    }
     
     static func buildLocationArray(fields:[Int])->[Level0]{
         
         var wines: [Bottle] = []
         let positionOf = Label(data:fields)
-
+        
         for row in dataArray{
                         
             let bottle = Bottle(

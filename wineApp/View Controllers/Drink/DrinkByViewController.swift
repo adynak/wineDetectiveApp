@@ -348,32 +348,52 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         var wineSelected = wineDetail()
-        
+        var bottles: [DrillLevel2]? = []
+        var detailTitle: String
+
         let bottle: SearchKeys
         
         if searchBar.text!.isEmpty{
             bottle = searchKeys[indexPath.row]
+            detailTitle = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
         } else {
             bottle = filteredBottles[indexPath.row]
+            detailTitle = searchBar.text!
         }
         
-        wineSelected.vintage = bottle.vintage
-        wineSelected.varietal = bottle.varietal
-        wineSelected.drinkBy = bottle.drinkBy
-        wineSelected.locale = bottle.locale
-        wineSelected.producer = bottle.producer
-        wineSelected.ava = bottle.appellation
-        wineSelected.designation = bottle.designation
-        wineSelected.region = bottle.region
-        wineSelected.country = bottle.country
-        wineSelected.type = bottle.type
-        wineSelected.vineyard = bottle.vineyard
-        wineSelected.storageBins = bottle.storageBins
+        let positionOf = DataServices.getPositionOf()
 
-        let wineDetailController = WineDetailViewController()
+        if let wines = bottle.storageBins {
+            for wine in wines {
+                let iWine = wine.iwine
+                var ava: String = ""
+                var designation: String = ""
+                var beginConsume: String = ""
+                var endConsume: String = ""
+                
+                if let inventoryIndex = inventoryArray.firstIndex(where: { $0[0] == iWine }){
+                       ava = inventoryArray[inventoryIndex][positionOf.ava]
+                       designation = inventoryArray[inventoryIndex][positionOf.designation]
+                       beginConsume = inventoryArray[inventoryIndex][positionOf.beginConsume]
+                       endConsume = inventoryArray[inventoryIndex][positionOf.endConsume]
+                   }
+                bottles?.append(DrillLevel2(
+                    producer: bottle.producer, varietal: bottle.varietal, vintage: bottle.vintage, iWine: wine.iwine, location: wine.binLocation, bin: wine.binName, barcode: wine.barcode, designation: designation, ava: ava, sortKey: "sortkey", beginConsume: beginConsume, endConsume: endConsume, viewName: "view", bottleCount: 1))
+            }
+        }
+                
+        wineSelected.bottles = bottles
+        wineSelected.location = bottle.producer
+        wineSelected.bin = bottle.varietal
+        wineSelected.bottleCount = String(bottle.storageBins!.count)
+        wineSelected.topLeft = bottle.producer
+        wineSelected.topRight = bottle.varietal
+        wineSelected.viewName = "producer"
+
+        let wineDetailController = DrillDownDetailViewController()
         wineDetailController.passedValue = wineSelected
+        wineDetailController.title = detailTitle
         let navController = UINavigationController(rootViewController: wineDetailController)
-//        wineDetailController.myUpdater = (self as BottleCountDelegate)
         present(navController, animated: true, completion: nil)
 
     }
