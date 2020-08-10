@@ -18,7 +18,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     let cellID = "cellIdz"
     var wineBins = [DrillLevel2]()
     
-    var cells = [DrillDownTableViewCell]() //initialize array at class level
+    var cells = [DrillDownTableViewCell]()
 
     var passedValue = wineDetail()
     
@@ -103,7 +103,6 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     func setupWineLabelLayout(){
         let labelTopLine: String
-        let labelBottomLine: String
         
         let bottles = NSLocalizedString("pluralBottle", comment: "plural bottles")
         
@@ -156,15 +155,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         }
         
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print("SDSDS")
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("XX")
-    }
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return wineBins.count
     }
@@ -366,7 +357,6 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         var index: Int = 0
         
         for bottle in bottles {
-            print("\(passedValue.bottles![index].producer!) \(passedValue.bottles![index].varietal!)")
             if (index != 0){
                 message += "\n\n"
             }

@@ -52,17 +52,6 @@ class DrillDownTableViewCell : UITableViewCell {
             
             barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
 
-//            var bottleCount: Int = 1
-//            if bottleCountLabel.text == nil {
-//                bottleCountLabel.text = setLabelText(count:bottleCount)
-//            } else {
-//                bottleCount = Int(bottleCountLabel.text!.digits)!
-//            }
-            
-//            bottleCountLabel.text = setLabelText(count:Int(stepperView.value))
-            print("\(binItem.barcode!) \(binItem.bottleCount!) \(stepperView.value)")
-            
-//            stepperView.value = Double(binItem.bottleCount!)
             stepperView.tag = binItem.bottleCount!
             iWineLabel.text = binItem.iWine
             vintageLabel.text = binItem.vintage
@@ -125,7 +114,7 @@ class DrillDownTableViewCell : UITableViewCell {
         label.textColor = .black
         label.font = UIFont.italicSystemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "1 Bottle"
+        label.text = "1 \(NSLocalizedString("singularBottle", comment: "singular bottle"))"
         return label
     }()
     
