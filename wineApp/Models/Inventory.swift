@@ -283,12 +283,14 @@ func addNewStorage(binName: String, binLocation: String, bin: inout [StorageBins
 func buildDrinkBy(beginConsume: String, endConsume: String) -> String{
     
     let drinkBy: String
+    
+    let beforeLabel = NSLocalizedString("labelBefore", comment: "before when begin consume is missing")
 
     if (beginConsume == "" && endConsume == "") {
         drinkBy = ""
     }
     else if (beginConsume == "" && endConsume != "") {
-        drinkBy = endConsume
+        drinkBy = "\(beforeLabel) \(endConsume)"
     }
     else {
         drinkBy = "\(beginConsume) - \(endConsume)"

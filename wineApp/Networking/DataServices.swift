@@ -667,8 +667,7 @@ class DataServices {
         return titleLabel
     }
     
-    static func findDrinkByIndex(iWine: String, drinkByKey: String) -> String{
-        
+    static func getDrinkByPositionOf(drinkByKey: String) -> Int {
         var drinkByPositionOf: Int = 0
         let positionOf = getPositionOf()
         
@@ -680,13 +679,37 @@ class DataServices {
             }
         }
         
+        return drinkByPositionOf
+    }
+    
+    static func findDrinkByIndex(iWine: String, drinkByKey: String) -> String{
+        let drinkByPositionOf = getDrinkByPositionOf(drinkByKey: drinkByKey)
         let row = inventoryArray.firstIndex(where:{$0[0] == iWine})
         let drinkByValue = Float(inventoryArray[row!][drinkByPositionOf])
         return String(format: "%.3f", drinkByValue!)
-        
     }
     
-    static func buildDrinkByBottlesArray(fields:[Int])->[AllLevel0]{
+    static func buildBottleArray(fields: [Int], drinkByKey: String) -> [Bottle]{
+        var wines: [Bottle] = []
+        let positionOf = Label(data:fields)
+        var bottleSort: String = ""
+        
+        let drinkByPositionOf = getDrinkByPositionOf(drinkByKey: drinkByKey)
+
+        for row in dataArray{
+            bottleSort = row[drinkByPositionOf]
+
+            let binSort = row[positionOf.location] + row[positionOf.bin]
+            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.wdVarietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort, region: row[positionOf.region], country: row[positionOf.country], vineyard: row[positionOf.vineyard], locale: row[positionOf.locale], type: row[positionOf.type])
+            wines.append(bottle)
+
+            
+        }
+
+        return wines
+    }
+    
+    static func buildDrinkByBottlesArray(fields:[Int], drinkByKey: String)->[AllLevel0]{
         
         var level0: [AllLevel0] = []
         var level1: [AllLevel1] = []
@@ -694,14 +717,18 @@ class DataServices {
         var label: [bottleDetail] = []
         let positionOf = Label(data:fields)
         var bottleSort: String = ""
+        let drinkByKey = "available"
+        let drinkByPositionOf = getDrinkByPositionOf(drinkByKey: drinkByKey)
+
+        wines = buildBottleArray(fields: fields, drinkByKey: drinkByKey)
         
-        for row in dataArray{
-            bottleSort = row[positionOf.available]
-            
-            let binSort = row[positionOf.location] + row[positionOf.bin]
-            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.wdVarietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort, region: row[positionOf.region], country: row[positionOf.country], vineyard: row[positionOf.vineyard], locale: row[positionOf.locale], type: row[positionOf.type])
-            wines.append(bottle)
-        }
+//        for row in dataArray{
+//            bottleSort = row[drinkByPositionOf]
+//
+//            let binSort = row[positionOf.location] + row[positionOf.bin]
+//            let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.wdVarietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort, region: row[positionOf.region], country: row[positionOf.country], vineyard: row[positionOf.vineyard], locale: row[positionOf.locale], type: row[positionOf.type])
+//            wines.append(bottle)
+//        }
         
         let groupLevel0 = Dictionary(grouping: wines, by: { $0.bottleSort })
         for (item0) in groupLevel0{
@@ -747,7 +774,7 @@ class DataServices {
                                           bottleCount: level1.count))
                 break
             }
-            level0.append(AllLevel0(drinkByIndex: bottleSort, label: label, storage: level1))
+            level0.append(AllLevel0(drinkByIndex: "bottleSort", label: label, storage: level1))
             level1.removeAll()
             label.removeAll()
         }

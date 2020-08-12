@@ -86,6 +86,7 @@ class DrinkByViewController: UIViewController {
     }
     
     @objc func handleReload(){
+        let drinkBySort = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: "available")
         searchWines = allWine?.search
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
@@ -98,12 +99,16 @@ class DrinkByViewController: UIViewController {
 
     
     @objc func changeDrinkBySort(_ notification: Notification) {
-        drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
+        let title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
+        let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
         
-        searchWines = allWine?.search
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].available) > ($1.label[0].available)
-        })
+        navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: drinkByMenuCode)
+        
+//        searchWines = allWine?.search
+        searchWines = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: drinkByMenuCode.lowercased())
+//        searchWines = searchWines!.sorted(by: {
+//            ($0.label[0].available) > ($1.label[0].available)
+//        })
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
         footerView.text = countBottles(bins: searchKeys)
 
@@ -146,9 +151,10 @@ class DrinkByViewController: UIViewController {
             searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
             footerView.text = countBottles(bins: searchKeys)
         default:
-            searchWines = searchWines!.sorted(by: {
-                ($0.label[0].available) > ($1.label[0].available)
-            })
+            break
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].available) > ($1.label[0].available)
+//            })
         }
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
@@ -172,6 +178,10 @@ class DrinkByViewController: UIViewController {
     
     func setupNavigationBar() {
         navigationItem.title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
+        let title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
+        let drinkByMenuCode = "Available"
+
+        navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: drinkByMenuCode)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
                                                 title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
                                                 style: UIBarButtonItem.Style.plain,
@@ -430,7 +440,10 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         let drinkByIndex = DataServices.findDrinkByIndex(iWine: bottle.storageBins![0].iwine!, drinkByKey: drinkByMenuCode)
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "drink by index")) \(drinkByIndex)"
+//        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "drink by index")) \(drinkByIndex)"
+        
+        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("labelDrinkByWindow", comment: "drinking window")) \(bottle.drinkBy)"
+
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2

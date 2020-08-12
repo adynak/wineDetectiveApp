@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-//var availabilityArray = [[String]]()
-
-
 class API {
     
     static func load() -> String {
@@ -102,7 +99,7 @@ class API {
             print("debug = \(debug)")
             
             dataHeader = dataArray.removeFirst()
-            let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+            fields = DataServices.locateDataPositions(dataHeader:dataHeader)
                         
             let locationSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
@@ -116,7 +113,7 @@ class API {
                                     sortKeys: ["producer","wdVarietal"],
                                     missingOnly: false)
             
-            let drinkBySort = DataServices.buildDrinkByBottlesArray(fields: fields)
+            let drinkBySort = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: "available")
 
 
             let varietalSort = DataServices.buildDrillIntoBottlesArray(
