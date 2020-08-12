@@ -66,6 +66,7 @@ struct DrillBottle {
 
 struct AllLevel0 {
     var isExpanded: Bool = false
+    var drinkByIndex: String?
     var label: [bottleDetail]
     var storage: [AllLevel1]
 }
@@ -180,19 +181,11 @@ struct wineDetail {
 struct WineInventory {
     var producers: [DrillLevel0]?
     var varietals: [DrillLevel0]?
-    var drinkBy: [Producers]?
+    var drinkBy: [AllLevel0]?
     var location0: [Level0]?
     var search: [AllLevel0]?
-    var searchVarietals: [Producers]?
     var location: [DrillLevel0]?
     var missing: [DrillLevel0]?
-}
-
-struct Producers: Codable {
-    let name: String?
-    var isExpanded: Bool?
-    var bottleCount: Int?
-    var wines : [Wines]?
 }
 
 struct Wines : Codable {

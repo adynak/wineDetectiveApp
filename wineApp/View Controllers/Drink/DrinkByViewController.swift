@@ -13,12 +13,12 @@ class DrinkByViewController: UIViewController {
     
     let cellID = "cell123"
     var searchKeys = [SearchKeys]()
-    var searchKeys0 = [SearchKeys]()
+    
+    var drinkByMenuCode = "available"
 
     var filteredBottles = [SearchKeys]()
     var searchString: String = ""
     
-//    var varietals: [Producers]?
     var searchWines: [AllLevel0]?
 
     lazy var tableView: UITableView = {
@@ -65,7 +65,7 @@ class DrinkByViewController: UIViewController {
         searchBar.resignFirstResponder()
                 
 //        varietals = allWine?.searchVarietals
-        searchWines = allWine?.search
+        searchWines = allWine?.drinkBy
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
@@ -98,7 +98,7 @@ class DrinkByViewController: UIViewController {
 
     
     @objc func changeDrinkBySort(_ notification: Notification) {
-        let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
+        drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
         
         searchWines = allWine?.search
         searchWines = searchWines!.sorted(by: {
@@ -342,7 +342,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -399,7 +399,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+                
         var totalBottles: Int = 0
         var bottleCount: String = ""
         
@@ -425,10 +425,12 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         bottleCount = " (\(totalBottles))"
                 
         cell.textLabel?.numberOfLines = 1
-        cell.detailTextLabel?.numberOfLines = 1;
+        cell.detailTextLabel?.numberOfLines = 2;
+        
+        let drinkByIndex = DataServices.findDrinkByIndex(iWine: bottle.storageBins![0].iwine!, drinkByKey: drinkByMenuCode)
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-        let line2 = "  \(bottle.producer)"
+        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "drink by index")) \(drinkByIndex)"
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2

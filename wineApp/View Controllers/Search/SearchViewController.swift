@@ -39,7 +39,6 @@ class SearchViewController: UIViewController {
     
     let cellID = "cell123"
     var searchKeys = [SearchKeys]()
-    var searchKeys0 = [SearchKeys]()
 
     var filteredBottles = [SearchKeys]()
     var searchString: String = ""
