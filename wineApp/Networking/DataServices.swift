@@ -685,8 +685,14 @@ class DataServices {
     static func findDrinkByIndex(iWine: String, drinkByKey: String) -> String{
         let drinkByPositionOf = getDrinkByPositionOf(drinkByKey: drinkByKey)
         let row = inventoryArray.firstIndex(where:{$0[0] == iWine})
-        let drinkByValue = Float(inventoryArray[row!][drinkByPositionOf])
-        return String(format: "%.3f", drinkByValue!)
+//        let drinkByValue = Float(inventoryArray[row!][drinkByPositionOf])
+//        return String(format: "%.3f", drinkByValue!)
+
+
+        guard let drinkByValue = Float(inventoryArray[row!][drinkByPositionOf]) else {
+            return "0"
+        }
+        return String(format: "%.3f", drinkByValue)
     }
     
     static func buildBottleArray(fields: [Int], drinkByKey: String) -> [Bottle]{

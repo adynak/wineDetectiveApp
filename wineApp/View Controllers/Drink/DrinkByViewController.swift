@@ -64,7 +64,7 @@ class DrinkByViewController: UIViewController {
         setupNavigationBar()
         searchBar.resignFirstResponder()
                 
-//        varietals = allWine?.searchVarietals
+
         searchWines = allWine?.drinkBy
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
@@ -87,7 +87,7 @@ class DrinkByViewController: UIViewController {
     
     @objc func handleReload(){
         let drinkBySort = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: "available")
-        searchWines = allWine?.search
+        searchWines = allWine?.drinkBy
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
         })
@@ -100,15 +100,23 @@ class DrinkByViewController: UIViewController {
     
     @objc func changeDrinkBySort(_ notification: Notification) {
         let title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
-        let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
+        var drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
         
-        navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: drinkByMenuCode)
+        let positionOfDrinkByMenuCode = drinkByMenuLauncher.drinkByMenuItems.firstIndex(where:{$0.drinkByMenuCode == drinkByMenuCode})
         
-//        searchWines = allWine?.search
-        searchWines = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: drinkByMenuCode.lowercased())
-//        searchWines = searchWines!.sorted(by: {
-//            ($0.label[0].available) > ($1.label[0].available)
-//        })
+        let subtitle = drinkByMenuLauncher.drinkByMenuItems[positionOfDrinkByMenuCode!].drinkByNavTitle
+
+        if drinkByMenuCode != "Cancel"{
+            navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: subtitle)
+        } else {
+            return
+        }
+        
+        if drinkByMenuCode == "Missing"{
+            searchWines = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey:"available")
+        } else {
+            searchWines = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: drinkByMenuCode.lowercased())
+        }
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
         footerView.text = countBottles(bins: searchKeys)
 
@@ -151,10 +159,9 @@ class DrinkByViewController: UIViewController {
             searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
             footerView.text = countBottles(bins: searchKeys)
         default:
-            break
-//            searchWines = searchWines!.sorted(by: {
-//                ($0.label[0].available) > ($1.label[0].available)
-//            })
+            searchWines = searchWines!.sorted(by: {
+                ($0.label[0].available) > ($1.label[0].available)
+            })
         }
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
@@ -179,7 +186,8 @@ class DrinkByViewController: UIViewController {
     func setupNavigationBar() {
         navigationItem.title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
         let title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
-        let drinkByMenuCode = "Available"
+        
+        let drinkByMenuCode = NSLocalizedString("drinkByNavTitleAvailable", comment: "drink by nav title Available")
 
         navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: drinkByMenuCode)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
