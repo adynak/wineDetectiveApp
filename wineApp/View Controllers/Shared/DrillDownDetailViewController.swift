@@ -20,7 +20,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     var cells = [DrillDownTableViewCell]()
 
-    var passedValue = wineDetail()
+    var passedValue = WineDetail()
     
     let storageLabel: UITextView = {
         let tv = UITextView()

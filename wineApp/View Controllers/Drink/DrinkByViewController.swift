@@ -366,7 +366,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        var wineSelected = wineDetail()
+        var wineSelected = WineDetail()
         var bottles: [DrillLevel2]? = []
         var detailTitle: String
 

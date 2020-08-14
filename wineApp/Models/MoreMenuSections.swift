@@ -55,7 +55,7 @@ enum ReportNames: Int, CaseIterable, SectionType{
         case .location:
             return NSLocalizedString("reportLocation", comment: "report location menu item")
         case .missingDates:
-            return NSLocalizedString("reportMissingDates", comment: "report missing dates menu item")
+            return NSLocalizedString("reportMissingDates", comment: "Wines Missing A Drinking Window")
         }
     }
     

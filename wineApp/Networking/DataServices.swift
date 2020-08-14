@@ -411,7 +411,7 @@ class DataServices {
         var level0: [AllLevel0] = []
         var level1: [AllLevel1] = []
         var wines: [Bottle] = []
-        var label: [bottleDetail] = []
+        var label: [BottleDetail] = []
         let positionOf = Label(data:fields)
         
         for row in dataArray{
@@ -441,7 +441,7 @@ class DataServices {
             for (item) in item0.value {
                 let vintage = (item.vintage == "1001") ? "NV" : item.vintage
 
-                label.append(bottleDetail(vvp: item.varietal + " " +
+                label.append(BottleDetail(vvp: item.varietal + " " +
                                                vintage + " " +
                                                item.producer,
                                           vintage: vintage,
@@ -725,7 +725,7 @@ class DataServices {
         var level0: [AllLevel0] = []
         var level1: [AllLevel1] = []
         var wines: [Bottle] = []
-        var label: [bottleDetail] = []
+        var label: [BottleDetail] = []
 
         wines = buildBottleArray(fields: fields, drinkByKey: drinkByKey)
                 
@@ -749,7 +749,7 @@ class DataServices {
                 for (item) in item1.value {
                     let vintage = (item.vintage == "1001") ? "NV" : item.vintage
 
-                    label.append(bottleDetail(vvp: item.varietal + " " +
+                    label.append(BottleDetail(vvp: item.varietal + " " +
                                                    vintage + " " +
                                                    item.producer,
                                               vintage: vintage,

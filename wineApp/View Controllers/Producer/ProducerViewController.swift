@@ -127,7 +127,7 @@ class ProducerViewController :UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var wineSelected = wineDetail()
+        var wineSelected = WineDetail()
         
         //getting the index path of selected row
         let indexPath = tableView.indexPathForSelectedRow

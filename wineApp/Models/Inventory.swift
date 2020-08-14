@@ -67,7 +67,7 @@ struct DrillBottle {
 struct AllLevel0 {
     var isExpanded: Bool = false
     var drinkByIndex: String?
-    var label: [bottleDetail]
+    var label: [BottleDetail]
     var storage: [AllLevel1]
 }
 
@@ -80,7 +80,7 @@ struct AllLevel1 {
     var varietal: String?
 }
 
-struct bottleDetail {
+struct BottleDetail {
     var vvp: String
     var vintage: String
     var varietal: String
@@ -157,7 +157,7 @@ struct Level2 {
     var barcode: String?
 }
 
-struct wineDetail {
+struct WineDetail {
     var varietal = "123"
     var vintage = "123"
     var producer = "123"
