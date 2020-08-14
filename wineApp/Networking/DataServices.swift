@@ -592,6 +592,8 @@ class DataServices {
                                 fields: fields,
                                 sortKeys: ["producer","wdVarietal"],
                                 missingOnly: false)
+        
+        let drinkBySort = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: "available")
 
         let varietalSort = DataServices.buildDrillIntoBottlesArray(
                                 fields: fields,
@@ -604,6 +606,7 @@ class DataServices {
                                                 
         let newInventory = WineInventory(producers: producerSort,
                                          varietals: varietalSort,
+                                         drinkBy: drinkBySort,
                                          search: searchSort,
                                          location: locationSort,
                                          missing: missingSort)
