@@ -9,13 +9,6 @@
 import UIKit
 
 class DrinkByMenuCell: BaseCell {
-    
-    override var isHighlighted: Bool{
-        didSet {
-            backgroundColor = isHighlighted ? .white : .lightGray
-            nameLabel.textColor = isHighlighted ? .white : .black
-        }
-    }
 
     var drinkByMenuItem: DrinkByMenuItem?{
         didSet {
@@ -47,7 +40,7 @@ class DrinkByMenuCell: BaseCell {
 //        addSubview(iconImageView)
 
 //        addConstraintsWithFormat(format: "H:|-8-[v0(30)]-8-[v1]|", views: iconImageView,nameLabel)
-        addConstraintsWithFormat(format: "V:|-2-[v0(40)]|", views: nameLabel)
+        addConstraintsWithFormat(format: "V:|-2-[v0(30)]|", views: nameLabel)
         addConstraintsWithFormat(format: "H:|-8-[v0]|", views: nameLabel)
 //        addConstraintsWithFormat(format: "V:|[v0(30)]|", views: iconImageView)
         

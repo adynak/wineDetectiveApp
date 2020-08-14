@@ -87,6 +87,7 @@ class DrinkByViewController: UIViewController {
     
     @objc func handleReload(){
         let drinkBySort = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: "available")
+        allWine?.drinkBy = drinkBySort
         searchWines = allWine?.drinkBy
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
@@ -100,7 +101,7 @@ class DrinkByViewController: UIViewController {
     
     @objc func changeDrinkBySort(_ notification: Notification) {
         let title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
-        var drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
+        let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
         
         let positionOfDrinkByMenuCode = drinkByMenuLauncher.drinkByMenuItems.firstIndex(where:{$0.drinkByMenuCode == drinkByMenuCode})
         
@@ -445,7 +446,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         cell.textLabel?.numberOfLines = 1
         cell.detailTextLabel?.numberOfLines = 2;
         
-        let drinkByIndex = DataServices.findDrinkByIndex(iWine: bottle.storageBins![0].iwine!, drinkByKey: drinkByMenuCode)
+//        let drinkByIndex = DataServices.findDrinkByIndex(iWine: bottle.storageBins![0].iwine!, drinkByKey: drinkByMenuCode)
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
 //        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "drink by index")) \(drinkByIndex)"

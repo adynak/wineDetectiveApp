@@ -153,6 +153,15 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! DrinkByMenuCell
+                
+        if indexPath.row == 0 {
+            cell.backgroundColor = drinkByMenuBackground
+            currentSelected = indexPath.row
+            previousSelected = indexPath
+        } else {
+            cell.backgroundColor = .white
+        }
+        
         let drinkByMenuItem = drinkByMenuItems[indexPath.item]
         cell.drinkByMenuItem = drinkByMenuItem
         return cell
@@ -166,8 +175,40 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
         return 0
     }
     
+    var previousSelected : IndexPath?
+    var currentSelected : Int?
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let drinkByMenuItem = self.drinkByMenuItems[indexPath.item]
+        let menuSelection = drinkByMenuItem.name
+        var changeCellBackgroundColor: Bool = false
+        
+        switch menuSelection {
+            case NSLocalizedString("drinkByCancel", comment: "Cancel"),
+                 NSLocalizedString("drinkByHelp", comment: "Drinkability Help"):
+                changeCellBackgroundColor = false
+            default:
+                changeCellBackgroundColor = true
+        }
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        if previousSelected != nil{
+            if changeCellBackgroundColor{
+                collectionView.cellForItem(at: previousSelected!)!.backgroundColor = .white
+                cell!.backgroundColor = drinkByMenuBackground
+                currentSelected = indexPath.row
+                previousSelected = indexPath
+            }
+        } else {
+            if changeCellBackgroundColor{
+                cell!.backgroundColor = drinkByMenuBackground
+                currentSelected = indexPath.row
+                previousSelected = indexPath
+            }
+        }
+        
+        
         handleDismiss(drinkByMenuItem: drinkByMenuItem)
     }
     

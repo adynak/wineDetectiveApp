@@ -726,7 +726,7 @@ class DataServices {
 //        let positionOf = Label(data:fields)
 //        var bottleSort: String = ""
 //        let drinkByKey = "available"
-        let drinkByPositionOf = getFieldPositionOf(positionOfKey: drinkByKey)
+//        let drinkByPositionOf = getFieldPositionOf(positionOfKey: drinkByKey)
 
         wines = buildBottleArray(fields: fields, drinkByKey: drinkByKey)
         
