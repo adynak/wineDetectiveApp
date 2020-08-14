@@ -11,21 +11,15 @@ import UIKit
 class DrinkByMenuCell: BaseCell {
     
     override var isHighlighted: Bool{
-        
         didSet {
-            backgroundColor = isHighlighted ? .darkGray : .white
+            backgroundColor = isHighlighted ? .white : .lightGray
             nameLabel.textColor = isHighlighted ? .white : .black
-//            iconImageView.tintColor = isHighlighted ? .white : .darkGray
         }
     }
-    
+
     var drinkByMenuItem: DrinkByMenuItem?{
         didSet {
             nameLabel.text = drinkByMenuItem?.name
-//            if let imageName = drinkByMenuItem?.imageName{
-//                iconImageView.image = UIImage(named: imageName)
-//                iconImageView.tintColor = .darkGray
-//            }
         }
     }
     

@@ -167,7 +167,6 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let drinkByMenuItem = self.drinkByMenuItems[indexPath.item]
         handleDismiss(drinkByMenuItem: drinkByMenuItem)
     }

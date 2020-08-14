@@ -667,27 +667,24 @@ class DataServices {
         return titleLabel
     }
     
-    static func getDrinkByPositionOf(drinkByKey: String) -> Int {
-        var drinkByPositionOf: Int = 0
-        let positionOf = getPositionOf()
+    static func getFieldPositionOf(positionOfKey: String) -> Int {
+        var positionOf: Int = 0
+        let positionOfFields = getPositionOf()
         
-        let mirror = Mirror(reflecting: positionOf)
+        let mirror = Mirror(reflecting: positionOfFields)
 
         for (key, value) in mirror.children {
-            if key == drinkByKey{
-                drinkByPositionOf = value as! Int
+            if key == positionOfKey{
+                positionOf = value as! Int
             }
         }
         
-        return drinkByPositionOf
+        return positionOf
     }
     
     static func findDrinkByIndex(iWine: String, drinkByKey: String) -> String{
-        let drinkByPositionOf = getDrinkByPositionOf(drinkByKey: drinkByKey)
+        let drinkByPositionOf = getFieldPositionOf(positionOfKey: drinkByKey)
         let row = inventoryArray.firstIndex(where:{$0[0] == iWine})
-//        let drinkByValue = Float(inventoryArray[row!][drinkByPositionOf])
-//        return String(format: "%.3f", drinkByValue!)
-
 
         guard let drinkByValue = Float(inventoryArray[row!][drinkByPositionOf]) else {
             return "0"
@@ -700,10 +697,15 @@ class DataServices {
         let positionOf = Label(data:fields)
         var bottleSort: String = ""
         
-        let drinkByPositionOf = getDrinkByPositionOf(drinkByKey: drinkByKey)
+        let drinkByPositionOf = getFieldPositionOf(positionOfKey: drinkByKey)
+        let iWinePositionOf = getFieldPositionOf(positionOfKey: "iWine")
 
         for row in dataArray{
             bottleSort = row[drinkByPositionOf]
+            
+            if bottleSort == "" {
+                bottleSort = row[iWinePositionOf]
+            }
 
             let binSort = row[positionOf.location] + row[positionOf.bin]
             let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.wdVarietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort, region: row[positionOf.region], country: row[positionOf.country], vineyard: row[positionOf.vineyard], locale: row[positionOf.locale], type: row[positionOf.type])
@@ -721,10 +723,10 @@ class DataServices {
         var level1: [AllLevel1] = []
         var wines: [Bottle] = []
         var label: [bottleDetail] = []
-        let positionOf = Label(data:fields)
-        var bottleSort: String = ""
-        let drinkByKey = "available"
-        let drinkByPositionOf = getDrinkByPositionOf(drinkByKey: drinkByKey)
+//        let positionOf = Label(data:fields)
+//        var bottleSort: String = ""
+//        let drinkByKey = "available"
+        let drinkByPositionOf = getFieldPositionOf(positionOfKey: drinkByKey)
 
         wines = buildBottleArray(fields: fields, drinkByKey: drinkByKey)
         
