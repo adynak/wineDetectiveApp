@@ -731,7 +731,7 @@ class DataServices {
                 
         let groupLevel0 = Dictionary(grouping: wines, by: { $0.bottleSort })
         for (item0) in groupLevel0{
-            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.binSort })
+            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.iWine })
             for (item1) in groupLevel1{
                 for (detail) in item1.value {
                     level1.append(AllLevel1(
@@ -739,43 +739,45 @@ class DataServices {
                         bin: detail.bin,
                         barcode: detail.barcode,
                         binSort: detail.binSort,
-                        iwine: detail.iWine))
+                        iwine: detail.iWine,
+                        varietal: detail.varietal))
                 }
                 level1 =  level1.sorted(by: {
-                    ($0.binSort.lowercased()) < ($1.binSort.lowercased())
+                    ($0.varietal!.lowercased()) < ($1.varietal!.lowercased())
                 })
-            }
-            for (item) in item0.value {
-                let vintage = (item.vintage == "1001") ? "NV" : item.vintage
+            
+                for (item) in item1.value {
+                    let vintage = (item.vintage == "1001") ? "NV" : item.vintage
 
-                label.append(bottleDetail(vvp: item.varietal + " " +
-                                               vintage + " " +
-                                               item.producer,
-                                          vintage: vintage,
-                                          varietal: item.varietal,
-                                          producer: item.producer,
-                                          vineyard: item.vineyard,
-                                          ava: item.ava,
-                                          designation: item.designation,
-                                          region: item.ava,
-                                          country: item.country,
-                                          locale: item.locale,
-                                          type: item.type,
-                                          drinkBy: buildDrinkBy(beginConsume: item.beginConsume, endConsume: item.endConsume),
-                                          available: item.available.floatValue,
-                                          linear: item.linear.floatValue,
-                                          bell: item.bell.floatValue,
-                                          early: item.early.floatValue,
-                                          late: item.late.floatValue,
-                                          fast: item.fast.floatValue,
-                                          twinPeak: item.twinpeak.floatValue,
-                                          simple: item.simple.floatValue,
-                                          bottleCount: level1.count))
-                break
+                    label.append(bottleDetail(vvp: item.varietal + " " +
+                                                   vintage + " " +
+                                                   item.producer,
+                                              vintage: vintage,
+                                              varietal: item.varietal,
+                                              producer: item.producer,
+                                              vineyard: item.vineyard,
+                                              ava: item.ava,
+                                              designation: item.designation,
+                                              region: item.ava,
+                                              country: item.country,
+                                              locale: item.locale,
+                                              type: item.type,
+                                              drinkBy: buildDrinkBy(beginConsume: item.beginConsume, endConsume: item.endConsume),
+                                              available: item.available.floatValue,
+                                              linear: item.linear.floatValue,
+                                              bell: item.bell.floatValue,
+                                              early: item.early.floatValue,
+                                              late: item.late.floatValue,
+                                              fast: item.fast.floatValue,
+                                              twinPeak: item.twinpeak.floatValue,
+                                              simple: item.simple.floatValue,
+                                              bottleCount: level1.count))
+                }
+            
+                level0.append(AllLevel0(drinkByIndex: "bottleSort", label: label, storage: level1))
+                level1.removeAll()
+                label.removeAll()
             }
-            level0.append(AllLevel0(drinkByIndex: "bottleSort", label: label, storage: level1))
-            level1.removeAll()
-            label.removeAll()
         }
 
         return level0

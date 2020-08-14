@@ -77,6 +77,7 @@ struct AllLevel1 {
     var barcode: String
     var binSort: String
     var iwine: String
+    var varietal: String?
 }
 
 struct bottleDetail {
