@@ -84,6 +84,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tellCellarTracker()
 
         configureUI()
         setupElements()
@@ -93,8 +94,6 @@ class SearchViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
         searchWines = allWine?.search
-        Alert.showLoginCredentialsAlert(on: self)
-
         
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
@@ -126,6 +125,34 @@ class SearchViewController: UIViewController {
         let loginController = LoginController()
         loginController.modalPresentationStyle = .fullScreen
         present(loginController, animated: true, completion: nil)
+    }
+    
+    func tellCellarTracker(){
+        var markAsDrank = [DrillLevel2]()
+        var message: String = ""
+
+        markAsDrank = DataServices.buildCellarTrackerList()
+        if markAsDrank.count > 0 {
+            message = DataServices.buildTellCellarTrackerMessage(markAsDrank: markAsDrank)
+
+            let titleText = NSLocalizedString("alertTitleTellCellarTracker", comment: "alert title inventory out of sync")
+            
+            var okButtonText = NSLocalizedString("alertTextHelp", comment: "alert text help")
+            
+            let alertTitle = "\(titleText)"
+
+            let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
+            alert.setMessageAlignment(.left)
+            
+            alert.addAction(UIAlertAction.init(title: okButtonText, style: .cancel) { (UIAlertAction) -> Void in
+                self.dismiss(animated: true, completion:nil)
+            })
+            
+            alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+            
+            present(alert, animated: true, completion: nil)
+        }
+            
     }
     
     func setupNavigationBar() {

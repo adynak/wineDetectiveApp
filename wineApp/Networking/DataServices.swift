@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 let debug: Bool = true
 
@@ -568,8 +569,48 @@ class DataServices {
         return level0
     }
     
-    static func buildCellarTrackerAlert(){
+    static func buildCellarTrackerList() -> [DrillLevel2] {
+        var tellCellarTracker = [DrillLevel2]()
+        var producer = String()
+        var vintage = String()
+        var varietal = String()
+        var location = String()
+        var bin = String()
         
+        dataHeader = inventoryArray.removeFirst()
+        fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+        let inventoryPositionOf = Label(data:fields)
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext = appDelegate!.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BottlesConsumed")
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            for data in result as! [NSManagedObject] {
+                let barcode = data.value(forKey: "barcode") as! String
+                
+                if let inventoryIndex = inventoryArray.firstIndex(where: { $0[inventoryPositionOf.barcode] == barcode }){
+                    producer = inventoryArray[inventoryIndex][inventoryPositionOf.producer]
+                    vintage = inventoryArray[inventoryIndex][inventoryPositionOf.vintage]
+                    varietal = inventoryArray[inventoryIndex][inventoryPositionOf.varietal]
+                    location = inventoryArray[inventoryIndex][inventoryPositionOf.location]
+                    bin = inventoryArray[inventoryIndex][inventoryPositionOf.bin]
+                }
+                
+                tellCellarTracker.append(DrillLevel2(
+                    producer: producer,
+                    varietal: varietal,
+                    vintage: vintage,
+                    location: location,
+                    bin: bin,
+                    barcode: barcode))
+            }
+        }
+        catch {
+            
+        }
+        return tellCellarTracker
     }
         
     static func removeBottles(bottles: [DrillLevel2]){
@@ -796,6 +837,28 @@ class DataServices {
 
         return level0
     }
+    
+    static func buildTellCellarTrackerMessage(markAsDrank: [DrillLevel2])->String{
+        var message: String = NSLocalizedString("updateCellarTracker", comment: "message that these bottles should be marked drank") + "\n\n"
+        var barcode: String = ""
+        
+        let bottleSingular = NSLocalizedString("singularThis", comment: "this wine")
+        let pluralBottle = NSLocalizedString("pluralThese", comment: "these wines")
+        let bottleString = (markAsDrank.count == 1) ? bottleSingular : pluralBottle
+        
+        message = message.replacingOccurrences(of: "%1", with: bottleString)
+        
+        for bottle in markAsDrank {
+            
+            if UserDefaults.standard.getShowBarcode() {
+                barcode = "(\(bottle.barcode!.digits))"
+            }
+            let locationAndBin = NSLocalizedString("labelLocation", comment: "label for location") + ": \(bottle.location!) \(bottle.bin!)"
+            message += "\(bottle.producer!)\n\(bottle.vintage!) \(bottle.varietal!)\n\(locationAndBin) \(barcode)"
+        }
+        return message
+    }
+
 
     
 }
