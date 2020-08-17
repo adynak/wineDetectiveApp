@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class API {
     
@@ -114,13 +115,17 @@ class API {
             fields = DataServices.locateDataPositions(dataHeader:dataHeader)
             let inventoryPositionOf = Label(data:fields)
 
-            for consumed in bottlesConsumed {
-                dataArray = inventoryArray.filter {
-                    $0[inventoryPositionOf.iWine] != consumed.iWine &&
-                    $0[inventoryPositionOf.barcode] != consumed.barcode
+            for consumed in bottlesConsumed {                
+                if let index = dataArray.firstIndex(where: {
+                    $0[inventoryPositionOf.iWine] == consumed.iWine &&
+                    $0[inventoryPositionOf.barcode] == consumed.barcode
+                }) {
+                    dataArray.remove(at: index)
+                } else {
+                    deleteCoreData(barcode: consumed.barcode!)
                 }
             }
-                        
+
             let locationSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
                                     sortKeys: ["location","bin"],
@@ -164,6 +169,34 @@ class API {
             return "Failed"
         }
 
+    }
+    
+    static func deleteCoreData(barcode: String){
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BottlesConsumed")
+        fetchRequest.predicate = NSPredicate(format: "barcode = %@", barcode)
+       
+        do
+        {
+            let test = try managedContext.fetch(fetchRequest)
+            let objectToDelete = test[0] as! NSManagedObject
+            managedContext.delete(objectToDelete)
+            
+            do{
+                try managedContext.save()
+            }
+            catch
+            {
+                print(error)
+            }
+            
+        }
+        catch
+        {
+            print(error)
+        }
     }
     
     enum NetworkError: Error {

@@ -567,6 +567,10 @@ class DataServices {
 
         return level0
     }
+    
+    static func buildCellarTrackerAlert(){
+        
+    }
         
     static func removeBottles(bottles: [DrillLevel2]){
         

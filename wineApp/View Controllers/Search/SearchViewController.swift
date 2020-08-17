@@ -83,6 +83,8 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         configureUI()
         setupElements()
         setupNavigationBar()
@@ -91,6 +93,8 @@ class SearchViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
         searchWines = allWine?.search
+        Alert.showLoginCredentialsAlert(on: self)
+
         
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
