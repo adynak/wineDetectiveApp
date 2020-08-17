@@ -12,6 +12,18 @@ import UIKit
 class API {
     
     static func load() -> String {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = (UIApplication.shared.delegate as! AppDelegate) .persistentContainer.viewContext
+        let context = appDelegate.persistentContainer.viewContext
+        var bottlesConsumed = [BottlesConsumed]()
+        
+        do {
+            bottlesConsumed = try context.fetch(BottlesConsumed.fetchRequest())
+        } catch let error as NSError {
+            print("coound not fetch. \(error), \(error.userInfo)")
+        }
+        
         print("load")
         
         if Reachability.isConnectedToNetwork(){
@@ -93,13 +105,21 @@ class API {
                 }
 
             }
-
+            
             dataArray = inventoryArray
             print("inventory")
             print("debug = \(debug)")
             
             dataHeader = dataArray.removeFirst()
             fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+            let inventoryPositionOf = Label(data:fields)
+
+            for consumed in bottlesConsumed {
+                dataArray = inventoryArray.filter {
+                    $0[inventoryPositionOf.iWine] != consumed.iWine &&
+                    $0[inventoryPositionOf.barcode] != consumed.barcode
+                }
+            }
                         
             let locationSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
