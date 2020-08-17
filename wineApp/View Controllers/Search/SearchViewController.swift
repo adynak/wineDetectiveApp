@@ -137,7 +137,7 @@ class SearchViewController: UIViewController {
 
             let titleText = NSLocalizedString("alertTitleTellCellarTracker", comment: "alert title inventory out of sync")
             
-            var okButtonText = NSLocalizedString("alertTextHelp", comment: "alert text help")
+            let okButtonText = NSLocalizedString("alertTextHelp", comment: "alert text help")
             
             let alertTitle = "\(titleText)"
 
