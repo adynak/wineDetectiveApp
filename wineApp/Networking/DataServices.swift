@@ -589,6 +589,7 @@ class DataServices {
             let result = try managedContext.fetch(fetchRequest)
             for data in result as! [NSManagedObject] {
                 let barcode = data.value(forKey: "barcode") as! String
+                let consumed = formatConsumeDate(consumed: data.value(forKey: "consumed") as! Date)
                 
                 if let inventoryIndex = inventoryArray.firstIndex(where: { $0[inventoryPositionOf.barcode] == barcode }){
                     producer = inventoryArray[inventoryIndex][inventoryPositionOf.producer]
@@ -604,13 +605,23 @@ class DataServices {
                     vintage: vintage,
                     location: location,
                     bin: bin,
-                    barcode: barcode))
+                    barcode: barcode,
+                    consumeDate: consumed))
             }
         }
         catch {
             
         }
         return tellCellarTracker
+    }
+    
+    static func formatConsumeDate(consumed: Date) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.setLocalizedDateFormatFromTemplate("MMddyyyy")
+        return dateFormatter.string(from: consumed)
     }
         
     static func removeBottles(bottles: [DrillLevel2]){
@@ -841,6 +852,7 @@ class DataServices {
     static func buildTellCellarTrackerMessage(markAsDrank: [DrillLevel2])->String{
         var message: String = NSLocalizedString("updateCellarTracker", comment: "message that these bottles should be marked drank") + "\n\n"
         var barcode: String = ""
+        var vintage: String = ""
         
         let bottleSingular = NSLocalizedString("singularThis", comment: "this wine")
         let pluralBottle = NSLocalizedString("pluralThese", comment: "these wines")
@@ -853,8 +865,13 @@ class DataServices {
             if UserDefaults.standard.getShowBarcode() {
                 barcode = "(\(bottle.barcode!.digits))"
             }
+            if bottle.vintage == "1001" {
+                vintage = "NV"
+            } else {
+                vintage = bottle.vintage!
+            }
             let locationAndBin = NSLocalizedString("labelLocation", comment: "label for location") + ": \(bottle.location!) \(bottle.bin!)"
-            message += "\(bottle.producer!)\n\(bottle.vintage!) \(bottle.varietal!)\n\(locationAndBin) \(barcode)"
+            message += "\(bottle.consumeDate!)\n  \(bottle.producer!)\n  \(vintage) \(bottle.varietal!)\n  \(locationAndBin) \(barcode)"
         }
         return message
     }

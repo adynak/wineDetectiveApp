@@ -414,6 +414,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         wineDetailController.title = detailTitle
         let navController = UINavigationController(rootViewController: wineDetailController)
         present(navController, animated: true, completion: nil)
+        searchBarCancelButtonClicked(searchBar)
 
     }
     

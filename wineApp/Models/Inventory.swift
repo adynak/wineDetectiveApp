@@ -132,6 +132,7 @@ struct DrillLevel2 {
     var endConsume: String?
     var viewName: String?
     var bottleCount: Int?
+    var consumeDate: String?
 }
 
 struct Level0 {
