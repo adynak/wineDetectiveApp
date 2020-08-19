@@ -38,6 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    static var managedContext: NSManagedObjectContext{
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = appDelegate!.persistentContainer.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        return context
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
                 
