@@ -116,7 +116,7 @@ class SearchViewController: UIViewController {
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
         footerView.text = countBottles(bins: searchKeys)
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
     @objc func handleLogOut(){

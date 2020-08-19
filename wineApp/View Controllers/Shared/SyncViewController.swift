@@ -43,6 +43,7 @@ class SyncViewController: UITableViewController {
     }
 
     @objc func syncCancel(){
+        reactToCoraData()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -105,6 +106,43 @@ class SyncViewController: UITableViewController {
         })
     }
 
+    func reactToCoraData(){
+        print("SFSG")
+        var coreData = [DrillLevel2]()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        var bottlesConsumed = [BottlesConsumed]()
+        
+        do {
+            bottlesConsumed = try context.fetch(BottlesConsumed.fetchRequest())
+        } catch let error as NSError {
+            print("could not fetch. \(error), \(error.userInfo)")
+        }
+//        dataArray = inventoryArray
+        print("inventory")
+        print("debug = \(debug)")
+        
+//        dataHeader = dataArray.removeFirst()
+//        fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+        
+        let inventoryPositionOf = Label(data:fields)
+
+        for consumed in bottlesConsumed {
+            if let index = dataArray.firstIndex(where: {
+                $0[inventoryPositionOf.iWine] == consumed.iWine &&
+                $0[inventoryPositionOf.barcode] == consumed.barcode
+            }) {
+                dataArray.remove(at: index)
+                coreData.append(DrillLevel2(iWine: consumed.iWine, barcode: consumed.barcode))
+            } else {
+                API.deleteCoreData(barcode: consumed.barcode!)
+            }
+        }
+
+        DataServices.removeBottles(bottles: coreData, writeCoreData: false)
+
+    }
+    
     func makeContextMenu(for indexPath: IndexPath) -> UIMenu {
         
         let copyVPVTitle = NSLocalizedString("labelVPV", comment: "label: Vintage Producer Varietal")
@@ -155,11 +193,15 @@ class SyncViewController: UITableViewController {
     }
     
     func deleteFromCoreData(indexPath: IndexPath, tableView: UITableView){
+        let barcode = markAsDrank[indexPath.row].barcode!
         self.markAsDrank.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        API.deleteCoreData(barcode: barcode)
+        
         if markAsDrank.count == 0 {
+            reactToCoraData()
             self.dismiss(animated: true, completion: nil)
         }
     }
-        
 }

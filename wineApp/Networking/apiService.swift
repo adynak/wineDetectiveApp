@@ -14,16 +14,15 @@ class API {
     
     static func load() -> String {
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = (UIApplication.shared.delegate as! AppDelegate) .persistentContainer.viewContext
-        let context = appDelegate.persistentContainer.viewContext
-        var bottlesConsumed = [BottlesConsumed]()
-        
-        do {
-            bottlesConsumed = try context.fetch(BottlesConsumed.fetchRequest())
-        } catch let error as NSError {
-            print("coound not fetch. \(error), \(error.userInfo)")
-        }
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegate.persistentContainer.viewContext
+//        var bottlesConsumed = [BottlesConsumed]()
+//        
+//        do {
+//            bottlesConsumed = try context.fetch(BottlesConsumed.fetchRequest())
+//        } catch let error as NSError {
+//            print("coound not fetch. \(error), \(error.userInfo)")
+//        }
         
         print("load")
         
@@ -113,18 +112,19 @@ class API {
             
             dataHeader = dataArray.removeFirst()
             fields = DataServices.locateDataPositions(dataHeader:dataHeader)
-            let inventoryPositionOf = Label(data:fields)
+            
+//            let inventoryPositionOf = Label(data:fields)
 
-            for consumed in bottlesConsumed {                
-                if let index = dataArray.firstIndex(where: {
-                    $0[inventoryPositionOf.iWine] == consumed.iWine &&
-                    $0[inventoryPositionOf.barcode] == consumed.barcode
-                }) {
-                    dataArray.remove(at: index)
-                } else {
-                    deleteCoreData(barcode: consumed.barcode!)
-                }
-            }
+//            for consumed in bottlesConsumed {
+//                if let index = dataArray.firstIndex(where: {
+//                    $0[inventoryPositionOf.iWine] == consumed.iWine &&
+//                    $0[inventoryPositionOf.barcode] == consumed.barcode
+//                }) {
+//                    dataArray.remove(at: index)
+//                } else {
+//                    deleteCoreData(barcode: consumed.barcode!)
+//                }
+//            }
 
             let locationSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,

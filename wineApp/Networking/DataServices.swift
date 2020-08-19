@@ -577,8 +577,8 @@ class DataServices {
         var location = String()
         var bin = String()
         
-        dataHeader = inventoryArray.removeFirst()
-        fields = DataServices.locateDataPositions(dataHeader:dataHeader)
+//        dataHeader = inventoryArray.removeFirst()
+//        fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         let inventoryPositionOf = Label(data:fields)
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -624,11 +624,11 @@ class DataServices {
         return dateFormatter.string(from: consumed)
     }
         
-    static func removeBottles(bottles: [DrillLevel2]){
+    static func removeBottles(bottles: [DrillLevel2], writeCoreData: Bool){
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = appDelegate!.persistentContainer.viewContext
+    
         let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         var dataArrayFiltered = [[String]]()
         
@@ -637,11 +637,13 @@ class DataServices {
             let iwine = bottle.iWine!.components(separatedBy:CharacterSet.decimalDigits.inverted).joined()
             print(barcode + " " + iwine)
             
-            let consumed = BottlesConsumed(entity: BottlesConsumed.entity(), insertInto: context)
-            consumed.iWine = iwine
-            consumed.barcode = barcode
-            consumed.consumed = Date()
-            appDelegate.saveContext()
+            if writeCoreData{
+                let consumed = BottlesConsumed(entity: BottlesConsumed.entity(), insertInto: context)
+                consumed.iWine = iwine
+                consumed.barcode = barcode
+                consumed.consumed = Date()
+                appDelegate!.saveContext()
+            }
             
             dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode) }
             dataArray = dataArrayFiltered

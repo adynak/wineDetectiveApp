@@ -309,7 +309,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         if showingSave {
             alert.addAction(UIAlertAction.init(title: drinkButtonText, style: .default) { (UIAlertAction) -> Void in
                 self.dismiss(animated: true, completion:{
-                    DataServices.removeBottles(bottles: markAsDrank)
+                    DataServices.removeBottles(bottles: markAsDrank, writeCoreData: true)
                 })
             })
         }
