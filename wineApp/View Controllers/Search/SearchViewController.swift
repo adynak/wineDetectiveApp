@@ -129,37 +129,14 @@ class SearchViewController: UIViewController {
     
     func tellCellarTracker(){
         var markAsDrank = [DrillLevel2]()
-//        var message: String = ""
 
         markAsDrank = DataServices.buildCellarTrackerList()
         if markAsDrank.count > 0 {
             
             let syncController = SyncViewController()
             syncController.markAsDrank = markAsDrank
-
             let navController = UINavigationController(rootViewController: syncController)
             present(navController, animated: true, completion: nil)
-
-//
-//
-//            message = DataServices.buildTellCellarTrackerMessage(markAsDrank: markAsDrank)
-//
-//            let titleText = NSLocalizedString("alertTitleTellCellarTracker", comment: "alert title inventory out of sync")
-//
-//            let okButtonText = NSLocalizedString("alertTextHelp", comment: "alert text help")
-//
-//            let alertTitle = "\(titleText)"
-//
-//            let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
-//            alert.setMessageAlignment(.left)
-//
-//            alert.addAction(UIAlertAction.init(title: okButtonText, style: .cancel) { (UIAlertAction) -> Void in
-//                self.dismiss(animated: true, completion:nil)
-//            })
-//
-//            alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
-//
-//            present(alert, animated: true, completion: nil)
         }
             
     }
@@ -205,9 +182,9 @@ class SearchViewController: UIViewController {
                                                     target: self,
                                                     action: #selector(handleLogOut))
             navigationItem.rightBarButtonItem = UIBarButtonItem(
-                                                  barButtonSystemItem: .search,
-                                                  target: self,
-                                                  action:#selector(handleShowSearchBar))
+                                                    barButtonSystemItem: .search,
+                                                    target: self,
+                                                    action:#selector(handleShowSearchBar))
         } else {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
@@ -360,7 +337,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         let navController = UINavigationController(rootViewController: wineDetailController)
         present(navController, animated: true, completion: nil)
         searchBarCancelButtonClicked(searchBar)
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

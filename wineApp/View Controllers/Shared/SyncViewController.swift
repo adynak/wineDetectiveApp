@@ -30,7 +30,7 @@ class SyncViewController: UITableViewController {
         navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: subTitle)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("buttonCancel", comment: "cancel button"),
+            title: NSLocalizedString("buttonDone", comment: "done button"),
             style: .plain,
             target: self,
             action: #selector(syncCancel))
@@ -155,8 +155,11 @@ class SyncViewController: UITableViewController {
     }
     
     func deleteFromCoreData(indexPath: IndexPath, tableView: UITableView){
-        self.apps.remove(at: indexPath.row)
+        self.markAsDrank.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
+        if markAsDrank.count == 0 {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
         
 }
