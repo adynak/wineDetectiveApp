@@ -82,7 +82,10 @@ class SyncViewController: UITableViewController {
         let colorOdd = tableStripeOdd
         let colorEven = tableStripeEven
         
-        let vintage = markAsDrank[indexPath.row].vintage
+        var vintage = markAsDrank[indexPath.row].vintage
+        if vintage == "1001" {
+            vintage = "NV"
+        }
         let varietal = markAsDrank[indexPath.row].varietal
         if UserDefaults.standard.getShowBarcode() {
             barcode = "(\(markAsDrank[indexPath.row].barcode!.digits))"
