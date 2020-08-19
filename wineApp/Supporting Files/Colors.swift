@@ -26,5 +26,7 @@ let viewBackgroundColor =         UIColor(r: 255, g: 255, b: 255)
 let switchOnColor =               UIColor(r: 52,  g: 199, b:  89)
 let switchOffColor =              UIColor(r: 255, g:  91, b: 110)
 let drinkByMenuBackground =       UIColor(r: 209, g: 209, b: 209)
+let notNowButton =                UIColor(r: 230, g: 100, b:  95)
+let unDrinkButton =               UIColor(r:  95, g: 230, b: 100)
 
 

@@ -129,28 +129,37 @@ class SearchViewController: UIViewController {
     
     func tellCellarTracker(){
         var markAsDrank = [DrillLevel2]()
-        var message: String = ""
+//        var message: String = ""
 
         markAsDrank = DataServices.buildCellarTrackerList()
         if markAsDrank.count > 0 {
-            message = DataServices.buildTellCellarTrackerMessage(markAsDrank: markAsDrank)
+            
+            let syncController = SyncViewController()
+            syncController.markAsDrank = markAsDrank
 
-            let titleText = NSLocalizedString("alertTitleTellCellarTracker", comment: "alert title inventory out of sync")
-            
-            let okButtonText = NSLocalizedString("alertTextHelp", comment: "alert text help")
-            
-            let alertTitle = "\(titleText)"
+            let navController = UINavigationController(rootViewController: syncController)
+            present(navController, animated: true, completion: nil)
 
-            let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
-            alert.setMessageAlignment(.left)
-            
-            alert.addAction(UIAlertAction.init(title: okButtonText, style: .cancel) { (UIAlertAction) -> Void in
-                self.dismiss(animated: true, completion:nil)
-            })
-            
-            alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
-            
-            present(alert, animated: true, completion: nil)
+//
+//
+//            message = DataServices.buildTellCellarTrackerMessage(markAsDrank: markAsDrank)
+//
+//            let titleText = NSLocalizedString("alertTitleTellCellarTracker", comment: "alert title inventory out of sync")
+//
+//            let okButtonText = NSLocalizedString("alertTextHelp", comment: "alert text help")
+//
+//            let alertTitle = "\(titleText)"
+//
+//            let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
+//            alert.setMessageAlignment(.left)
+//
+//            alert.addAction(UIAlertAction.init(title: okButtonText, style: .cancel) { (UIAlertAction) -> Void in
+//                self.dismiss(animated: true, completion:nil)
+//            })
+//
+//            alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+//
+//            present(alert, animated: true, completion: nil)
         }
             
     }
