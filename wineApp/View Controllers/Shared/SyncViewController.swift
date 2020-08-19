@@ -118,12 +118,6 @@ class SyncViewController: UITableViewController {
         } catch let error as NSError {
             print("could not fetch. \(error), \(error.userInfo)")
         }
-//        dataArray = inventoryArray
-        print("inventory")
-        print("debug = \(debug)")
-        
-//        dataHeader = dataArray.removeFirst()
-//        fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         
         let inventoryPositionOf = Label(data:fields)
 
@@ -165,8 +159,12 @@ class SyncViewController: UITableViewController {
             let barcode = textArray.last?.digits
             pasteboard.string = barcode
         }
-
-        return UIMenu(title: copyTitle, children: [copyVPV,copyBarcode])
+        
+        if UserDefaults.standard.getShowBarcode() {
+            return UIMenu(title: copyTitle, children: [copyVPV,copyBarcode])
+        } else {
+            return UIMenu(title: copyTitle, children: [copyVPV])
+        }
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)-> UISwipeActionsConfiguration? {
