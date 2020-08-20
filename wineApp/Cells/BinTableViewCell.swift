@@ -1,9 +1,9 @@
 //
 //  BinTableViewCell.swift
-//  wineBinsTableView
+//  wineApp
 //
-//  Created by adynak on 12/20/18.
-//  Copyright © 2018 adynak. All rights reserved.
+//  Created by adynak on 1/1/20.
+//  Copyright © 2020 Al Dynak. All rights reserved.
 //
 
 import UIKit

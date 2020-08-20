@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
-//  SettingsTemplate
+//  SupportViewController.swift
+//  wineApp
 //
-//  Created by Stephen Dowless on 2/10/19.
-//  Copyright © 2019 Stephan Dowless. All rights reserved.
+//  Created by adynak on 1/1/20.
+//  Copyright © 2020 Al Dynak. All rights reserved.
 //
 
 import UIKit

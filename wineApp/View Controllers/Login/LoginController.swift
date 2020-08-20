@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
-//  audible
+//  LoginController.swift
+//  wineApp
 //
-//  Created by Brian Voong on 9/1/16.
-//  Copyright © 2016 Lets Build That App. All rights reserved.
+//  Created by adynak on 1/1/20.
+//  Copyright © 2020 Al Dynak. All rights reserved.
 //
 
 import UIKit

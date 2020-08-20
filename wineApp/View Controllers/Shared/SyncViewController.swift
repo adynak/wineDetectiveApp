@@ -1,9 +1,9 @@
 //
-//  TableViewController.swift
-//  IOSActionsTableViewTutorial
+//  SyncViewController.swift
+//  wineApp
 //
-//  Created by Arthur Knopper on 25/02/2019.
-//  Copyright © 2019 Arthur Knopper. All rights reserved.
+//  Created by adynak on 1/1/20.
+//  Copyright © 2020 Al Dynak. All rights reserved.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  BottlesConsumed+CoreDataProperties.swift
 //  wineApp
 //
-//  Created by adynak on 8/17/20.
+//  Created by adynak on 1/1/20.
 //  Copyright © 2020 Al Dynak. All rights reserved.
 //
 //
