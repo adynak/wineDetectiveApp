@@ -110,7 +110,6 @@ class SyncViewController: UITableViewController {
     }
 
     func reactToCoraData(){
-        print("SFSG")
         var coreData = [DrillLevel2]()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext

@@ -160,6 +160,43 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         return wineBins.count
     }
     
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
+
+            return self.makeContextMenu(for: indexPath, tableView: tableView)
+        })
+    }
+    
+    func makeContextMenu(for indexPath: IndexPath, tableView: UITableView) -> UIMenu {
+        
+        let copyVPVTitle = NSLocalizedString("labelVPV", comment: "label: Vintage Producer Varietal")
+        let copyBarcodeTitle = NSLocalizedString("labelBarcode", comment: "labelBarcode")
+        let copyTitle = NSLocalizedString("labelClipboard", comment: "labelClipboard")
+
+        let copyVPV = UIAction(title: copyVPVTitle) { [weak self] _ in
+            guard self != nil else { return }
+            let cell = tableView.cellForRow(at: indexPath) as! DrillDownTableViewCell
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = cell.vpvLabel.text
+        }
+        
+        let copyBarcode = UIAction(title: copyBarcodeTitle) { [weak self] _ in
+            guard self != nil else { return }
+            let cell = tableView.cellForRow(at: indexPath) as! DrillDownTableViewCell
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = cell.barcodeLabel.text?.digits
+        }
+        
+        if UserDefaults.standard.getShowBarcode() {
+            return UIMenu(title: copyTitle, children: [copyVPV,copyBarcode])
+        } else {
+            return UIMenu(title: copyTitle, children: [copyVPV])
+        }
+    }
+
+
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // want to stripe the table's rows?

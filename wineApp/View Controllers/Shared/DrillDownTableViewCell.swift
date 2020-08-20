@@ -46,8 +46,8 @@ class DrillDownTableViewCell : UITableViewCell {
                     vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
                     drinkByLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(drinkBy)"
                     locationAndBinLabel.text = NSLocalizedString("labelLocation", comment: "label for location") + ": \(binItem.location!) \(binItem.bin!)"
-
                 }
+                vpvLabel.text = "\(binItem.vintage!) \(binItem.producer!) \(binItem.varietal!) \(binItem.designation!)"
             }
             
             barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
@@ -67,6 +67,12 @@ class DrillDownTableViewCell : UITableViewCell {
     }()
     
     let iWineLabel:UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        return label
+    }()
+    
+    let vpvLabel:UILabel = {
         let label = UILabel()
         label.isHidden = true
         return label
