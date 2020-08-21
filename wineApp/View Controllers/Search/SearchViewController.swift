@@ -79,7 +79,7 @@ class SearchViewController: UIViewController {
         sb.subviews.first?.clipsToBounds = true
         return sb
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -329,6 +329,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         wineSelected.topLeft = bottle.producer
         wineSelected.topRight = bottle.varietal
         wineSelected.viewName = "producer"
+        wineSelected.description = bottle.description
 
         let wineDetailController = DrillDownDetailViewController()
         wineDetailController.passedValue = wineSelected
@@ -366,7 +367,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         cell.detailTextLabel?.numberOfLines = 1;
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-        let line2 = "  \(bottle.producer)"
+        let line2 = bottle.description
 
         cell.textLabel?.text = line1
         cell.detailTextLabel?.text = line2
@@ -385,6 +386,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+        
 }
 

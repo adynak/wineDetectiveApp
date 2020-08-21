@@ -233,7 +233,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                     beginConsume: beginConsume,
                     endConsume: endConsume,
                     viewName: passedValue.viewName,
-                    bottleCount: bottleCount)
+                    bottleCount: bottleCount,
+                    description: passedValue.description)
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         cell.delegate = self
         

@@ -133,6 +133,7 @@ struct DrillLevel2 {
     var viewName: String?
     var bottleCount: Int?
     var consumeDate: String?
+    var description: String?
 }
 
 struct Level0 {
@@ -178,6 +179,7 @@ struct WineDetail {
     var topLeft: String?
     var topRight: String?
     var viewName: String?
+    var description: String?
 }
 
 struct WineInventory {

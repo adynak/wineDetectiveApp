@@ -22,12 +22,17 @@ class DrillDownTableViewCell : UITableViewCell {
     var bin:DrillLevel2! {
         didSet {
             guard let binItem = bin else {return}
+            var description: String = ""
 
             if let producer = binItem.producer {
                 producerLabel.text = binItem.producer
-                let designation = binItem.designation!
+//                let designation = binItem.designation!
                 let ava = binItem.ava!
-                let description = designation == "" ? ava : "\(designation) \(ava)"
+                description = ava == "" ? "" : ava
+                description = description + " " + binItem.description!
+                description = description.replacingOccurrences(of: producer, with: "")
+                description = description.condensedWhitespace
+
                 vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
                 
                 let drinkBy = buildDrinkBy(beginConsume: binItem.beginConsume!, endConsume: binItem.endConsume!)

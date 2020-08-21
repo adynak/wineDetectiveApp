@@ -407,6 +407,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         wineSelected.topLeft = bottle.producer
         wineSelected.topRight = bottle.varietal
         wineSelected.viewName = "producer"
+        wineSelected.description = bottle.description
 
         let wineDetailController = DrillDownDetailViewController()
         wineDetailController.passedValue = wineSelected
@@ -451,7 +452,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
 //        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "drink by index")) \(drinkByIndex)"
         
-        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("labelDrinkByWindow", comment: "drinking window")) \(bottle.drinkBy)"
+        let line2 = "  \(bottle.description!)\n  \(NSLocalizedString("labelDrinkByWindow", comment: "drinking window")) \(bottle.drinkBy)"
 
 
         cell.textLabel?.text = line1
