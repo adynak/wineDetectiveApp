@@ -61,6 +61,8 @@ struct DrillBottle {
     let endConsume: String
     let sortKey0: String
     let sortKey1: String
+    let description: String?
+    let vineyard: String?
 }
 
 

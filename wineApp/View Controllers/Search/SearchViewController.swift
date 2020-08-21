@@ -309,6 +309,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
                 var designation: String = ""
                 var beginConsume: String = ""
                 var endConsume: String = ""
+                var description: String = ""
                 
                 if let inventoryIndex = inventoryArray.firstIndex(where: { $0[0] == iWine }){
                     ava = inventoryArray[inventoryIndex][positionOf.ava]

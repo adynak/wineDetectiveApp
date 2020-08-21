@@ -217,7 +217,11 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         let beginConsume = wineBins[indexPath.row].beginConsume
         let endConsume = wineBins[indexPath.row].endConsume
         let bottleCount = wineBins[indexPath.row].bottleCount
-        
+        var description = wineBins[indexPath.row].description
+        if description == nil {
+            description = passedValue.description
+        }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! DrillDownTableViewCell
         
         cell.bin = DrillLevel2(
@@ -234,7 +238,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                     endConsume: endConsume,
                     viewName: passedValue.viewName,
                     bottleCount: bottleCount,
-                    description: passedValue.description)
+                    description: description)
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
         cell.delegate = self
         

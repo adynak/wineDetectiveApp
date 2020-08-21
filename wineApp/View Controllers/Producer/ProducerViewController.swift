@@ -141,6 +141,7 @@ class ProducerViewController :UITableViewController {
         wineSelected.topLeft = bottles![section].data[row].data[0].producer
         wineSelected.topRight = bottles![section].data[row].data[0].varietal
         wineSelected.viewName = "producer"
+        wineSelected.description = "123"
         
         let wineDetailController = DrillDownDetailViewController()
         wineDetailController.passedValue = wineSelected

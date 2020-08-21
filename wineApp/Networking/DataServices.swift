@@ -173,6 +173,7 @@ class DataServices {
         
         var name: String = ""
         var iWine: String = ""
+        var desc: String = ""
 
         var bottleCount: Int = 0
         
@@ -214,7 +215,9 @@ class DataServices {
                 beginConsume: row[positionOf.beginConsume],
                 endConsume: row[positionOf.endConsume],
                 sortKey0: row[sortIndex0],
-                sortKey1: row[sortIndex1]
+                sortKey1: row[sortIndex1],
+                description: "123",
+                vineyard: row[positionOf.vineyard]
             )
             
             if missingOnly {
@@ -237,6 +240,14 @@ class DataServices {
                         bottleCount += 1
                         var sortKey = designation == "" ? detail.ava : "\(detail.designation) \(detail.ava)"
                         sortKey = "\(detail.vintage) \(sortKey)"
+                                                
+                        if detail.ava == detail.designation{
+                            desc = detail.vineyard!
+                        } else {
+                            desc = detail.designation + " " + detail.vineyard!
+                        }
+                        desc = desc.condensedWhitespace
+                        
                         level2.append(DrillLevel2(producer: detail.producer,
                                              varietal: detail.varietal,
                                              vintage: detail.vintage,
@@ -249,7 +260,8 @@ class DataServices {
                                              sortKey: sortKey,
                                              beginConsume: detail.beginConsume,
                                              endConsume: detail.endConsume,
-                                             bottleCount: 1))
+                                             bottleCount: 1,
+                                             description: desc))
                     }
                     
                     level2 =  level2.sorted(by: {
@@ -292,121 +304,7 @@ class DataServices {
 
         return level0
     }
-    
-    static func buildDrillIntoBottlesArraySave(fields:[Int], sortKeys: [String], missingOnly: Bool)->[DrillLevel0]{
         
-        let positionOf = Label(data:fields)
-        
-        let mirror = Mirror(reflecting: positionOf)
-        var sortIndex0: Int = 0
-        var sortIndex1: Int = 0
-        
-        var level0: [DrillLevel0] = []
-        var level1: [DrillLevel1] = []
-        var level2: [DrillLevel2] = []
-
-        var bottleCount: Int = 0
-        
-        for child in mirror.children  {
-            if child.label == sortKeys[0]{
-                sortIndex0 = child.value as! Int
-            }
-        }
-        
-        for child in mirror.children  {
-            if child.label == sortKeys[1]{
-                sortIndex1 = child.value as! Int
-            }
-        }
-
-        var wines: [DrillBottle] = []
-        
-        for row in dataArray{
-            let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
-
-            let bottle = DrillBottle(
-                producer: row[positionOf.producer],
-                varietal: row[positionOf.wdVarietal],
-                location: row[positionOf.location],
-                bin: row[positionOf.bin],
-                vintage: vintage,
-                iWine: row[positionOf.iWine],
-                barcode: row[positionOf.barcode],
-                available: row[positionOf.available],
-                linear: row[positionOf.linear],
-                bell: row[positionOf.bell],
-                early: row[positionOf.early],
-                late: row[positionOf.late],
-                fast: row[positionOf.fast],
-                twinpeak: row[positionOf.twinpeak],
-                simple: row[positionOf.simple],
-                designation: row[positionOf.designation],
-                ava: row[positionOf.ava],
-                beginConsume: row[positionOf.beginConsume],
-                endConsume: row[positionOf.endConsume],
-                sortKey0: row[sortIndex0],
-                sortKey1: row[sortIndex1]
-            )
-            
-            if missingOnly {
-                if row[positionOf.beginConsume] == "" && row[positionOf.endConsume] == ""{
-                    wines.append(bottle)
-                }
-            } else {
-                wines.append(bottle)
-            }
-        }
-
-        let groupLevel0 = Dictionary(grouping: wines, by: { $0.sortKey0 })
-
-        for (item0) in groupLevel0{
-            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.sortKey1 })
-            for (item1) in groupLevel1{
-                let groupLevel2 = Dictionary(grouping: item1.value, by: { $0.sortKey1 })
-                for (item2) in groupLevel2{
-                    for (detail) in item2.value {
-                        bottleCount += 1
-                        var sortKey = designation == "" ? detail.ava : "\(detail.designation) \(detail.ava)"
-                        sortKey = "\(detail.vintage) \(sortKey)"
-                        level2.append(DrillLevel2(producer: detail.producer,
-                                             varietal: detail.varietal,
-                                             vintage: detail.vintage,
-                                             iWine: detail.iWine,
-                                             location: detail.location,
-                                             bin: detail.bin,
-                                             barcode: detail.barcode,
-                                             designation: detail.designation,
-                                             ava: detail.ava,
-                                             sortKey: sortKey,
-                                             beginConsume: detail.beginConsume,
-                                             endConsume: detail.endConsume))
-                    }
-                    
-                    level2 =  level2.sorted(by: {
-                        ($0.sortKey!.lowercased()) < ($1.sortKey!.lowercased())
-                    })
-
-                    level1.append(DrillLevel1(name: item1.key, bottleCount: level2.count, data: level2))
-                    level2.removeAll()
-                }
-            }
-            
-            level1 =  level1.sorted(by: {
-                ($0.name!.lowercased()) < ($1.name!.lowercased())
-            })
-            level0.append(DrillLevel0(name: item0.key, bottleCount: bottleCount, data: level1))
-            bottleCount = 0
-            level1.removeAll()
-
-        }
-
-        level0 =  level0.sorted(by: {
-            ($0.name!.lowercased()) < ($1.name!.lowercased())
-        })
-
-        return level0
-    }
-    
     static func buildAllBottlesArray(fields:[Int])->[AllLevel0]{
         
         var level0: [AllLevel0] = []

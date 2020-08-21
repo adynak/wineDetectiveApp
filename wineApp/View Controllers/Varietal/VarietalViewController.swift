@@ -128,7 +128,7 @@ class VarietalViewController : UITableViewController {
         wineSelected.topLeft = bottles![section].data[row].data[0].producer
         wineSelected.topRight = bottles![section].data[row].data[0].varietal
         wineSelected.viewName = "varietal"
-
+        
         let detailController = DrillDownDetailViewController()
         detailController.passedValue = wineSelected
         detailController.title = NSLocalizedString("titleVarietal", comment: "navagation title: varietal")
