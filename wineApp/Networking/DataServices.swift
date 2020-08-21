@@ -416,7 +416,7 @@ class DataServices {
         let positionOf = Label(data:fields)
         
         for row in dataArray{
-            let bottleSort = row[positionOf.wdVarietal] + " " + row[positionOf.vintage] + " " + row[positionOf.producer]
+            let bottleSort = row[positionOf.wdVarietal] + " " + row[positionOf.vintage] + " " + row[positionOf.producer] + row[positionOf.iWine]
             
             let binSort = row[positionOf.location] + row[positionOf.bin]
             let bottle = Bottle(producer: row[positionOf.producer], varietal: row[positionOf.wdVarietal], location: row[positionOf.location], bin: row[positionOf.bin], vintage: row[positionOf.vintage], iWine: row[positionOf.iWine], barcode: row[positionOf.barcode], available: row[positionOf.available], linear: row[positionOf.linear], bell: row[positionOf.bell], early: row[positionOf.early], late: row[positionOf.late], fast: row[positionOf.fast], twinpeak: row[positionOf.twinpeak], simple: row[positionOf.simple], beginConsume: row[positionOf.beginConsume], endConsume: row[positionOf.endConsume], sortKey: "", ava: row[positionOf.ava], designation: row[positionOf.designation], bottleSort: bottleSort, binSort: binSort, region: row[positionOf.region], country: row[positionOf.country], vineyard: row[positionOf.vineyard], locale: row[positionOf.locale], type: row[positionOf.type])
@@ -425,7 +425,7 @@ class DataServices {
         
         let groupLevel0 = Dictionary(grouping: wines, by: { $0.bottleSort })
         for (item0) in groupLevel0{
-            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.binSort })
+            let groupLevel1 = Dictionary(grouping: item0.value, by: { $0.iWine })
             for (item1) in groupLevel1{
                 for (detail) in item1.value {
                     level1.append(AllLevel1(
@@ -577,8 +577,6 @@ class DataServices {
         var location = String()
         var bin = String()
         
-//        dataHeader = inventoryArray.removeFirst()
-//        fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         let inventoryPositionOf = Label(data:fields)
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
