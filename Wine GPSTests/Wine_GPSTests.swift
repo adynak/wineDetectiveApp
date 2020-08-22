@@ -7,11 +7,12 @@
 //
 
 import XCTest
+@testable import Wine_GPS
 
 class Wine_GPSTests: XCTestCase {
-    
+
     var sut: URLSession!
-    
+
     override func setUp() {
       super.setUp()
       sut = URLSession(configuration: .default)
@@ -35,49 +36,11 @@ class Wine_GPSTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func testCallToInventory() {
-      let url = URL(string: "https://www.cellartracker.com/xlquery.asp?User=al00p&Password=Genesis13355Tigard&Format=csv&Table=Inventory&Location=1")
-        
-      let promise = expectation(description: "Completion handler invoked")
-      var statusCode: Int?
-      var responseError: Error?
-      
-      let dataTask = sut.dataTask(with: url!) { data, response, error in
-        statusCode = (response as? HTTPURLResponse)?.statusCode
-        responseError = error
-        promise.fulfill()
-      }
-      dataTask.resume()
-      wait(for: [promise], timeout: 5)
-      
-      XCTAssertNil(responseError)
-      XCTAssertEqual(statusCode, 200)
-    }
-
-    func testCallToAvailability() {
-      let url = URL(string: "https://www.cellartracker.com/xlquery.asp?User=al00p&Password=Genesis13355Tigard&Format=csv&Table=Availability&Location=1")
-        
-      let promise = expectation(description: "Completion handler invoked")
-      var statusCode: Int?
-      var responseError: Error?
-      
-      let dataTask = sut.dataTask(with: url!) { data, response, error in
-        statusCode = (response as? HTTPURLResponse)?.statusCode
-        responseError = error
-        promise.fulfill()
-      }
-      dataTask.resume()
-      wait(for: [promise], timeout: 5)
-      
-      XCTAssertNil(responseError)
-      XCTAssertEqual(statusCode, 200)
-    }
-
     func testPerformance() throws {
         // This is an example of a performance test case.
         measure {
             // Put the code you want to measure the time of here.
         }
     }
-
+    
 }

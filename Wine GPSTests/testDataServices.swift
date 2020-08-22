@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Wine_GPS
 
 class testDataServices: XCTestCase {
 
@@ -17,17 +18,64 @@ class testDataServices: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testgetDataUrlInventory(){
+        let dataUrl = DataServices.getDataUrl(user: "user",pword: "pword", table: "Inventory")
+        let params = dataUrl.split(separator: "?", maxSplits: 1)
+        let param = "\(params[1])"
+        let result = "User=user&Password=pword&Format=csv&Table=Inventory&Location=1"
+        XCTAssertEqual(param, result, "expected URL not returned")
+    }
+    
+    func testgetDataUrlAvailability(){
+        let dataUrl = DataServices.getDataUrl(user: "user",pword: "pword", table: "Availability")
+        let params = dataUrl.split(separator: "?", maxSplits: 1)
+        let param = "\(params[1])"
+        let result = "User=user&Password=pword&Format=csv&Table=Availability&Location=1"
+        XCTAssertEqual(param, result, "expected URL not returned")
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testCallToInventory() {
+
+        let dataUrl = DataServices.getDataUrl(user: "user",pword: "pword", table: "Inventory")
+        
+        let url = URL(string: dataUrl)
+
+        let promise = expectation(description: "Completion handler invoked")
+        var statusCode: Int?
+        var responseError: Error?
+      
+        let dataTask = URLSession.shared.dataTask(with: url!) { data, response, error in
+            statusCode = (response as? HTTPURLResponse)?.statusCode
+            responseError = error
+            promise.fulfill()
         }
+        dataTask.resume()
+        wait(for: [promise], timeout: 5)
+
+        XCTAssertNil(responseError)
+        XCTAssertEqual(statusCode, 200)
+    }
+
+    func testCallToAvailability() {
+        let dataUrl = DataServices.getDataUrl(user: "user",pword: "pword", table: "Availability")
+        
+        let url = URL(string: dataUrl)
+
+        let promise = expectation(description: "Completion handler invoked")
+        var statusCode: Int?
+        var responseError: Error?
+      
+        let dataTask = URLSession.shared.dataTask(with: url!) { data, response, error in
+            statusCode = (response as? HTTPURLResponse)?.statusCode
+            responseError = error
+            promise.fulfill()
+        }
+        dataTask.resume()
+        wait(for: [promise], timeout: 5)
+
+        XCTAssertNil(responseError)
+        XCTAssertEqual(statusCode, 200)
     }
 
 }
