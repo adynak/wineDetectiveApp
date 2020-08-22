@@ -37,6 +37,26 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "923373EA24F1668B000EFAF7"
+               BuildableName = "Wine GPSTests.xctest"
+               BlueprintName = "Wine GPSTests"
+               ReferencedContainer = "container:wineApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "923373F824F166A2000EFAF7"
+               BuildableName = "Wine GPSUITests.xctest"
+               BlueprintName = "Wine GPSUITests"
+               ReferencedContainer = "container:wineApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
