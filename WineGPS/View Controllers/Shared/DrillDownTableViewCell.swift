@@ -1,6 +1,6 @@
 //
 //  DrillDownTableViewCell.swift
-//  wineApp
+//  WineGPS
 //
 //  Created by adynak on 1/1/20.
 //  Copyright © 2020 Al Dynak. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  wineApp
+//  WineApp
 //
 //  Created by adynak on 1/1/20.
 //  Copyright © 2020 Al Dynak. All rights reserved.
@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
-        let container = NSPersistentCloudKitContainer(name: "wineApp")
+        let container = NSPersistentCloudKitContainer(name: "WineGPS")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
