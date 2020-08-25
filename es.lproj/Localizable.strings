@@ -168,8 +168,8 @@
 /* You liked it, bought it, and brought it home.  What happened to it next? */
 "page1Message" = "You liked it, bought it and brought it home.  What happened to it next?\n\nOf course, you added it to a \"location\" and maybe a \"bin\" using your Cellar Tracker account, right?\n\nHow do you find it again?";
 
-/* Dude, Where's My Wine? */
-"page1Title" = "Where's My Wine?";
+/* Find My Wine! */
+"page1Title" = "Find My Wine!";
 
 /* Search by Producer, Varietal, Vineyard, AVA, or Designation */
 "page2Message" = "Search terms are Producer, Varietal, Vintage, Vineyard, AVA, Country and Designation.\n\nUse the \"Drink By\" view to find wines that are ready to drink and which can take more aging.";

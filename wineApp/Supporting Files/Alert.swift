@@ -15,7 +15,7 @@ struct Alert{
                                        with title:String,
                                        message: String,
                                        buttonText: String = NSLocalizedString("alertTextHelp", comment: "alert button text: Help")
-){
+        ){
         
         let alert = UIAlertController(title: title,
                                       message: message,

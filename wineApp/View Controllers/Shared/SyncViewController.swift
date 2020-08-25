@@ -11,9 +11,7 @@ import CoreData
 
 
 class SyncViewController: UITableViewController {
-    var apps = ["Minecraft","Facebook","Tweetbot","Instagram"]
     var markAsDrank = [DrillLevel2]()
-    
     let cellID = "cellId"
     
     override func viewDidLoad() {
@@ -25,7 +23,7 @@ class SyncViewController: UITableViewController {
     
     private func setupNavigationBar(){
         let title = NSLocalizedString("titleSync", comment: "sync title: Inventory Out Of Sync")
-        let subTitle = NSLocalizedString("titleSyncSubTitle", comment: "sync subtitle: Inventory Out Of Sync")
+        let subTitle = NSLocalizedString("titleSyncSubTitle", comment: "sync subtitle: Swipe To Resolve")
         
         navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: subTitle)
 

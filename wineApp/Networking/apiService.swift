@@ -9,21 +9,12 @@
 import Foundation
 import UIKit
 import CoreData
+import CloudKit
 
 class API {
     
     static func load() -> String {
-        
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//        var bottlesConsumed = [BottlesConsumed]()
-//        
-//        do {
-//            bottlesConsumed = try context.fetch(BottlesConsumed.fetchRequest())
-//        } catch let error as NSError {
-//            print("coound not fetch. \(error), \(error.userInfo)")
-//        }
-        
+                
         print("load")
         
         if Reachability.isConnectedToNetwork(){
@@ -181,9 +172,10 @@ class API {
         do
         {
             let test = try managedContext.fetch(fetchRequest)
-            let objectToDelete = test[0] as! NSManagedObject
-            managedContext.delete(objectToDelete)
-            
+            if test.count != 0 {
+                let objectToDelete = test[0] as! NSManagedObject
+                managedContext.delete(objectToDelete)
+            }
             do{
                 try managedContext.save()
             }
@@ -237,6 +229,32 @@ class API {
         }
         
         return data
+    }
+    
+    static func getiCloudAccountStatus()->String {
+        var status: String = ""
+        
+        if FileManager.default.ubiquityIdentityToken != nil {
+            status = "Available"
+        } else {
+            status = "Unavailable"
+        }
+//        
+//        CKContainer.default().accountStatus { (accountStatus, error) in
+//            switch accountStatus {
+//            case .available:
+//                status = "iCloud Available"
+//            case .noAccount:
+//                status = "No iCloud account"
+//            case .restricted:
+//                status = "iCloud restricted"
+//            case .couldNotDetermine:
+//                status = "Unable to determine iCloud status"
+//            @unknown default:
+//                status = "Unable to determine iCloud status (default)"
+//            }
+//        }
+        return status
     }
 
 }

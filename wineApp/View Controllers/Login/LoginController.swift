@@ -11,7 +11,7 @@ import UIKit
 var allWine: WineInventory?
 
 protocol LoginControllerDelegate: class {
-    func finishLoggingIn()
+    func finishLoggingIn(userName: String, userPword: String)
 }
 
 enum apiResults: String {
@@ -39,7 +39,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     var dataLoaded = false
     
     var pages: [Page] = {
-        let firstPage = Page(title: NSLocalizedString("page1Title", comment: "Dude, Where's My Wine?"),
+        let firstPage = Page(title: NSLocalizedString("page1Title", comment: "Find My Wine!"),
                              message: NSLocalizedString("page1Message", comment: "You liked it, bought it, and brought it home.  What happened to it next?"),
                              imageName: "page1")
 
@@ -231,10 +231,10 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         return cell
     }
     
-    func finishLoggingIn() {
+    func finishLoggingIn(userName: String, userPword: String) {
                 
-        let userName = UserDefaults.standard.getUserName()
-        let userPword = UserDefaults.standard.getUserPword()
+        let userName = userName
+        let userPword = userPword
         if (userName.isEmpty || userPword.isEmpty) {
             Alert.showLoginCredentialsAlert(on: self)
         } else {

@@ -52,6 +52,19 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.addDoneButtonOnKeyboard()
         return textField
     }()
+        
+    lazy var rememberMeCheckbox: UIButton = {
+        let checkbox = UIButton(type: .custom)
+        checkbox.setTitle(NSLocalizedString("buttonRememberMe", comment: "remember username and password on this device"), for: .normal)
+        checkbox.setImage(UIImage.init(named: "unchecked"), for: .normal)
+        checkbox.setImage(UIImage.init(named: "checked"), for: .selected)
+        checkbox.addTarget(self, action: #selector(toggleCheckboxSelection), for: .touchUpInside)
+        checkbox.setTitleColor(.black, for: .normal)
+        checkbox.titleLabel!.font = UIFont(name: "Verdana", size: 12)
+//        checkbox.backgroundColor = .red
+        checkbox.titleEdgeInsets = UIEdgeInsets.init(top: 0,left: 12,bottom: 0,right: 0)
+        return checkbox
+    }()
     
     lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
@@ -67,17 +80,47 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     weak var delegate: LoginControllerDelegate?
         
     @objc func handleLogin() {
-        UserDefaults.standard.setUserName(value: emailTextField.text!)
-        UserDefaults.standard.setUserPword(value: passwordTextField.text!)
-        delegate?.finishLoggingIn()
+        if rememberMeCheckbox.isSelected == true {
+            UserDefaults.standard.set(true, forKey: "rememberMe")
+            UserDefaults.standard.setUserName(value: emailTextField.text!)
+            UserDefaults.standard.setUserPword(value: passwordTextField.text!)
+        } else {
+            UserDefaults.standard.setUserName(value: "")
+            UserDefaults.standard.setUserPword(value: "")
+            UserDefaults.standard.set(false, forKey: "rememberMe")
+        }
+        delegate?.finishLoggingIn(userName: emailTextField.text!, userPword: passwordTextField.text!)
+    }
+    
+    @objc func toggleCheckboxSelection(_ sender: UIButton) {
+//        if !sender.isSelected {
+//            if UserDefaults.contains("rememberMe"){
+//                UserDefaults.standard.set(true, forKey: "rememberMe")
+//            }
+//            print("selected")
+//        } else {
+//            if UserDefaults.contains("rememberMe"){
+//                UserDefaults.standard.set(false, forKey: "rememberMe")
+//            }
+//            print("deselected")
+//        }
+        sender.isSelected = !sender.isSelected
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        emailTextField.text = "al00p"
-        passwordTextField.text = "Genesis13355Tigard"
+//        emailTextField.text = "al00p"
+//        passwordTextField.text = "Genesis13355Tigard"
         
+        if UserDefaults.standard.getRememberMe() {
+            rememberMeCheckbox.isSelected = true
+            emailTextField.text = UserDefaults.standard.getUserName()
+            passwordTextField.text = UserDefaults.standard.getUserPword()
+        } else {
+            rememberMeCheckbox.isSelected = false
+        }
+
         if ((emailTextField.text!.isEmpty) || (passwordTextField.text?.isEmpty) != nil) {
             loginButton.isEnabled = true
         } else {
@@ -89,8 +132,11 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         addSubview(logoImageView)
         addSubview(emailTextField)
         addSubview(passwordTextField)
+        addSubview(rememberMeCheckbox)
         addSubview(loginButton)
         
+        rememberMeCheckbox.setImage(UIImage.init(named: "unchecked"), for: .normal)
+
         _ = productNameView.anchor(centerYAnchor, left: nil, bottom: nil, right: nil, topConstant: -340, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 160)
         productNameView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
@@ -101,7 +147,10 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         
         _ = passwordTextField.anchor(emailTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 32, bottomConstant: 0, rightConstant: 32, widthConstant: 0, heightConstant: 50)
         
-        _ = loginButton.anchor(passwordTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 32, bottomConstant: 0, rightConstant: 32, widthConstant: 0, heightConstant: 50)
+        _ = rememberMeCheckbox.anchor(passwordTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 32, bottomConstant: 0, rightConstant: 32, widthConstant: 0, heightConstant: 25)
+
+        
+        _ = loginButton.anchor(rememberMeCheckbox.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 16, leftConstant: 32, bottomConstant: 0, rightConstant: 32, widthConstant: 0, heightConstant: 50)
     }
     
     required init?(coder aDecoder: NSCoder) {

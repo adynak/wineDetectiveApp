@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "36BDE4B8203D87BC00581A05"
-               BuildableName = "Wine GPS.app"
+               BuildableName = "Find My Wine.app"
                BlueprintName = "wineApp"
                ReferencedContainer = "container:wineApp.xcodeproj">
             </BuildableReference>
@@ -26,12 +26,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "36BDE4B8203D87BC00581A05"
-            BuildableName = "Wine GPS.app"
+            BuildableName = "Find My Wine.app"
             BlueprintName = "wineApp"
             ReferencedContainer = "container:wineApp.xcodeproj">
          </BuildableReference>
@@ -75,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "36BDE4B8203D87BC00581A05"
-            BuildableName = "Wine GPS.app"
+            BuildableName = "Find My Wine.app"
             BlueprintName = "wineApp"
             ReferencedContainer = "container:wineApp.xcodeproj">
          </BuildableReference>
@@ -99,7 +100,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "36BDE4B8203D87BC00581A05"
-            BuildableName = "Wine GPS.app"
+            BuildableName = "Find My Wine.app"
             BlueprintName = "wineApp"
             ReferencedContainer = "container:wineApp.xcodeproj">
          </BuildableReference>

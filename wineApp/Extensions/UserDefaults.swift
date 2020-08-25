@@ -16,6 +16,7 @@ extension UserDefaults {
         case userPword
         case showBarcode
         case showPages
+        case rememberMe
     }
     
     static func contains(_ key: String) -> Bool {
@@ -55,5 +56,9 @@ extension UserDefaults {
     
     func getShowPages() -> Bool{
         return bool(forKey: UserDefaultsKeys.showPages.rawValue)
+    }
+    
+    func getRememberMe() -> Bool{
+        return bool(forKey: UserDefaultsKeys.rememberMe.rawValue)
     }
 }
