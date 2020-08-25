@@ -31,7 +31,6 @@ class DrinkByHelpController: UIViewController{
           helpLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
           helpLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
           helpLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor)])
-        
 
     }
 }

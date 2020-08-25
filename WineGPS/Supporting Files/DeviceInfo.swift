@@ -60,16 +60,18 @@ class DeviceInfo {
     }
     
     static func buldEmailBody() -> String {
-        let swVersion = Bundle.main.versionAndBuildPretty
         var emailBody = NSLocalizedString("emailBody", comment: "email Body")
         
+        let swVersion = Bundle.main.versionAndBuildPretty
         let usedStorage = getUsedStorageMemory()
         let totalStorage = getTotalStorageMemory()
+        let iCloudStatus = API.getiCloudAccountStatus()
         emailBody = emailBody.replacingOccurrences(of: "%1", with: modelIdentifier())
         emailBody = emailBody.replacingOccurrences(of: "%2", with: versionIdentifier())
         emailBody = emailBody.replacingOccurrences(of: "%3", with: swVersion)
         emailBody = emailBody.replacingOccurrences(of: "%4", with: usedStorage)
         emailBody = emailBody.replacingOccurrences(of: "%5", with: totalStorage)
+        emailBody = emailBody.replacingOccurrences(of: "%6", with: iCloudStatus)
 
         return emailBody
         

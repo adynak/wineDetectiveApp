@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchBarContainerView: UIView {
-
+    
     let searchBar: UISearchBar
 
     init(customSearchBar: UISearchBar) {

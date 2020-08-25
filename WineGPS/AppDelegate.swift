@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = buttonTintColor
         UINavigationBar.appearance().prefersLargeTitles = false
 
-        
         UIBarButtonItem.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14)!,
@@ -75,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !UserDefaults.contains("showPages"){
             UserDefaults.standard.set(true, forKey: "showPages")
         }
-
+        
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height + 50
         let frame = CGRect.init(x: 0, y: 0, width: width, height: height)

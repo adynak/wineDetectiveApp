@@ -168,7 +168,6 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
     func sendEmail() {
         if MFMailComposeViewController.canSendMail() {
             let emailBody = DeviceInfo.buldEmailBody()
-
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients([NSLocalizedString("emailContactAddress", comment: "email address for support")])
