@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Wine_GPS
+@testable import WineGPS
 
 class Wine_GPSTests: XCTestCase {
 

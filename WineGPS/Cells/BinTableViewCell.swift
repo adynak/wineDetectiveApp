@@ -14,9 +14,6 @@ protocol BinCellDelegate{
 
 class BinTableViewCell : UITableViewCell {
     
-    let singularText = NSLocalizedString("singularBottle", comment: "singular bottle")
-    let pluralText = NSLocalizedString("pluralBottle", comment: "plural bottles")
-
     var delegate: BinCellDelegate?
 
     var bin:StorageBins! {
@@ -139,7 +136,11 @@ class BinTableViewCell : UITableViewCell {
 
     }
     
-    private func setLabelText(count: Int) -> String {
+    func setLabelText(count: Int) -> String {
+        
+        let singularText = NSLocalizedString("singularBottle", comment: "singular bottle")
+        let pluralText = NSLocalizedString("pluralBottle", comment: "plural bottles")
+
         let plural = count == 1 ? singularText : pluralText
         return String(count) + plural
     }
