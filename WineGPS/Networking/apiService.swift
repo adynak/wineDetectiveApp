@@ -39,6 +39,9 @@ class API {
 
             csvAvailability = csvAvailability!.replacingOccurrences(of: "Unknown", with: "")
             availabilityArray = DataServices.parseCsv(data:csvAvailability!)
+            if availabilityArray.count == 0 {
+                return "Failed"
+            }
             availabilityArray[0].append("wdVarietal")
             
             availabilityHeader = availabilityArray[0]
@@ -73,6 +76,10 @@ class API {
             
             csvInventory = csvInventory!.replacingOccurrences(of: "Unknown", with: "")
             inventoryArray = DataServices.parseCsv(data:csvInventory!)
+            if inventoryArray.count == 0 {
+                return "Failed"
+            }
+
             availabilityHeader = availabilityArray[0]
             
             let availibilityFields = DataServices.locateAvailabilityFields(availabilityHeader:availabilityHeader)
