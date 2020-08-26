@@ -12,7 +12,7 @@ import XCTest
 
 class testTableBinCell: XCTestCase {
     
-    var underTest: BinTableViewCell!
+    var underTest = BinTableViewCell()
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -27,12 +27,24 @@ class testTableBinCell: XCTestCase {
         
         let singularText = NSLocalizedString("singularBottle", comment: "singular bottle")
         let pluralText = NSLocalizedString("pluralBottle", comment: "plural bottles")
-
-//        let singular = underTest.setLabelText(count:(Int("1"))!)
-//        XCTAssertEqual(singular, singularText, "expected singular not returned")
+        var count: Int
+        var result: String
+        var bottleString: String
         
-//        let plural = underTest!.setLabelText(count:(Int("2"))!)
-//        XCTAssertEqual(plural, pluralText, "expected plural not returned")
+        count = 0
+        result = underTest.setLabelText(count:count)
+        bottleString = "\(count)" + pluralText
+        XCTAssertEqual(bottleString, result, "expected plural not returned")
+        
+        count = 1
+        result = underTest.setLabelText(count:count)
+        bottleString = "\(count)" + singularText
+        XCTAssertEqual(bottleString, result, "expected singular not returned")
+        
+        count = 2
+        result = underTest.setLabelText(count:count)
+        bottleString = "\(count)" + pluralText
+        XCTAssertEqual(bottleString, result, "expected plural not returned")
         
     }
 
