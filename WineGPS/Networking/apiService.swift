@@ -111,19 +111,6 @@ class API {
             dataHeader = dataArray.removeFirst()
             fields = DataServices.locateDataPositions(dataHeader:dataHeader)
             
-//            let inventoryPositionOf = Label(data:fields)
-
-//            for consumed in bottlesConsumed {
-//                if let index = dataArray.firstIndex(where: {
-//                    $0[inventoryPositionOf.iWine] == consumed.iWine &&
-//                    $0[inventoryPositionOf.barcode] == consumed.barcode
-//                }) {
-//                    dataArray.remove(at: index)
-//                } else {
-//                    deleteCoreData(barcode: consumed.barcode!)
-//                }
-//            }
-
             let locationSort = DataServices.buildDrillIntoBottlesArray(
                                     fields: fields,
                                     sortKeys: ["location","bin"],

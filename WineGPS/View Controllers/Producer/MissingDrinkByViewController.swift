@@ -17,24 +17,13 @@ class MissingDrinkByViewController :UITableViewController {
     var bottles: [DrillLevel0]?
     var locationLocations:Set = Set<Int>()
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        if dig > 0{
-//            print("SFSG")
-//                    let drinkBottlesViewController : UIViewController
-//                    drinkBottlesViewController = DrinkBottlesViewController()
-//
-//            navigationController?.pushViewController(drinkBottlesViewController, animated: true)
-//
-//        }
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
         bottles = allWine?.missing
-        
+                
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
     }

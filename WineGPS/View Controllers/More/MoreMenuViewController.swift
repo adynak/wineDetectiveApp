@@ -90,7 +90,12 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch section {
             case .Reports:
-                return ReportNames.allCases.count
+                // lucky for you the last report is the one we want to hide
+                if allWine?.missing?.count == 0 {
+                    return ReportNames.allCases.count - 1
+                } else {
+                    return ReportNames.allCases.count
+                }
             case .Settings:
                 return AppOptions.allCases.count
         }
@@ -188,11 +193,9 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.moreImageView.image = UIImage(named:ReportNames(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
             case .Settings:
                 let appOption = AppOptions(rawValue: indexPath.row)
-                cell.moreImageView.image = UIImage(named:AppOptions(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
                 cell.sectionType = appOption
+                cell.moreImageView.image = UIImage(named:AppOptions(rawValue:indexPath.row)!.thumbnail,in: Bundle(for: type(of:self)),compatibleWith: nil)
         }
-           
-        cell.largeContentTitle = "123"
         return cell
     }
     

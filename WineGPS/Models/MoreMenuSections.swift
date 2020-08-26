@@ -29,7 +29,12 @@ enum MoreMenuSections: Int, CaseIterable, CustomStringConvertible{
     var sectionRowCount: Int{
         switch self{
         case .Reports:
-            return ReportNames.allCases.count
+            // lucky for you the last report is the one we want to hide
+            if allWine?.missing?.count == 0 {
+                return ReportNames.allCases.count - 1
+            } else {
+                return ReportNames.allCases.count
+            }
         case .Settings:
             return AppOptions.allCases.count
         }
