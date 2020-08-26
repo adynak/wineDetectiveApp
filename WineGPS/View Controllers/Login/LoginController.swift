@@ -166,11 +166,20 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             }, completion: nil)
     }
     
-    @objc func keyboardShow() {
+    @objc func keyboardShow(notification: NSNotification) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
-            let y: CGFloat = UIDevice.current.orientation.isLandscape ? -100 : -50
-            self.view.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: self.view.frame.height)
+            guard let userInfo = notification.userInfo else {return}
+
+            guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+            let keyboardFrame = keyboardSize.cgRectValue
+
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardFrame.height - 100
+            }
+            
+//            var y: CGFloat = UIDevice.current.orientation.isLandscape ? -100 : -75
+//            self.view.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: self.view.frame.height)
             
             }, completion: nil)
     }

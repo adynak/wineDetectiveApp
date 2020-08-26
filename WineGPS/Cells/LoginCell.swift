@@ -110,9 +110,6 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        emailTextField.text = "al00p"
-//        passwordTextField.text = "Genesis13355Tigard"
-        
         if UserDefaults.standard.getRememberMe() {
             rememberMeCheckbox.isSelected = true
             emailTextField.text = UserDefaults.standard.getUserName()
