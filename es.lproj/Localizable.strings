@@ -1,32 +1,44 @@
 /* alert text: data download failed message */
-"alertTextDataLoadFailedMessage" = "The wine inventory download did not complete.";
+"alertTextDataLoadFailedMessage" = "La informacion proporcionada esta incopmpleta.";
 
 /* alert button text: data download failed title */
 "alertTextDataLoadFailedTitle" = "Descarga fracasó";
 
 /* alert text: email not configured for this application */
-"alertTextEmail" = "Email is not configured for this application.";
+"alertTextEmail" = "Su correo electronico no esta configurado en la aplicación.";
 
 /* alert button text: Help */
 "alertTextHelp" = "Ok";
 
 /* alert text: Username and password are required */
-"alertTextMissingCredentials" = "Se requiere el nombre de cuenta y la contraseña.";
+"alertTextMissingCredentials" = "Se requiere su correo electronico y contaseña.";
 
 /* alert text: no internet message */
-"alertTextNoInternetMessage" = "No se puede actualizar su vino porque su dispositivo no está conectado a Internet.";
+"alertTextNoInternetMessage" = "No está conectado a la Internet.";
 
 /* alert button text: no internet title */
 "alertTextNoInternetTitle" = "La conexión falló";
 
+/* alert button text: wine details for these bottles */
+"alertTextWineDetailsText" = "alertTextWineDetailsText";
+
+/* alert title: Wine Details */
+"alertTextWineDetailsTitle" = "alertTextWineDetailsTitle";
+
 /* alert title mark as drank */
-"alertTitleMarkAsDrank" = "Marcar como bebido";
+"alertTitleMarkAsDrank" = "Remover del inventario";
+
+/* alert title inventory out of sync */
+"alertTitleTellCellarTracker" = "alertTitleTellCellarTracker";
 
 /* cancel button */
 "buttonCancel" = "Cancelar";
 
 /* discard buttom */
 "buttonDiscard" = "Descartar los cambios";
+
+/* done button */
+"buttonDone" = "buttonDone";
 
 /* drink button */
 "buttonDrink" = "Eliminar %1%2";
@@ -38,93 +50,103 @@
 "buttonLogOut" = "Cerrar sesión";
 
 /* Next */
-"buttonNext" = "Próxima";
+"buttonNext" = "Siguiente";
+
+/* remember username and password on this device */
+"buttonRememberMe" = "buttonRememberMe";
 
 /* navigation save button */
-"buttonSave" = "Salvar";
+"buttonSave" = "Guardar";
 
 /* Skip */
 "buttonSkip" = "Omitir";
+
+/* sync: Not Now */
+"buttonSyncNotNow" = "buttonSyncNotNow";
+
+/* sync: return to inventory (Un-Drink) */
+"buttonSyncUnDrink" = "buttonSyncUnDrink";
 
 /* Cancel */
 "drinkByCancel" = "Cancelar";
 
 /* Available (default) */
-"drinkByDefault" = "Disponible (defecto)";
+"drinkByDefault" = "Available (default)";
 
 /* Early Bell (Dry White Wines) */
-"drinkByEarlyBell" = "Campana temprana (Dry White Wines)";
+"drinkByEarlyBell" = "Early Bell (Dry White Wines)";
 
 /* Fast Maturing (Rosé, Beaujolais, Moscato d'Asti) */
-"drinkByFast" = "Maduración rápida (Rosé, Beaujolais, Moscato d'Asti)";
+"drinkByFast" = "Fast Maturing (Rosé, Beaujolais, Moscato d'Asti)";
 
 /* Drinkability Help */
-"drinkByHelp" = "Beber por ayuda";
+"drinkByHelp" = "Ayuda";
 
 /* Drinkability Help */
-"drinkByHelpText" = "\nThe Drink By report orders the wines in your cellar by an index number which shows whether a wine is being consumed faster or slower than a rate implied by the drinking window (the time between \"Drink Soonest\" and \"Drink Latest\").\n\nThe Drink By report uses pre-defined algorithms for different categories of wines.\n\nChoose one of these algorithms.\n\nThe default is Availability.\n\nYou may want to run the Consume Dates Missing report to see which of your wines do not have a \"Drink Soonest\" or \"Drink Latest\" date.";
+"drinkByHelpText" = "The Drink By report orders the wines in your cellar by an index number which shows whether a wine is being consumed faster or slower than a rate implied by the drinking window (the time between \"Drink Soonest\" and \"Drink Latest\").\n\nThe Drink By report uses pre-defined algorithms for different categories of wines.\n\nChoose one of these algorithms.\n\nThe default is Availability.\n\nYou may want to run the Consume Dates Missing report to see which of your wines do not have a \"Drink Soonest\" or \"Drink Latest\" date.";
 
 /* drink by index */
-"drinkByIndex" = "Índice de bebibilidad";
+"drinkByIndex" = "Indice de Consumo";
 
 /* Late Bell (Red Bordeaux, Red Northern Rhone and Rioja) */
-"drinkByLateBell" = "Campana tardía (Red Bordeaux, Red Northern Rhone and Rioja)";
+"drinkByLateBell" = "Late Bell (Red Bordeaux, Red Northern Rhone and Rioja)";
 
 /* Linear */
-"drinkByLinear" = "Lineal";
+"drinkByLinear" = "Linear";
 
 /* drink by nav title Available */
-"drinkByNavTitleAvailable" = "Disponible";
+"drinkByNavTitleAvailable" = "Available";
 
 /* drink by nav title Cancel */
 "drinkByNavTitleCancel" = "Cancelar";
 
 /* drink by nav title Early Bell */
-"drinkByNavTitleEarlyBell" = "Campana temprana";
+"drinkByNavTitleEarlyBell" = "Early Bell";
 
 /* drink by nav title Fast Maturing */
-"drinkByNavTitleFastMaturing" = "Maduración rápida";
+"drinkByNavTitleFastMaturing" = "Fast Maturing";
 
 /* drink by nav title Help */
 "drinkByNavTitleHelp" = "Ayuda";
 
 /* drink by nav title Late Bell */
-"drinkByNavTitleLateBell" = "Campana tardía";
+"drinkByNavTitleLateBell" = "Late Bell";
 
 /* drink by nav title Linear */
-"drinkByNavTitleLinear" = "Lineal";
+"drinkByNavTitleLinear" = "Linear";
 
 /* drink by nav title Consume Dates Missing */
-"drinkByNavTitleMissing" = "Consumir fechas que faltan";
+"drinkByNavTitleMissing" = "Fecha de consumo no disponible";
 
 /* drink by nav title Standard Bell */
-"drinkByNavTitleStandardBell" = "Campana estándar";
+"drinkByNavTitleStandardBell" = "Standard Bell";
 
 /* drink by nav title Twin Peak */
 "drinkByNavTitleTwinPeak" = "Twin Peak";
 
 /* Standard Bell (Red Wines) */
-"drinkByStandardBell" = "Campana estándar (Red Wines)";
+"drinkByStandardBell" = "Standard Bell (Red Wines)";
 
 /* Twin Peak (Red Southern Rhône, White Northern Rhône, White German) */
 "drinkByTwinPeak" = "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)";
 
 /* email Body */
 "emailBody" = "&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>
-              ----------<br>
-              Device: %1<br>
-              iOS Version: %2<br>
-              Wine Detective Version: %3<br>
-              Storage Memory: %4 Used/ %5 Total";
+               ----------<br>
+               Device: %1<br>
+               iOS Version: %2<br>
+               WineGPS Version: %3<br>
+               Storage Memory: %4 Used/ %5 Total<br>
+               iCloud Status: %6";
 
 /* email address for support */
 "emailContactAddress" = "WheresMyWine@gmail.com";
 
 /* email menu item */
-"emailContactMenu" = "Contacta con nosotras";
+"emailContactMenu" = "Contactenos";
 
 /* email support subject */
-"emailSubject" = "Wine Detective Realimentación";
+"emailSubject" = "Wine GPS Soporte";
 
 /* labelBarcode */
 "labelBarcode" = "Código de barras";
@@ -132,14 +154,20 @@
 /* before when begin consume is missing */
 "labelBefore" = "Antes de";
 
+/* labelClipboard */
+"labelClipboard" = "labelClipboard";
+
 /* drinking window */
-"labelDrinkByWindow" = "Ventana para beber: ";
+"labelDrinkByWindow" = "Consumir:";
 
 /* label for location */
 "labelLocation" = "Ubicación";
 
 /* location and bin */
-"labelLocationAndBin" = "Ubicación y contenedor";
+"labelLocationAndBin" = "Ubicación - Compartimento";
+
+/* label: Vintage Producer Varietal */
+"labelVPV" = "labelVPV";
 
 /* loading web page spinner */
 "loadingWebPage" = "Cargando página web";
@@ -151,7 +179,7 @@
 "loginPassword" = "contraseña";
 
 /* contacts menu item */
-"menuContacts" = "Contacto";
+"menuContacts" = "Contactenos";
 
 /* reports menu item */
 "menuReports" = "Informes";
@@ -163,31 +191,31 @@
 "menuVersion" = "Versión";
 
 /* storage bin is missing */
-"noBin" = "no asignado";
+"noBin" = "compartimento no asignado";
 
 /* You liked it, bought it, and brought it home.  What happened to it next? */
 "page1Message" = "You liked it, bought it and brought it home.  What happened to it next?\n\nOf course, you added it to a \"location\" and maybe a \"bin\" using your Cellar Tracker account, right?\n\nHow do you find it again?";
 
-/* Find My Wine! */
-"page1Title" = "Find My Wine!";
+/* Dude, Find My Wine!? */
+"page1Title" = "¡Ecuentra my vino!";
 
 /* Search by Producer, Varietal, Vineyard, AVA, or Designation */
 "page2Message" = "Search terms are Producer, Varietal, Vintage, Vineyard, AVA, Country and Designation.\n\nUse the \"Drink By\" view to find wines that are ready to drink and which can take more aging.";
 
 /* You can search for it. */
-"page2Title" = "You can search for it";
+"page2Title" = "Puedes buscarla";
 
 /* Sort by Producer or by Varietal. The Sort by Location is a great tool for physical inventory. */
 "page3Message" = "Sort by Producer or by Varietal. Sort by Location is a great tool for physical inventory.\n\n  Find bottles with missing \"Drink Soonest\" and \"Drink Latest\" dates.";
 
 /* The More menu has other views */
-"page3Title" = "More has other Views and Settings";
+"page3Title" = "Mas tiene otras opciones y configuraciones";
 
 /* Don't use \"Barcode\", just turn it off! */
 "page4Message" = "If you don't use \"Barcodes\", just turn them off!\n\n Once you understand the application, you can turn off the \"Walkthrough\" pages.";
 
 /* Don't forget to check settings */
-"page4Title" = "Don't forget to check Settings";
+"page4Title" = "Revisar configuraciones.";
 
 /* plural bottles */
 "pluralBottle" = " Botellas";
@@ -195,32 +223,35 @@
 /* bottles remaining */
 "pluralRemaining" = " Botellas restantes";
 
+/* these bottles */
+"pluralThese" = "pluralThese";
+
 /* product name */
-"productName" = "Wine Detective";
+"productName" = "WineGPS";
 
 /* navigation item: remove bottles */
-"removeBottles" = "removeBottles";
+"removeBottles" = "remover botellas";
 
 /* report location menu item */
-"reportLocation" = "Ordenar por ubicación";
+"reportLocation" = "Por ubicación";
 
 /* report missing dates menu item */
 "reportMissingDates" = "Consumir fechas que faltan";
 
 /* report producer menu item */
-"reportProducer" = "Ordenar por productora";
+"reportProducer" = "Por viñedo";
 
 /* report varietal menu item */
-"reportVarietal" = "Ordenar por varietal";
+"reportVarietal" = "Por Variedad";
 
 /* waiting for API to return */
-"runAPI" = "Conseguir tus vinos";
+"runAPI" = "Espera";
 
 /* barcode menu item */
 "settingBarcode" = "Mostrar código de barras";
 
 /* show me menu item */
-"settingShowMe" = "Mostrar páginas de tutorial";
+"settingShowMe" = "Mostrar páginas de tutoría";
 
 /* support menu item */
 "settingSupport" = "Apoyo";
@@ -231,8 +262,14 @@
 /* bottle remaining */
 "singularRemaining" = " Botella restante";
 
+/* this bottle */
+"singularThis" = "singularThis";
+
+/* what to do to fix sync condition */
+"syncMessage" = "syncMessage";
+
 /* navagation title: drink by */
-"titleDrinkBy" = "Beber por";
+"titleDrinkBy" = "Consumir";
 
 /* navagation title: location */
 "titleLocation" = "Ubicación";
@@ -244,7 +281,7 @@
 "titleMore" = "Más";
 
 /* navagation title: producer */
-"titleProducer" = "Productora";
+"titleProducer" = "Viñedo";
 
 /* navigation title: search */
 "titleSearch" = "Buscar";
@@ -252,9 +289,17 @@
 /* navigation title : Support */
 "titleSupport" = "Apoyo";
 
+/* sync title: Inventory Out Of Sync */
+"titleSync" = "titleSync";
+
+/* sync subtitle: Swipe To Resolve */
+"titleSyncSubTitle" = "titleSyncSubTitle";
+
 /* navagation title: varietal */
-"titleVarietal" = "Varietal";
+"titleVarietal" = "Variedad";
 
 /* plural : total bottles */
 "totalBottles" = "Botellas totales";
 
+/* message that these bottles should be marked drank */
+"updateCellarTracker" = "updateCellarTracker";
