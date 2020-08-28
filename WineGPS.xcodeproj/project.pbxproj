@@ -153,6 +153,7 @@
 		92B73A3624ED76DF00B6686F /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		92B73A3824EDE24700B6686F /* WineGPS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WineGPS.entitlements; sourceTree = "<group>"; };
 		92B73A3A24EDE25100B6686F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		92BC7F7F24F9526C00EC25D7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		92C97C3624F5CEC7002CA657 /* WineGPS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WineGPS.xcdatamodel; sourceTree = "<group>"; };
 		92CA324F24B661ED00AC2747 /* DrinkBottlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkBottlesViewController.swift; sourceTree = "<group>"; };
 		92D6B83C24AE892900E539E0 /* DrinkByMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkByMenuCell.swift; sourceTree = "<group>"; };
@@ -712,6 +713,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				923400F124F861CE00EED320 /* es */,
+				92BC7F7F24F9526C00EC25D7 /* fr */,
 			);
 			name = InfoPlist.strings;
 			path = "WineGPS/Supporting Files";
@@ -851,7 +853,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WineGPS/WineGPS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 95;
+				CURRENT_PROJECT_VERSION = 98;
 				DEVELOPMENT_ASSET_PATHS = WineGPS;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = "WineGPS/Supporting Files/Info.plist";
@@ -871,7 +873,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WineGPS/WineGPS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 95;
+				CURRENT_PROJECT_VERSION = 98;
 				DEVELOPMENT_ASSET_PATHS = WineGPS;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = "WineGPS/Supporting Files/Info.plist";
