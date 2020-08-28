@@ -188,7 +188,7 @@
 "noBin" = "compartimento no asignado";
 
 /* You liked it, bought it, and brought it home.  What happened to it next? */
-"page1Message" = "You liked it, bought it and brought it home.  What happened to it next?\n\nOf course, you added it to a \"location\" and maybe a \"bin\" using your Cellar Tracker account, right?\n\nHow do you find it again?";
+"page1Message" = "You liked it, bought it and brought it home.  What happened to it next?\n\nOf course, you added it to a \"location\" and maybe a \"bin\" using your \"Cellar Tracker\" account, right?\n\nHow do you find it again?";
 
 /* Dude, Find My Wine!? */
 "page1Title" = "¡Encuentra Mi Vino!";
