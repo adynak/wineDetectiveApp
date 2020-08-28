@@ -57,10 +57,4 @@ struct Alert{
         showBasicAlert(on: vc, with: title, message: message)
     }
 
-    static func showWineDetailAlert(on vc: UIViewController, with bottleInfo:String){
-        showBasicAlert(on: vc,
-                       with: NSLocalizedString("alertTextWineDetailsTitle", comment: "alert title: Wine Details"),
-                       message: NSLocalizedString("alertTextWineDetailsText", comment: "alert button text: wine details for these bottles") + bottleInfo )
-    }
-
 }

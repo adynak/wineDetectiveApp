@@ -2,7 +2,7 @@
 "alertTextDataLoadFailedMessage" = "La informacion proporcionada esta incopmpleta.";
 
 /* alert button text: data download failed title */
-"alertTextDataLoadFailedTitle" = "Descarga fracasó";
+"alertTextDataLoadFailedTitle" = "Descarga Fracasó";
 
 /* alert text: email not configured for this application */
 "alertTextEmail" = "Su correo electronico no esta configurado en la aplicación.";
@@ -17,43 +17,37 @@
 "alertTextNoInternetMessage" = "No está conectado a la Internet.";
 
 /* alert button text: no internet title */
-"alertTextNoInternetTitle" = "La conexión falló";
-
-/* alert button text: wine details for these bottles */
-"alertTextWineDetailsText" = "alertTextWineDetailsText";
-
-/* alert title: Wine Details */
-"alertTextWineDetailsTitle" = "alertTextWineDetailsTitle";
+"alertTextNoInternetTitle" = "La Conexión Falló";
 
 /* alert title mark as drank */
-"alertTitleMarkAsDrank" = "Remover del inventario";
+"alertTitleMarkAsDrank" = "Remover del Inventario";
 
 /* alert title inventory out of sync */
-"alertTitleTellCellarTracker" = "alertTitleTellCellarTracker";
+"alertTitleTellCellarTracker" = "Inventario Desincronizado";
 
 /* cancel button */
 "buttonCancel" = "Cancelar";
 
 /* discard buttom */
-"buttonDiscard" = "Descartar los cambios";
+"buttonDiscard" = "Descartar los Cambios";
 
 /* done button */
-"buttonDone" = "buttonDone";
+"buttonDone" = "Hecho";
 
 /* drink button */
 "buttonDrink" = "Eliminar %1%2";
 
 /* the command Log In */
-"buttonLogin" = "Iniciar sesión";
+"buttonLogin" = "Iniciar Sesión";
 
 /* button text: Log Out */
-"buttonLogOut" = "Cerrar sesión";
+"buttonLogOut" = "Cerrar Sesión";
 
 /* Next */
 "buttonNext" = "Siguiente";
 
 /* remember username and password on this device */
-"buttonRememberMe" = "buttonRememberMe";
+"buttonRememberMe" = "Recordarme";
 
 /* navigation save button */
 "buttonSave" = "Guardar";
@@ -62,10 +56,10 @@
 "buttonSkip" = "Omitir";
 
 /* sync: Not Now */
-"buttonSyncNotNow" = "buttonSyncNotNow";
+"buttonSyncNotNow" = "No Ahora";
 
 /* sync: return to inventory (Un-Drink) */
-"buttonSyncUnDrink" = "buttonSyncUnDrink";
+"buttonSyncUnDrink" = "Regresen a su Inventario";
 
 /* Cancel */
 "drinkByCancel" = "Cancelar";
@@ -116,7 +110,7 @@
 "drinkByNavTitleLinear" = "Linear";
 
 /* drink by nav title Consume Dates Missing */
-"drinkByNavTitleMissing" = "Fecha de consumo no disponible";
+"drinkByNavTitleMissing" = "Consumir Fechas que Faltan";
 
 /* drink by nav title Standard Bell */
 "drinkByNavTitleStandardBell" = "Standard Bell";
@@ -149,13 +143,13 @@
 "emailSubject" = "Wine GPS Soporte";
 
 /* labelBarcode */
-"labelBarcode" = "Código de barras";
+"labelBarcode" = "Código de Barras";
 
 /* before when begin consume is missing */
 "labelBefore" = "Antes de";
 
 /* labelClipboard */
-"labelClipboard" = "labelClipboard";
+"labelClipboard" = "Copiar al Portapapeles";
 
 /* drinking window */
 "labelDrinkByWindow" = "Consumir:";
@@ -167,7 +161,7 @@
 "labelLocationAndBin" = "Ubicación - Compartimento";
 
 /* label: Vintage Producer Varietal */
-"labelVPV" = "labelVPV";
+"labelVPV" = "Vendimia Viñedo";
 
 /* loading web page spinner */
 "loadingWebPage" = "Cargando página web";
@@ -197,7 +191,7 @@
 "page1Message" = "You liked it, bought it and brought it home.  What happened to it next?\n\nOf course, you added it to a \"location\" and maybe a \"bin\" using your Cellar Tracker account, right?\n\nHow do you find it again?";
 
 /* Dude, Find My Wine!? */
-"page1Title" = "¡Ecuentra my vino!";
+"page1Title" = "¡Encuentra Mi Vino!";
 
 /* Search by Producer, Varietal, Vineyard, AVA, or Designation */
 "page2Message" = "Search terms are Producer, Varietal, Vintage, Vineyard, AVA, Country and Designation.\n\nUse the \"Drink By\" view to find wines that are ready to drink and which can take more aging.";
@@ -209,22 +203,22 @@
 "page3Message" = "Sort by Producer or by Varietal. Sort by Location is a great tool for physical inventory.\n\n  Find bottles with missing \"Drink Soonest\" and \"Drink Latest\" dates.";
 
 /* The More menu has other views */
-"page3Title" = "Mas tiene otras opciones y configuraciones";
+"page3Title" = "Mas tiene otras opciones";
 
 /* Don't use \"Barcode\", just turn it off! */
 "page4Message" = "If you don't use \"Barcodes\", just turn them off!\n\n Once you understand the application, you can turn off the \"Walkthrough\" pages.";
 
 /* Don't forget to check settings */
-"page4Title" = "Revisar configuraciones.";
+"page4Title" = "Revisar configuraciones";
 
 /* plural bottles */
 "pluralBottle" = " Botellas";
 
 /* bottles remaining */
-"pluralRemaining" = " Botellas restantes";
+"pluralRemaining" = " Botellas Restantes";
 
 /* these bottles */
-"pluralThese" = "pluralThese";
+"pluralThese" = "estas botellas";
 
 /* product name */
 "productName" = "WineGPS";
@@ -233,13 +227,13 @@
 "removeBottles" = "remover botellas";
 
 /* report location menu item */
-"reportLocation" = "Por ubicación";
+"reportLocation" = "Por Ubicación";
 
 /* report missing dates menu item */
-"reportMissingDates" = "Consumir fechas que faltan";
+"reportMissingDates" = "Consumir Fechas que Faltan";
 
 /* report producer menu item */
-"reportProducer" = "Por viñedo";
+"reportProducer" = "Por Viñedo";
 
 /* report varietal menu item */
 "reportVarietal" = "Por Variedad";
@@ -248,10 +242,10 @@
 "runAPI" = "Espera";
 
 /* barcode menu item */
-"settingBarcode" = "Mostrar código de barras";
+"settingBarcode" = "Mostrar Código de Barras";
 
 /* show me menu item */
-"settingShowMe" = "Mostrar páginas de tutoría";
+"settingShowMe" = "Mostrar Páginas de Tutoría";
 
 /* support menu item */
 "settingSupport" = "Apoyo";
@@ -260,10 +254,10 @@
 "singularBottle" = " Botella";
 
 /* bottle remaining */
-"singularRemaining" = " Botella restante";
+"singularRemaining" = " Botella Restante";
 
 /* this bottle */
-"singularThis" = "singularThis";
+"singularThis" = "esta botella";
 
 /* what to do to fix sync condition */
 "syncMessage" = "syncMessage";
@@ -275,7 +269,7 @@
 "titleLocation" = "Ubicación";
 
 /* navagation title: missing bottles */
-"titleMissing" = "Consumir fechas que faltan";
+"titleMissing" = "Consumir Fechas que Faltan";
 
 /* navigation title: More */
 "titleMore" = "Más";
@@ -290,16 +284,16 @@
 "titleSupport" = "Apoyo";
 
 /* sync title: Inventory Out Of Sync */
-"titleSync" = "titleSync";
+"titleSync" = "Inventario Desincronizado";
 
 /* sync subtitle: Swipe To Resolve */
-"titleSyncSubTitle" = "titleSyncSubTitle";
+"titleSyncSubTitle" = "Deslizar Para Resolver";
 
 /* navagation title: varietal */
 "titleVarietal" = "Variedad";
 
 /* plural : total bottles */
-"totalBottles" = "Botellas totales";
+"totalBottles" = "Botellas Totales";
 
 /* message that these bottles should be marked drank */
 "updateCellarTracker" = "updateCellarTracker";
