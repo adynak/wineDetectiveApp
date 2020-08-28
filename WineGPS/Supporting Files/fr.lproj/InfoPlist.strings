@@ -1,6 +1,5 @@
 /* Bundle display name */
-"CFBundleDisplayName" = "WIneGPS";
+"CFBundleDisplayName" = "VinGPS";
 
 /* Bundle name */
-"CFBundleName" = "WineGPS";
-
+"CFBundleName" = "VinGPS";

@@ -125,13 +125,7 @@
 "drinkByTwinPeak" = "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)";
 
 /* email Body */
-"emailBody" = "&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>
-               ----------<br>
-               Device: %1<br>
-               iOS Version: %2<br>
-               WineGPS Version: %3<br>
-               Storage Memory: %4 Used/ %5 Total<br>
-               iCloud Status: %6";
+"emailBody" = " <br> <br> <br> <br> <br> <br>\n               ----------<br>\n               Tipo de Aparato: %1<br>\n               iOS Versión: %2<br>\n               VinoGPS Versión: %3<br>\n               Almacenamiento Interno: %4 Utilizado/ %5 Capacidad <br>\n               Situación iCloud: %6";
 
 /* email address for support */
 "emailContactAddress" = "WheresMyWine@gmail.com";
@@ -140,7 +134,7 @@
 "emailContactMenu" = "Contactenos";
 
 /* email support subject */
-"emailSubject" = "Wine GPS Soporte";
+"emailSubject" = "VinoGPS Soporte";
 
 /* labelBarcode */
 "labelBarcode" = "Código de Barras";
@@ -221,7 +215,7 @@
 "pluralThese" = "estas botellas";
 
 /* product name */
-"productName" = "WineGPS";
+"productName" = "VinoGPS";
 
 /* navigation item: remove bottles */
 "removeBottles" = "remover botellas";
