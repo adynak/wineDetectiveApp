@@ -494,16 +494,19 @@ class DataServices {
                     varietal = inventoryArray[inventoryIndex][inventoryPositionOf.varietal]
                     location = inventoryArray[inventoryIndex][inventoryPositionOf.location]
                     bin = inventoryArray[inventoryIndex][inventoryPositionOf.bin]
+                    
+                    tellCellarTracker.append(DrillLevel2(
+                        producer: producer,
+                        varietal: varietal,
+                        vintage: vintage,
+                        location: location,
+                        bin: bin,
+                        barcode: barcode,
+                        consumeDate: consumed))
+                } else {
+                    API.deleteCoreData(barcode: barcode)
                 }
                 
-                tellCellarTracker.append(DrillLevel2(
-                    producer: producer,
-                    varietal: varietal,
-                    vintage: vintage,
-                    location: location,
-                    bin: bin,
-                    barcode: barcode,
-                    consumeDate: consumed))
             }
         }
         catch {
