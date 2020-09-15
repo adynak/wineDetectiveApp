@@ -55,7 +55,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         
     lazy var rememberMeCheckbox: UIButton = {
         let checkbox = UIButton(type: .custom)
-        checkbox.setTitle(NSLocalizedString("buttonRememberMe", comment: "remember username and password on this device"), for: .normal)
+        checkbox.setTitle(NSLocalizedString("buttonRememberMe", comment: "checkbox text: Remember Me (username and password)"), for: .normal)
         checkbox.setImage(UIImage.init(named: "unchecked"), for: .normal)
         checkbox.setImage(UIImage.init(named: "checked"), for: .selected)
         checkbox.addTarget(self, action: #selector(toggleCheckboxSelection), for: .touchUpInside)
@@ -69,7 +69,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = loginButtonColor
-        button.setTitle(NSLocalizedString("buttonLogin", comment: "the command Log In"), for: .normal)
+        button.setTitle(NSLocalizedString("buttonLogin", comment: "button text: Log In"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         button.isEnabled = true

@@ -128,6 +128,14 @@ class LocationViewController :UITableViewController {
         wineSelected.topLeft = bottles![section].name
         wineSelected.topRight = bottles![section].data[row].name
         wineSelected.viewName = "location"
+                
+        wineSelected.bottles = wineSelected.bottles?.sorted {
+            var isSorted = false
+            if let first = $0.producer, let second = $1.producer {
+                isSorted = first < second
+            }
+            return isSorted
+        }
         
         let locationDetailController = DrillDownDetailViewController()
         locationDetailController.passedValue = wineSelected

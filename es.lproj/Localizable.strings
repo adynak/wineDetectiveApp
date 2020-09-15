@@ -28,7 +28,7 @@
 /* cancel button */
 "buttonCancel" = "Cancelar";
 
-/* discard buttom */
+/* discard button */
 "buttonDiscard" = "Descartar los Cambios";
 
 /* done button */
@@ -77,7 +77,7 @@
 "drinkByHelp" = "Ayuda";
 
 /* Drinkability Help */
-"drinkByHelpText" = "The Drink By report orders the wines in your cellar by an index number which shows whether a wine is being consumed faster or slower than a rate implied by the drinking window (the time between \"Drink Soonest\" and \"Drink Latest\").\n\nThe Drink By report uses pre-defined algorithms for different categories of wines.\n\nChoose one of these algorithms.\n\nThe default is Availability.\n\nYou may want to run the Consume Dates Missing report to see which of your wines do not have a \"Drink Soonest\" or \"Drink Latest\" date.";
+"drinkByHelpText" = "TRANSLATION NEEDED";
 
 /* drink by index */
 "drinkByIndex" = "Indice de Consumo";
@@ -182,25 +182,25 @@
 "noBin" = "compartimento no asignado";
 
 /* You liked it, bought it, and brought it home.  What happened to it next? */
-"page1Message" = "You liked it, bought it and brought it home.  What happened to it next?\n\nOf course, you added it to a \"location\" and maybe a \"bin\" using your \"Cellar Tracker\" account, right?\n\nHow do you find it again?";
+"page1Message" = "TRANSLATION NEEDED";
 
 /* Dude, Find My Wine!? */
 "page1Title" = "¡Encuentra Mi Vino!";
 
 /* Search by Producer, Varietal, Vineyard, AVA, or Designation */
-"page2Message" = "Search terms are Producer, Varietal, Vintage, Vineyard, AVA, Country and Designation.\n\nUse the \"Drink By\" view to find wines that are ready to drink and which can take more aging.";
+"page2Message" = "TRANSLATION NEEDED";
 
 /* You can search for it. */
 "page2Title" = "Puedes buscarla";
 
 /* Sort by Producer or by Varietal. The Sort by Location is a great tool for physical inventory. */
-"page3Message" = "Sort by Producer or by Varietal. Sort by Location is a great tool for physical inventory.\n\n  Find bottles with missing \"Drink Soonest\" and \"Drink Latest\" dates.";
+"page3Message" = "TRANSLATION NEEDED";
 
 /* The More menu has other views */
 "page3Title" = "Mas tiene otras opciones";
 
 /* Don't use \"Barcode\", just turn it off! */
-"page4Message" = "If you don't use \"Barcodes\", just turn them off!\n\n Once you understand the application, you can turn off the \"Walkthrough\" pages.";
+"page4Message" = "TRANSLATION NEEDED";
 
 /* Don't forget to check settings */
 "page4Title" = "Revisar configuraciones";

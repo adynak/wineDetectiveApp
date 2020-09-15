@@ -274,7 +274,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
             action: #selector(cancelMarkDrank))
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("buttonSave", comment: "navigation save button"),
+            title: NSLocalizedString("buttonSave", comment: "button text: Save"),
             style: .plain,
             target: self,
             action: #selector(saveMarkDrank))
@@ -332,9 +332,9 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         markAsDrank = buildMarkAsDrankList()
         message = buildRemoveMessage(bottles: markAsDrank)
         
-        let titleText = NSLocalizedString("alertTitleMarkAsDrank", comment: "alert title mark as drank")
+        let titleText = NSLocalizedString("alertTitleMarkAsDrank", comment: "alert title: mark this bottle as consumed")
         
-        var drinkButtonText = NSLocalizedString("buttonDrink", comment: "drink button")
+        var drinkButtonText = NSLocalizedString("buttonDrink", comment: "button text: Remove %1 is bottleCount, %2 is singular/plural of bottle(s)")
         drinkButtonText = drinkButtonText.replacingOccurrences(of: "%1", with: String(markAsDrank.count))
         
         let plural = markAsDrank.count == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")

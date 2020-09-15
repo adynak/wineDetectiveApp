@@ -37,7 +37,7 @@ class MainTabBarController: UITabBarController {
     
     func setupTabBar() {
         
-        let drinkByTitle = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
+        let drinkByTitle = NSLocalizedString("titleDrinkBy", comment: "Navigation Bar menu title: Drink By.  This will display a list of wines sorted by when they should be consumed, from sooner to later.")
         let searchTitle = NSLocalizedString("titleSearch", comment: "navigation title: search")
         let moreTitle = NSLocalizedString("titleMore", comment: "navigation title: More")
 

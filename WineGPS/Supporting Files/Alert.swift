@@ -14,7 +14,7 @@ struct Alert{
     private static func showBasicAlert(on vc: UIViewController,
                                        with title:String,
                                        message: String,
-                                       buttonText: String = NSLocalizedString("alertTextHelp", comment: "alert button text: Help")
+                                       buttonText: String = NSLocalizedString("alertTextHelp", comment: "alert button: OK")
         ){
         
         let alert = UIAlertController(title: title,
@@ -46,14 +46,14 @@ struct Alert{
     }
 
     static func showAPIFailedsAlert(on vc: UIViewController){
-        let title = NSLocalizedString("alertTextDataLoadFailedTitle", comment: "alert button text: data download failed title")
-        let message = NSLocalizedString("alertTextDataLoadFailedMessage", comment: "alert text: data download failed message")
+        let title = NSLocalizedString("alertTextDataLoadFailedTitle", comment: "alert title: data download failed")
+        let message = NSLocalizedString("alertTextDataLoadFailedMessage", comment: "alert text: data download failed message, maybe the userID and/or password was invalid")
         showBasicAlert(on: vc, with: title, message: message)
     }
 
     static func noInternetAlert(on vc: UIViewController){
-        let title = NSLocalizedString("alertTextNoInternetTitle", comment: "alert button text: no internet title")
-        let message = NSLocalizedString("alertTextNoInternetMessage", comment: "alert text: no internet message")
+        let title = NSLocalizedString("alertTextNoInternetTitle", comment: "alert title: internet connection failed")
+        let message = NSLocalizedString("alertTextNoInternetMessage", comment: "alert text: not connected to the internet")
         showBasicAlert(on: vc, with: title, message: message)
     }
 

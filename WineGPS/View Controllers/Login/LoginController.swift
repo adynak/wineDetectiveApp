@@ -68,7 +68,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     
     lazy var skipButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("buttonSkip", comment: "Skip"), for: .normal)
+        button.setTitle(NSLocalizedString("buttonSkip", comment: "button text: Skip all pages in tutorial (or simply, Skip)"), for: .normal)
         button.setTitleColor(loginButtonColor, for: .normal)
         button.addTarget(self, action: #selector(skip), for: .touchUpInside)
         return button
@@ -81,7 +81,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     
     lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("buttonNext", comment: "Next"), for: .normal)
+        button.setTitle(NSLocalizedString("buttonNext", comment: "button text: Next"), for: .normal)
         button.setTitleColor(loginButtonColor, for: .normal)
         button.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
         return button

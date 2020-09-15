@@ -56,7 +56,7 @@ class SyncViewController: UITableViewController {
         alertMessage = alertMessage.replacingOccurrences(of: "%1", with: bottleString)
 
         
-        let alertOk = NSLocalizedString("alertTextHelp", comment: "alert button text: Help")
+        let alertOk = NSLocalizedString("alertTextHelp", comment: "alert button: OK")
         
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
 
@@ -169,9 +169,9 @@ class SyncViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)-> UISwipeActionsConfiguration? {
                 
-        let notNowTitle = NSLocalizedString("buttonSyncNotNow", comment: "sync: Not Now")
+        let notNowTitle = NSLocalizedString("buttonSyncNotNow", comment: "button text: do not sync now (or simply, Not Now)")
         
-        let unDrinkTitle = NSLocalizedString("buttonSyncUnDrink", comment: "sync: return to inventory (Un-Drink)")
+        let unDrinkTitle = NSLocalizedString("buttonSyncUnDrink", comment: "button text: return this selection to inventory (Un-Drink)")
             
         let unDrinkAction = UIContextualAction(style: .normal, title: unDrinkTitle) { (action, view, completionHandler) in
             self.deleteFromCoreData(indexPath: indexPath, tableView: tableView)

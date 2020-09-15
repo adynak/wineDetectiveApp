@@ -33,56 +33,56 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
     let cellHeight: CGFloat = 35
     let drinkByMenuItems: [DrinkByMenuItem] = {
         return [
-            DrinkByMenuItem(name: NSLocalizedString("drinkByDefault", comment: "Available (default)"),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByDefault", comment: "Available (default) DO NOT TRANSLATE"),
                     imageName: "settings",
                     isSelected: true,
                     drinkByMenuCode: "Available",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleAvailable", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByLinear", comment: "Linear"),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleAvailable", comment: "drink by nav title Available DO NOT TRANSLATE")),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByLinear", comment: "Linear DO NOT TRANSLATE"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Linear",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleLinear", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByStandardBell", comment: "Standard Bell (Red Wines)"),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleLinear", comment: "drink by nav title Linear DO NOT TRANSLATE")),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByStandardBell", comment: "Standard Bell (Red Wines) DO NOT TRANSLATE"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Bell",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleStandardBell", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByEarlyBell", comment: "Early Bell (Dry White Wines)"),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleStandardBell", comment: "drink by nav title Stabdard Bell DO NOT TRANSLATE")),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByEarlyBell", comment: "Early Bell (Dry White Wines) DO NOT TRANSLATE"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Early",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleEarlyBell", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByLateBell", comment: "Late Bell (Red Bordeaux, Red Northern Rhone and Rioja)"),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleEarlyBell", comment: "drink by nav title Early Bell DO NOT TRANSLATE")),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByLateBell", comment: "Late Bell (Red Bordeaux, Red Northern Rhone and Rioja) DO NOT TRANSLATE"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Late",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleLateBell", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByFast", comment: "Fast Maturing (Rosé, Beaujolais, Moscato d'Asti)"),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleLateBell", comment: "drink by nav title Late Bell DO NOT TRANSLATE")),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByFast", comment: "Fast Maturing (Rosé, Beaujolais, Moscato d'Asti) DO NOT TRANSLATE"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Fast",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleFastMaturing", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByTwinPeak", comment: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German)"),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleFastMaturing", comment: "drink by nav title Fast Maturing DO NOT TRANSLATE")),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByTwinPeak", comment: "Twin Peak (Red Southern Rhône, White Northern Rhône, White German) DO NOT TRANSLATE"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "TwinPeak",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleTwinPeak", comment: "drink by nav title Available")),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleTwinPeak", comment: "drink by nav title Twin Peak DO NOT TRANSLATE")),
             DrinkByMenuItem(name: NSLocalizedString("reportMissingDates", comment: "Wines Missing A Drinking Window"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Missing",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleMissing", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByHelp", comment: "Drinkability Help"),
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleMissing", comment: "drink by nav title when the 'start drinking' and 'drink before' dates are missing")),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByHelp", comment: "drinkability menu item: Help"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Help",
                     drinkByNavTitle: NSLocalizedString("drinkByNavTitleHelp", comment: "drink by nav title Available")),
-            DrinkByMenuItem(name: NSLocalizedString("drinkByCancel", comment: "Cancel"),
+            DrinkByMenuItem(name: NSLocalizedString("drinkByCancel", comment: "button text: Cancel"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Cancel",
-                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleCancel", comment: "drink by nav title Available"))
+                    drinkByNavTitle: NSLocalizedString("drinkByNavTitleCancel", comment: "drink by nav title Cancel"))
         ]
         
     }()
@@ -185,8 +185,8 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
         var changeCellBackgroundColor: Bool = false
         
         switch menuSelection {
-            case NSLocalizedString("drinkByCancel", comment: "Cancel"),
-                 NSLocalizedString("drinkByHelp", comment: "Drinkability Help"):
+            case NSLocalizedString("drinkByCancel", comment: "button text: Cancel"),
+                 NSLocalizedString("drinkByHelp", comment: "drinkability menu item: Help"):
                 changeCellBackgroundColor = false
             default:
                 changeCellBackgroundColor = true

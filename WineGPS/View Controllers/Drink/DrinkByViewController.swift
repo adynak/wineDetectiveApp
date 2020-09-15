@@ -99,7 +99,7 @@ class DrinkByViewController: UIViewController {
 
     
     @objc func changeDrinkBySort(_ notification: Notification) {
-        let title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
+        let title = NSLocalizedString("titleDrinkBy", comment: "Navigation Bar menu title: Drink By.  This will display a list of wines sorted by when they should be consumed, from sooner to later.")
         let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
         
         let positionOfDrinkByMenuCode = drinkByMenuLauncher.drinkByMenuItems.firstIndex(where:{$0.drinkByMenuCode == drinkByMenuCode})
@@ -184,10 +184,10 @@ class DrinkByViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
-        let title = NSLocalizedString("titleDrinkBy", comment: "navagation title: drink by")
+        navigationItem.title = NSLocalizedString("titleDrinkBy", comment: "Navigation Bar menu title: Drink By.  This will display a list of wines sorted by when they should be consumed, from sooner to later.")
+        let title = NSLocalizedString("titleDrinkBy", comment: "Navigation Bar menu title: Drink By.  This will display a list of wines sorted by when they should be consumed, from sooner to later.")
         
-        let drinkByMenuCode = NSLocalizedString("drinkByNavTitleAvailable", comment: "drink by nav title Available")
+        let drinkByMenuCode = NSLocalizedString("drinkByNavTitleAvailable", comment: "drink by nav title Available DO NOT TRANSLATE")
 
         navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: drinkByMenuCode)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -450,7 +450,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
 //        let drinkByIndex = DataServices.findDrinkByIndex(iWine: bottle.storageBins![0].iwine!, drinkByKey: drinkByMenuCode)
         
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
-//        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "drink by index")) \(drinkByIndex)"
+//        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "Drinkability Index, a magic index number used to sort wines")) \(drinkByIndex)"
         
         let line2 = "  \(bottle.description!)\n  \(NSLocalizedString("labelDrinkByWindow", comment: "drinking window")) \(bottle.drinkBy)"
 
