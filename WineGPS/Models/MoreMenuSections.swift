@@ -20,9 +20,9 @@ enum MoreMenuSections: Int, CaseIterable, CustomStringConvertible{
     var description: String{
         switch self{
         case .Reports:
-            return NSLocalizedString("menuReports", comment: "reports menu item").uppercased()
+            return NSLocalizedString("menuReports", comment: "menu item: Reports").uppercased()
         case .Settings:
-            return NSLocalizedString("menuSettings", comment: "settings menu item").uppercased()
+            return NSLocalizedString("menuSettings", comment: "menu item: Settings").uppercased()
         }
     }
     
@@ -54,13 +54,13 @@ enum ReportNames: Int, CaseIterable, SectionType{
     var description: String{
         switch self{
         case .producer:
-            return NSLocalizedString("reportProducer", comment: "report producer menu item")
+            return NSLocalizedString("reportProducer", comment: "menu item: Sort By Producer Report")
         case .varietal:
-            return NSLocalizedString("reportVarietal", comment: "report varietal menu item")
+            return NSLocalizedString("reportVarietal", comment: "menu item: Sort By Varietal Report")
         case .location:
-            return NSLocalizedString("reportLocation", comment: "report location menu item")
+            return NSLocalizedString("reportLocation", comment: "menu item: Sort by Location Report")
         case .missingDates:
-            return NSLocalizedString("reportMissingDates", comment: "Wines Missing A Drinking Window")
+            return NSLocalizedString("reportMissingDates", comment: "menu item: Consume Dates Missing Report")
         }
     }
     
@@ -123,11 +123,11 @@ enum AppOptions: Int, CaseIterable, SectionType{
     var description: String{
         switch self{
         case .showBarcode:
-            return NSLocalizedString("settingBarcode", comment: "barcode menu item")
+            return NSLocalizedString("settingBarcode", comment: "menu item: Show Barcode")
         case .showMeHow:
-            return NSLocalizedString("settingShowMe", comment: "show me menu item")
+            return NSLocalizedString("settingShowMe", comment: "menu item: Show Walkthrough Pages")
         case .support:
-            return NSLocalizedString("settingSupport", comment: "support menu item")
+            return NSLocalizedString("settingSupport", comment: "menu item: Support")
         }
     }
     

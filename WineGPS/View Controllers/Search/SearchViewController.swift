@@ -158,7 +158,7 @@ class SearchViewController: UIViewController {
             }
         }
         
-        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
+        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular for the word bottle") : NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
         
         return "\(totalBottles)" + plural
     }

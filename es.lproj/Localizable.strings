@@ -226,31 +226,31 @@
 /* report missing dates menu item */
 "reportMissingDates" = "Consumir Fechas que Faltan";
 
-/* report producer menu item */
+/* menu item: Sort By Producer Report */
 "reportProducer" = "Por Viñedo";
 
-/* report varietal menu item */
+/* menu item: Sort By Varietal Report */
 "reportVarietal" = "Por Variedad";
 
-/* waiting for API to return */
+/* textfield label: Getting Your Wines, text below animation while waiting for download */
 "runAPI" = "Espera";
 
-/* barcode menu item */
+/* menu item: Show Barcode */
 "settingBarcode" = "Mostrar Código de Barras";
 
-/* show me menu item */
+/* menu item: Show Walkthrough Pages */
 "settingShowMe" = "Mostrar Páginas de Tutoría";
 
-/* support menu item */
+/* menu item: Support */
 "settingSupport" = "Apoyo";
 
-/* singular bottle */
+/* text replacement for these bottle: this bottles */
 "singularBottle" = " Botella";
 
-/* bottle remaining */
+/* when there is one bottle in inventory: Bottle Remaining */
 "singularRemaining" = " Botella Restante";
 
-/* this bottle */
+/* text replacement for this bottle: these bottles */
 "singularThis" = "esta botella";
 
 /* what to do to fix sync condition */

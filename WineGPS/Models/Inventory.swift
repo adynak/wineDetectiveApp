@@ -290,7 +290,7 @@ func buildDrinkBy(beginConsume: String, endConsume: String) -> String{
     
     let drinkBy: String
     
-    let beforeLabel = NSLocalizedString("labelBefore", comment: "before when begin consume is missing")
+    let beforeLabel = NSLocalizedString("labelBefore", comment: "textfield label: Before 2020")
 
     if (beginConsume == "" && endConsume == "") {
         drinkBy = ""

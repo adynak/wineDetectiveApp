@@ -24,7 +24,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     let storageLabel: UITextView = {
         let tv = UITextView()
-        tv.text = NSLocalizedString("labelLocationAndBin", comment: "location and bin")
+        tv.text = NSLocalizedString("labelLocationAndBin", comment: "textfield label: Location and Bin: similar to a storage room and a filing cabinet in that room")
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = storageLabelBackgroundColor
@@ -104,7 +104,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     func setupWineLabelLayout(){
         let labelTopLine: String
         
-        let bottles = NSLocalizedString("pluralBottle", comment: "plural bottles")
+        let bottles = NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
         
         switch passedValue.viewName {
             case "producer":
@@ -170,9 +170,9 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     func makeContextMenu(for indexPath: IndexPath, tableView: UITableView) -> UIMenu {
         
-        let copyVPVTitle = NSLocalizedString("labelVPV", comment: "label: Vintage Producer Varietal")
-        let copyBarcodeTitle = NSLocalizedString("labelBarcode", comment: "labelBarcode")
-        let copyTitle = NSLocalizedString("labelClipboard", comment: "labelClipboard")
+        let copyVPVTitle = NSLocalizedString("labelVPV", comment: "button text: Vintage Producer Varietal")
+        let copyBarcodeTitle = NSLocalizedString("labelBarcode", comment: "textfield label: Barcode")
+        let copyTitle = NSLocalizedString("labelClipboard", comment: "button text: Copy To Clipboard")
 
         let copyVPV = UIAction(title: copyVPVTitle) { [weak self] _ in
             guard self != nil else { return }
@@ -309,8 +309,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
         
     private func getTotalBottles()  -> String {
-        let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
-        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
+        let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
+        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
         let totalBottles = wineBins.count
         let bottleString = (totalBottles > 1) ? pluralBottle : bottleSingular
         
@@ -337,7 +337,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         var drinkButtonText = NSLocalizedString("buttonDrink", comment: "button text: Remove %1 is bottleCount, %2 is singular/plural of bottle(s)")
         drinkButtonText = drinkButtonText.replacingOccurrences(of: "%1", with: String(markAsDrank.count))
         
-        let plural = markAsDrank.count == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
+        let plural = markAsDrank.count == 1 ? NSLocalizedString("singularBottle", comment: "singular for the word bottle") : NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
         
         drinkButtonText = drinkButtonText.replacingOccurrences(of: "%2", with: plural)
         
@@ -358,12 +358,12 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         
         alert.addAction(UIAlertAction.init(title: discardBtnText, style: .destructive) { (UIAlertAction) -> Void in
             for cell in self.cells {
-                    cell.bottleCountLabel.text = "1 \(NSLocalizedString("singularBottle", comment: "singular bottle"))"
+                    cell.bottleCountLabel.text = "1 \(NSLocalizedString("singularBottle", comment: "singular for the word bottle"))"
                     cell.stepperView.tag = 1
                     cell.stepperView.value = 1
                 }
-                let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
-                let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
+                let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
+                let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
                 let bottleString = (self.wineBins.count == 1) ? bottleSingular : pluralBottle
 
                 self.inventoryFooter.text = String(self.wineBins.count) + bottleString
@@ -429,8 +429,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
 extension DrillDownDetailViewController : DrillDownStepperCellDelegate {
     func didTapStepper(direction: String){
-        let bottleSingular = NSLocalizedString("singularRemaining", comment: "bottle remaining")
-        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "bottles remaining")
+        let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
+        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
         let minus = "minus" as String
         let plus = "plus" as String
         

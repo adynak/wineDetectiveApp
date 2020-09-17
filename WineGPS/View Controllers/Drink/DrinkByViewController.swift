@@ -206,7 +206,7 @@ class DrinkByViewController: UIViewController {
             }
         }
         
-        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
+        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular for the word bottle") : NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
         
         return "\(totalBottles)" + plural
     }
@@ -441,7 +441,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
             totalBottles += bottles.bottleCount!
         }
         
-//        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular bottle") : NSLocalizedString("pluralBottle", comment: "plural bottles")
+//        var bottleCount = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular for the word bottle") : NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
         bottleCount = " (\(totalBottles))"
                 
         cell.textLabel?.numberOfLines = 1
@@ -452,7 +452,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         let line1 = bottle.vintage + " " + bottle.varietal + bottleCount
 //        let line2 = "  \(bottle.producer)\n  \(NSLocalizedString("drinkByIndex", comment: "Drinkability Index, a magic index number used to sort wines")) \(drinkByIndex)"
         
-        let line2 = "  \(bottle.description!)\n  \(NSLocalizedString("labelDrinkByWindow", comment: "drinking window")) \(bottle.drinkBy)"
+        let line2 = "  \(bottle.description!)\n  \(NSLocalizedString("labelDrinkByWindow", comment: "textfield label: Drinking Window: 2020 - 2022")) \(bottle.drinkBy)"
 
 
         cell.textLabel?.text = line1

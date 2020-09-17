@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 var allWine: WineInventory?
 
@@ -39,20 +40,20 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     var dataLoaded = false
     
     var pages: [Page] = {
-        let firstPage = Page(title: NSLocalizedString("page1Title", comment: "Find My Wine!"),
-                             message: NSLocalizedString("page1Message", comment: "You liked it, bought it, and brought it home.  What happened to it next?"),
+        let firstPage = Page(title: NSLocalizedString("page1Title", comment: "walkthrough title page 1: Find My Wine!"),
+                             message: NSLocalizedString("page1Message", comment: "walkthrough instructions: page 1"),
                              imageName: "page1")
 
-        let secondPage = Page(title: NSLocalizedString("page2Title", comment: "You can search for it."),
-                              message: NSLocalizedString("page2Message", comment: "Search by Producer, Varietal, Vineyard, AVA, or Designation"),
+        let secondPage = Page(title: NSLocalizedString("page2Title", comment: "walkthrough title page 2: You can search for it."),
+                              message: NSLocalizedString("page2Message", comment: "walkthrough instructions: page 2"),
                               imageName: "page2")
 
-        let thirdPage = Page(title: NSLocalizedString("page3Title", comment: "The More menu has other views"),
-                              message: NSLocalizedString("page3Message", comment: "Sort by Producer or by Varietal. The Sort by Location is a great tool for physical inventory."),
+        let thirdPage = Page(title: NSLocalizedString("page3Title", comment: "walkthrough title page 3: The More menu has other views"),
+                              message: NSLocalizedString("page3Message", comment: "walkthrough instructions: page 3"),
                               imageName: "page3")
 
-        let fourthPage = Page(title: NSLocalizedString("page4Title", comment: "Don't forget to check settings"),
-                              message: NSLocalizedString("page4Message", comment: "Don't use \"Barcode\", just turn it off!"),
+        let fourthPage = Page(title: NSLocalizedString("page4Title", comment: "walkthrough title page 4: Don't forget to check settings"),
+                              message: NSLocalizedString("page4Message", comment: "walkthrough instructions: page 4"),
                               imageName: "page4")
         
         return [firstPage, secondPage, thirdPage, fourthPage]
@@ -253,10 +254,18 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             
             guard let mainNavigationController = rootViewController as? MainTabBarController else { return }
             
-            let spinnerText = NSLocalizedString("runAPI", comment: "waiting for API to return")
+            let spinnerText = NSLocalizedString("runAPI", comment: "textfield label: Getting Your Wines, text below animation while waiting for download")
             showSpinner(localizedText: spinnerText)
             
             var timeLeft = 21
+            
+            CKContainer.default().accountStatus { (accountStatus, error) in
+                if case .available = accountStatus {
+                    UserDefaults.standard.set(true, forKey: "iCloudAvailable")
+                } else {
+                    UserDefaults.standard.set(false, forKey: "iCloudAvailable")
+                }
+            }
             
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 timeLeft -= 1

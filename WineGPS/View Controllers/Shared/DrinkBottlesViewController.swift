@@ -18,7 +18,7 @@ class DrinkBottlesViewController: UIViewController , WKNavigationDelegate{
         
         let mainTabBarController = MainTabBarController()
         mainTabBarController.tabBar.isHidden = true
-        navigationItem.title = NSLocalizedString("removeBottles", comment: "navigation item: remove bottles")
+        navigationItem.title = NSLocalizedString("removeBottles", comment: "navigation item: remove bottles from inventory")
 
         setUpWebView()
     }
@@ -61,7 +61,7 @@ class DrinkBottlesViewController: UIViewController , WKNavigationDelegate{
     
     //web view start loading
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        let localizedText = NSLocalizedString("loadingWebPage", comment: "loading web page spinner")
+        let localizedText = NSLocalizedString("loadingWebPage", comment: "textfield label: Loading Web Page, text below animation while page loads")
         showSpinner(localizedText: localizedText)
         print("start loading webView")
     }

@@ -233,21 +233,21 @@ class API {
         } else {
             status = "Unavailable"
         }
-//        
-//        CKContainer.default().accountStatus { (accountStatus, error) in
-//            switch accountStatus {
-//            case .available:
-//                status = "iCloud Available"
-//            case .noAccount:
-//                status = "No iCloud account"
-//            case .restricted:
-//                status = "iCloud restricted"
-//            case .couldNotDetermine:
-//                status = "Unable to determine iCloud status"
-//            @unknown default:
-//                status = "Unable to determine iCloud status (default)"
-//            }
-//        }
+        
+        CKContainer.default().accountStatus { (accountStatus, error) in
+            switch accountStatus {
+            case .available:
+                status = "iCloud Available"
+            case .noAccount:
+                status = "No iCloud account"
+            case .restricted:
+                status = "iCloud restricted"
+            case .couldNotDetermine:
+                status = "Unable to determine iCloud status"
+            @unknown default:
+                status = "Unable to determine iCloud status (default)"
+            }
+        }
         return status
     }
 

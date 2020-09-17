@@ -752,12 +752,12 @@ class DataServices {
     }
     
     static func buildTellCellarTrackerMessage(markAsDrank: [DrillLevel2])->String{
-        var message: String = NSLocalizedString("updateCellarTracker", comment: "message that these bottles should be marked drank") + "\n\n"
+        var message: String = NSLocalizedString("updateCellarTracker", comment: "message that these bottles should be marked drank, replacement text is singular 'this bottle'or plural 'these bottles") + "\n\n"
         var barcode: String = ""
         var vintage: String = ""
         
         let bottleSingular = NSLocalizedString("singularThis", comment: "this wine")
-        let pluralBottle = NSLocalizedString("pluralThese", comment: "these wines")
+        let pluralBottle = NSLocalizedString("pluralThese", comment: "text replacement for this bottle: these bottles")
         let bottleString = (markAsDrank.count == 1) ? bottleSingular : pluralBottle
         
         message = message.replacingOccurrences(of: "%1", with: bottleString)
@@ -772,7 +772,7 @@ class DataServices {
             } else {
                 vintage = bottle.vintage!
             }
-            let locationAndBin = NSLocalizedString("labelLocation", comment: "label for location") + ": \(bottle.location!) \(bottle.bin!)"
+            let locationAndBin = NSLocalizedString("labelLocation", comment: "textfield label: Location: similar to a storage room") + ": \(bottle.location!) \(bottle.bin!)"
             message += "\(bottle.consumeDate!)\n  \(bottle.producer!)\n  \(vintage) \(bottle.varietal!)\n  \(locationAndBin) \(barcode)"
         }
         return message

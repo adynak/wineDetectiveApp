@@ -68,7 +68,7 @@ class DrinkByMenuLauncher: NSObject, UICollectionViewDelegate, UICollectionViewD
                     isSelected: false,
                     drinkByMenuCode: "TwinPeak",
                     drinkByNavTitle: NSLocalizedString("drinkByNavTitleTwinPeak", comment: "drink by nav title Twin Peak DO NOT TRANSLATE")),
-            DrinkByMenuItem(name: NSLocalizedString("reportMissingDates", comment: "Wines Missing A Drinking Window"),
+            DrinkByMenuItem(name: NSLocalizedString("reportMissingDates", comment: "menu item: Consume Dates Missing Report"),
                     imageName: "settings",
                     isSelected: false,
                     drinkByMenuCode: "Missing",

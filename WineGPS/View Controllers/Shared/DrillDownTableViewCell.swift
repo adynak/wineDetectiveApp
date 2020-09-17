@@ -14,8 +14,8 @@ protocol DrillDownStepperCellDelegate{
 
 class DrillDownTableViewCell : UITableViewCell {
     
-    let singularText = NSLocalizedString("singularBottle", comment: "singular bottle")
-    let pluralText = NSLocalizedString("pluralBottle", comment: "plural bottles")
+    let singularText = NSLocalizedString("singularBottle", comment: "singular for the word bottle")
+    let pluralText = NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
     
     var delegate: DrillDownStepperCellDelegate?
 
@@ -45,17 +45,17 @@ class DrillDownTableViewCell : UITableViewCell {
                     vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer) \(additionalInfo)"
                     
                     drinkByLabel.text = binItem.varietal
-                    locationAndBinLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(drinkBy)"
+                    locationAndBinLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "textfield label: Drinking Window: 2020 - 2022") + " \(drinkBy)"
 
                 } else {
                     vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
-                    drinkByLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "drinking window") + " \(drinkBy)"
-                    locationAndBinLabel.text = NSLocalizedString("labelLocation", comment: "label for location") + ": \(binItem.location!) \(binItem.bin!)"
+                    drinkByLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "textfield label: Drinking Window: 2020 - 2022") + " \(drinkBy)"
+                    locationAndBinLabel.text = NSLocalizedString("labelLocation", comment: "textfield label: Location: similar to a storage room") + ": \(binItem.location!) \(binItem.bin!)"
                 }
                 vpvLabel.text = "\(binItem.vintage!) \(binItem.producer!) \(binItem.varietal!) \(binItem.designation!)"
             }
             
-            barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
+            barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "textfield label: Barcode") + ": \(binItem.barcode!)"
 
             stepperView.tag = binItem.bottleCount!
             iWineLabel.text = binItem.iWine
@@ -125,7 +125,7 @@ class DrillDownTableViewCell : UITableViewCell {
         label.textColor = .black
         label.font = UIFont.italicSystemFont(ofSize: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "1 \(NSLocalizedString("singularBottle", comment: "singular bottle"))"
+        label.text = "1 \(NSLocalizedString("singularBottle", comment: "singular for the word bottle"))"
         return label
     }()
     

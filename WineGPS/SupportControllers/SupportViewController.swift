@@ -171,7 +171,7 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients([NSLocalizedString("emailContactAddress", comment: "email address for support")])
-            mail.setSubject(NSLocalizedString("emailSubject", comment: "email support subject"))
+            mail.setSubject(NSLocalizedString("emailSubject", comment: "email subject"))
             mail.setMessageBody(emailBody, isHTML: true)
             present(mail, animated: true)
         } else {

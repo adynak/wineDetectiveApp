@@ -22,7 +22,7 @@ class BinTableViewCell : UITableViewCell {
 
             if let binName = binItem.binName {
                 binNameLabel.text = "\(binItem.binLocation!) \(binName)"
-                barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "labelBarcode") + ": \(binItem.barcode!)"
+                barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "textfield label: Barcode") + ": \(binItem.barcode!)"
                 if UserDefaults.standard.getShowBarcode() {
                     barcodeLabel.isHidden = false
                 } else {
@@ -138,8 +138,8 @@ class BinTableViewCell : UITableViewCell {
     
     func setLabelText(count: Int) -> String {
         
-        let singularText = NSLocalizedString("singularBottle", comment: "singular bottle")
-        let pluralText = NSLocalizedString("pluralBottle", comment: "plural bottles")
+        let singularText = NSLocalizedString("singularBottle", comment: "singular for the word bottle")
+        let pluralText = NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
 
         let plural = count == 1 ? singularText : pluralText
         return String(count) + plural

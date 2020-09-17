@@ -56,5 +56,13 @@ struct Alert{
         let message = NSLocalizedString("alertTextNoInternetMessage", comment: "alert text: not connected to the internet")
         showBasicAlert(on: vc, with: title, message: message)
     }
+    
+    static func noIcloudAlert(on vc: UIViewController){
+        let title = NSLocalizedString("alertTextNoIcloudTitle", comment: "alert title: iCloud")
+        let message = NSLocalizedString("alertTextNoIcloudMessage", comment: "alert text: some features will not be available until you log on to your iCloud account")
+        showBasicAlert(on: vc, with: title, message: message)
+
+        
+    }
 
 }

@@ -17,7 +17,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         label.textColor = productNameColor
         label.textAlignment = .left
         label.numberOfLines = 3
-        label.text = NSLocalizedString("productName", comment: "product name")
+        label.text = NSLocalizedString("productName", comment: "app name: WineGPS")
         label.font = UIFont(name: "Papyrus", size: 32)
         return label
     }()
@@ -35,7 +35,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.textContentType = .username
-        let placeholderString = NSAttributedString.init(string: NSLocalizedString("loginAccountName", comment: "login prompt for account name"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
+        let placeholderString = NSAttributedString.init(string: NSLocalizedString("loginAccountName", comment: "placeholder text for input of account name (handle or email)"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField
@@ -47,7 +47,7 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         textField.layer.borderWidth = 1
         textField.isSecureTextEntry = true
         textField.textContentType = .password
-        let placeholderString = NSAttributedString.init(string: NSLocalizedString("loginPassword", comment: "login prompt for password"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
+        let placeholderString = NSAttributedString.init(string: NSLocalizedString("loginPassword", comment: "plageholder text for password"), attributes: [NSAttributedString.Key.foregroundColor : placeholderColor])
         textField.attributedPlaceholder = placeholderString
         textField.addDoneButtonOnKeyboard()
         return textField

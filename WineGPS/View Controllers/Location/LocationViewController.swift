@@ -150,7 +150,7 @@ class LocationViewController :UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         var bin = bottles?[indexPath.section].data[indexPath.row].name
         if bin == "" {
-            bin = NSLocalizedString("noBin", comment: "storage bin is missing")
+            bin = NSLocalizedString("noBin", comment: "textfield label: unassigned (used when the bin is blank")
         }
         let colorOdd = tableStripeWhite
         let colorEven = tableStripeGray

@@ -50,7 +50,7 @@ class SyncViewController: UITableViewController {
         var alertMessage = NSLocalizedString("syncMessage", comment: "what to do to fix sync condition")
         
         let bottleSingular = NSLocalizedString("singularThis", comment: "this wine")
-        let pluralBottle = NSLocalizedString("pluralThese", comment: "these wines")
+        let pluralBottle = NSLocalizedString("pluralThese", comment: "text replacement for this bottle: these bottles")
         let bottleString = (markAsDrank.count == 1) ? bottleSingular : pluralBottle
         
         alertMessage = alertMessage.replacingOccurrences(of: "%1", with: bottleString)
@@ -89,7 +89,7 @@ class SyncViewController: UITableViewController {
             barcode = "(\(markAsDrank[indexPath.row].barcode!.digits))"
         }
         let producer = markAsDrank[indexPath.row].producer
-        let locationAndBin = NSLocalizedString("labelLocation", comment: "label for location") + ": \(markAsDrank[indexPath.row].location!) \(markAsDrank[indexPath.row].bin!)"
+        let locationAndBin = NSLocalizedString("labelLocation", comment: "textfield label: Location: similar to a storage room") + ": \(markAsDrank[indexPath.row].location!) \(markAsDrank[indexPath.row].bin!)"
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         cell.textLabel?.text = "\(vintage!) \(producer!) \(varietal!)"
@@ -139,9 +139,9 @@ class SyncViewController: UITableViewController {
     
     func makeContextMenu(for indexPath: IndexPath) -> UIMenu {
         
-        let copyVPVTitle = NSLocalizedString("labelVPV", comment: "label: Vintage Producer Varietal")
-        let copyBarcodeTitle = NSLocalizedString("labelBarcode", comment: "labelBarcode")
-        let copyTitle = NSLocalizedString("labelClipboard", comment: "labelClipboard")
+        let copyVPVTitle = NSLocalizedString("labelVPV", comment: "button text: Vintage Producer Varietal")
+        let copyBarcodeTitle = NSLocalizedString("labelBarcode", comment: "textfield label: Barcode")
+        let copyTitle = NSLocalizedString("labelClipboard", comment: "button text: Copy To Clipboard")
 
         let copyVPV = UIAction(title: copyVPVTitle) { [weak self] _ in
             guard let self = self else { return }

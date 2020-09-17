@@ -226,31 +226,31 @@
 /* report missing dates menu item */
 "reportMissingDates" = "reportMissingDates";
 
-/* report producer menu item */
+/* menu item: Sort By Producer Report */
 "reportProducer" = "reportProducer";
 
-/* report varietal menu item */
+/* menu item: Sort By Varietal Report */
 "reportVarietal" = "reportVarietal";
 
-/* waiting for API to return */
+/* textfield label: Getting Your Wines, text below animation while waiting for download */
 "runAPI" = "runAPI";
 
-/* barcode menu item */
+/* menu item: Show Barcode */
 "settingBarcode" = "settingBarcode";
 
-/* show me menu item */
+/* menu item: Show Walkthrough Pages */
 "settingShowMe" = "settingShowMe";
 
-/* support menu item */
+/* menu item: Support */
 "settingSupport" = "settingSupport";
 
-/* singular bottle */
+/* text replacement for these bottle: this bottles */
 "singularBottle" = "singularBottle";
 
-/* bottle remaining */
+/* when there is one bottle in inventory: Bottle Remaining */
 "singularRemaining" = "singularRemaining";
 
-/* this bottle */
+/* text replacement for this bottle: these bottles */
 "singularThis" = "";
 
 /* what to do to fix sync condition */

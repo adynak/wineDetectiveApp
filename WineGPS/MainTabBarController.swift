@@ -17,6 +17,11 @@ class MainTabBarController: UITabBarController {
             tabBar.barTintColor = UIColor.white
             UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
             UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .selected)
+            
+            if !UserDefaults.standard.getiCloudStatus() {
+                Alert.noIcloudAlert(on: self)
+            }
+
             setupTabBar()
         } else {
             perform(#selector(showLoginController), with: nil, afterDelay: 0.01)

@@ -25,8 +25,8 @@ class testTableBinCell: XCTestCase {
     
     func testSetupLabelText(){
         
-        let singularText = NSLocalizedString("singularBottle", comment: "singular bottle")
-        let pluralText = NSLocalizedString("pluralBottle", comment: "plural bottles")
+        let singularText = NSLocalizedString("singularBottle", comment: "singular for the word bottle")
+        let pluralText = NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
         var count: Int
         var result: String
         var bottleString: String
