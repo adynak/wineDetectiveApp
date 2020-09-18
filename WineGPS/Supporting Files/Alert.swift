@@ -59,7 +59,7 @@ struct Alert{
     
     static func noIcloudAlert(on vc: UIViewController){
         let title = NSLocalizedString("alertTextNoIcloudTitle", comment: "alert title: iCloud")
-        let message = NSLocalizedString("alertTextNoIcloudMessage", comment: "alert text: some features will not be available until you log on to your iCloud account")
+        let message = NSLocalizedString("alertTextNoIcloudMessage", comment: "alert text: connect to iCloud account")
         showBasicAlert(on: vc, with: title, message: message)
 
         
