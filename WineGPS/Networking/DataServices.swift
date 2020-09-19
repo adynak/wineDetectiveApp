@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-let debug: Bool = false
+let debug: Bool = true
 
 class DataServices {
             
