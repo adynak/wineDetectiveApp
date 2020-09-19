@@ -1,0 +1,6 @@
+/* textfield label: red (wines) */
+"wineRed" = "Red";
+
+/* textfield label: white (wines) */
+"wineWhite" = "White";
+
