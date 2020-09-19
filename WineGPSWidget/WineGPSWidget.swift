@@ -45,7 +45,71 @@ struct WineGPSWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+            HStack {
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        HStack{
+                            Image("logo").resizable()
+                            .frame(width: 25.0, height: 25.0)
+                            
+                                
+                        Text("WineGPS").font(.headline)
+                        }
+                        Text("251 Bottles").font(.subheadline).foregroundColor(Color(UIColor.secondaryLabel))
+                    }
+                    
+                    Spacer()
+                    Spacer()
+                    HStack {
+                        RedWineView()
+                            .cornerRadius(8)
+
+                        Spacer()
+                        WhiteWineView()
+                            .cornerRadius(8)
+                    }
+                }
+            }
+            
+            .padding()
+            .frame(width: 340, height: 155)
+//            .background(Color(UIColor.secondarySystemBackground))
+            .cornerRadius(24)
+            .padding()
+        }
+}
+
+struct RedWineView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Reds").font(.subheadline)
+                .padding(.horizontal,5)
+            Text("222").font(.headline)
+                .padding(.horizontal,15)
+        }.frame(minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading)
+            .background(Color(UIColor.secondarySystemBackground))
+
+    }
+}
+
+struct WhiteWineView: View {
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Whites").font(.subheadline)
+                .padding(.horizontal,5)
+            Text("29").font(.headline)
+                .padding(.horizontal,15)
+            Spacer()
+        }.frame(minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading)
+        .background(Color(UIColor.secondarySystemBackground))
     }
 }
 
@@ -57,14 +121,34 @@ struct WineGPSWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             WineGPSWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("WineGPS")
+        .supportedFamilies([.systemMedium])
+        .description("WineGPS widget.")
     }
 }
 
-struct WineGPSWidget_Previews: PreviewProvider {
+struct WineGPSWidgetSmall_Previews: PreviewProvider {
     static var previews: some View {
         WineGPSWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .previewDisplayName("Small")
     }
 }
+
+struct WineGPSWidgetMedium_Previews: PreviewProvider {
+    static var previews: some View {
+        WineGPSWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            .previewDisplayName("Medium")
+            .environment(\.colorScheme, .light)
+    }
+}
+
+struct WineGPSWidgetLarge_Previews: PreviewProvider {
+    static var previews: some View {
+        WineGPSWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
+            .previewDisplayName("Large")
+    }
+}
+
