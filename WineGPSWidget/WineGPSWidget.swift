@@ -55,7 +55,7 @@ struct WineGPSWidgetEntryView : View {
                                 
                         Text("WineGPS").font(.headline)
                         }
-                        Text("251 Bottles").font(.subheadline).foregroundColor(Color(UIColor.secondaryLabel))
+                        TotalBottlesView()
                     }
                     
                     Spacer()
@@ -63,7 +63,6 @@ struct WineGPSWidgetEntryView : View {
                     HStack {
                         RedWineView()
                             .cornerRadius(8)
-
                         Spacer()
                         WhiteWineView()
                             .cornerRadius(8)
@@ -80,11 +79,14 @@ struct WineGPSWidgetEntryView : View {
 }
 
 struct RedWineView: View {
+    var wineType = NSLocalizedString("wineRed", comment: "textfield label: red (wines)")
+    let wineCount: Int = 222
+
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Reds").font(.subheadline)
+            Text(wineType).font(.subheadline)
                 .padding(.horizontal,5)
-            Text("222").font(.headline)
+            Text(String(wineCount)).font(.headline)
                 .padding(.horizontal,15)
         }.frame(minWidth: 0,
             maxWidth: .infinity,
@@ -96,12 +98,37 @@ struct RedWineView: View {
     }
 }
 
+struct TotalBottlesView: View {
+    let wineCount: Int = 251
+    let format = NSLocalizedString("totalBottlesWidget", comment: "replace 'bottle' with its singular or plural")
+
+    var body: some View {
+        
+        let message = String.localizedStringWithFormat(format, wineCount)
+        
+        
+        Text(message).font(.headline)
+                .padding(.horizontal,5)
+        .frame(minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading)
+//            .background(Color(UIColor.secondarySystemBackground))
+
+    }
+}
+
 struct WhiteWineView: View {
+    var wineType = NSLocalizedString("wineWhite", comment: "textfield label: white (wines)")
+    let wineCount: Int = 29
+
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Whites").font(.subheadline)
+            Text(wineType).font(.subheadline)
                 .padding(.horizontal,5)
-            Text("29").font(.headline)
+            Text(String(wineCount)).font(.headline)
                 .padding(.horizontal,15)
             Spacer()
         }.frame(minWidth: 0,

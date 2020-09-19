@@ -47,6 +47,10 @@
 		924175F6245A212E002502FE /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175F5245A212E002502FE /* Page.swift */; };
 		924175FA245A2625002502FE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175F9245A2625002502FE /* UserDefaults.swift */; };
 		924175FC245A2910002502FE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175FB245A2910002502FE /* Extensions.swift */; };
+		924E5BAA25164D3B00259AB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BA825164D3B00259AB3 /* Localizable.strings */; };
+		924E5BB125164DCB00259AB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BAF25164DCB00259AB3 /* InfoPlist.strings */; };
+		924E5BBE251658B500259AB3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BBD251658B500259AB3 /* Localizable.stringsdict */; };
+		924E5BBF251658B500259AB3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BBD251658B500259AB3 /* Localizable.stringsdict */; };
 		9256B72B24B4DEA0003BAA4C /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256B72A24B4DEA0003BAA4C /* mail.png */; };
 		9256B72D24B4E085003BAA4C /* bottleLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256B72C24B4E085003BAA4C /* bottleLogo.png */; };
 		925C4513246AE8A000044894 /* SearchKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C4512246AE8A000044894 /* SearchKeys.swift */; };
@@ -166,6 +170,12 @@
 		924175F5245A212E002502FE /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		924175F9245A2625002502FE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		924175FB245A2910002502FE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		924E5BA925164D3B00259AB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		924E5BB025164DCB00259AB3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		924E5BB225164DCB00259AB3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		924E5BB725164EDB00259AB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		924E5BB825164EDB00259AB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		924E5BBD251658B500259AB3 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		9256B72A24B4DEA0003BAA4C /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		9256B72C24B4E085003BAA4C /* bottleLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottleLogo.png; sourceTree = "<group>"; };
 		925C4512246AE8A000044894 /* SearchKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeys.swift; sourceTree = "<group>"; };
@@ -290,6 +300,9 @@
 				9215078625150A6000AA13E0 /* WineGPSWidget.intentdefinition */,
 				9215078725150A6300AA13E0 /* Assets.xcassets */,
 				9215078925150A6300AA13E0 /* Info.plist */,
+				924E5BAF25164DCB00259AB3 /* InfoPlist.strings */,
+				924E5BA825164D3B00259AB3 /* Localizable.strings */,
+				924E5BBD251658B500259AB3 /* Localizable.stringsdict */,
 			);
 			path = WineGPSWidget;
 			sourceTree = "<group>";
@@ -656,6 +669,7 @@
 				92DCEA2D2491768500AFFB59 /* LaunchScreen.storyboard in Resources */,
 				9256B72D24B4E085003BAA4C /* bottleLogo.png in Resources */,
 				923400F224F861CE00EED320 /* InfoPlist.strings in Resources */,
+				924E5BBE251658B500259AB3 /* Localizable.stringsdict in Resources */,
 				923196DE24B39E530044C1A0 /* producer.png in Resources */,
 				927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */,
 				923196E224B39E530044C1A0 /* location.png in Resources */,
@@ -674,6 +688,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9215078825150A6300AA13E0 /* Assets.xcassets in Resources */,
+				924E5BBF251658B500259AB3 /* Localizable.stringsdict in Resources */,
+				924E5BB125164DCB00259AB3 /* InfoPlist.strings in Resources */,
+				924E5BAA25164D3B00259AB3 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,6 +840,25 @@
 			);
 			name = InfoPlist.strings;
 			path = "WineGPS/Supporting Files";
+			sourceTree = "<group>";
+		};
+		924E5BA825164D3B00259AB3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				924E5BA925164D3B00259AB3 /* en */,
+				924E5BB225164DCB00259AB3 /* fr */,
+				924E5BB825164EDB00259AB3 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		924E5BAF25164DCB00259AB3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				924E5BB025164DCB00259AB3 /* fr */,
+				924E5BB725164EDB00259AB3 /* es */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		927C22B22483729800695B45 /* Localizable.strings */ = {

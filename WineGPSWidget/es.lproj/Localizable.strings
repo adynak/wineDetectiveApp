@@ -1,3 +1,12 @@
+/* replace 'bottle' with its singular or plural */
+"totalBottles" = "zzz";
+
 /* No comment provided by engineer. */
 "WineGPS" = "VinoGPS";
+
+/* textfield label: red (wines) */
+"wineRed" = "Vino Tinto";
+
+/* textfield label: white (wines) */
+"wineWhite" = "Vino Blanco";
 
