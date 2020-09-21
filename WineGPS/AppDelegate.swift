@@ -45,6 +45,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
                 
+        
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global(qos: .default).async {
+            CKContainer.default().accountStatus { (accountStatus, error) in
+                if accountStatus == .available {
+                    UserDefaults.standard.set(true, forKey: "iCloudAvailable")
+                } else {
+                    UserDefaults.standard.set(false, forKey: "iCloudAvailable")
+                }
+            }
+            group.leave()
+        }
+        group.wait()
+        
         print("didFinishLaunchingWithOptions")
                 
         let attrs = [

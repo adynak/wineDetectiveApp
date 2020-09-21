@@ -115,6 +115,11 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if !UserDefaults.standard.getiCloudStatus() {
+            Alert.noIcloudAlert(on: self)
+        }
+
+        
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }
@@ -258,15 +263,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             showSpinner(localizedText: spinnerText)
             
             var timeLeft = 21
-            
-            CKContainer.default().accountStatus { (accountStatus, error) in
-                if case .available = accountStatus {
-                    UserDefaults.standard.set(true, forKey: "iCloudAvailable")
-                } else {
-                    UserDefaults.standard.set(false, forKey: "iCloudAvailable")
-                }
-            }
-            
+                        
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 timeLeft -= 1
                 if timeLeft == 20 {

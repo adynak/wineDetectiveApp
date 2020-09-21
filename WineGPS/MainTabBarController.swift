@@ -18,9 +18,9 @@ class MainTabBarController: UITabBarController {
             UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
             UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .selected)
             
-            if !UserDefaults.standard.getiCloudStatus() {
-                Alert.noIcloudAlert(on: self)
-            }
+//            if !UserDefaults.standard.getiCloudStatus() {
+//                Alert.noIcloudAlert(on: self)
+//            }
 
             setupTabBar()
         } else {

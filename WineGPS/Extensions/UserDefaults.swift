@@ -17,7 +17,7 @@ extension UserDefaults {
         case showBarcode
         case showPages
         case rememberMe
-        case iCloudStatus
+        case iCloudAvailable
     }
     
     static func contains(_ key: String) -> Bool {
@@ -64,6 +64,6 @@ extension UserDefaults {
     }
     
     func getiCloudStatus() -> Bool {
-        return bool(forKey: UserDefaultsKeys.iCloudStatus.rawValue)
+        return bool(forKey: UserDefaultsKeys.iCloudAvailable.rawValue)
     }
 }
