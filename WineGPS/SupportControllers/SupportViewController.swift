@@ -115,15 +115,15 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
         return 40
     }
     
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        let cell  = tableView.cellForRow(at: indexPath)
-        cell!.contentView.backgroundColor = .white
-    }
+//    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+//        let cell  = tableView.cellForRow(at: indexPath)
+//        cell!.contentView.backgroundColor = .white
+//    }
 
-    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        let cell  = tableView.cellForRow(at: indexPath)
-        cell!.contentView.backgroundColor = .white
-    }
+//    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+//        let cell  = tableView.cellForRow(at: indexPath)
+//        cell!.contentView.backgroundColor = .white
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let section = SupportMenuSections(rawValue: indexPath.section) else {return}
@@ -148,6 +148,8 @@ extension SupportViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MoreMenuCell
+        
+        cell.selectionStyle = .none
         
         guard let section = SupportMenuSections(rawValue: indexPath.section) else {return UITableViewCell()}
         
