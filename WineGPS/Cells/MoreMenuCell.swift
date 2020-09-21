@@ -20,6 +20,8 @@ class MoreMenuCell: UITableViewCell {
             textLabel?.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 60).isActive = true
             switchControl.tag = sectionType.switchNumber
             
+            accessoryView = switchControl
+            
             switch sectionType.switchNumber{
             case 3:
                 if UserDefaults.standard.getShowBarcode(){
@@ -73,9 +75,6 @@ class MoreMenuCell: UITableViewCell {
         moreImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
         moreImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
-        addSubview(switchControl)
-        switchControl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        switchControl.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
