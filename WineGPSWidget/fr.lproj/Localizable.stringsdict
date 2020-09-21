@@ -13,29 +13,11 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>No Bottles in Inventory</string>
+			<string>Aucun vin en inventaire</string>
 			<key>one</key>
-			<string>%d Bottle</string>
+			<string>%d Bouteille</string>
 			<key>other</key>
-			<string>%d Bottles</string>
-		</dict>
-	</dict>
-	<key>totalBottlesWidgetES</key>
-	<dict>
-		<key>NSStringLocalizedFormatKey</key>
-		<string></string>
-		<key>value</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>d</string>
-			<key>zero</key>
-			<string>No hay botellas en el inventario</string>
-			<key>one</key>
-			<string>%d Botella</string>
-			<key>other</key>
-			<string>%d Botellas</string>
+			<string>%d Bouteilles</string>
 		</dict>
 	</dict>
 </dict>

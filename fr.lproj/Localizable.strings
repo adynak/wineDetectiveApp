@@ -291,4 +291,3 @@
 
 /* message that these bottles should be marked drank, replacement text is singular 'this bottle'or plural 'these bottles */
 "updateCellarTracker" = "";
-
