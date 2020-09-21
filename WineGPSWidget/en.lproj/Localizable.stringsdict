@@ -20,5 +20,23 @@
 			<string>%d Bottles</string>
 		</dict>
 	</dict>
+	<key>totalBottlesWidgetES</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string></string>
+		<key>value</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>zero</key>
+			<string>No hay botellas en el inventario</string>
+			<key>one</key>
+			<string>%d Botella</string>
+			<key>other</key>
+			<string>%d Botellas</string>
+		</dict>
+	</dict>
 </dict>
 </plist>
