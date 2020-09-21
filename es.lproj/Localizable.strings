@@ -14,10 +14,10 @@
 "alertTextMissingCredentials" = "Se requiere su correo electronico y contaseña.";
 
 /* alert text: connect to iCloud account */
-"alertTextNoIcloudMessage" = "TRANSLATION NEEDED";
+"alertTextNoIcloudMessage" = "Algunas funciones no estarán disponibles hasta que inicie sesión en su cuenta de iCloud en este dispositivo.";
 
 /* alert title: iCloud */
-"alertTextNoIcloudTitle" = "TRANSLATION NEEDED";
+"alertTextNoIcloudTitle" = "Iniciar sesión en iCloud";
 
 /* alert text: not connected to the internet */
 "alertTextNoInternetMessage" = "No está conectado a la Internet.";
@@ -83,7 +83,7 @@
 "drinkByHelp" = "Ayuda";
 
 /* Drinkability Help */
-"drinkByHelpText" = "\nEl reporte \"Drink By\" (Bebe Por) ordena los vinos en su bodega utilizando un número  que demuestra si un vino se consume más rápido o más lentamente que el tiempo entre  beber  mas pronto y más reciente.\n \nEl \"Drink By\" reporte utiliza un algoritmos predefinido para cada categoría de vino.\n \nEscoja uno de estos algoritmos.\n \nEl predeterminado es Disponibilidad.\n \nUsted puede correr el \"Consume Dates Missing\" (fechas de consume que faltan) reporte para saber que vinos les faltan la fecha de consume rápido o más lento.";
+"drinkByHelpText" = "\nEl reporte \"Drink By\" (Bebe Por) ordena los vinos en su bodega utilizando un número  que demuestra si un vino se consume más rápido o más lentamente que el tiempo entre  beber  mas pronto y más reciente.\n\nEl \"Drink By\" reporte utiliza un algoritmos predefinido para cada categoría de vino.\n\nEscoja uno de estos algoritmos.\n\nEl predeterminado es Disponibilidad.\n\nUsted puede correr el \"Consume Dates Missing\" (fechas de consume que faltan) reporte para saber que vinos les faltan la fecha de consume rápido o más lento.";
 
 /* drinkByIndex", comment: "Drinkability Index, a magic index number used to sort wines */
 "drinkByIndex" = "Indice de Consumo";
@@ -188,25 +188,25 @@
 "noBin" = "compartimento no asignado";
 
 /* walkthrough instructions: page 1 */
-"page1Message" = "TRANSLATION NEEDED";
+"page1Message" = "Le gustó, lo compró, y se lo llevó a la casa.  ¿Qué pasó después?\n\n¿Usted lo agregó a una ubicación y tal vez a un compartimento usando su cuenta de rastreo \"Cellar Tracker\", correcto?\n\n¿Como lo encontró de nuevo?";
 
 /* walkthrough title: page 1 Find My Wine! */
 "page1Title" = "¡Encuentra Mi Vino!";
 
 /* walkthrough instructions: page 2 */
-"page2Message" = "TRANSLATION NEEDED";
+"page2Message" = "Los términos de búsqueda son: Producer, Varietal, Vintage, Vineyard, AVA, Country y Designation.\n\nUse El reporte \"Drink By\" (Bebe Por)  para ver los vinos que están listos para tomar y cuales tomarán mas tiempo para envejecer.";
 
 /* walkthrough title: page 2 You can search for it. */
 "page2Title" = "Puedes buscarla";
 
 /* walkthrough instructions: page 3 */
-"page3Message" = "TRANSLATION NEEDED";
+"page3Message" = "Ordenar por viñedo o por variedad.  Ordenar por ubicación es una buena herramienta para un inventario físico.\n\nBúsqueda de botellas de vino que les faltan las fechas de \"tomar lo más pronto\" o \"tomar de último.\"";
 
 /* walkthrough title: page 3 The More menu has other views */
 "page3Title" = "Mas tiene otras opciones";
 
 /* walkthrough instructions: page 4 */
-"page4Message" = "TRANSLATION NEEDED";
+"page4Message" = "Si usted no usa códigos de barras, por favor apagarlas.\n\nEn cuanto usted entienda como funciona la aplicación, puede apagar la páginas de tutoría.";
 
 /* walkthrough title: page 4 Don't forget to check settings */
 "page4Title" = "Revisar configuraciones";
@@ -296,4 +296,4 @@
 "totalBottles" = "Botellas Totales";
 
 /* message that these bottles should be marked drank, replacement text is singular 'this bottle'or plural 'these bottles */
-"updateCellarTracker" = "TRANSLATION NEEDED";
+"updateCellarTracker" = "Bebiste %1 y deberías actualizar \"Cellar Tracker\".";
