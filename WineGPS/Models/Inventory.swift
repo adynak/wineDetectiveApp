@@ -63,6 +63,7 @@ struct DrillBottle {
     let sortKey1: String
     let description: String?
     let vineyard: String?
+    let type: String?
 }
 
 

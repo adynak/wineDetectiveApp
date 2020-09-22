@@ -218,7 +218,8 @@ class DataServices {
                 sortKey0: row[sortIndex0],
                 sortKey1: row[sortIndex1],
                 description: "123",
-                vineyard: row[positionOf.vineyard]
+                vineyard: row[positionOf.vineyard],
+                type: row[positionOf.type]
             )
             
             if missingOnly {
@@ -228,6 +229,21 @@ class DataServices {
             } else {
                 wines.append(bottle)
             }
+        }
+        
+        
+        let reds = Dictionary(grouping: wines, by: { $0.type!.lowercased().contains("red") })
+        let whites = Dictionary(grouping: wines, by: { $0.type!.lowercased().contains("white") })
+        print(wines.count)
+        print (reds[true]!.count)
+        print (whites[true]!.count)
+        
+        let wineTypes = Dictionary(grouping: wines, by: { (element: DrillBottle) in
+            return element.type
+        })
+        
+        for (type) in wineTypes {
+            print("\(type.key!) : \(wineTypes[type.key]!.count)")
         }
 
         let groupLevel0 = Dictionary(grouping: wines, by: { $0.sortKey0 })
