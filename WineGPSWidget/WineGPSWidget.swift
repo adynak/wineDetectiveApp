@@ -21,19 +21,19 @@ struct Provider: IntentTimelineProvider {
         completion(entry)
     }
 
+    let wineCounts = API.load()
+
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         
-        let wineCounts = API.load()
+//        let wineCounts = API.load()
         let currentDate = Date()
         
-        for hourOffset in 0 ..< 1 {
+        for hourOffset in 0..<5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            
-            let minute = Calendar.current.component(.minute, from: currentDate)
-            
+                        
             let totalBottles = wineCounts["totalBottles"]
             let wineCountRed = wineCounts["Red"]
 
@@ -74,11 +74,9 @@ struct WineGPSWidgetEntryView : View {
                         RedWineView(entry: entry).cornerRadius(8)
                         Spacer()
                         WhiteWineView(entry: entry).cornerRadius(8)
-                        Spacer()
 //                        WineTypesView(entry: entry)
                     }
-                    .padding(.leading, 15)
-                    .padding(.trailing,8)
+                    .padding([.leading, .trailing], 8)
                 }
             }
             
@@ -92,15 +90,15 @@ struct WineGPSWidgetEntryView : View {
 
 struct WineTypesView: View {
     var entry: Provider.Entry
+    
+    var otherViews : [String] = ["Red", "Rosé","White", "White - Sparkling"]
 
     var body: some View {
-           List {
-               Text("Wash the car")
-               Text("Vacuum house")
-               Text("Pick up kids from school bus @ 3pm")
-               Text("Auction the kids on eBay")
-               Text("Order Pizza")
-           }
+        VStack(alignment: .leading) {
+            ForEach(0..<otherViews.count) { index in
+                Text(otherViews[index])
+            }
+        }
     }
 
 }
@@ -111,11 +109,11 @@ struct RedWineView: View {
     var wineType = NSLocalizedString("wineRed", comment: "textfield label: red (wines)")
 
     var body: some View {
-        let wineCount = entry.wineCounts["Red"]
+        let wineCount = String(entry.wineCounts["Red"]!)
 
         VStack(alignment: .leading) {
             Text(wineType).font(.subheadline).padding(.horizontal,5)
-            Text(String(wineCount!)).font(.headline).padding(.horizontal,15)
+            Text(wineCount).font(.headline).padding(.horizontal,15)
         }.frame(minWidth: 0,
             maxWidth: .infinity,
             minHeight: 0,
