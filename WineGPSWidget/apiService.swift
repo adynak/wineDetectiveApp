@@ -10,9 +10,9 @@ import Foundation
 
 class API {
     
-    static func load() -> [Int] {
+    static func load() -> [String: Int] {
         
-        var wineCounts: [Int] = []
+        var wineCounts = [String: Int]()
         
         do {
 
@@ -59,17 +59,16 @@ class API {
                     wines.append(bottle)
 
                 }
-                
-                let reds = Dictionary(grouping: wines, by: { $0.type!.lowercased().contains("red") })
-                let whites = Dictionary(grouping: wines, by: { $0.type!.lowercased().contains("white") })
-                print(wines.count)
-                print (reds[true]!.count)
-                print (whites[true]!.count)
+                                
+                let wineTypes = Dictionary(grouping: wines, by: { (element: DrillBottle) in
+                    return element.type
+                })
+        
+                wineCounts["totalBottles"] = wines.count
+                for (type) in wineTypes {
+                    wineCounts[type.key!] = wineTypes[type.key]!.count
+                }
             
-                wineCounts.append(wines.count)
-                wineCounts.append(reds[true]!.count)
-                wineCounts.append(whites[true]!.count)
-
             } catch {
                 print(error)
             }
