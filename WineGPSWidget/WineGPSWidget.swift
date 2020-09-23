@@ -11,6 +11,7 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
+        
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationIntent(), totalBottles: 0, wineCountRed: 0)
     }
@@ -24,7 +25,8 @@ struct Provider: IntentTimelineProvider {
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-
+        
+        let wineCounts = API.load()
         let currentDate = Date()
         
         for hourOffset in 0 ..< 5 {
@@ -33,8 +35,8 @@ struct Provider: IntentTimelineProvider {
             let minute = Calendar.current.component(.minute, from: currentDate)
             print(minute)
             
-            let totalBottles = 248
-            let wineCountRed = totalBottles - minute
+            let totalBottles = wineCounts[0]
+            let wineCountRed = wineCounts[1]
 
             let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles, wineCountRed: wineCountRed)
             entries.append(entry)
