@@ -21,19 +21,18 @@ struct Provider: IntentTimelineProvider {
         completion(entry)
     }
 
-    let wineCounts = API.load()
-
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         
-//        let wineCounts = API.load()
         let currentDate = Date()
         
-        for hourOffset in 0..<5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                        
+        for refreshInterval in stride(from: 0, to: 40, by: 10) {
+            
+            let wineCounts = API.load()
+
+            let entryDate = Calendar.current.date(byAdding: .minute, value: refreshInterval, to: currentDate)!
             let totalBottles = wineCounts["totalBottles"]
             let wineCountRed = wineCounts["Red"]
 
