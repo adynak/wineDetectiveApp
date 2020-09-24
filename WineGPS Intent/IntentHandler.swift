@@ -18,3 +18,17 @@ class IntentHandler: INExtension {
     }
     
 }
+
+extension IntentHandler: SelectVarietalIntentHandling {
+    func provideVarietalOptionsCollection(
+        for intent: SelectVarietalIntent,
+        with completion: @escaping (INObjectCollection<WineGPSINO>?, Error?) -> Void) {
+            var varietalItems = [WineGPSINO]()
+            VarietalProvider.all().forEach { varietalDetails in
+                let varietalIntentObject =
+                    WineGPSINO(identifier: varietalDetails.id, display: varietalDetails.name)
+                varietalItems.append(varietalIntentObject)
+            }
+        completion(INObjectCollection(items: varietalItems), nil)
+    }
+}

@@ -13,19 +13,22 @@ import Intents
 struct Provider: IntentTimelineProvider {
         
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), totalBottles: 0, wineCountRed: 0, wineCounts: ["totalBottles":0])
+        SimpleEntry(date: Date(), configuration: SelectVarietalIntent(), totalBottles: 0, wineCountRed: 0, wineCounts: ["totalBottles":0], wineVarietal: "Not Logged On")
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, wineCountRed: 0, wineCounts: ["totalBottles":0])
+    func getSnapshot(for configuration: SelectVarietalIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, wineCountRed: 0, wineCounts: ["totalBottles":0], wineVarietal: "")
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    
+    func getTimeline(
+        for configuration: SelectVarietalIntent,
+        in context: Context,
+        completion: @escaping (Timeline<Entry>) -> ()
+    ) {
         var entries: [SimpleEntry] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        
         let currentDate = Date()
         
         for refreshInterval in stride(from: 0, to: 40, by: 10) {
@@ -36,7 +39,7 @@ struct Provider: IntentTimelineProvider {
             let totalBottles = wineCounts["totalBottles"]
             let wineCountRed = wineCounts["Red"]
 
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles!, wineCountRed: wineCountRed!, wineCounts: wineCounts)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles!, wineCountRed: wineCountRed!, wineCounts: wineCounts, wineVarietal: "Cabernet Sauvignon")
             entries.append(entry)
         }
 
@@ -47,60 +50,102 @@ struct Provider: IntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationIntent
+    let configuration: SelectVarietalIntent
     let totalBottles: Int
     let wineCountRed: Int
     let wineCounts: [String: Int]
+    let wineVarietal: String
 }
 
 struct WineGPSWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-            HStack {
-                VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        HStack{
-                            Image("logo").resizable().frame(width: 25.0, height: 25.0)
-                            Text("WineGPS").font(.headline)
-                        }
-                        TotalBottlesView(entry: entry)
-                    }.padding(.leading, 15)
-                    
-                    Spacer()
-                    Spacer()
-                    HStack {
-                        RedWineView(entry: entry).cornerRadius(8)
-                        Spacer()
-                        WhiteWineView(entry: entry).cornerRadius(8)
-//                        WineTypesView(entry: entry)
-                    }
-                    .padding([.leading, .trailing], 8)
-                }
-            }
-            
-            .padding()
-            .frame(width: 340, height: 155)
-//            .background(Color(UIColor.secondarySystemBackground))
-            .cornerRadius(24)
-            .padding()
-        }
+        
+        SmallWidgetView(entry: entry)
+//
+//    HStack {
+//        VStack(alignment: .leading) {
+//            VStack(alignment: .leading) {
+//                HStack{
+//                    Image("logo").resizable().frame(width: 25.0, height: 25.0)
+//                    Text("WineGPS").font(.headline)
+//                }
+//                TotalBottlesView(entry: entry)
+//            }.padding(.leading, 15)
+//
+//            Spacer()
+//            Spacer()
+//            HStack{
+//                SmallWidgetView(entry: entry)
+//            }
+////                    HStack {
+////                        RedWineView(entry: entry).cornerRadius(8)
+////                        Spacer()
+////                        WhiteWineView(entry: entry).cornerRadius(8)
+////                    }
+//            .padding([.leading, .trailing], 8)
+//        }
+//    }
+//
+//    .padding()
+//    .frame(width: 340, height: 155)
+////            .background(Color(UIColor.secondarySystemBackground))
+//    .cornerRadius(24)
+//    .padding()
+}
 }
 
-struct WineTypesView: View {
+struct WineVarietalView: View {
     var entry: Provider.Entry
-    
-    var otherViews : [String] = ["Red", "Rosé","White", "White - Sparkling"]
+        
+    var wineType = "Cabernet Sauvignon"
 
     var body: some View {
+//        let wineCount = String(entry.wineCounts["Red"]!)
+        let wineCount = "123"
+
+
         VStack(alignment: .leading) {
-            ForEach(0..<otherViews.count) { index in
-                Text(otherViews[index])
-            }
-        }
+            Text(wineType).font(.subheadline).padding(.horizontal,5)
+            Text(wineCount).font(.headline).padding(.horizontal,15)
+        }.frame(minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading)
+            .background(Color(UIColor.lightGray))
+
     }
 
 }
+
+struct SmallWidgetView: View {
+    var entry: Provider.Entry
+
+    var body: some View {
+
+        VStack(alignment: .leading) {
+            HStack{
+                Image("logo").resizable().frame(width: 25.0, height: 25.0)
+                Text("WineGPS").font(.headline)
+            }
+            Text(entry.wineVarietal)
+                .font(.system(.caption2))
+                .foregroundColor(.black)
+                .bold()
+            Text("19")
+                .font(.system(.caption2))
+                .foregroundColor(.black)
+                .padding(.horizontal,15)
+
+        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
+        .padding()
+        .background(LinearGradient(gradient: Gradient(colors: [.orange, .yellow]), startPoint: .top, endPoint: .bottom))
+    }
+
+}
+
 
 struct RedWineView: View {
     var entry: Provider.Entry
@@ -108,7 +153,9 @@ struct RedWineView: View {
     var wineType = NSLocalizedString("wineRed", comment: "textfield label: red (wines)")
 
     var body: some View {
-        let wineCount = String(entry.wineCounts["Red"]!)
+//        let wineCount = String(entry.wineCounts["Red"]!)
+        let wineCount = "123"
+
 
         VStack(alignment: .leading) {
             Text(wineType).font(.subheadline).padding(.horizontal,5)
@@ -163,17 +210,28 @@ struct WhiteWineView: View {
     }
 }
 
-@main
+//@main
 struct WineGPSWidget: Widget {
     let kind: String = "WineGPSWidget"
-
+    
+    
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(
+            kind: kind,
+            intent: SelectVarietalIntent.self,
+            provider: Provider()
+        ) { entry in
             WineGPSWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("WineGPS")
-        .supportedFamilies([.systemMedium, .systemLarge])
-        .description("WineGPS widget.")
+        .configurationDisplayName("Select Varietal")
+        .supportedFamilies([.systemSmall])
+        .description("Choose the one varietal to display in this widget.")
+    }
+}
+
+struct WineGPSWidgetPlaceholderView: View {
+    var body: some View {
+        Color(UIColor.systemIndigo)
     }
 }
 

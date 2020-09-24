@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+import SwiftUI
+import WidgetKit
+
+@main
+struct WineGPSWidgetBundle: WidgetBundle {
+
+  @WidgetBundleBuilder
+  var body: some Widget {
+    WineGPSWidget()
+  }
+}
+
