@@ -18,8 +18,6 @@
 		9215078225150A6000AA13E0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9215078125150A6000AA13E0 /* SwiftUI.framework */; };
 		9215078525150A6000AA13E0 /* WineGPSWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9215078425150A6000AA13E0 /* WineGPSWidget.swift */; };
 		9215078825150A6300AA13E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9215078725150A6300AA13E0 /* Assets.xcassets */; };
-		9215078A25150A6300AA13E0 /* WineGPSWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9215078625150A6000AA13E0 /* WineGPSWidget.intentdefinition */; };
-		9215078B25150A6300AA13E0 /* WineGPSWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9215078625150A6000AA13E0 /* WineGPSWidget.intentdefinition */; };
 		9215078E25150A6300AA13E0 /* WineGPSWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9215077E25150A6000AA13E0 /* WineGPSWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9216011A2496F7BB006B6EF0 /* DrinkByHelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921601192496F7BB006B6EF0 /* DrinkByHelpController.swift */; };
 		921636F524B8EA5900BF0574 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921636F424B8EA5900BF0574 /* Bundle.swift */; };
@@ -171,7 +169,6 @@
 		9215077F25150A6000AA13E0 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9215078125150A6000AA13E0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		9215078425150A6000AA13E0 /* WineGPSWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WineGPSWidget.swift; sourceTree = "<group>"; };
-		9215078625150A6000AA13E0 /* WineGPSWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WineGPSWidget.intentdefinition; sourceTree = "<group>"; };
 		9215078725150A6300AA13E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9215078925150A6300AA13E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		921601192496F7BB006B6EF0 /* DrinkByHelpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkByHelpController.swift; sourceTree = "<group>"; };
@@ -369,7 +366,6 @@
 				9248A16B251ACFFA004587EF /* apiService.swift */,
 				9248A165251ACC21004587EF /* DataServices.swift */,
 				9215078425150A6000AA13E0 /* WineGPSWidget.swift */,
-				9215078625150A6000AA13E0 /* WineGPSWidget.intentdefinition */,
 				9215078725150A6300AA13E0 /* Assets.xcassets */,
 				9215078925150A6300AA13E0 /* Info.plist */,
 				924E5BAF25164DCB00259AB3 /* InfoPlist.strings */,
@@ -906,7 +902,6 @@
 				92E94A862494267300419F11 /* BaseCell.swift in Sources */,
 				924175FA245A2625002502FE /* UserDefaults.swift in Sources */,
 				923B6EC524A7EA9B00598D57 /* Strings.swift in Sources */,
-				9215078B25150A6300AA13E0 /* WineGPSWidget.intentdefinition in Sources */,
 				9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */,
 				36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */,
 				9230461F24D0F1360083BCF7 /* MissingDrinkByViewController.swift in Sources */,
@@ -951,7 +946,6 @@
 				9248A166251ACC21004587EF /* DataServices.swift in Sources */,
 				9272ADB6251CF7E600576020 /* WineGPSIntent.intentdefinition in Sources */,
 				9272AE24251D02B000576020 /* VarietalDetail.swift in Sources */,
-				9215078A25150A6300AA13E0 /* WineGPSWidget.intentdefinition in Sources */,
 				9272AE2D251D02DC00576020 /* VarietalProvider.swift in Sources */,
 				922F4166251D333900EBC404 /* WineGPSBundle.swift in Sources */,
 				9248A16C251ACFFA004587EF /* apiService.swift in Sources */,

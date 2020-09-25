@@ -25,43 +25,43 @@ public struct VarietalProvider {
             VarietalDetails(
                 name: "Cabernet Franc",
                 description: "red",
-                varietalCount: 19),
+                varietalCount: 39),
             VarietalDetails(
                 name: "Cabernet Sauvignon",
                 description: "red",
-                varietalCount: 29),
+                varietalCount: 49),
             VarietalDetails(
                 name: "Carménère",
                 description: "red",
-                varietalCount: 19),
+                varietalCount: 59),
             VarietalDetails(
                 name: "Chardonnay",
                 description: "red",
-                varietalCount: 29),
+                varietalCount: 69),
             VarietalDetails(
                 name: "Dolcetto",
                 description: "red",
-                varietalCount: 19),
+                varietalCount: 79),
             VarietalDetails(
                 name: "Gewürztraminer ",
                 description: "red",
-                varietalCount: 29),
+                varietalCount: 89),
             VarietalDetails(
                 name: "Graciano",
                 description: "red",
-                varietalCount: 19),
+                varietalCount: 99),
             VarietalDetails(
                 name: "Grenache ",
                 description: "red",
-                varietalCount: 29),
+                varietalCount: 11),
             VarietalDetails(
                 name: "Lemberger",
                 description: "red",
-                varietalCount: 19),
+                varietalCount: 21),
             VarietalDetails(
                 name: "Malbec ",
                 description: "red",
-                varietalCount: 29)
+                varietalCount: 31)
         ]
     }
 
