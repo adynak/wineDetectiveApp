@@ -11,9 +11,18 @@ import SwiftUI
 import UIKit
 
 public struct VarietalProvider {
-
+    
     static func all() -> [VarietalDetails] {
-        return [
+        
+//        let bottles = API.load()
+        var varietals : [VarietalDetails]
+        
+//        for bottle in bottles {
+//            let thisBottle = VarietalDetails(name: bottle.name, description: bottle.type, varietalCount: bottle.count)
+//            varietals.append(thisBottle)
+//        }
+//
+        varietals = [
             VarietalDetails(
                 name: "Barbera",
                 description: "red",
@@ -63,6 +72,8 @@ public struct VarietalProvider {
                 description: "red",
                 varietalCount: 31)
         ]
+
+        return varietals
     }
 
     static func random() -> VarietalDetails {
