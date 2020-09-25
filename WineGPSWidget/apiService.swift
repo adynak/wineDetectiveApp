@@ -61,12 +61,12 @@ class API {
                 }
                                 
                 let wineTypes = Dictionary(grouping: wines, by: { (element: DrillBottle) in
-                    return element.type
+                    return element.varietal
                 })
         
                 wineCounts["totalBottles"] = wines.count
-                for (type) in wineTypes {
-                    wineCounts[type.key!] = wineTypes[type.key]!.count
+                for (varietal) in wineTypes {
+                    wineCounts[varietal.key] = wineTypes[varietal.key]!.count
                 }
             
             } catch {

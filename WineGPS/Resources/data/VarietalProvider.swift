@@ -43,7 +43,7 @@ public struct VarietalProvider {
                 description: "red",
                 varietalCount: 79),
             VarietalDetails(
-                name: "Gewürztraminer ",
+                name: "Gewürztraminer",
                 description: "red",
                 varietalCount: 89),
             VarietalDetails(
@@ -51,7 +51,7 @@ public struct VarietalProvider {
                 description: "red",
                 varietalCount: 99),
             VarietalDetails(
-                name: "Grenache ",
+                name: "Grenache",
                 description: "red",
                 varietalCount: 11),
             VarietalDetails(
@@ -59,7 +59,7 @@ public struct VarietalProvider {
                 description: "red",
                 varietalCount: 21),
             VarietalDetails(
-                name: "Malbec ",
+                name: "Malbec",
                 description: "red",
                 varietalCount: 31)
         ]

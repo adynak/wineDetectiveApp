@@ -40,7 +40,7 @@ struct Provider: IntentTimelineProvider {
 
             let varietalDetails = lookupVarietalDetails(for: configuration)
 
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles!, wineCountRed: varietalDetails.count!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles!, wineCountRed: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
             entries.append(entry)
         }
 
@@ -49,14 +49,14 @@ struct Provider: IntentTimelineProvider {
     }
     
     private func lookupVarietalDetails(for configuration: SelectVarietalIntent) -> VarietalDetails {
-      guard let emojiId = configuration.varietal?.identifier,
-         let emojiForConfig = VarietalProvider.all().first(where: { emoji in
-          emoji.id == emojiId
+      guard let varietalId = configuration.varietal?.identifier,
+         let varietal = VarietalProvider.all().first(where: { varietal in
+          varietal.id == varietalId
          })
       else {
         return VarietalProvider.random()
       }
-      return emojiForConfig
+      return varietal
     }
 }
 
@@ -85,6 +85,7 @@ struct SmallWidgetView: View {
     var body: some View {
         
         let wineCount = entry.wineCountRed
+
         let bottleCount = String.localizedStringWithFormat(format, wineCount)
         
         VStack(alignment: .leading) {
