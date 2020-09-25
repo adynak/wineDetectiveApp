@@ -69,15 +69,15 @@
 		9272AE0E251D017200576020 /* VarietalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE0D251D017200576020 /* VarietalDetail.swift */; };
 		9272AE1D251D02AF00576020 /* VarietalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE0D251D017200576020 /* VarietalDetail.swift */; };
 		9272AE24251D02B000576020 /* VarietalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE0D251D017200576020 /* VarietalDetail.swift */; };
-		9272AE2C251D02DC00576020 /* VarietalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE2B251D02DC00576020 /* VarietalProvider.swift */; };
-		9272AE2D251D02DC00576020 /* VarietalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE2B251D02DC00576020 /* VarietalProvider.swift */; };
-		9272AE2E251D02DC00576020 /* VarietalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE2B251D02DC00576020 /* VarietalProvider.swift */; };
 		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
 		927C22B02483729800695B45 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 927C22B22483729800695B45 /* Localizable.strings */; };
 		927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927DF8D324F5B4F00090727E /* Default-568h@2x.png */; };
 		9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */; };
 		9289227C24AD102E0090A410 /* DrillDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */; };
 		929A8A7A24D0998600A9E671 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 929A8A7924D0998600A9E671 /* calendar.png */; };
+		929EDDA4251E68CF0042D113 /* VarietalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE2B251D02DC00576020 /* VarietalProvider.swift */; };
+		929EDDE8251E6B400042D113 /* VarietalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE2B251D02DC00576020 /* VarietalProvider.swift */; };
+		929EDDEF251E6B430042D113 /* VarietalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE2B251D02DC00576020 /* VarietalProvider.swift */; };
 		92A271B7249187BD00F9BE57 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A271B6249187BD00F9BE57 /* API.swift */; };
 		92A271B9249187FC00F9BE57 /* apiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A271B8249187FC00F9BE57 /* apiService.swift */; };
 		92ABF50C24D1EE6E006768EC /* support.png in Resources */ = {isa = PBXBuildFile; fileRef = 92ABF50B24D1EE6E006768EC /* support.png */; };
@@ -363,6 +363,7 @@
 		9215078325150A6000AA13E0 /* WineGPSWidget */ = {
 			isa = PBXGroup;
 			children = (
+				929EDD85251E635A0042D113 /* data */,
 				9248A16B251ACFFA004587EF /* apiService.swift */,
 				9248A165251ACC21004587EF /* DataServices.swift */,
 				9215078425150A6000AA13E0 /* WineGPSWidget.swift */,
@@ -447,6 +448,13 @@
 				9272ADE1251CFA5B00576020 /* Info.plist */,
 			);
 			path = "WineGPS IntentUI";
+			sourceTree = "<group>";
+		};
+		929EDD85251E635A0042D113 /* data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		92A238E724AEFDA400F606F8 /* SupportControllers */ = {
@@ -547,8 +555,8 @@
 		92DCEA1D249164DD00AFFB59 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				923B6D3E24509B020080A5F6 /* bottles1.csv */,
 				9272AE2B251D02DC00576020 /* VarietalProvider.swift */,
+				923B6D3E24509B020080A5F6 /* bottles1.csv */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -892,6 +900,7 @@
 				92AE9BCF24BE1CCF00924435 /* Colors.swift in Sources */,
 				92307A9E24E1D1CA00C06F32 /* alert.swift in Sources */,
 				92E94A8824942AA600419F11 /* Constraints.swift in Sources */,
+				929EDDA4251E68CF0042D113 /* VarietalProvider.swift in Sources */,
 				92F6896B2472E294006EB934 /* LocationViewController.swift in Sources */,
 				924166D424AF0BB60082954A /* MoreMenuCell.swift in Sources */,
 				925E9B9324B4C49F00D4553A /* SupportMenuSections.swift in Sources */,
@@ -912,7 +921,6 @@
 				923196E424B3FF300044C1A0 /* SupportViewController.swift in Sources */,
 				924175FC245A2910002502FE /* Extensions.swift in Sources */,
 				925C4513246AE8A000044894 /* SearchKeys.swift in Sources */,
-				9272AE2C251D02DC00576020 /* VarietalProvider.swift in Sources */,
 				92D9571224BF6789002BBF98 /* Reachability.swift in Sources */,
 				9272AE0E251D017200576020 /* VarietalDetail.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,
@@ -946,8 +954,8 @@
 				9248A166251ACC21004587EF /* DataServices.swift in Sources */,
 				9272ADB6251CF7E600576020 /* WineGPSIntent.intentdefinition in Sources */,
 				9272AE24251D02B000576020 /* VarietalDetail.swift in Sources */,
-				9272AE2D251D02DC00576020 /* VarietalProvider.swift in Sources */,
 				922F4166251D333900EBC404 /* WineGPSBundle.swift in Sources */,
+				929EDDE8251E6B400042D113 /* VarietalProvider.swift in Sources */,
 				9248A16C251ACFFA004587EF /* apiService.swift in Sources */,
 				9215078525150A6000AA13E0 /* WineGPSWidget.swift in Sources */,
 			);
@@ -975,7 +983,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9272AE2E251D02DC00576020 /* VarietalProvider.swift in Sources */,
+				929EDDEF251E6B430042D113 /* VarietalProvider.swift in Sources */,
 				9272AE06251CFD1600576020 /* WineGPSIntent.intentdefinition in Sources */,
 				9272ADD2251CFA5B00576020 /* IntentHandler.swift in Sources */,
 				9272AE1D251D02AF00576020 /* VarietalDetail.swift in Sources */,

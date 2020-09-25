@@ -30,7 +30,7 @@ struct Provider: IntentTimelineProvider {
 
         let currentDate = Date()
         
-        for refreshInterval in stride(from: 0, to: 40, by: 10) {
+        for refreshInterval in stride(from: 0, to: 40, by: 120) {
             
             let wineCounts = API.load()
 
