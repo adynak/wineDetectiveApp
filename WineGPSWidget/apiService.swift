@@ -34,7 +34,6 @@ class API {
                 let positionOf = Label(data:fields)
                 
                 var wines: [DrillBottle] = []
-//                print(inventoryArray[0])
                 
                 for row in inventoryArray{
                     let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
@@ -64,7 +63,7 @@ class API {
                     return element.varietal
                 })
         
-                wineCounts["totalBottles"] = wines.count
+                wineCounts["TotalBottles"] = wines.count
                 for (varietal) in wineTypes {
                     wineCounts[varietal.key] = wineTypes[varietal.key]!.count
                 }

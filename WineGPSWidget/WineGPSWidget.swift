@@ -13,11 +13,11 @@ import Intents
 struct Provider: IntentTimelineProvider {
         
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: SelectVarietalIntent(), totalBottles: 0, wineCountRed: 0, wineCounts: ["totalBottles":0], wineVarietal: "Not Logged On")
+        SimpleEntry(date: Date(), configuration: SelectVarietalIntent(), totalBottles: 0, varietalCount: 0, wineCounts: ["totalBottles":0], wineVarietal: "Not Logged On")
     }
 
     func getSnapshot(for configuration: SelectVarietalIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, wineCountRed: 0, wineCounts: ["totalBottles":0], wineVarietal: "")
+        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, varietalCount: 0, wineCounts: ["totalBottles":0], wineVarietal: "")
         completion(entry)
     }
 
@@ -35,12 +35,11 @@ struct Provider: IntentTimelineProvider {
             let wineCounts = API.load()
 
             let entryDate = Calendar.current.date(byAdding: .minute, value: refreshInterval, to: currentDate)!
-            let totalBottles = wineCounts["totalBottles"]
-//            let wineCountRed = wineCounts["Red"]
+            let totalBottles = wineCounts["TotalBottles"]
 
             let varietalDetails = lookupVarietalDetails(for: configuration)
 
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles!, wineCountRed: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles!, varietalCount: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
             entries.append(entry)
         }
 
@@ -64,7 +63,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: SelectVarietalIntent
     let totalBottles: Int
-    let wineCountRed: Int
+    let varietalCount: Int
     let wineCounts: [String: Int]
     let wineVarietal: String
 }
@@ -73,7 +72,12 @@ struct WineGPSWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        SmallWidgetView(entry: entry)
+        let wineVarietal = entry.wineVarietal
+        if wineVarietal == "TotalBottles"{
+            SmallWidgetViewTotalBottles(entry: entry)
+        } else {
+            SmallWidgetView(entry: entry)
+        }
     }
 }
 
@@ -84,8 +88,9 @@ struct SmallWidgetView: View {
 
     var body: some View {
         
-        let wineCount = entry.wineCountRed
-
+        let wineCount = entry.varietalCount
+        let wineVarietal = entry.wineVarietal
+        
         let bottleCount = String.localizedStringWithFormat(format, wineCount)
         
         VStack(alignment: .leading) {
@@ -98,7 +103,7 @@ struct SmallWidgetView: View {
                 .padding(.horizontal,30)
             TotalBottlesView(entry: entry)
             Spacer()
-            Text(entry.wineVarietal)
+            Text(wineVarietal)
                 .font(.system(.caption2))
                 .foregroundColor(.black)
                 .bold()
@@ -117,13 +122,54 @@ struct SmallWidgetView: View {
 
 }
 
+struct SmallWidgetViewTotalBottles: View {
+    var entry: Provider.Entry
+    
+    let format = NSLocalizedString("totalBottlesWidget", comment: "replace 'bottle' with its singular or plural")
+
+    var body: some View {
+        
+        let wineCount = entry.varietalCount
+        let wineVarietal = NSLocalizedString("totalBottles", comment: "plural : total bottles")
+
+        let bottleCount = String.localizedStringWithFormat(format, wineCount)
+        
+        VStack(alignment: .leading) {
+            Image("logo")
+                .resizable()
+                .frame(width: 25.0, height: 25.0)
+            Text("WineGPS")
+                .font(.caption)
+                .padding(.vertical,-35)
+                .padding(.horizontal,30)
+            Spacer()
+            Text(wineVarietal)
+                .font(.system(.caption2))
+                .foregroundColor(.black)
+                .bold()
+                .padding(.bottom, 1)
+            Text(bottleCount)
+                .font(.system(.headline))
+                .foregroundColor(.black)
+                .padding(.horizontal,10)
+
+            Spacer()
+
+        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
+        .padding()
+        .background(LinearGradient(gradient: Gradient(colors: [.white,.white, .purple]), startPoint: .top, endPoint: .bottom))
+    }
+
+}
+
+
 struct TotalBottlesView: View {
     var entry: Provider.Entry
 
     let format = NSLocalizedString("totalBottlesWidget", comment: "replace 'bottle' with its singular or plural")
 
     var body: some View {
-        let wineCount = entry.wineCounts["totalBottles"]
+        let wineCount = entry.wineCounts["TotalBottles"]
         let message = String.localizedStringWithFormat(format, wineCount!)
         Text(message).font(.caption2).padding(.vertical,-28).padding(.horizontal,30).fixedSize()
     }

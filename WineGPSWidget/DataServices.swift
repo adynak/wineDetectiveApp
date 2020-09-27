@@ -19,6 +19,8 @@ enum NetworkError: Error {
 
 var dataHeader = [String]()
 var fields = [Int]()
+var varietals = [VarietalDetails]()
+
 
 struct Bottle {
     let producer: String

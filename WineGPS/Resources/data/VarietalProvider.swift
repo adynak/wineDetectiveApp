@@ -14,64 +14,23 @@ public struct VarietalProvider {
     
     static func all() -> [VarietalDetails] {
         
-//        let bottles = API.load()
-        var varietals : [VarietalDetails]
+        let bottles = API.load()
+
+        varietals.removeAll()
         
-//        for bottle in bottles {
-//            let thisBottle = VarietalDetails(name: bottle.name, description: bottle.type, varietalCount: bottle.count)
-//            varietals.append(thisBottle)
-//        }
-//
-        varietals = [
-            VarietalDetails(
-                name: "Barbera",
-                description: "red",
-                varietalCount: 19),
-            VarietalDetails(
-                name: "Bastardo",
-                description: "red",
-                varietalCount: 29),
-            VarietalDetails(
-                name: "Cabernet Franc",
-                description: "red",
-                varietalCount: 39),
-            VarietalDetails(
-                name: "Cabernet Sauvignon",
-                description: "red",
-                varietalCount: 49),
-            VarietalDetails(
-                name: "Carménère",
-                description: "red",
-                varietalCount: 59),
-            VarietalDetails(
-                name: "Chardonnay",
-                description: "red",
-                varietalCount: 69),
-            VarietalDetails(
-                name: "Dolcetto",
-                description: "red",
-                varietalCount: 79),
-            VarietalDetails(
-                name: "Gewürztraminer",
-                description: "red",
-                varietalCount: 89),
-            VarietalDetails(
-                name: "Graciano",
-                description: "red",
-                varietalCount: 99),
-            VarietalDetails(
-                name: "Grenache",
-                description: "red",
-                varietalCount: 11),
-            VarietalDetails(
-                name: "Lemberger",
-                description: "red",
-                varietalCount: 21),
-            VarietalDetails(
-                name: "Malbec",
-                description: "red",
-                varietalCount: 31)
-        ]
+        for bottle in bottles {
+            let thisBottle = VarietalDetails(name: bottle.key, description: "desc", varietalCount: bottle.value)
+            varietals.append(thisBottle)
+        }
+
+        varietals =  varietals.sorted(by: {
+            ($0.name.lowercased()) < ($1.name.lowercased())
+        })
+        
+        if let i = varietals.firstIndex(where: { $0.name == "TotalBottles" }) {
+            let element = varietals.remove(at: i)
+            varietals.insert(element, at: 0)
+        }
 
         return varietals
     }
