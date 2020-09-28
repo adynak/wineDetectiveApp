@@ -82,6 +82,7 @@
 		92ABF50C24D1EE6E006768EC /* support.png in Resources */ = {isa = PBXBuildFile; fileRef = 92ABF50B24D1EE6E006768EC /* support.png */; };
 		92AE9BCF24BE1CCF00924435 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AE9BCE24BE1CCF00924435 /* Colors.swift */; };
 		92AEF1C924F5DA6500E92FC2 /* testTableBinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEF1C824F5DA6500E92FC2 /* testTableBinCell.swift */; };
+		92B0BFEC2522344E00175C69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BA825164D3B00259AB3 /* Localizable.strings */; };
 		92B5ECF124AC019D0032E1F2 /* DrinkByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B5ECF024AC019D0032E1F2 /* DrinkByViewController.swift */; };
 		92B73A3724ED76DF00B6686F /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B73A3624ED76DF00B6686F /* SyncViewController.swift */; };
 		92B73A3B24EDE25100B6686F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B73A3A24EDE25100B6686F /* CloudKit.framework */; };
@@ -859,6 +860,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B0BFEC2522344E00175C69 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,3 +1,6 @@
+/* plural : total bottles */
+"totalBottles" = "Total Bottles";
+
 /* textfield label: red (wines) */
 "wineRed" = "Red";
 

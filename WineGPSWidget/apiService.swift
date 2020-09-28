@@ -8,7 +8,7 @@
 
 import Foundation
 
-class API {
+class WidgetAPI {
     
     static func load() -> [String: Int] {
         
@@ -63,7 +63,8 @@ class API {
                     return element.varietal
                 })
         
-                wineCounts["TotalBottles"] = wines.count
+                let totalElement = NSLocalizedString("totalBottles", comment: "plural : total bottles")
+                wineCounts[totalElement] = wines.count
                 for (varietal) in wineTypes {
                     wineCounts[varietal.key] = wineTypes[varietal.key]!.count
                 }

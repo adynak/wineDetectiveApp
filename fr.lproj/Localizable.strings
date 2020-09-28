@@ -287,7 +287,7 @@
 "titleVarietal" = "titleVarietal";
 
 /* plural : total bottles */
-"totalBottles" = "totalBottles";
+"totalBottles" = "Nombre Total de Bouteilles";
 
 /* message that these bottles should be marked drank, replacement text is singular 'this bottle'or plural 'these bottles */
 "updateCellarTracker" = "";

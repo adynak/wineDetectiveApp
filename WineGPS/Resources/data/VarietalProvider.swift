@@ -14,7 +14,8 @@ public struct VarietalProvider {
     
     static func all() -> [VarietalDetails] {
         
-        let bottles = API.load()
+        let bottles = WidgetAPI.load()
+        let totalBottles = NSLocalizedString("totalBottles", comment: "plural : total bottles")
 
         varietals.removeAll()
         
@@ -27,7 +28,7 @@ public struct VarietalProvider {
             ($0.name.lowercased()) < ($1.name.lowercased())
         })
         
-        if let i = varietals.firstIndex(where: { $0.name == "TotalBottles" }) {
+        if let i = varietals.firstIndex(where: { $0.name == totalBottles }) {
             let element = varietals.remove(at: i)
             varietals.insert(element, at: 0)
         }

@@ -11,13 +11,16 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
+    
+    let totalBottles = NSLocalizedString("totalBottles", comment: "plural : total bottles")
         
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: SelectVarietalIntent(), totalBottles: 0, varietalCount: 0, wineCounts: ["totalBottles":0], wineVarietal: "Not Logged On")
+        
+        SimpleEntry(date: Date(), configuration: SelectVarietalIntent(), totalBottles: 0, varietalCount: 0, wineCounts: [totalBottles:0], wineVarietal: "Not Logged On")
     }
 
     func getSnapshot(for configuration: SelectVarietalIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, varietalCount: 0, wineCounts: ["totalBottles":0], wineVarietal: "")
+        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, varietalCount: 0, wineCounts: [totalBottles:0], wineVarietal: "")
         completion(entry)
     }
 
@@ -32,14 +35,14 @@ struct Provider: IntentTimelineProvider {
         
         for refreshInterval in stride(from: 0, to: 40, by: 120) {
             
-            let wineCounts = API.load()
+            let wineCounts = WidgetAPI.load()
 
             let entryDate = Calendar.current.date(byAdding: .minute, value: refreshInterval, to: currentDate)!
-            let totalBottles = wineCounts["TotalBottles"]
+            let totalBottleCount = wineCounts[totalBottles]
 
             let varietalDetails = lookupVarietalDetails(for: configuration)
 
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottles!, varietalCount: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottleCount!, varietalCount: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
             entries.append(entry)
         }
 
@@ -73,7 +76,9 @@ struct WineGPSWidgetEntryView : View {
 
     var body: some View {
         let wineVarietal = entry.wineVarietal
-        if wineVarietal == "TotalBottles"{
+        let totalBottles = NSLocalizedString("totalBottles", comment: "plural : total bottles")
+
+        if wineVarietal == totalBottles {
             SmallWidgetViewTotalBottles(entry: entry)
         } else {
             SmallWidgetView(entry: entry)
@@ -167,9 +172,10 @@ struct TotalBottlesView: View {
     var entry: Provider.Entry
 
     let format = NSLocalizedString("totalBottlesWidget", comment: "replace 'bottle' with its singular or plural")
+    let totalBottles = NSLocalizedString("totalBottles", comment: "plural : total bottles")
 
     var body: some View {
-        let wineCount = entry.wineCounts["TotalBottles"]
+        let wineCount = entry.wineCounts[totalBottles]
         let message = String.localizedStringWithFormat(format, wineCount!)
         Text(message).font(.caption2).padding(.vertical,-28).padding(.horizontal,30).fixedSize()
     }
