@@ -455,6 +455,7 @@
 		929EDD85251E635A0042D113 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				9272AE2B251D02DC00576020 /* VarietalProvider.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -557,7 +558,6 @@
 		92DCEA1D249164DD00AFFB59 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				9272AE2B251D02DC00576020 /* VarietalProvider.swift */,
 				923B6D3E24509B020080A5F6 /* bottles1.csv */,
 			);
 			path = data;
