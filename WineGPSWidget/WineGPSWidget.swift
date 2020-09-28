@@ -98,14 +98,18 @@ struct SmallWidgetView: View {
         
         let bottleCount = String.localizedStringWithFormat(format, wineCount)
         
+        let appName = NSLocalizedString("productName", comment: "app name: WineGPS")
+        
         VStack(alignment: .leading) {
             Image("logo")
                 .resizable()
                 .frame(width: 25.0, height: 25.0)
-            Text("WineGPS")
+            Text(appName)
                 .font(.caption)
                 .padding(.vertical,-35)
                 .padding(.horizontal,30)
+                .fixedSize()
+                .frame(width: 100)
             TotalBottlesView(entry: entry)
             Spacer()
             Text(wineVarietal)
@@ -139,14 +143,18 @@ struct SmallWidgetViewTotalBottles: View {
 
         let bottleCount = String.localizedStringWithFormat(format, wineCount)
         
+        let appName = NSLocalizedString("productName", comment: "app name: WineGPS")
+        
         VStack(alignment: .leading) {
             Image("logo")
                 .resizable()
                 .frame(width: 25.0, height: 25.0)
-            Text("WineGPS")
+            Text(appName)
                 .font(.caption)
                 .padding(.vertical,-35)
                 .padding(.horizontal,30)
+                .fixedSize()
+                .frame(width: 100)
             Spacer()
             Text(wineVarietal)
                 .font(.system(.caption2))
@@ -157,6 +165,8 @@ struct SmallWidgetViewTotalBottles: View {
                 .font(.system(.headline))
                 .foregroundColor(.black)
                 .padding(.horizontal,10)
+                .fixedSize()
+                .frame(width: 100)
 
             Spacer()
 
@@ -177,13 +187,22 @@ struct TotalBottlesView: View {
     var body: some View {
         let wineCount = entry.wineCounts[totalBottles]
         let message = String.localizedStringWithFormat(format, wineCount!)
-        Text(message).font(.caption2).padding(.vertical,-28).padding(.horizontal,30).fixedSize()
+        Text(message)
+            .font(.caption2)
+            .padding(.vertical,-28)
+            .padding(.horizontal,30)
+            .fixedSize()
     }
 }
 
 //@main
 struct WineGPSWidget: Widget {
     let kind: String = "WineGPSWidget"
+    
+    let selectHeading = NSLocalizedString("selectVarietal", comment: "heading in a selection window of wine varietals")
+    
+    let selectDescription = NSLocalizedString("selectVarietal", comment: "help text in a selection window of wine varietals")
+    
     
     var body: some WidgetConfiguration {
         IntentConfiguration(
@@ -193,7 +212,7 @@ struct WineGPSWidget: Widget {
         ) { entry in
             WineGPSWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Select Varietal")
+        .configurationDisplayName(selectHeading)
         .supportedFamilies([.systemSmall])
         .description("Choose one varietal to display its bottle count in this widget.")
     }

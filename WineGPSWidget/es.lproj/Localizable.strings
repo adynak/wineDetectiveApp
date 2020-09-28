@@ -1,3 +1,12 @@
+/* app name: WineGPS */
+"productName" = "VinoGPS";
+
+/* help text in a selection window of wine varietals */
+"selectDescription" = "Elija un vino varietal para mostrar su número de botellas en este widget.";
+
+/* heading in a selection window of wine varietals */
+"selectVarietal" = "Seleccionar Vino Variedad";
+
 /* plural : total bottles */
 "totalBottles" = "Botellas Totales";
 
