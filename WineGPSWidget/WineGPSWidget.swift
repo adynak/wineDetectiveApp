@@ -201,7 +201,7 @@ struct WineGPSWidget: Widget {
     
     let selectHeading = NSLocalizedString("selectVarietal", comment: "heading in a selection window of wine varietals")
     
-    let selectDescription = NSLocalizedString("selectVarietal", comment: "help text in a selection window of wine varietals")
+    let selectDescription = NSLocalizedString("selectDescription", comment: "help text in a selection window of wine varietals")
     
     
     var body: some WidgetConfiguration {
@@ -214,7 +214,7 @@ struct WineGPSWidget: Widget {
         }
         .configurationDisplayName(selectHeading)
         .supportedFamilies([.systemSmall])
-        .description("Choose one varietal to display its bottle count in this widget.")
+        .description(selectDescription)
     }
 }
 
