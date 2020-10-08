@@ -414,8 +414,8 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         wineDetailController.title = detailTitle
         let navController = UINavigationController(rootViewController: wineDetailController)
         present(navController, animated: true, completion: nil)
-        searchBarCancelButtonClicked(searchBar)
-
+//        don't clear the text from the searchBar
+//        searchBarCancelButtonClicked(searchBar)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
