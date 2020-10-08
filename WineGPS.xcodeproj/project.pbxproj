@@ -48,13 +48,13 @@
 		924175FC245A2910002502FE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924175FB245A2910002502FE /* Extensions.swift */; };
 		9248A166251ACC21004587EF /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248A165251ACC21004587EF /* DataServices.swift */; };
 		9248A16C251ACFFA004587EF /* apiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248A16B251ACFFA004587EF /* apiService.swift */; };
+		924C7F742525042A007900BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 927C22B22483729800695B45 /* Localizable.strings */; };
 		924E5BAA25164D3B00259AB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BA825164D3B00259AB3 /* Localizable.strings */; };
 		924E5BB125164DCB00259AB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BAF25164DCB00259AB3 /* InfoPlist.strings */; };
 		9256B72B24B4DEA0003BAA4C /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256B72A24B4DEA0003BAA4C /* mail.png */; };
 		9256B72D24B4E085003BAA4C /* bottleLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256B72C24B4E085003BAA4C /* bottleLogo.png */; };
 		925C4513246AE8A000044894 /* SearchKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C4512246AE8A000044894 /* SearchKeys.swift */; };
 		925E9B9324B4C49F00D4553A /* SupportMenuSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E9B9224B4C49F00D4553A /* SupportMenuSections.swift */; };
-		92674FD62518D638000D5B45 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 92674FD92518D638000D5B45 /* Localizable.stringsdict */; };
 		92674FD72518D638000D5B45 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 92674FD92518D638000D5B45 /* Localizable.stringsdict */; };
 		9270146724BCDBA6001A20CC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270146624BCDBA6001A20CC /* LoginController.swift */; };
 		9272ADD2251CFA5B00576020 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272ADD1251CFA5B00576020 /* IntentHandler.swift */; };
@@ -67,11 +67,9 @@
 		9272AE1D251D02AF00576020 /* VarietalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE0D251D017200576020 /* VarietalDetail.swift */; };
 		9272AE24251D02B000576020 /* VarietalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE0D251D017200576020 /* VarietalDetail.swift */; };
 		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
-		927C22B02483729800695B45 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 927C22B22483729800695B45 /* Localizable.strings */; };
 		927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927DF8D324F5B4F00090727E /* Default-568h@2x.png */; };
 		9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */; };
 		9289227C24AD102E0090A410 /* DrillDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */; };
-		9299CEF22522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
 		9299CEF32522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
 		9299CEF42522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
 		9299CF1B2522748C00CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
@@ -163,7 +161,7 @@
 		36BDE4BC203D87BC00581A05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		36BDE4C3203D87BC00581A05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		36BDE4C8203D87BC00581A05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Wine GPS/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
+		36BDE4C8203D87BC00581A05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../WineGPSWidget/Info.plist; sourceTree = "<group>"; };
 		36BDE4D0203D884D00581A05 /* ProducerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducerViewController.swift; sourceTree = "<group>"; };
 		9201C7A424B5015400775B00 /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		92042F3424645CBC00515BAD /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
@@ -207,6 +205,7 @@
 		924175FB245A2910002502FE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9248A165251ACC21004587EF /* DataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
 		9248A16B251ACFFA004587EF /* apiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiService.swift; sourceTree = "<group>"; };
+		924B3FAC252372E800FB2CD0 /* WineGPSWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WineGPSWidgetExtension.entitlements; sourceTree = "<group>"; };
 		924E5BA925164D3B00259AB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		924E5BB025164DCB00259AB3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		924E5BB225164DCB00259AB3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -321,6 +320,7 @@
 		36BDE4B0203D87BC00581A05 = {
 			isa = PBXGroup;
 			children = (
+				924B3FAC252372E800FB2CD0 /* WineGPSWidgetExtension.entitlements */,
 				923400F024F861CE00EED320 /* InfoPlist.strings */,
 				927DF8D324F5B4F00090727E /* Default-568h@2x.png */,
 				927C22B22483729800695B45 /* Localizable.strings */,
@@ -821,7 +821,6 @@
 				92DCEA2D2491768500AFFB59 /* LaunchScreen.storyboard in Resources */,
 				9256B72D24B4E085003BAA4C /* bottleLogo.png in Resources */,
 				923400F224F861CE00EED320 /* InfoPlist.strings in Resources */,
-				92674FD62518D638000D5B45 /* Localizable.stringsdict in Resources */,
 				923196DE24B39E530044C1A0 /* producer.png in Resources */,
 				927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */,
 				923196E224B39E530044C1A0 /* location.png in Resources */,
@@ -829,8 +828,8 @@
 				923196E024B39E530044C1A0 /* barcode.png in Resources */,
 				9256B72B24B4DEA0003BAA4C /* mail.png in Resources */,
 				9206B0E424C493BF00EA67A5 /* pages.png in Resources */,
+				924C7F742525042A007900BC /* Localizable.strings in Resources */,
 				923196DF24B39E530044C1A0 /* varietal.png in Resources */,
-				927C22B02483729800695B45 /* Localizable.strings in Resources */,
 				36BDE4C4203D87BC00581A05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -930,7 +929,6 @@
 				92D9571224BF6789002BBF98 /* Reachability.swift in Sources */,
 				9272AE0E251D017200576020 /* VarietalDetail.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,
-				9299CEF22522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */,
 				92042F3524645CBC00515BAD /* TableCell.swift in Sources */,
 				92A271B7249187BD00F9BE57 /* API.swift in Sources */,
 				92DCEA2924916FA600AFFB59 /* DataServices.swift in Sources */,
@@ -1238,7 +1236,7 @@
 				DEVELOPMENT_ASSET_PATHS = WineGPS;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = "WineGPS/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = adynak.wineGPS;
 				PRODUCT_NAME = WineGPS;
@@ -1259,7 +1257,7 @@
 				DEVELOPMENT_ASSET_PATHS = WineGPS;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = "WineGPS/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = adynak.wineGPS;
 				PRODUCT_NAME = WineGPS;
@@ -1275,6 +1273,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = WineGPSWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = WineGPSWidget/Info.plist;
@@ -1296,6 +1295,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = WineGPSWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = WineGPSWidget/Info.plist;
