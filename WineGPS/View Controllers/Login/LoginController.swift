@@ -115,11 +115,6 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !UserDefaults.standard.getiCloudStatus() {
-            Alert.noIcloudAlert(on: self)
-        }
-
-        
         if #available(iOS 13.0, *) {
             self.isModalInPresentation = true
         }
@@ -247,7 +242,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     func finishLoggingIn(userName: String, userPword: String) {
-                
+                        
         let userName = userName
         let userPword = userPword
         if (userName.isEmpty || userPword.isEmpty) {
