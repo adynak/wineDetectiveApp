@@ -68,6 +68,8 @@
 		9272AE24251D02B000576020 /* VarietalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272AE0D251D017200576020 /* VarietalDetail.swift */; };
 		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
 		927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927DF8D324F5B4F00090727E /* Default-568h@2x.png */; };
+		9287A869252FA50D00716407 /* wineJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9287A868252FA50D00716407 /* wineJSON.swift */; };
+		9287A86A252FA50D00716407 /* wineJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9287A868252FA50D00716407 /* wineJSON.swift */; };
 		9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */; };
 		9289227C24AD102E0090A410 /* DrillDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */; };
 		9299CEF32522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
@@ -235,6 +237,7 @@
 		927C22B12483729800695B45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		927C22B3248372AA00695B45 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		927DF8D324F5B4F00090727E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9287A868252FA50D00716407 /* wineJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wineJSON.swift; sourceTree = "<group>"; };
 		9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillDownDetailViewController.swift; sourceTree = "<group>"; };
 		9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillDownTableViewCell.swift; sourceTree = "<group>"; };
 		9299CEF52522725600CBBD60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/WineGPSIntent.intentdefinition; sourceTree = "<group>"; };
@@ -621,6 +624,7 @@
 				924166D124AF0B880082954A /* MoreMenuSections.swift */,
 				925E9B9224B4C49F00D4553A /* SupportMenuSections.swift */,
 				92C97C3524F5CEC7002CA657 /* WineGPS.xcdatamodeld */,
+				9287A868252FA50D00716407 /* wineJSON.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -930,6 +934,7 @@
 				9272AE0E251D017200576020 /* VarietalDetail.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,
 				92042F3524645CBC00515BAD /* TableCell.swift in Sources */,
+				9287A869252FA50D00716407 /* wineJSON.swift in Sources */,
 				92A271B7249187BD00F9BE57 /* API.swift in Sources */,
 				92DCEA2924916FA600AFFB59 /* DataServices.swift in Sources */,
 				92B5ECF124AC019D0032E1F2 /* DrinkByViewController.swift in Sources */,
@@ -961,6 +966,7 @@
 				922F4166251D333900EBC404 /* WineGPSBundle.swift in Sources */,
 				929EDDE8251E6B400042D113 /* VarietalProvider.swift in Sources */,
 				9248A16C251ACFFA004587EF /* apiService.swift in Sources */,
+				9287A86A252FA50D00716407 /* wineJSON.swift in Sources */,
 				9215078525150A6000AA13E0 /* WineGPSWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

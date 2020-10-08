@@ -794,14 +794,41 @@ class DataServices {
         return message
     }
 
-    static func writeToDocumentsDirectory(wines: [DrillLevel0]){
+    static func writeToDocumentsDirectory(wines: [DrillLevel0]) {
         var totalBottles = 0
-        for varietal in wines{
-            totalBottles += varietal.bottleCount!
-            print(varietal.name! + " \(varietal.bottleCount ?? 0)")
-            
+        let json:NSMutableDictionary = NSMutableDictionary()
+        let jsonArray:NSMutableArray = NSMutableArray()
+
+        for bottle in wines
+        {
+            let varietal: NSMutableDictionary = NSMutableDictionary()
+            varietal.setValue(bottle.name, forKey: "name")
+            varietal.setValue(bottle.bottleCount, forKey: "quantity")
+            jsonArray.add(varietal)
+            totalBottles += bottle.bottleCount!
         }
-        print("totalBottles \(totalBottles)")
+        
+        let varietal: NSMutableDictionary = NSMutableDictionary()
+        let totalString = NSLocalizedString("totalBottles", comment: "plural : total bottles")
+
+        varietal.setValue(totalString, forKey: "name")
+        varietal.setValue(totalBottles, forKey: "quantity")
+        jsonArray.insert(varietal, at: 0)
+
+        json.setObject(jsonArray, forKey: "varietals" as NSCopying)
+        let jsonData = try! JSONSerialization.data(withJSONObject: json)
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        
+        let url = AppGroup.wineGPS.containerURL.appendingPathComponent("varietals.txt")
+        _ = try?jsonString.write(to: url, atomically: true, encoding: .utf8)
+        
+//        do {
+//            let input = try String(contentsOf: url)
+//            print(input)
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+        
     }
     
 }
