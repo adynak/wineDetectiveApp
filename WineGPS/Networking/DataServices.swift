@@ -794,7 +794,15 @@ class DataServices {
         return message
     }
 
-
+    static func writeToDocumentsDirectory(wines: [DrillLevel0]){
+        var totalBottles = 0
+        for varietal in wines{
+            totalBottles += varietal.bottleCount!
+            print(varietal.name! + " \(varietal.bottleCount ?? 0)")
+            
+        }
+        print("totalBottles \(totalBottles)")
+    }
     
 }
 

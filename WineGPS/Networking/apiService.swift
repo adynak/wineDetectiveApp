@@ -143,6 +143,8 @@ class API {
                                              location: locationSort,
                                              missing: missingSort)
             
+            DataServices.writeToDocumentsDirectory(wines: varietalSort)
+
             print("build data arrays complete")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APILoaded"), object: nil)
 
