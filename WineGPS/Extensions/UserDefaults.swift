@@ -34,11 +34,19 @@ extension UserDefaults {
     }
     
     func setUserName(value: String) {
+        
+        if let userDs = UserDefaults(suiteName: "group.adynak.wineGPS") {
+            userDs.set(value as AnyObject, forKey: "username")
+        }
         set(value, forKey: UserDefaultsKeys.userName.rawValue)
         synchronize()
     }
     
     func setUserPword(value: String) {
+        
+        if let userDs = UserDefaults(suiteName: "group.adynak.wineGPS") {
+            userDs.set(value as AnyObject, forKey: "userPword")
+        }
         set(value, forKey: UserDefaultsKeys.userPword.rawValue)
         synchronize()
     }

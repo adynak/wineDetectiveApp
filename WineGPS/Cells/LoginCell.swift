@@ -61,7 +61,6 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
         checkbox.addTarget(self, action: #selector(toggleCheckboxSelection), for: .touchUpInside)
         checkbox.setTitleColor(.black, for: .normal)
         checkbox.titleLabel!.font = UIFont(name: "Verdana", size: 12)
-//        checkbox.backgroundColor = .red
         checkbox.titleEdgeInsets = UIEdgeInsets.init(top: 0,left: 12,bottom: 0,right: 0)
         return checkbox
     }()
@@ -80,30 +79,21 @@ class LoginCell: UICollectionViewCell, UITextFieldDelegate {
     weak var delegate: LoginControllerDelegate?
         
     @objc func handleLogin() {
+
+//        change language?
+//        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        
+        UserDefaults.standard.setUserName(value: emailTextField.text!)
+        UserDefaults.standard.setUserPword(value: passwordTextField.text!)
         if rememberMeCheckbox.isSelected == true {
             UserDefaults.standard.set(true, forKey: "rememberMe")
-            UserDefaults.standard.setUserName(value: emailTextField.text!)
-            UserDefaults.standard.setUserPword(value: passwordTextField.text!)
         } else {
-            UserDefaults.standard.setUserName(value: "")
-            UserDefaults.standard.setUserPword(value: "")
             UserDefaults.standard.set(false, forKey: "rememberMe")
         }
         delegate?.finishLoggingIn(userName: emailTextField.text!, userPword: passwordTextField.text!)
     }
     
     @objc func toggleCheckboxSelection(_ sender: UIButton) {
-//        if !sender.isSelected {
-//            if UserDefaults.contains("rememberMe"){
-//                UserDefaults.standard.set(true, forKey: "rememberMe")
-//            }
-//            print("selected")
-//        } else {
-//            if UserDefaults.contains("rememberMe"){
-//                UserDefaults.standard.set(false, forKey: "rememberMe")
-//            }
-//            print("deselected")
-//        }
         sender.isSelected = !sender.isSelected
     }
     
