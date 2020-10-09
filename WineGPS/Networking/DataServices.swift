@@ -796,7 +796,6 @@ class DataServices {
 
     static func writeToDocumentsDirectory(wines: [DrillLevel0]) {
         var totalBottles = 0
-        let json:NSMutableDictionary = NSMutableDictionary()
         let jsonArray:NSMutableArray = NSMutableArray()
 
         for bottle in wines
@@ -814,21 +813,14 @@ class DataServices {
         varietal.setValue(totalString, forKey: "name")
         varietal.setValue(totalBottles, forKey: "quantity")
         jsonArray.insert(varietal, at: 0)
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonArray)
 
-        json.setObject(jsonArray, forKey: "varietals" as NSCopying)
-        let jsonData = try! JSONSerialization.data(withJSONObject: json)
         let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
         
         let url = AppGroup.wineGPS.containerURL.appendingPathComponent("varietals.txt")
         _ = try?jsonString.write(to: url, atomically: true, encoding: .utf8)
-        
-//        do {
-//            let input = try String(contentsOf: url)
-//            print(input)
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-        
+                
     }
     
 }

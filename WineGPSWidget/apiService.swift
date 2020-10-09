@@ -111,5 +111,19 @@ class WidgetAPI {
         
         return data
     }
+    
+    static func readVarietalJson() -> [WidgetVarietals]? {
 
+        let url = AppGroup.wineGPS.containerURL.appendingPathComponent("varietals.txt")
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let varietalArray = try decoder.decode([WidgetVarietals].self, from: data)
+                return varietalArray
+            } catch {
+                print("error:\(error)")
+            }
+        
+        return nil
+    }
 }

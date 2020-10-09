@@ -69,7 +69,6 @@
 		92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92753CE4245DC3D400EF08F6 /* Keyboard.swift */; };
 		927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927DF8D324F5B4F00090727E /* Default-568h@2x.png */; };
 		9287A869252FA50D00716407 /* wineJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9287A868252FA50D00716407 /* wineJSON.swift */; };
-		9287A86A252FA50D00716407 /* wineJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9287A868252FA50D00716407 /* wineJSON.swift */; };
 		9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */; };
 		9289227C24AD102E0090A410 /* DrillDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */; };
 		9299CEF32522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
@@ -966,7 +965,6 @@
 				922F4166251D333900EBC404 /* WineGPSBundle.swift in Sources */,
 				929EDDE8251E6B400042D113 /* VarietalProvider.swift in Sources */,
 				9248A16C251ACFFA004587EF /* apiService.swift in Sources */,
-				9287A86A252FA50D00716407 /* wineJSON.swift in Sources */,
 				9215078525150A6000AA13E0 /* WineGPSWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

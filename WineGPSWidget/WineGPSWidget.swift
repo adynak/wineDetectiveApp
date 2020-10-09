@@ -36,13 +36,16 @@ struct Provider: IntentTimelineProvider {
         for refreshInterval in stride(from: 0, to: 40, by: 120) {
             
             let wineCounts = WidgetAPI.load()
+            let wineCounts1 = WidgetAPI.readVarietalJson()
 
             let entryDate = Calendar.current.date(byAdding: .minute, value: refreshInterval, to: currentDate)!
-            let totalBottleCount = wineCounts[totalBottles]
+//            let totalBottleCount = wineCounts[totalBottles]
+            let totalBottleCount1 = wineCounts1?[0].quantity
+
 
             let varietalDetails = lookupVarietalDetails(for: configuration)
 
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottleCount!, varietalCount: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottleCount1!, varietalCount: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
             entries.append(entry)
         }
 
