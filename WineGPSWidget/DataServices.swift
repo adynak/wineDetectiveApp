@@ -8,7 +8,7 @@
 
 import Foundation
 
-var debug: Bool = false
+var debug: Bool = true
 
 enum NetworkError: Error {
     case url
