@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import WidgetKit
 
 let debug: Bool = true
 
@@ -598,6 +599,11 @@ class DataServices {
         print("rebuild data arrays complete")
         allWine = newInventory
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+        
+        DataServices.writeToDocumentsDirectory(wines: varietalSort)
+        
+        WidgetCenter.shared.reloadTimelines(ofKind: "adynak.wineGPS.WineGPSWidget")
+
 
     }
 
@@ -794,15 +800,81 @@ class DataServices {
         return message
     }
 
-    static func writeToDocumentsDirectory(wines: [DrillLevel0]){
+    static func writeToDocumentsDirectory(wines: [DrillLevel0]) {
+        
+        print("writeToDocumentsDirectory")
         var totalBottles = 0
-        for varietal in wines{
-            totalBottles += varietal.bottleCount!
-            print(varietal.name! + " \(varietal.bottleCount ?? 0)")
-            
+        let jsonArray:NSMutableArray = NSMutableArray()
+
+        for bottle in wines
+        {
+            let varietal: NSMutableDictionary = NSMutableDictionary()
+            varietal.setValue(bottle.name, forKey: "name")
+            varietal.setValue(bottle.bottleCount, forKey: "quantity")
+            jsonArray.add(varietal)
+            totalBottles += bottle.bottleCount!
         }
-        print("totalBottles \(totalBottles)")
+        
+        let varietal: NSMutableDictionary = NSMutableDictionary()
+        let totalString = NSLocalizedString("totalBottles", comment: "plural : total bottles")
+
+        varietal.setValue(totalString, forKey: "name")
+        varietal.setValue(totalBottles, forKey: "quantity")
+        jsonArray.insert(varietal, at: 0)
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: jsonArray)
+
+        let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+        
+        let url = AppGroup.wineGPS.containerURL.appendingPathComponent("varietals.txt")
+        _ = try?jsonString.write(to: url, atomically: true, encoding: .utf8)
+        
+//        let wineCounts = readVarietalJson()
+//
+//
+//        var varietalArray = [WidgetVarietals]()
+//
+//        do {
+//            let data = try Data(contentsOf: url)
+//            let decoder = JSONDecoder()
+//            varietalArray = try decoder.decode([WidgetVarietals].self, from: data)
+//            print(varietalArray)
+//        } catch {
+//            print("error:\(error)")
+//        }
+//        print("atend")
+                
     }
+    
+//    class WidgetVarietals : Decodable {
+//        var name : String
+//        var quantity : Int
+//
+//        init (name : String, quantity: Int){
+//             self.name = name
+//             self.quantity = quantity
+//        }
+//    }
+    
+//    static func readVarietalJson() -> [String: Int] {
+//        
+//        var wineCounts = [String: Int]()
+//
+//        let url = AppGroup.wineGPS.containerURL.appendingPathComponent("varietals.txt")
+//            do {
+//                let data = try Data(contentsOf: url)
+//                let decoder = JSONDecoder()
+//                let varietalArray = try decoder.decode([WidgetVarietals].self, from: data)
+//                for varietal in varietalArray{
+//                    wineCounts[varietal.name] = varietal.quantity
+//                }                
+//            } catch {
+//                print("error:\(error)")
+//                wineCounts["Total Bottles"] = 0
+//            }
+//        return wineCounts
+//    }
+
     
 }
 

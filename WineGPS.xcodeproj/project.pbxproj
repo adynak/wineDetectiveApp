@@ -70,6 +70,7 @@
 		927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927DF8D324F5B4F00090727E /* Default-568h@2x.png */; };
 		9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */; };
 		9289227C24AD102E0090A410 /* DrillDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */; };
+		92910807253643B300DC5C89 /* wineJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92910806253643B300DC5C89 /* wineJSON.swift */; };
 		9299CEF32522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
 		9299CEF42522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
 		9299CF1B2522748C00CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
@@ -237,11 +238,13 @@
 		927DF8D324F5B4F00090727E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillDownDetailViewController.swift; sourceTree = "<group>"; };
 		9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillDownTableViewCell.swift; sourceTree = "<group>"; };
+		92910806253643B300DC5C89 /* wineJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = wineJSON.swift; path = "../../../WineGPS copy 2/WineGPS/Models/wineJSON.swift"; sourceTree = "<group>"; };
 		9299CEF52522725600CBBD60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/WineGPSIntent.intentdefinition; sourceTree = "<group>"; };
 		9299CEFE2522726E00CBBD60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WineGPSIntent.strings; sourceTree = "<group>"; };
 		9299CF062522727000CBBD60 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/WineGPSIntent.strings; sourceTree = "<group>"; };
 		9299CF142522727200CBBD60 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/WineGPSIntent.strings; sourceTree = "<group>"; };
 		929A8A7924D0998600A9E671 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		92A2054C253767C400077753 /* WineGPS Intent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WineGPS Intent.entitlements"; sourceTree = "<group>"; };
 		92A271B6249187BD00F9BE57 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		92A271B8249187FC00F9BE57 /* apiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiService.swift; sourceTree = "<group>"; };
 		92ABF50B24D1EE6E006768EC /* support.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = support.png; sourceTree = "<group>"; };
@@ -440,6 +443,7 @@
 		9272ADD0251CFA5B00576020 /* WineGPS Intent */ = {
 			isa = PBXGroup;
 			children = (
+				92A2054C253767C400077753 /* WineGPS Intent.entitlements */,
 				9272ADD1251CFA5B00576020 /* IntentHandler.swift */,
 				9272ADD3251CFA5B00576020 /* Info.plist */,
 			);
@@ -614,6 +618,7 @@
 		92DCEA2724916BFC00AFFB59 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				92910806253643B300DC5C89 /* wineJSON.swift */,
 				9272AE0D251D017200576020 /* VarietalDetail.swift */,
 				922FBD3F21B9CD4800E14641 /* Inventory.swift */,
 				924175F5245A212E002502FE /* Page.swift */,
@@ -930,6 +935,7 @@
 				9272AE0E251D017200576020 /* VarietalDetail.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,
 				92042F3524645CBC00515BAD /* TableCell.swift in Sources */,
+				92910807253643B300DC5C89 /* wineJSON.swift in Sources */,
 				92A271B7249187BD00F9BE57 /* API.swift in Sources */,
 				92DCEA2924916FA600AFFB59 /* DataServices.swift in Sources */,
 				92B5ECF124AC019D0032E1F2 /* DrinkByViewController.swift in Sources */,
@@ -1425,6 +1431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "WineGPS Intent/WineGPS Intent.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = "WineGPS Intent/Info.plist";
@@ -1443,6 +1450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "WineGPS Intent/WineGPS Intent.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H738MGD6WZ;
 				INFOPLIST_FILE = "WineGPS Intent/Info.plist";
