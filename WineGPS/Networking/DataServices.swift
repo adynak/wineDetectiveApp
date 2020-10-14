@@ -602,7 +602,7 @@ class DataServices {
         
         DataServices.writeToDocumentsDirectory(wines: varietalSort)
         
-        WidgetCenter.shared.reloadTimelines(ofKind: "WineGPSWidget")
+        WidgetCenter.shared.reloadAllTimelines()
 
 
     }
