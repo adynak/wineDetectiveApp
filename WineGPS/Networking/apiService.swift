@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import CloudKit
+import WidgetKit
 
 class API {
     
@@ -143,6 +144,8 @@ class API {
                                              missing: missingSort)
             
             DataServices.writeToDocumentsDirectory(wines: varietalSort)
+            
+            WidgetCenter.shared.reloadAllTimelines()
 
             print("build data arrays complete")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APILoaded"), object: nil)

@@ -37,38 +37,4 @@ class WidgetAPI {
         return wineCounts
     }
 
-    
-    static func fetchRemoteDataAsyncAwait(url:String) throws -> Data? {
-        guard let remoteURL = URL(string: url) else {
-            throw NetworkError.url
-        }
-        
-        var data: Data?
-        var response: URLResponse?
-        var error: Error?
-        
-        // Semaphore
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        URLSession.shared.dataTask(with: remoteURL) { (d, r, e) in
-            data = d
-            response = r
-            error = e
-            
-            semaphore.signal()
-        }.resume()
-        
-        _ = semaphore.wait(timeout: .distantFuture)
-        
-        if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode > 300 {
-            throw NetworkError.statusCode
-        }
-        
-        if error != nil {
-            throw NetworkError.standard
-        }
-        
-        return data
-    }
-
 }
