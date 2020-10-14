@@ -13,71 +13,30 @@ class WidgetAPI {
     static func load() -> [String: Int] {
         
         var wineCounts = [String: Int]()
-        
-        do {
-
-            let user = "al00p"
-            let pword = "Genesis13355Tigard"
-            
-            let dataUrl = DataServices.getDataUrl(user: user,
-                                                  pword: pword,
-                                                  table: "Inventory")
-            
-            do {
-
-                let data = try fetchRemoteDataAsyncAwait(url: dataUrl)
-                let csvInventory = String(data: data!, encoding: String.Encoding.ascii)
-                var inventoryArray = DataServices.parseCsv(data:csvInventory!.replacingOccurrences(of: "Unknown", with: ""))
-
-                dataHeader = inventoryArray.removeFirst()
-                fields = DataServices.locateDataPositions(dataHeader:dataHeader)
-                let positionOf = Label(data:fields)
-                
-                var wines: [DrillBottle] = []
-                
-                for row in inventoryArray{
-                    let vintage = (row[positionOf.vintage] == "1001") ? "NV" : row[positionOf.vintage]
-
-                    let bottle = DrillBottle(
-                        producer: row[positionOf.producer],
-                        varietal: row[positionOf.varietal],
-                        location: row[positionOf.location],
-                        bin: row[positionOf.bin],
-                        vintage: vintage,
-                        iWine: row[positionOf.iWine],
-                        barcode: row[positionOf.barcode],
-                        designation: row[positionOf.designation],
-                        ava: row[positionOf.ava],
-                        beginConsume: row[positionOf.beginConsume],
-                        endConsume: row[positionOf.endConsume],
-                        description: "123",
-                        vineyard: row[positionOf.vineyard],
-                        type: row[positionOf.type]
-                    )
-                    
-                    wines.append(bottle)
-
-                }
-                                
-                let wineTypes = Dictionary(grouping: wines, by: { (element: DrillBottle) in
-                    return element.varietal
-                })
-        
-                let totalElement = NSLocalizedString("totalBottles", comment: "plural : total bottles")
-                wineCounts[totalElement] = wines.count
-                for (varietal) in wineTypes {
-                    wineCounts[varietal.key] = wineTypes[varietal.key]!.count
-                }
-            
-            } catch {
-                print(error)
-            }
-
-        }
-
+        wineCounts = WidgetAPI.readVarietalJson()
         return wineCounts
         
     }
+    
+    static func readVarietalJson() -> [String: Int] {
+        
+        var wineCounts = [String: Int]()
+
+        let url = AppGroup.wineGPS.containerURL.appendingPathComponent("varietals.txt")
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let varietalArray = try decoder.decode([WidgetVarietals].self, from: data)
+                for varietal in varietalArray{
+                    wineCounts[varietal.name] = varietal.quantity
+                }
+            } catch {
+                print("error:\(error)")
+                wineCounts["Total Bottles"] = 0
+            }
+        return wineCounts
+    }
+
     
     static func fetchRemoteDataAsyncAwait(url:String) throws -> Data? {
         guard let remoteURL = URL(string: url) else {

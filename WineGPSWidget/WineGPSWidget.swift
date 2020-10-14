@@ -205,6 +205,7 @@ struct WineGPSWidget: Widget {
     
     
     var body: some WidgetConfiguration {
+        
         IntentConfiguration(
             kind: kind,
             intent: SelectVarietalIntent.self,

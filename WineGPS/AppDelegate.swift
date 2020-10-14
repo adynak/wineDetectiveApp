@@ -45,19 +45,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
                 
-        let group = DispatchGroup()
-        group.enter()
-        DispatchQueue.global(qos: .default).async {
-            CKContainer.default().accountStatus { (accountStatus, error) in
-                if accountStatus == .available {
+//        let group = DispatchGroup()
+//        group.enter()
+//        DispatchQueue.global(qos: .default).async {
+//            CKContainer.default().accountStatus { (accountStatus, error) in
+//                if accountStatus == .available {
                     UserDefaults.standard.set(true, forKey: "iCloudAvailable")
-                } else {
-                    UserDefaults.standard.set(false, forKey: "iCloudAvailable")
-                }
-            }
-            group.leave()
-        }
-        group.wait()
+//                } else {
+//                    UserDefaults.standard.set(false, forKey: "iCloudAvailable")
+//                }
+//            }
+//            group.leave()
+//        }
+//        group.wait()
         
         print("didFinishLaunchingWithOptions")
                 
@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        // print("applicationDidBecomeActive")
+         print("applicationDidBecomeActive")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
