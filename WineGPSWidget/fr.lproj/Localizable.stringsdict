@@ -13,7 +13,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>Aucun vin en inventaire</string>
+			<string>La cave est vide</string>
 			<key>one</key>
 			<string>%d Bouteille</string>
 			<key>other</key>
