@@ -802,7 +802,7 @@ class DataServices {
 
     static func writeToDocumentsDirectory(wines: [DrillLevel0]) {
         
-        print("writeToDocumentsDirectory")
+//        print("writeToDocumentsDirectory")
         var totalBottles = 0
         let jsonArray:NSMutableArray = NSMutableArray()
 

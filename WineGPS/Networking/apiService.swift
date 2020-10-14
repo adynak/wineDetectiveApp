@@ -14,8 +14,8 @@ import CloudKit
 class API {
     
     static func load() -> String {
-                
-        print("load")
+        
+        print("debug = \(debug)")
         
         if Reachability.isConnectedToNetwork(){
             print("Internet Connection Available!")
@@ -55,7 +55,7 @@ class API {
                 
             }
 
-            print("availability")
+            print("loading availability")
         } catch {
             print("Failed to fetch availability:", error)
             return "Failed"
@@ -105,8 +105,7 @@ class API {
             }
             
             dataArray = inventoryArray
-            print("inventory")
-            print("debug = \(debug)")
+            print("loading inventory")
             
             dataHeader = dataArray.removeFirst()
             fields = DataServices.locateDataPositions(dataHeader:dataHeader)
