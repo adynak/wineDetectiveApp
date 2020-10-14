@@ -200,7 +200,7 @@
 		924166D124AF0B880082954A /* MoreMenuSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuSections.swift; sourceTree = "<group>"; };
 		924166D324AF0BB60082954A /* MoreMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuCell.swift; sourceTree = "<group>"; };
 		924166D624AF0C110082954A /* MoreMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreMenuViewController.swift; sourceTree = "<group>"; };
-		924175F1245A2082002502FE /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
+		924175F1245A2082002502FE /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; tabWidth = 5; };
 		924175F3245A2104002502FE /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		924175F5245A212E002502FE /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		924175F9245A2625002502FE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
