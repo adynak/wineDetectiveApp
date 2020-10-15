@@ -80,8 +80,18 @@ class SearchViewController: UIViewController {
         return sb
     }()
     
+    @objc func loadList(notification: NSNotification){
+        //load data here
+        let markAsDrank = DataServices.buildCellarTrackerList()
+
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+
         
         tellCellarTracker()
 
