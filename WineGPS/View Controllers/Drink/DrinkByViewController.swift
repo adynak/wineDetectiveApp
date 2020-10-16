@@ -55,6 +55,41 @@ class DrinkByViewController: UIViewController {
         sb.subviews.first?.clipsToBounds = true
         return sb
     }()
+    
+    @objc func removeRecentlyDrank(notification: NSNotification){
+        let markAsDrank = DataServices.buildCellarTrackerList()
+        if markAsDrank.count > 0 {
+            filteredBottles = removeFilteredBottles(markAsDrank: markAsDrank, filteredBottles: filteredBottles)
+            tableView.reloadData()
+        }
+    }
+    
+    func removeFilteredBottles(markAsDrank: [DrillLevel2] ,filteredBottles: [SearchKeys]) -> [SearchKeys]{
+                
+        for emptyBottle in markAsDrank {
+            let findThisBarcode = emptyBottle.barcode
+            for (index,someBottle) in self.filteredBottles.enumerated(){
+                let storageBin = someBottle.storageBins
+                
+                if let foo = storageBin!.enumerated().first(where: {$0.element.barcode == findThisBarcode}) {
+                   // do something with foo.offset and foo.element
+                    if storageBin!.count > 1 {
+                        self.filteredBottles[index].storageBins!.remove(at:foo.offset)
+                    } else {
+                        self.filteredBottles.remove(at: index)
+                    }
+                } else {
+                   // item could not be found
+                }
+                
+            }
+            
+        }
+        
+        return self.filteredBottles
+        
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,14 +102,14 @@ class DrinkByViewController: UIViewController {
         searchWines = allWine?.drinkBy
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
-
         
+        NotificationCenter.default.addObserver(self, selector: #selector(removeRecentlyDrank), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(changeDrinkBySort),
                                                name: Notification.Name("changeDrinkBySort"),
                                                object: nil)
 
-        
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].available) > ($1.label[0].available)
         })

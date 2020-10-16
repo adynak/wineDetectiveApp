@@ -80,17 +80,44 @@ class SearchViewController: UIViewController {
         return sb
     }()
     
-    @objc func loadList(notification: NSNotification){
-        //load data here
+    @objc func removeRecentlyDrank(notification: NSNotification){
         let markAsDrank = DataServices.buildCellarTrackerList()
-
-        self.tableView.reloadData()
+        if markAsDrank.count > 0 {
+            filteredBottles = removeFilteredBottles(markAsDrank: markAsDrank, filteredBottles: filteredBottles)
+            tableView.reloadData()
+        }
+    }
+    
+    func removeFilteredBottles(markAsDrank: [DrillLevel2] ,filteredBottles: [SearchKeys]) -> [SearchKeys]{
+                
+        for emptyBottle in markAsDrank {
+            let findThisBarcode = emptyBottle.barcode
+            for (index,someBottle) in self.filteredBottles.enumerated(){
+                let storageBin = someBottle.storageBins
+                
+                if let foo = storageBin!.enumerated().first(where: {$0.element.barcode == findThisBarcode}) {
+                   // do something with foo.offset and foo.element
+                    if storageBin!.count > 1 {
+                        self.filteredBottles[index].storageBins!.remove(at:foo.offset)
+                    } else {
+                        self.filteredBottles.remove(at: index)
+                    }
+                } else {
+                   // item could not be found
+                }
+                
+            }
+            
+        }
+        
+        return self.filteredBottles
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeRecentlyDrank), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
         
         tellCellarTracker()
