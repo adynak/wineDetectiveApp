@@ -358,15 +358,15 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         
         alert.addAction(UIAlertAction.init(title: discardBtnText, style: .destructive) { (UIAlertAction) -> Void in
             for cell in self.cells {
-                    cell.bottleCountLabel.text = "1 \(NSLocalizedString("singularBottle", comment: "singular for the word bottle"))"
-                    cell.stepperView.tag = 1
-                    cell.stepperView.value = 1
-                }
-                let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
-                let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
-                let bottleString = (self.wineBins.count == 1) ? bottleSingular : pluralBottle
+                cell.bottleCountLabel.text = "1 \(NSLocalizedString("singularBottle", comment: "singular for the word bottle"))"
+                cell.stepperView.tag = 1
+                cell.stepperView.value = 1
+            }
+            let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
+            let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
+            let bottleString = (self.wineBins.count == 1) ? bottleSingular : pluralBottle
 
-                self.inventoryFooter.text = String(self.wineBins.count) + bottleString
+            self.inventoryFooter.text = String(self.wineBins.count) + bottleString
         })
         
         alert.addAction(UIAlertAction.init(title: cancelBtnText, style: .cancel) { (UIAlertAction) -> Void in
