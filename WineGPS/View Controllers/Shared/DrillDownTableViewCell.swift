@@ -58,6 +58,8 @@ class DrillDownTableViewCell : UITableViewCell {
             barcodeLabel.text = NSLocalizedString("labelBarcode", comment: "textfield label: Barcode") + ": \(binItem.barcode!)"
 
             stepperView.tag = binItem.bottleCount!
+            stepperView.value = Double(binItem.bottleCount!)
+
             iWineLabel.text = binItem.iWine
             vintageLabel.text = binItem.vintage
             bottleCountLabel.text = setLabelText(count: bin.bottleCount!)
@@ -246,12 +248,16 @@ class DrillDownTableViewCell : UITableViewCell {
         bottleCountLabel.text = setLabelText(count: Int(sender.value))
         bin.bottleCount = Int(sender.value)
         responseMessages["direction"] = stepDirection
-        delegate?.didTapStepper(direction: stepDirection)
-
+        delegate?.didTapStepper(direction: stepDirection, barcode: bin.barcode!)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bottleCountLabel.text = setLabelText(count: bin.bottleCount!)
+    }
+
 }

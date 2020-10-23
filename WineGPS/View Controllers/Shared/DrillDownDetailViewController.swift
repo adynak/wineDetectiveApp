@@ -332,18 +332,34 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     func buildMarkAsDrankList() -> [DrillLevel2]{
         var markAsDrank = [DrillLevel2]()
 
-        for cell in cells {
-            if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
-                if bottles == 0 {
-                    markAsDrank.append(DrillLevel2(
-                        producer: cell.producerLabel.text!,
-                        varietal: cell.locationAndBinLabel.text!,
-                        vintage: cell.vintageLabel.text!,
-                        iWine: cell.iWineLabel.text!,
-                        barcode: cell.barcodeLabel.text!,
-                        designation: cell.vintageAndDescriptionLabel.text,
-                        ava: cell.drinkByLabel.text))
-                }
+//        for cell in cells {
+//            if let bottles = Int.parse(from: cell.bottleCountLabel.text!) {
+//                if bottles == 0 {
+//                    markAsDrank.append(DrillLevel2(
+//                        producer: cell.producerLabel.text!,
+//                        varietal: cell.locationAndBinLabel.text!,
+//                        vintage: cell.vintageLabel.text!,
+//                        iWine: cell.iWineLabel.text!,
+//                        barcode: cell.barcodeLabel.text!,
+//                        designation: cell.vintageAndDescriptionLabel.text,
+//                        ava: cell.drinkByLabel.text))
+//                }
+//            }
+//        }
+        
+        for row in wineBins {
+            if row.bottleCount == 0 {
+                let vpd = String("\(row.vintage!) \(row.producer!) \(row.designation!)")
+                let va = String("\(row.varietal!) \(row.ava!)")
+                markAsDrank.append(DrillLevel2(
+                    producer: row.producer,
+                    varietal: row.varietal,
+                    vintage: row.vintage,
+                    iWine: row.iWine,
+                    barcode: row.barcode,
+                    designation: vpd,
+                    ava: va)
+                )
             }
         }
         return markAsDrank
