@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BinCellDelegate{
-    func didTapStepper(direction: String)
+    func didTapStepper(direction: String, barcode: String)
 }
 
 class BinTableViewCell : UITableViewCell {
@@ -154,7 +154,7 @@ class BinTableViewCell : UITableViewCell {
         bottleCountLabel.text = setLabelText(count: Int(sender.value))
         
         responseMessages["direction"] = stepDirection
-        delegate?.didTapStepper(direction: stepDirection)
+        delegate?.didTapStepper(direction: stepDirection, barcode: bin.barcode!)
 
     }
     

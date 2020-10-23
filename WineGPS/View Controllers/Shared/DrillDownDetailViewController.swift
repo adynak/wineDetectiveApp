@@ -264,7 +264,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 
         return cell
     }
-        
+            
     private func setupNavigationBar(){
         var mainTitle: String = ""
         var subTitle: String = ""
@@ -398,10 +398,11 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         alert.addAction(UIAlertAction.init(title: discardBtnText, style: .destructive) { (UIAlertAction) -> Void in
-            for cell in self.cells {
+            for (index,cell) in self.cells.enumerated() {
                 cell.bottleCountLabel.text = "1 \(NSLocalizedString("singularBottle", comment: "singular for the word bottle"))"
                 cell.stepperView.tag = 1
                 cell.stepperView.value = 1
+                self.wineBins[index].bottleCount = 1
             }
             let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
             let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
@@ -469,7 +470,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
 }
 
 extension DrillDownDetailViewController : DrillDownStepperCellDelegate {
-    func didTapStepper(direction: String){
+    
+    func didTapStepper(direction: String, barcode: String){
         let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
         let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
         let minus = "minus" as String
@@ -485,6 +487,16 @@ extension DrillDownDetailViewController : DrillDownStepperCellDelegate {
             count = number! + 1
         }
         let bottleString = (count == 1) ? bottleSingular : pluralBottle
+                
+        if let foo = self.wineBins.enumerated().first(where: {$0.element.barcode == barcode}) {
+            if direction == plus {
+                self.wineBins[foo.offset].bottleCount! += 1
+            } else {
+                self.wineBins[foo.offset].bottleCount! -= 1
+            }
+        } else {
+           // item could not be found
+        }
 
         inventoryFooter.text = String(count) + bottleString
     }

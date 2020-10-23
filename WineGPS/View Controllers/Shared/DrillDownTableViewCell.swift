@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DrillDownStepperCellDelegate{
-    func didTapStepper(direction: String)
+    func didTapStepper(direction: String, barcode: String)
 }
 
 class DrillDownTableViewCell : UITableViewCell {
@@ -60,6 +60,8 @@ class DrillDownTableViewCell : UITableViewCell {
             stepperView.tag = binItem.bottleCount!
             iWineLabel.text = binItem.iWine
             vintageLabel.text = binItem.vintage
+            bottleCountLabel.text = setLabelText(count: bin.bottleCount!)
+            
         }
     }
     
