@@ -441,7 +441,7 @@ extension DrinkByViewController: UITableViewDelegate, UITableViewDataSource{
         wineSelected.bottleCount = String(bottle.storageBins!.count)
         wineSelected.topLeft = bottle.producer
         wineSelected.topRight = bottle.varietal
-        wineSelected.viewName = "producer"
+        wineSelected.viewName = "drinkby"
         wineSelected.description = bottle.description
 
         let wineDetailController = DrillDownDetailViewController()

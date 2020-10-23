@@ -366,7 +366,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
         wineSelected.bottleCount = String(bottle.storageBins!.count)
         wineSelected.topLeft = bottle.producer
         wineSelected.topRight = bottle.varietal
-        wineSelected.viewName = "producer"
+        wineSelected.viewName = "search"
         wineSelected.description = bottle.description
 
         let wineDetailController = DrillDownDetailViewController()

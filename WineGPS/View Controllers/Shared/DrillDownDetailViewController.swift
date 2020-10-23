@@ -23,6 +23,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     var passedValue = WineDetail()
     
     let storageLabel: UITextView = {
+        // something about the order of these configs is important
         let tv = UITextView()
         tv.text = NSLocalizedString("labelLocationAndBin", comment: "textfield label: Location and Bin: similar to a storage room and a filing cabinet in that room")
         tv.font = UIFont.boldSystemFont(ofSize: 14)
@@ -30,6 +31,9 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         tv.backgroundColor = storageLabelBackgroundColor
         tv.textAlignment = .left
         tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.textContainer.lineFragmentPadding = 0
+        tv.textContainer.maximumNumberOfLines = 2
         tv.isScrollEnabled = true
         return tv
     }()
@@ -103,29 +107,41 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     func setupWineLabelLayout(){
         let labelTopLine: String
-        
+        let labelBottomLine: String
+
         let bottles = NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
         
         switch passedValue.viewName {
             case "producer":
-                labelTopLine = passedValue.topRight!
+                labelTopLine = passedValue.bottles![0].producer!
+                labelBottomLine = passedValue.bottles![0].varietal!
             case "varietal":
-                labelTopLine = passedValue.topLeft!
+                labelTopLine = passedValue.bottles![0].producer!
+                labelBottomLine = passedValue.bottles![0].varietal!
             case "location":
-                labelTopLine = ""
+                labelTopLine = " " + passedValue.bottles![0].location! + " " + passedValue.bottles![0].bin!
+                labelBottomLine = "\(bottles): \(passedValue.bottleCount)"
             case "missing":
-                labelTopLine = passedValue.topRight!
+                labelTopLine = passedValue.bottles![0].producer!
+                labelBottomLine = passedValue.bottles![0].varietal!
+            case "search":
+                labelTopLine = passedValue.bottles![0].producer!
+                labelBottomLine = passedValue.bottles![0].varietal!
+            case "drinkby":
+                labelTopLine = passedValue.bottles![0].producer!
+                labelBottomLine = passedValue.bottles![0].varietal!
             default:
                 labelTopLine = ""
+                labelBottomLine = ""
         }
         
-        storageLabel.text = " \(labelTopLine)\n\(bottles): \(passedValue.bottleCount)"
+        storageLabel.text = String(labelTopLine + "\n" + labelBottomLine)
         
         NSLayoutConstraint.activate([
             storageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             storageLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant : 5.0),
             storageLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24),
-            storageLabel.heightAnchor.constraint(equalToConstant: 42)
+            storageLabel.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     
@@ -250,22 +266,47 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
         
     private func setupNavigationBar(){
-        let subtitle: String
+        var mainTitle: String = ""
+        var subTitle: String = ""
 
         switch passedValue.viewName {
             case "producer":
-                subtitle = passedValue.topLeft!
+                subTitle = passedValue.topLeft!
+                mainTitle = title!
+                subTitle = ""
             case "varietal":
-                subtitle = passedValue.topRight!
+                subTitle = passedValue.topRight!
+                mainTitle = title!
+                subTitle = ""
             case "location":
-                subtitle = "\(passedValue.topLeft!) \(passedValue.topRight!)"
+                subTitle = "\(passedValue.topLeft!) \(passedValue.topRight!)"
+                mainTitle = title!
+                subTitle = ""
             case "missing":
-                subtitle = passedValue.topLeft!
+                subTitle = passedValue.topLeft!
+                mainTitle = title!
+                subTitle = ""
+            case "search":
+                mainTitle = NSLocalizedString("titleSearch", comment: "navigation title: search")
+                subTitle = title!
+                if mainTitle == subTitle {
+                    subTitle = ""
+                } else {
+                    subTitle = "\"\(subTitle)\""
+                }
+            case "drinkby":
+                mainTitle = NSLocalizedString("titleDrinkBy", comment: "Navigation Bar menu title: Drink By.  This will display a list of wines sorted by when they should be consumed, from sooner to later.")
+                subTitle = title!
+                if mainTitle == subTitle {
+                    subTitle = ""
+                } else {
+                    subTitle = "\"\(subTitle)\""
+                }
             default:
-                subtitle = ""
+                subTitle = ""
         }
-        
-        navigationItem.titleView = DataServices.setupTitleView(title: title!, subTitle: subtitle)
+
+        navigationItem.titleView = DataServices.setupTitleView(title: mainTitle, subTitle: subTitle)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("buttonCancel", comment: "cancel button"),
