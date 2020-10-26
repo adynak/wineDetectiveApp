@@ -39,8 +39,12 @@ class DrillDownTableViewCell : UITableViewCell {
                 
                 if binItem.viewName == "location"{
                     var additionalInfo: String = ""
+                    // don't confuse designation with description
                     if binItem.designation != "" {
                         additionalInfo = binItem.designation!
+                    } else {
+                        additionalInfo = binItem.description!.replacingOccurrences(of: "vineyard", with: "", options: .caseInsensitive)
+
                     }
                     vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer) \(additionalInfo)"
                     
