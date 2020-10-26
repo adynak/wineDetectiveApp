@@ -126,10 +126,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         inventoryFooter.text = getTotalBottles()
         NSLayoutConstraint.activate([
             inventoryFooter.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            inventoryFooter.topAnchor.constraint(equalTo: footerView.bottomAnchor, constant: -100),
             inventoryFooter.heightAnchor.constraint(equalToConstant: 40),
             inventoryFooter.leftAnchor.constraint(equalTo: footerView.leftAnchor, constant : 6),
-//            inventoryFooter.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant : -6)
         ])
     }
     
@@ -374,11 +372,25 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     @objc func toggleDrinkAll(sender: UIButton){
         sender.isSelected = !sender.isSelected
+        
+        let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
+        let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
 
         if sender.isSelected {
             sender.setTitle(NSLocalizedString("unDrinkAllBottles", comment: "button text: un-drink all bottles"), for: .normal)
+            for (index,_) in wineBins.enumerated() {
+                wineBins[index].bottleCount = 0
+            }
+            self.inventoryFooter.text = String(0) + pluralBottle
+            self.wineBinsTableView.reloadData()
         } else {
             sender.setTitle(NSLocalizedString("drinkAllBottles", comment: "button text: drink all bottles"), for: .normal)
+            for (index,_) in wineBins.enumerated() {
+                wineBins[index].bottleCount = 1
+            }
+            let bottleString = (self.wineBins.count == 1) ? bottleSingular : pluralBottle
+            self.inventoryFooter.text = String(self.wineBins.count) + bottleString
+            self.wineBinsTableView.reloadData()
         }
 
     }
@@ -477,6 +489,8 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 cell.stepperView.tag = 1
                 cell.stepperView.value = 1
                 self.wineBins[index].bottleCount = 1
+                self.toggleButton.setTitle(NSLocalizedString("drinkAllBottles", comment: "button text: drink all bottles"), for: .normal)
+                self.toggleButton.isSelected = false
             }
             let bottleSingular = NSLocalizedString("singularRemaining", comment: "when there is one bottle in inventory: Bottle Remaining")
             let pluralBottle = NSLocalizedString("pluralRemaining", comment: "when there are more than one bottle in inventory: Bottles Remaining")
@@ -485,13 +499,12 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
             self.inventoryFooter.text = String(self.wineBins.count) + bottleString
         })
         
-        alert.addAction(UIAlertAction.init(title: cancelBtnText, style: .cancel) { (UIAlertAction) -> Void in
-            self.dismiss(animated: true, completion:nil)
-        })
+//        alert.addAction(UIAlertAction.init(title: cancelBtnText, style: .cancel) { (UIAlertAction) -> Void in
+//            self.dismiss(animated: true, completion:nil)
+//        })
         
         alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
 
-                
         present(alert, animated: true, completion: nil)
     }
     
