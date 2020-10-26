@@ -48,14 +48,17 @@ class SyncViewController: UITableViewController {
     @objc func syncHelp(){
         let alertTitle = NSLocalizedString("titleSync", comment: "sync title: Inventory Out Of Sync")
         var alertMessage = NSLocalizedString("syncMessage", comment: "what to do to fix sync condition")
-        
         let bottleSingular = NSLocalizedString("singularThis", comment: "this wine")
         let pluralBottle = NSLocalizedString("pluralThese", comment: "text replacement for this bottle: these bottles")
+        let notNowTitle = NSLocalizedString("buttonSyncNotNow", comment: "button text: do not sync now (or simply, Not Now)")
+        let unDrinkTitle = NSLocalizedString("buttonSyncUnDrink", comment: "button text: return this selection to inventory (Un-Drink)")
+        
         let bottleString = (markAsDrank.count == 1) ? bottleSingular : pluralBottle
         
         alertMessage = alertMessage.replacingOccurrences(of: "%1", with: bottleString)
+        alertMessage = alertMessage.replacingOccurrences(of: "%2", with: notNowTitle)
+        alertMessage = alertMessage.replacingOccurrences(of: "%3", with: unDrinkTitle)
 
-        
         let alertOk = NSLocalizedString("alertTextHelp", comment: "alert button: OK")
         
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
@@ -95,6 +98,7 @@ class SyncViewController: UITableViewController {
         cell.textLabel?.text = "\(vintage!) \(producer!) \(varietal!)"
         cell.detailTextLabel?.text = "\(locationAndBin) \(barcode)"
         cell.backgroundColor = indexPath.row % 2 == 0 ? colorOdd : colorEven
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
         return cell
     }

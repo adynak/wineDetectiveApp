@@ -254,7 +254,7 @@
 "singularThis" = "";
 
 /* what to do to fix sync condition */
-"syncMessage" = "";
+"syncMessage" = "TRANSLATION NEEDED";
 
 /* Navigation Bar menu title: "Drink By".  This will display a list of wines sorted by when they should be consumed, from sooner to later. */
 "titleDrinkBy" = "titleDrinkBy";
