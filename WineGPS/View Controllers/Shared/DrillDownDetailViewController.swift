@@ -499,12 +499,15 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
             self.inventoryFooter.text = String(self.wineBins.count) + bottleString
         })
         
-//        alert.addAction(UIAlertAction.init(title: cancelBtnText, style: .cancel) { (UIAlertAction) -> Void in
-//            self.dismiss(animated: true, completion:nil)
-//        })
+        alert.addAction(UIAlertAction.init(title: cancelBtnText, style: .cancel) { (UIAlertAction) -> Void in
+            self.dismiss(animated: true, completion:nil)
+        })
         
         alert.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
 
+        let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.80)
+            alert.view.addConstraint(height)
+        
         present(alert, animated: true, completion: nil)
     }
     
