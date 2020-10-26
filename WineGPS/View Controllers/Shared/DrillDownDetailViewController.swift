@@ -52,6 +52,29 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         return tv
     }()
     
+    let footerView: UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.layer.cornerRadius = 5
+        v.backgroundColor = storageLabelBackgroundColor
+        return v
+    }()
+        
+    let toggleButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = loginButtonColor
+        button.setTitle(NSLocalizedString("drinkAllBottles", comment: "button text: drink all bottles"), for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.isSelected = false
+        button.addTarget(self, action: #selector(toggleDrinkAll), for: .touchUpInside)
+        button.isEnabled = true
+        button.titleLabel!.font = UIFont(name: "Verdana", size: 14)
+        button.layer.cornerRadius = 5
+        button.contentEdgeInsets = UIEdgeInsets(top: 5,left: 5,bottom: 5,right: 5)
+        return button
+    }()
+
     let tableContainer: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -76,13 +99,18 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         view.addSubview(storageLabel)
         view.addSubview(tableContainer)
         tableContainer.addSubview(wineBinsTableView)
-        view.addSubview(inventoryFooter)
+        view.addSubview(footerView)
+        footerView.addSubview(inventoryFooter)
+        footerView.addSubview(toggleButton)
+        toggleButton.sizeToFit()
 
         setupNavigationBar()
         setupWineLabelLayout()
+        setupFooterViewLayout()
         setupInventoryFooterLayout()
+        setupToggleButtonLayout()
         setupWineBinsTableViewLayout()
-        
+                
     }
     
     var hasChanges: Bool {
@@ -98,12 +126,31 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         inventoryFooter.text = getTotalBottles()
         NSLayoutConstraint.activate([
             inventoryFooter.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            inventoryFooter.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+//            inventoryFooter.topAnchor.constraint(equalTo: footerView.bottomAnchor, constant: -100),
             inventoryFooter.heightAnchor.constraint(equalToConstant: 40),
-            inventoryFooter.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant : 6),
-            inventoryFooter.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant : -6)
+            inventoryFooter.leftAnchor.constraint(equalTo: footerView.leftAnchor, constant : 6),
+//            inventoryFooter.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant : -6)
         ])
     }
+    
+    func setupToggleButtonLayout(){
+        NSLayoutConstraint.activate([
+            toggleButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
+            toggleButton.rightAnchor.constraint(equalTo: footerView.rightAnchor,constant: -12),
+            toggleButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+
+    func setupFooterViewLayout(){
+        NSLayoutConstraint.activate([
+            footerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            footerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            footerView.heightAnchor.constraint(equalToConstant: 40),
+            footerView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant : 0),
+            footerView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant : -0)
+        ])
+    }
+
     
     func setupWineLabelLayout(){
         let labelTopLine: String
@@ -323,6 +370,17 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     @objc func cancelMarkDrank() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func toggleDrinkAll(sender: UIButton){
+        sender.isSelected = !sender.isSelected
+
+        if sender.isSelected {
+            sender.setTitle(NSLocalizedString("unDrinkAllBottles", comment: "button text: un-drink all bottles"), for: .normal)
+        } else {
+            sender.setTitle(NSLocalizedString("drinkAllBottles", comment: "button text: drink all bottles"), for: .normal)
+        }
+
     }
     
     @objc func saveMarkDrank(){
