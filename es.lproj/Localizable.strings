@@ -67,6 +67,9 @@
 /* button text: return this selection to inventory (Un-Drink) */
 "buttonSyncUnDrink" = "Regresen a su Inventario";
 
+/* button text: drink all bottles */
+"drinkAllBottles" = "Consumir";
+
 /* button text: Cancel */
 "drinkByCancel" = "Cancelar";
 
@@ -224,7 +227,7 @@
 "productName" = "VinoGPS";
 
 /* navigation item: remove bottles from inventory */
-"removeBottles" = "remover botellas";
+"removeBottles" = "Remover Botellas";
 
 /* menu item: Sort by Location Report */
 "reportLocation" = "Por Ubicación";
@@ -260,7 +263,7 @@
 "singularThis" = "esta botella";
 
 /* what to do to fix sync condition */
-"syncMessage" = "TRANSLATION NEEDED";
+"syncMessage" = "WineGPS marked %1 as drank at some point.  Cellar Tracker does not know this.\n\n  To fix this, log in to Cellar Tracker and search for the wine using the vintage producer and varietal or search using the barcode. You can press and hold the row to put one of these values in the clipboard. \n\nComplete the Cellar Tracker \"Drink or Remove\" form and Save your changes.\n\nSwipe each bottle from right to left to make your choice.  Press and hold for the clipboard.\n\n\"%2\" is the default and will remove %1 from WineGPS.\n\n\"%3\" means add back to WineGPS.";
 
 /* Navigation Bar menu title: "Drink By".  This will display a list of wines sorted by when they should be consumed, from sooner to later. */
 "titleDrinkBy" = "Consumir";
@@ -294,6 +297,9 @@
 
 /* plural : total bottles */
 "totalBottles" = "Botellas Totales";
+
+/* button text: un-drink all bottles */
+"unDrinkAllBottles" = "Devolve";
 
 /* message that these bottles should be marked drank, replacement text is singular 'this bottle'or plural 'these bottles */
 "updateCellarTracker" = "Bebiste %1 y deberías actualizar \"Cellar Tracker\".";
