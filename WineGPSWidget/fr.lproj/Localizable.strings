@@ -10,9 +10,6 @@
 /* plural : total bottles */
 "totalBottles" = "Nombre Total de Bouteilles";
 
-/* replace 'bottle' with its singular or plural */
-"totalBottlesWidget" = "VinGPS";
-
 /* textfield label: red (wines) */
 "wineRed" = "Vin Rouge";
 
