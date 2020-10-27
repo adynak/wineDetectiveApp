@@ -136,9 +136,9 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         
         pageControlBottomAnchor = pageControl.anchor(view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 60, rightConstant: 0, widthConstant: 0, heightConstant: 40)[1]
         
-        skipButtonTopAnchor = skipButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 50).first
+        skipButtonTopAnchor = skipButton.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 20).first
         
-        nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 16, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 50).first
+        nextButtonTopAnchor = nextButton.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 20).first
         
         //use autolayout instead
         collectionView.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
@@ -200,8 +200,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         } else {
             //back on regular pages
             pageControlBottomAnchor?.constant = 0
-            skipButtonTopAnchor?.constant = 16
-            nextButtonTopAnchor?.constant = 16
+            skipButtonTopAnchor?.constant = 0
+            nextButtonTopAnchor?.constant = 0
         }
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -211,8 +211,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     
     fileprivate func moveControlConstraintsOffScreen() {
         pageControlBottomAnchor?.constant = 400
-        skipButtonTopAnchor?.constant = -40
-        nextButtonTopAnchor?.constant = -40
+        skipButtonTopAnchor?.constant = -80
+        nextButtonTopAnchor?.constant = -80
     }
     
     fileprivate func registerCells() {
