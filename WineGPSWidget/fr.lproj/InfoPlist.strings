@@ -1,6 +1,6 @@
 /* Bundle display name */
-"CFBundleDisplayName" = "VinGPSWidget";
+"CFBundleDisplayName" = "VinGPS";
 
 /* Bundle name */
-"CFBundleName" = "VinGPSWidgetExtension";
+"CFBundleName" = "VinGPS";
 

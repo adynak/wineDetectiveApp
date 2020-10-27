@@ -1,5 +1,9 @@
-"NNGeEz" = "Wine GPSINO";
-
+/* widget placeholder: Varietal */
 "dAWvjd" = "Cépage";
 
-"wafivE" = "Select Varietal";
+/* Wine GPSINO */
+"NNGeEz" = "Wine GPSINO";
+
+/* widget label: Select Varietal */
+"wafivE" = "Sélectionnez le Cépage";
+

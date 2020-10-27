@@ -1,5 +1,5 @@
 /* alert text: data download failed message, maybe the userID and/or password was invalid */
-"alertTextDataLoadFailedMessage" = "alertTextDataLoadFailedMessage";
+"alertTextDataLoadFailedMessage" = "Le téléchargement de l'inventaire du vin ne s'est pas terminé.\n\nAvez-vous correctement saisi votre pseudo (email) et votre mot de passe \"Cellar Tracker\"?";
 
 /* alert title: data download failed */
 "alertTextDataLoadFailedTitle" = "Échec du téléchargement";
@@ -13,11 +13,17 @@
 /* alert text: Username and password are required */
 "alertTextMissingCredentials" = "Le nom d'utilisateur et le mot de passe sont requis";
 
+/* alert text: connect to iCloud account */
+"alertTextNoIcloudMessage" = "Certaines fonctionnalités ne seront pas disponibles tant que vous ne vous connecterez pas à votre compte iCloud sur cet appareil.";
+
+/* alert title: iCloud */
+"alertTextNoIcloudTitle" = "Connectez-vous à icloud";
+
 /* alert text: not connected to the internet */
 "alertTextNoInternetMessage" = "Impossible de mettre à jour votre vin, car votre appareil n'’est pas connecté à Internet.";
 
 /* alert title: internet connection failed */
-"alertTextNoInternetTitle" = "échec de la connexion iInternet";
+"alertTextNoInternetTitle" = "Échec de la connexion iInternet";
 
 /* alert title: mark this bottle as consumed */
 "alertTitleMarkAsDrank" = "supprimer de l'inventaire";
@@ -61,6 +67,9 @@
 /* button text: return this selection to inventory (Un-Drink) */
 "buttonSyncUnDrink" = "Retour à l'inventaire";
 
+/* button text: drink all bottles */
+"drinkAllBottles" = "Consommer";
+
 /* button text: Cancel */
 "drinkByCancel" = "Annuler";
 
@@ -77,10 +86,10 @@
 "drinkByHelp" = "Aide";
 
 /* Drinkability Help */
-"drinkByHelpText" = "drinkByHelpText";
+"drinkByHelpText" = "The Drink By report orders the wines in your cellar by an index number which shows whether a wine is being consumed faster or slower than a rate implied by the drinking window (the time between \"Drink Soonest\" and \"Drink Latest\").  The Drink By report uses pre-defined algorithms for different categories of wines.  Choose one of these algorithms.  The default is Availability.  You may want to run the Consume Dates Missing report to see which of your wines do not have a \"Drink Soonest\" or \"Drink Latest\" date.";
 
 /* drinkByIndex", comment: "Drinkability Index, a magic index number used to sort wines */
-"drinkByIndex" = "drinkByIndex";
+"drinkByIndex" = "Drinkability Index";
 
 /* Late Bell (Red Bordeaux, Red Northern Rhone and Rioja) DO NOT TRANSLATE */
 "drinkByLateBell" = "Late Bell (Red Bordeaux, Red Northern Rhone and Rioja)";
@@ -110,184 +119,188 @@
 "drinkByNavTitleLinear" = "Linear";
 
 /* drink by nav title when the 'start drinking' and 'drink before' dates are missing */
-"drinkByNavTitleMissing" = "drinkByNavTitleMissing";
+"drinkByNavTitleMissing" = "L'année de consommation est manquante";
 
 /* drink by nav title Standard Bell DO NOT TRANSLATE */
 "drinkByNavTitleStandardBell" = "drinkByNavTitleStandardBell";
 
 /* drink by nav title Twin Peak DO NOT TRANSLATE */
-"drinkByNavTitleTwinPeak" = "drinkByNavTitleTwinPeak";
+"drinkByNavTitleTwinPeak" = "Twin Peak";
 
 /* Standard Bell (Red Wines) DO NOT TRANSLATE */
 "drinkByStandardBell" = "drinkByStandardBell";
 
 /* Twin Peak (Red Southern Rhône, White Northern Rhône, White German) DO NOT TRANSLATE */
-"drinkByTwinPeak" = "drinkByTwinPeak";
+"drinkByTwinPeak" = "Twin Peak (Red Southern Rhône, White Northern Rhône, White German) drinkByTwinPeak";
 
 /* email Body */
-"emailBody" = "emailBody";
+"emailBody" = "&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>&nbsp<br>\n              ----------<br>\n              Device: %1<br>\n              iOS Version: %2<br>\n              WineGPS Version: %3<br>\n              Storage Memory: %4 Used/ %5 Total<br>\n              iCloud Status: %6";
 
 /* email address for support */
-"emailContactAddress" = "emailContactAddress";
+"emailContactAddress" = "WineGPSHelp@gmail.com";
 
 /* email menu item */
-"emailContactMenu" = "emailContactMenu";
+"emailContactMenu" = "Nous contacter";
 
 /* email subject */
-"emailSubject" = "emailSubject";
+"emailSubject" = "VinGPS Retour d'information";
 
 /* textfield label: Barcode */
-"labelBarcode" = "labelBarcode";
+"labelBarcode" = "code à barre";
 
 /* textfield label: Before 2020 */
-"labelBefore" = "labelBefore";
+"labelBefore" = "Avant";
 
 /* button text: Copy To Clipboard */
-"labelClipboard" = "";
+"labelClipboard" = "Copier dans le presse-papier";
 
 /* textfield label: Drinking Window: 2020 - 2022 */
-"labelDrinkByWindow" = "labelDrinkByWindow";
+"labelDrinkByWindow" = "Consommer";
 
 /* ltextfield label: Location: similar to a storage room */
-"labelLocation" = "labelLocation";
+"labelLocation" = "Emplacement";
 
 /* textfield label: Location and Bin: similar to a storage room and a filing cabinet in that room */
-"labelLocationAndBin" = "labelLocationAndBin";
+"labelLocationAndBin" = "Emplacement et Bac";
 
 /* button text: Vintage Producer Varietal */
-"labelVPV" = "";
+"labelVPV" = "Millésime Vigneron Cépage";
 
 /* textfield label: Loading Web Page, text below animation while page loads */
-"loadingWebPage" = "loadingWebPage";
+"loadingWebPage" = "Chargement de la page Web";
 
 /* placeholder text for input of account name (handle or email) */
-"loginAccountName" = "loginAccountName";
+"loginAccountName" = "adresse électronique";
 
 /* placeholder text for password */
-"loginPassword" = "loginPassword";
+"loginPassword" = "mot de passe";
 
 /* menu item: Contact (Email Us) */
-"menuContacts" = "menuContacts";
+"menuContacts" = "Contacter";
 
 /* menu item: Reports */
-"menuReports" = "menuReports";
+"menuReports" = "Rapports";
 
 /* menu item: Settings */
-"menuSettings" = "menuSettings";
+"menuSettings" = "Configuration";
 
 /* menu item: Version */
-"menuVersion" = "menuVersion";
+"menuVersion" = "Version";
 
 /* textfield label: unassigned (used when the bin is blank */
-"noBin" = "noBin";
+"noBin" = "Non attribué";
 
 /* walkthrough instructions: page 1 */
-"page1Message" = "page1Message";
+"page1Message" = "Vous l'avez aimé, acheté et ramené à la maison. Qu'est-il arrivé ensuite?\n\nBien sûr, vous l'avez ajouté à un \"emplacement\" et peut-être à un \"bac\" en utilisant votre compte \"Cellar Tracker\", non?\n\nComment le retrouvez-vous?";
 
 /* walkthrough title: page 1 Find My Wine! */
-"page1Title" = "page1Title";
+"page1Title" = "Trouvez mon vin!";
 
 /* walkthrough instructions: page 2 */
-"page2Message" = "page2Message";
+"page2Message" = "Les termes de recherche sont Vigneron, Cépage, Millésime, Vignoble, AVA, Pays et Désignation.\n\nUtilisez la vue «Boire par» pour trouver des vins prêts à boire et qui peuvent prendre plus de temps.";
 
 /* walkthrough title: page 2 You can search for it. */
-"page2Title" = "page2Title";
+"page2Title" = "Vous pouvez le rechercher.";
 
 /* walkthrough instructions: page 3 */
-"page3Message" = "page3Message";
+"page3Message" = "Trier par Vigneron ou par Cépage. Trier par Emplacement est un excellent outil pour l'inventaire physique.\n\nTrouvez des bouteilles dont les dates \"Boire le plus tôt\" et \"Boire le plus tard\" sont manquantes.";
 
 /* walkthrough title: page 3 The More menu has other views */
-"page3Title" = "page3Title";
+"page3Title" = "Plus a d'autres vues et paramètres";
 
 /* walkthrough instructions: page 4 */
-"page4Message" = "page4Message";
+"page4Message" = "Si vous n'utilisez pas de \"codes-barres\", désactivez-les!\n\nUne fois que vous avez compris l'application, vous pouvez désactiver les pages \"Procédure pas à pas\".";
 
 /* walkthrough title: page 4 Don't forget to check settings */
-"page4Title" = "page4Title";
+"page4Title" = "N'oubliez pas de vérifier les paramètres";
 
 /* plural of the word bottle */
-"pluralBottle" = "pluralBottle";
+"pluralBottle" = "Bouteilles";
 
 /* when there are more than one bottle in inventory: Bottles Remaining */
-"pluralRemaining" = "pluralRemaining";
+"pluralRemaining" = "Bouteilles Restantes";
 
 /* text replacement for this bottle: these bottles */
-"pluralThese" = "";
+"pluralThese" = "ces bouteilles";
 
 /* app name: WineGPS */
-"productName" = "productName";
+"productName" = "VinGPS";
 
 /* navigation item: remove bottles from inventory */
-"removeBottles" = "removeBottles";
+"removeBottles" = "Supprimer de l'inventaire";
 
 /* menu item: Sort by Location Report */
-"reportLocation" = "reportLocation";
+"reportLocation" = "Trier par Emplacement";
 
 /* menu item : Consume Dates Missing Report */
-"reportMissingDates" = "reportMissingDates";
+"reportMissingDates" = "Rapport des années manquantes";
 
 /* menu item: Sort By Producer Report */
-"reportProducer" = "reportProducer";
+"reportProducer" = "Trier par Vigneron";
 
 /* menu item: Sort By Varietal Report */
-"reportVarietal" = "reportVarietal";
+"reportVarietal" = "Trier par Cépage";
 
 /* textfield label: Getting Your Wines, text below animation while waiting for download */
-"runAPI" = "runAPI";
+"runAPI" = "Obtenir votre vin";
 
 /* menu item: Show Barcode */
-"settingBarcode" = "settingBarcode";
+"settingBarcode" = "Afficher le code barre";
 
 /* menu item: Show Walkthrough Pages */
-"settingShowMe" = "settingShowMe";
+"settingShowMe" = "Afficher les pages du guide";
 
 /* menu item: Support */
-"settingSupport" = "settingSupport";
+"settingSupport" = "Soutien Technique";
 
 /* singular of the word bottle */
-"singularBottle" = "singularBottle";
+"singularBottle" = "Bouteille";
 
 /* when there is one bottle in inventory: Bottle Remaining */
-"singularRemaining" = "singularRemaining";
+"singularRemaining" = "Bouteille Restante";
 
 /* text replacement for these bottles: this bottle */
-"singularThis" = "";
+"singularThis" = "cette bouteille";
 
 /* what to do to fix sync condition */
-"syncMessage" = "WineGPS marked %1 as drank at some point.  Cellar Tracker does not know this.\n\n  To fix this, log in to Cellar Tracker and search for the wine using the vintage producer and varietal or search using the barcode. You can press and hold the row to put one of these values in the clipboard. \n\nComplete the Cellar Tracker \"Drink or Remove\" form and Save your changes.\n\nSwipe each bottle from right to left to make your choice.  Press and hold for the clipboard.\n\n\"%2\" is the default and will remove %1 from WineGPS.\n\n\"%3\" means add back to WineGPS.";
+"syncMessage" = "WineGPS a marqué cette bouteille comme bu à un moment donné. Cellar Tracker ne le sait pas.\n\nPour résoudre ce problème, connectez-vous à Cellar Tracker et recherchez le vin à l'aide du producteur de cru et du cépage ou recherchez à l'aide du code-barres. Vous pouvez appuyer et maintenir la ligne pour mettre l'une de ces valeurs dans le presse-papiers.\n\nRemplissez le formulaire «Boire ou Supprimer» de Cellar Tracker et enregistrez vos modifications.\n\nFaites glisser chaque bouteille de droite à gauche pour faire votre choix. Appuyez et maintenez pour le presse-papiers.\n\n\"%2\" est la valeur par défaut et supprimera %1 de VinGPS.\n\n\"%3\" signifie ajouter à VinGPS.";
 
 /* Navigation Bar menu title: "Drink By".  This will display a list of wines sorted by when they should be consumed, from sooner to later. */
-"titleDrinkBy" = "titleDrinkBy";
+"titleDrinkBy" = "Boire Par";
 
 /* navagation title: location */
-"titleLocation" = "titleLocation";
+"titleLocation" = "Emplacement";
 
 /* navagation title: missing bottles */
-"titleMissing" = "titleMissing";
+"titleMissing" = "Rapport des années manquantes";
 
 /* navigation title: More */
-"titleMore" = "titleMore";
+"titleMore" = "Plus";
 
 /* navagation title: producer */
-"titleProducer" = "titleProducer";
+"titleProducer" = "Vigneron";
 
 /* navigation title: search */
-"titleSearch" = "titleSearch";
+"titleSearch" = "Chercher";
 
 /* navigation title : Support */
-"titleSupport" = "titleSupport";
+"titleSupport" = "Soutien";
 
 /* sync title: Inventory Out Of Sync */
-"titleSync" = "";
+"titleSync" = "Inventaire non synchronisé";
 
 /* sync subtitle: Swipe To Resolve */
-"titleSyncSubTitle" = "";
+"titleSyncSubTitle" = "Glisser pour Corriger";
 
 /* navagation title: varietal */
-"titleVarietal" = "titleVarietal";
+"titleVarietal" = "Cépage";
 
 /* plural : total bottles */
 "totalBottles" = "Nombre Total de Bouteilles";
 
+/* button text: un-drink all bottles */
+"unDrinkAllBottles" = "Retour à l'inventaire";
+
 /* message that these bottles should be marked drank, replacement text is singular 'this bottle'or plural 'these bottles */
-"updateCellarTracker" = "";
+"updateCellarTracker" = "Vous avez bu %1 et devez mettre à jour \"Cellar Tracker\".";
+

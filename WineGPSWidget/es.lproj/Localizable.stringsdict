@@ -12,12 +12,12 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>zero</key>
-			<string>Bodega está vacía</string>
 			<key>one</key>
 			<string>%d Botella</string>
 			<key>other</key>
 			<string>%d Botellas</string>
+			<key>zero</key>
+			<string>Bodega está vacía</string>
 		</dict>
 	</dict>
 </dict>
