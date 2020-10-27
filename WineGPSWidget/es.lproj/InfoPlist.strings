@@ -1,6 +1,5 @@
 /* Bundle display name */
-"CFBundleDisplayName" = "VinoGPSWidget";
+"CFBundleDisplayName" = "VinoGPS";
 
 /* Bundle name */
-"CFBundleName" = "VinoGPSWidgetExtension";
-
+"CFBundleName" = "VinoGPS";
