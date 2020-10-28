@@ -86,7 +86,7 @@
 "drinkByHelp" = "Aide";
 
 /* Drinkability Help */
-"drinkByHelpText" = "Le rapport Drink By classe les vins de votre cave par un numéro d'index qui indique si un vin est consommé plus rapidement ou plus lentement qu'un taux impliqué par la fenêtre de consommation (le temps entre «\U2009Boire le plus tôt\U2009» et «\U2009Boire le plus tard\U2009»).  Le rapport Drink By utilise des algorithmes prédéfinis pour différentes catégories de vins.  Choisissez l'un de ces algorithmes.  La valeur par défaut est Disponibilité.  Vous pouvez exécuter le rapport Dates de consommation manquantes pour voir lesquels de vos vins n'ont pas de date «\U2009À boire le plus tôt\U2009» ou «\U2009À boire le plus tard\U2009».";
+"drinkByHelpText" = "\nLe rapport Drink By classe les vins de votre cave par un numéro d'index qui indique si un vin est consommé plus rapidement ou plus lentement qu'un taux impliqué par la fenêtre de consommation (le temps entre «\U2009Boire le plus tôt\U2009» et «\U2009Boire le plus tard\U2009»).\n\nLe rapport Drink By utilise des algorithmes prédéfinis pour différentes catégories de vins.\n\nChoisissez l'un de ces algorithmes.\n\nLa valeur par défaut est Disponibilité.\n\nVous pouvez exécuter le rapport Dates de consommation manquantes pour voir lesquels de vos vins n'ont pas de date «\U2009À boire le plus tôt\U2009» ou «\U2009À boire le plus tard\U2009».";
 
 /* drinkByIndex", comment: "Drinkability Index, a magic index number used to sort wines */
 "drinkByIndex" = "Drinkability Index";
