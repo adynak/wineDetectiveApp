@@ -339,7 +339,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 if mainTitle == subTitle {
                     subTitle = ""
                 } else {
-                    subTitle = "\"\(subTitle)\""
+                    subTitle = subTitle.quoted
                 }
             case "drinkby":
                 mainTitle = NSLocalizedString("titleDrinkBy", comment: "Navigation Bar menu title: Drink By.  This will display a list of wines sorted by when they should be consumed, from sooner to later.")
@@ -347,7 +347,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
                 if mainTitle == subTitle {
                     subTitle = ""
                 } else {
-                    subTitle = "\"\(subTitle)\""
+                    subTitle = subTitle.quoted
                 }
             default:
                 subTitle = ""

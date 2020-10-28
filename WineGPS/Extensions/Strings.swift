@@ -33,8 +33,12 @@ extension String {
     }
         
     var quoted: String {
+        var nbsp = ""
+        if Locale.current.languageCode == "fr" {
+            nbsp = "\u{2009}"
+        }
         let (bQuote, eQuote) = String.quotes
-        return bQuote + self + eQuote
+        return bQuote + nbsp + self + nbsp + eQuote
     }
     
 }
