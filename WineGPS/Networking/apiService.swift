@@ -40,7 +40,7 @@ class API {
 
             csvAvailability = csvAvailability!.replacingOccurrences(of: "Unknown", with: "")
             availabilityArray = DataServices.parseCsv(data:csvAvailability!)
-            if availabilityArray.count == 0 {
+            if availabilityArray[0].firstIndex(of: "iWine") == nil {
                 return "Failed"
             }
             availabilityArray[0].append("wdVarietal")
@@ -222,6 +222,9 @@ class API {
             throw NetworkError.statusCode
         }
         
+//        print(try NSAttributedString(data: data!, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil).string)
+//        print(try NSAttributedString(data: data!, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil).length)
+
         if error != nil {
             throw NetworkError.standard
         }
