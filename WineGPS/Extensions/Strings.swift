@@ -23,6 +23,20 @@ extension String {
         return components.filter { !$0.isEmpty }.joined(separator: " ")
     }
     
+    static var quotes: (String, String) {
+        guard
+            let bQuote = Locale.current.quotationBeginDelimiter,
+            let eQuote = Locale.current.quotationEndDelimiter
+            else { return ("\"", "\"") }
+        
+        return (bQuote, eQuote)
+    }
+        
+    var quoted: String {
+        let (bQuote, eQuote) = String.quotes
+        return bQuote + self + eQuote
+    }
+    
 }
 
 extension Int {
