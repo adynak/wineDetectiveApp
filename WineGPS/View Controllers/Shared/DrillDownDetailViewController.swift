@@ -60,7 +60,7 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         return v
     }()
         
-    let toggleButton: UIButton = {
+    lazy var toggleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = loginButtonColor
@@ -110,7 +110,9 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
         setupInventoryFooterLayout()
         setupToggleButtonLayout()
         setupWineBinsTableViewLayout()
-                
+        
+//        toggleButton.addTarget(self, action: #selector(toggleDrinkAll), for: .touchUpInside)
+
     }
     
     var hasChanges: Bool {
