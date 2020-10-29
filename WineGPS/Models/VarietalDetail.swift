@@ -18,7 +18,7 @@ public struct VarietalDetails {
         self.name = name
         self.description = description
         self.count = varietalCount
-        self.url = URL(string: "WineGPS://varietals/\(description)")
+        self.url = URL(string: "WineGPS://WineGPS/varietals?varietal=\(description.lowercased())")
     }
 }
 

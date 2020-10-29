@@ -140,6 +140,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // print("applicationWillTerminate")
         UserDefaults.standard.setIsLoggedIn(value: false)
     }
+    
+    func application(_ application: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:] ) -> Bool {
+        
+        // Determine who sent the URL.
+//        let sendingAppID = options[.sourceApplication]
+//        print("source application = \(sendingAppID ?? "Unknown")")
+        
+        // Process the URL.
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+            let urlPath = components.path,
+            let params = components.queryItems else {
+                return false
+        }
+        
+        if let varietalName = params.first(where: { $0.name == "varietal" })?.value {
+            print("urlPath = \(urlPath)")
+            print("varietalName = \(varietalName)")
+            
+            let width = UIScreen.main.bounds.width
+            let height = UIScreen.main.bounds.height + 50
+            let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
+
+//            window = UIWindow(frame: frame)
+//            window?.makeKeyAndVisible()
+//            window?.rootViewController = VarietalViewController()
+            
+            return true
+        } else {
+            print("Photo index missing")
+            return false
+        }
+    }
 
 }
 

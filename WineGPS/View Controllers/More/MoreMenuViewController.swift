@@ -54,7 +54,8 @@ class MoreMenuViewController: UIViewController {
                                            target: self,
                                            action: #selector(handleLogOut))
         
-        navigationItem.leftBarButtonItem = cancelButton    }
+        navigationItem.leftBarButtonItem = cancelButton
+    }
     
     func calcTableHeight() -> Int{
         var numberOfRows: Int = 0
