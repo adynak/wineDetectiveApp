@@ -16,11 +16,11 @@ struct Provider: IntentTimelineProvider {
         
     func placeholder(in context: Context) -> SimpleEntry {
         
-        SimpleEntry(date: Date(), configuration: SelectVarietalIntent(), totalBottles: 0, varietalCount: 0, wineCounts: [totalBottles:0], wineVarietal: "Not Logged On")
+        SimpleEntry(date: Date(), configuration: SelectVarietalIntent(), totalBottles: 0, varietalCount: 0, wineCounts: [totalBottles:0], wineVarietal: "Not Logged On", deepLinkURL: nil)
     }
 
     func getSnapshot(for configuration: SelectVarietalIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, varietalCount: 0, wineCounts: [totalBottles:0], wineVarietal: "")
+        let entry = SimpleEntry(date: Date(), configuration: configuration, totalBottles: 0, varietalCount: 0, wineCounts: [totalBottles:0], wineVarietal: "", deepLinkURL: nil)
         completion(entry)
     }
 
@@ -42,7 +42,7 @@ struct Provider: IntentTimelineProvider {
 
             let varietalDetails = lookupVarietalDetails(for: configuration)
 
-            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottleCount!, varietalCount: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, totalBottles: totalBottleCount!, varietalCount: wineCounts[varietalDetails.name.trimmingCharacters(in: .whitespacesAndNewlines)]!, wineCounts: wineCounts, wineVarietal: varietalDetails.name, deepLinkURL: varietalDetails.url)
             entries.append(entry)
         }
 
@@ -69,6 +69,7 @@ struct SimpleEntry: TimelineEntry {
     let varietalCount: Int
     let wineCounts: [String: Int]
     let wineVarietal: String
+    let deepLinkURL: URL?
 }
 
 struct WineGPSWidgetEntryView : View {
