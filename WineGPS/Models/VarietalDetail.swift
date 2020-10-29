@@ -18,7 +18,7 @@ public struct VarietalDetails {
         self.name = name
         self.description = description
         self.count = varietalCount
-        self.url = URL(string: "emoji://\(name.filter { !$0.isWhitespace })")
+        self.url = URL(string: "WineGPS://varietals/\(description)")
     }
 }
 

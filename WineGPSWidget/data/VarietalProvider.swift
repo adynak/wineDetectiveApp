@@ -20,7 +20,7 @@ public struct VarietalProvider {
         varietals.removeAll()
         
         for bottle in bottles {
-            let thisBottle = VarietalDetails(name: bottle.key, description: "desc", varietalCount: bottle.value)
+            let thisBottle = VarietalDetails(name: bottle.key, description: bottle.key.stripped, varietalCount: bottle.value)
             varietals.append(thisBottle)
         }
 
@@ -40,5 +40,13 @@ public struct VarietalProvider {
         let allVarietals = VarietalProvider.all()
         let randomIndex = Int.random(in: 0..<allVarietals.count)
         return allVarietals[randomIndex]
+    }
+}
+
+extension String {
+
+    var stripped: String {
+        let okayChars = Set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890+-=().!_")
+        return self.filter {okayChars.contains($0) }
     }
 }
