@@ -20,7 +20,7 @@ public struct VarietalProvider {
         varietals.removeAll()
         
         for bottle in bottles {
-            let thisBottle = VarietalDetails(name: bottle.key, description: bottle.key.stripped, varietalCount: bottle.value)
+            let thisBottle = VarietalDetails(name: bottle.key, description: bottle.key, varietalCount: bottle.value)
             varietals.append(thisBottle)
         }
 

@@ -71,6 +71,7 @@
 		927DF8D424F5B4F00090727E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927DF8D324F5B4F00090727E /* Default-568h@2x.png */; };
 		9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */; };
 		9289227C24AD102E0090A410 /* DrillDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */; };
+		928E116A254C80AD002CBDBC /* WidgetVarietalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E1169254C80AD002CBDBC /* WidgetVarietalViewController.swift */; };
 		9299CEF32522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
 		9299CEF42522725600CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
 		9299CF1B2522748C00CBBD60 /* WineGPSIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9299CEF62522725600CBBD60 /* WineGPSIntent.intentdefinition */; };
@@ -239,6 +240,7 @@
 		927DF8D324F5B4F00090727E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9289227924AD0FEC0090A410 /* DrillDownDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillDownDetailViewController.swift; sourceTree = "<group>"; };
 		9289227B24AD102E0090A410 /* DrillDownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrillDownTableViewCell.swift; sourceTree = "<group>"; };
+		928E1169254C80AD002CBDBC /* WidgetVarietalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetVarietalViewController.swift; sourceTree = "<group>"; };
 		9299CEF52522725600CBBD60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/WineGPSIntent.intentdefinition; sourceTree = "<group>"; };
 		9299CEFE2522726E00CBBD60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/WineGPSIntent.strings; sourceTree = "<group>"; };
 		9299CF062522727000CBBD60 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/WineGPSIntent.strings; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				92E15D1021B8A49E0068C213 /* VarietalViewController.swift */,
+				928E1169254C80AD002CBDBC /* WidgetVarietalViewController.swift */,
 			);
 			path = Varietal;
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				923196E424B3FF300044C1A0 /* SupportViewController.swift in Sources */,
 				924175FC245A2910002502FE /* Extensions.swift in Sources */,
 				925C4513246AE8A000044894 /* SearchKeys.swift in Sources */,
+				928E116A254C80AD002CBDBC /* WidgetVarietalViewController.swift in Sources */,
 				92D9571224BF6789002BBF98 /* Reachability.swift in Sources */,
 				9272AE0E251D017200576020 /* VarietalDetail.swift in Sources */,
 				36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */,

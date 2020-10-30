@@ -147,8 +147,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Determine who sent the URL.
 //        let sendingAppID = options[.sourceApplication]
-//        print("source application = \(sendingAppID ?? "Unknown")")
-        
+        print("link from widget")
+
         // Process the URL.
         guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
             let urlPath = components.path,
@@ -163,10 +163,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let width = UIScreen.main.bounds.width
             let height = UIScreen.main.bounds.height + 50
             let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
+            print("link from widget")
+            
+            let varietalController = WidgetVarietalViewController()
+            varietalController.widgetVarietal = varietalName
+//            navigationController?.pushViewController(supportController, animated: true)
 
 //            window = UIWindow(frame: frame)
 //            window?.makeKeyAndVisible()
-//            window?.rootViewController = VarietalViewController()
+//            window?.rootViewController = varietalController
+//            present(varietalController, animated: true, completion: nil)
+
+            self.window?.rootViewController = UINavigationController(rootViewController: varietalController)
+
+            
             
             return true
         } else {
