@@ -13,12 +13,16 @@ public struct VarietalDetails {
     public let description: String
     public let count: Int?
     public let url: URL?
+    
 
     init(name: String, description: String, varietalCount: Int) {
+        
+        let encodedVarietal = description.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+
         self.name = name
         self.description = description
         self.count = varietalCount
-        self.url = URL(string: "WineGPS://WineGPS/varietals?varietal=\(description.lowercased())")
+        self.url = URL(string: "WineGPS://WineGPS/varietals?varietal=\(encodedVarietal!)")
     }
 }
 
