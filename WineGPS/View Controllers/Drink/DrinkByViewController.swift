@@ -116,7 +116,7 @@ class DrinkByViewController: UIViewController {
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
 
-        footerView.text = countBottles(bins: searchKeys)
+        footerView.text = DataServices.countBottles(bins: searchKeys)
     }
     
     @objc func handleReload(){
@@ -128,7 +128,7 @@ class DrinkByViewController: UIViewController {
         })
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-        footerView.text = countBottles(bins: searchKeys)
+        footerView.text = DataServices.countBottles(bins: searchKeys)
         self.tableView.reloadData()
     }
 
@@ -153,7 +153,7 @@ class DrinkByViewController: UIViewController {
             searchWines = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: drinkByMenuCode.lowercased())
         }
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-        footerView.text = countBottles(bins: searchKeys)
+        footerView.text = DataServices.countBottles(bins: searchKeys)
 
         switch drinkByMenuCode {
         case "Linear":
@@ -192,7 +192,7 @@ class DrinkByViewController: UIViewController {
                 ($0.label[0].producer) < ($1.label[0].producer)
             })
             searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-            footerView.text = countBottles(bins: searchKeys)
+            footerView.text = DataServices.countBottles(bins: searchKeys)
         default:
             searchWines = searchWines!.sorted(by: {
                 ($0.label[0].available) > ($1.label[0].available)
@@ -231,21 +231,6 @@ class DrinkByViewController: UIViewController {
                                                 target: self,
                                                 action: #selector(handleLogOut))
     }
-    
-    func countBottles(bins: [SearchKeys])-> String{
-        var totalBottles: Int = 0
-        
-        for (bin) in bins {
-            for (bottles) in bin.storageBins! {
-                totalBottles += bottles.bottleCount!
-            }
-        }
-        
-        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular for the word bottle") : NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
-        
-        return "\(totalBottles)" + plural
-    }
-
     
     func configureUI() {
         view.backgroundColor = barTintColor
@@ -341,7 +326,7 @@ extension DrinkByViewController: UISearchBarDelegate {
         search(shouldShow: false)
         searchBar.searchTextField.text = ""
         filteredBottles = searchKeys
-        footerView.text = countBottles(bins: filteredBottles)
+        footerView.text = DataServices.countBottles(bins: filteredBottles)
         tableView.reloadData()
         searchBar.endEditing(true)
 
@@ -359,7 +344,7 @@ extension DrinkByViewController: UISearchBarDelegate {
             })
         }
         
-        footerView.text = countBottles(bins: filteredBottles)
+        footerView.text = DataServices.countBottles(bins: filteredBottles)
 
         tableView.reloadData()
 

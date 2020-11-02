@@ -16,6 +16,22 @@ class WidgetVarietalViewController : UITableViewController {
 
     var bottles: [DrillLevel0]?
     var locationLocations:Set = Set<Int>()
+    
+    let footerView: UITextView = {
+        let tv = UITextView()
+        tv.font = UIFont.boldSystemFont(ofSize: 18)
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.textAlignment = .left
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.layer.masksToBounds = true
+        tv.text = "Total Bottles"
+        tv.textAlignment = .center
+        tv.backgroundColor = barTintColor
+        tv.textColor = .white
+        return tv
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +42,13 @@ class WidgetVarietalViewController : UITableViewController {
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
         bottles = allWine?.varietals
-        
+        bottles = bottles!.filter { $0.name!.contains(widgetVarietal) }
+
+//        footerView.text = DataServices.countBottles(bins: bottles!)
+
         if let varietalIndex = bottles!.firstIndex(where: { $0.name == widgetVarietal }) {
             print(varietalIndex)
             bottles?[varietalIndex].isExpanded = true
-//            scrollToSelectedRow(selectedRow:varietalIndex)
-            let scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height)
-            self.tableView.setContentOffset(scrollPoint, animated: true)
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
@@ -174,35 +190,5 @@ class WidgetVarietalViewController : UITableViewController {
         present(loginController, animated: true, completion: nil)
         
     }
-    
-    func scrollToSelectedRow(selectedRow:Int) {
-        let indexPath : IndexPath = [selectedRow,0]
-        self.tableView.scrollToRow(at: indexPath as IndexPath, at: .middle, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let lastVisibleIndexPath = tableView.indexPathsForVisibleRows?.last {
-            if indexPath == lastVisibleIndexPath {
-                // do here...
-                tableView.tableViewScrollToBottom(animated: true)
-            }
-        }
-    }
-            
-}
-
-extension UITableView {
-
-    func tableViewScrollToBottom(animated: Bool) {
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-
-            let numberOfSections = self.numberOfSections
-            let numberOfRows = self.numberOfRows(inSection: numberOfSections-1)
-            if numberOfRows > 0 {
-                let indexPath = IndexPath(row: 20-1, section: (numberOfSections-1))
-                self.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: animated)
-            }
-        }
-    }
+                    
 }

@@ -136,7 +136,7 @@ class SearchViewController: UIViewController {
         })
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-        footerView.text = countBottles(bins: searchKeys)
+        footerView.text = DataServices.countBottles(bins: searchKeys)
     }
     
     @objc func handleShowSearchBar() {
@@ -151,7 +151,7 @@ class SearchViewController: UIViewController {
         })
         
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-        footerView.text = countBottles(bins: searchKeys)
+        footerView.text = DataServices.countBottles(bins: searchKeys)
         tableView.reloadData()
     }
     
@@ -185,21 +185,6 @@ class SearchViewController: UIViewController {
                                                 target: self,
                                                 action: #selector(handleLogOut))
     }
-    
-    func countBottles(bins: [SearchKeys])-> String{
-        var totalBottles: Int = 0
-        
-        for (bin) in bins {
-            for (bottles) in bin.storageBins! {
-                totalBottles += bottles.bottleCount!
-            }
-        }
-        
-        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular for the word bottle") : NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
-        
-        return "\(totalBottles)" + plural
-    }
-
     
     func configureUI() {
         view.backgroundColor = barTintColor
@@ -263,7 +248,7 @@ extension SearchViewController: UISearchBarDelegate {
         search(shouldShow: false)
         searchBar.searchTextField.text = ""
         filteredBottles = searchKeys
-        footerView.text = countBottles(bins: filteredBottles)
+        footerView.text = DataServices.countBottles(bins: filteredBottles)
         tableView.reloadData()
         searchBar.endEditing(true)
 
@@ -282,7 +267,7 @@ extension SearchViewController: UISearchBarDelegate {
             })
         }
         
-        footerView.text = countBottles(bins: filteredBottles)
+        footerView.text = DataServices.countBottles(bins: filteredBottles)
 
         tableView.reloadData()
 

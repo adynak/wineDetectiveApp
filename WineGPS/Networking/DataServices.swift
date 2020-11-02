@@ -875,6 +875,20 @@ class DataServices {
 //        return wineCounts
 //    }
 
+    static func countBottles(bins: [SearchKeys])-> String{
+        var totalBottles: Int = 0
+        
+        for (bin) in bins {
+            for (bottles) in bin.storageBins! {
+                totalBottles += bottles.bottleCount!
+            }
+        }
+        
+        let plural = totalBottles == 1 ? NSLocalizedString("singularBottle", comment: "singular for the word bottle") : NSLocalizedString("pluralBottle", comment: "plural of the word bottle")
+        
+        return "\(totalBottles)" + plural
+    }
+
     
 }
 
