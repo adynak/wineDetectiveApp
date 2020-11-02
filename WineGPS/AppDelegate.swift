@@ -159,25 +159,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let varietalName = params.first(where: { $0.name == "varietal" })?.value {
             print("urlPath = \(urlPath)")
             print("varietalName = \(varietalName)")
-            
-            let width = UIScreen.main.bounds.width
-            let height = UIScreen.main.bounds.height + 50
-            let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
             print("link from widget")
             
             let varietalController = WidgetVarietalViewController()
             varietalController.widgetVarietal = varietalName
-//            navigationController?.pushViewController(supportController, animated: true)
-
-//            window = UIWindow(frame: frame)
-//            window?.makeKeyAndVisible()
-//            window?.rootViewController = varietalController
-//            present(varietalController, animated: true, completion: nil)
-
-            self.window?.rootViewController = UINavigationController(rootViewController: varietalController)
-
+            let width = UIScreen.main.bounds.width
+            let height = UIScreen.main.bounds.height + 0
+            let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
             
-            
+            window = UIWindow(frame: frame)
+            window?.makeKeyAndVisible()
+            window?.rootViewController = MainTabBarController()
             return true
         } else {
             print("Photo index missing")

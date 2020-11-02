@@ -250,6 +250,11 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         } else {
             UserDefaults.standard.setIsLoggedIn(value: true)
 //            let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+            
+            let width = UIScreen.main.bounds.width
+            let height = UIScreen.main.bounds.height + 50
+            let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
+            self.view.window?.frame = frame
             let rootViewController = self.view.window!.rootViewController
             
             guard let mainNavigationController = rootViewController as? MainTabBarController else { return }
