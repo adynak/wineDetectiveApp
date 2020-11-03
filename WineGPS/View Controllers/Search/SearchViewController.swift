@@ -43,6 +43,7 @@ class SearchViewController: UIViewController {
     var searchString: String = ""
     
     var searchWines: [AllLevel0]?
+    var allSearchWines: [AllLevel0]?
 
     lazy var tableView: UITableView = {
         let tv = UITableView()
@@ -73,6 +74,7 @@ class SearchViewController: UIViewController {
         sb.searchTextField.backgroundColor = .white
         sb.searchTextField.font = UIFont.systemFont(ofSize: 12)
         sb.searchTextField.addDoneButtonOnKeyboard()
+//        sb.searchTextField.text = "Dolcetto"
         sb.autocapitalizationType = .none
         sb.placeholder = NSLocalizedString("titleSearch", comment: "navigation title: search")
         sb.subviews.first?.layer.cornerRadius = 10
@@ -119,7 +121,6 @@ class SearchViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(removeRecentlyDrank), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
-        
         tellCellarTracker()
 
         configureUI()
@@ -128,14 +129,27 @@ class SearchViewController: UIViewController {
         searchBar.resignFirstResponder()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
-
-        searchWines = allWine?.search
         
+        var widgetVarietal = "Dolcetto"
+        searchWines = allWine?.search
+        allSearchWines = allWine?.search
+
+        if !(widgetVarietal.isEmpty){
+            let filteredWines = searchWines!.filter({
+                return $0.label[0].varietal == widgetVarietal
+            })
+            searchBar.searchTextField.text = widgetVarietal
+            searchWines = filteredWines
+        } else {
+            searchWines = allWine?.search
+        }
+
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
         })
-        
+        tableView.reloadData()
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+        filteredBottles = searchKeys
         footerView.text = DataServices.countBottles(bins: searchKeys)
     }
     
@@ -235,6 +249,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.searchTextField.text = "Pinot Gris"
         searchString = searchBar.searchTextField.text!
         searchBar.resignFirstResponder()
         print("searchBarSearchButtonClicked")
@@ -260,6 +275,8 @@ extension SearchViewController: UISearchBarDelegate {
         let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
 
         if searchText.isEmpty {
+            searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
+
             filteredBottles = searchKeys
         } else {
             filteredBottles = searchKeys.filter({( text: SearchKeys) -> Bool in

@@ -89,13 +89,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "showPages")
         }
         
+        let widgetViewController = MainTabBarController()
+        widgetViewController.widgetVarietal = ""
+        
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height + 50
         let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
         
         window = UIWindow(frame: frame)
         window?.makeKeyAndVisible()
-        window?.rootViewController = MainTabBarController()
+        window?.rootViewController = widgetViewController
         
         if #available(iOS 13.0, *) {
             window?.overrideUserInterfaceStyle = .light
@@ -161,15 +164,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("varietalName = \(varietalName)")
             print("link from widget")
             
-            let varietalController = WidgetVarietalViewController()
-            varietalController.widgetVarietal = varietalName
+            let widgetViewController = MainTabBarController()
+            widgetViewController.widgetVarietal = varietalName
+            print("from app delegate \(widgetViewController.widgetVarietal)")
             let width = UIScreen.main.bounds.width
             let height = UIScreen.main.bounds.height + 0
             let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
             
             window = UIWindow(frame: frame)
             window?.makeKeyAndVisible()
-            window?.rootViewController = MainTabBarController()
+            window?.rootViewController = widgetViewController
             return true
         } else {
             print("Photo index missing")
