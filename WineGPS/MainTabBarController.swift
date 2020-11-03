@@ -10,20 +10,8 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    var widgetVarietal: String = ""
-    
-//    init(widgetVarietal: String){
-//        self.widgetVarietal = widgetVarietal
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    required init?(coder: NSCoder) {
-//            fatalError("init(coder:) is not supported")
-//        }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("widgetVarietalMTB = \(widgetVarietal)")
         
         if isLoggedIn() {
             tabBar.barTintColor = UIColor.white
