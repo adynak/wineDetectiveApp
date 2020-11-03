@@ -32,7 +32,7 @@
 "alertTitleTellCellarTracker" = "Inventario Desincronizado";
 
 /* button text: All Wines, toggled with buttonLogOut */
-"buttonAllWine" = "Todas";
+"buttonAllWine" = "Todo el Vino";
 
 /* cancel button */
 "buttonCancel" = "Cancelar";
