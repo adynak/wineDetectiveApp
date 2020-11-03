@@ -74,7 +74,6 @@ class SearchViewController: UIViewController {
         sb.searchTextField.backgroundColor = .white
         sb.searchTextField.font = UIFont.systemFont(ofSize: 12)
         sb.searchTextField.addDoneButtonOnKeyboard()
-//        sb.searchTextField.text = "Dolcetto"
         sb.autocapitalizationType = .none
         sb.placeholder = NSLocalizedString("titleSearch", comment: "navigation title: search")
         sb.subviews.first?.layer.cornerRadius = 10
@@ -308,9 +307,7 @@ extension SearchViewController: UISearchBarDelegate {
         let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
 
         if searchText.isEmpty {
-            
             searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
-
             filteredBottles = searchKeys
         } else {
             filteredBottles = searchKeys.filter({( text: SearchKeys) -> Bool in
@@ -319,9 +316,7 @@ extension SearchViewController: UISearchBarDelegate {
         }
         
         footerView.text = DataServices.countBottles(bins: filteredBottles)
-
         tableView.reloadData()
-
     }
 }
 

@@ -19,6 +19,7 @@ class DrinkByViewController: UIViewController {
     var searchString: String = ""
     
     var searchWines: [AllLevel0]?
+    var allSearchWines: [AllLevel0]?
 
     lazy var tableView: UITableView = {
         let tv = UITableView()
@@ -98,7 +99,6 @@ class DrinkByViewController: UIViewController {
         setupNavigationBar()
         searchBar.resignFirstResponder()
                 
-
         searchWines = allWine?.drinkBy
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
@@ -110,12 +110,31 @@ class DrinkByViewController: UIViewController {
                                                name: Notification.Name("changeDrinkBySort"),
                                                object: nil)
 
+        
+        let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
+        searchWines = allWine?.drinkBy
+        allSearchWines = allWine?.drinkBy
+        allSearchWines = allSearchWines!.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
+        
+        if !(widgetVarietal.isEmpty){
+            let filteredWines = searchWines!.filter({
+                return $0.label[0].varietal == widgetVarietal
+            })
+            searchBar.searchTextField.text = widgetVarietal
+            searchWines = filteredWines
+        } else {
+            searchWines = allWine?.drinkBy
+        }
+        
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].available) > ($1.label[0].available)
         })
         
+        tableView.reloadData()
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-
+        filteredBottles = searchKeys
         footerView.text = DataServices.countBottles(bins: searchKeys)
     }
     
@@ -127,12 +146,26 @@ class DrinkByViewController: UIViewController {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
         })
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+            style: UIBarButtonItem.Style.plain,
+            target: self,
+            action: #selector(handleLogOut)
+        )
+
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
         footerView.text = DataServices.countBottles(bins: searchKeys)
         self.tableView.reloadData()
     }
-
     
+    @objc func handleLoadAllWine(){
+        let widgetVarietal = ""
+        UserDefaults.standard.setWidgetVarietal(value: "")
+        searchBar.searchTextField.text = widgetVarietal
+        handleReload()
+        filteredBottles = searchKeys
+    }
+
     @objc func changeDrinkBySort(_ notification: Notification) {
         let title = NSLocalizedString("titleDrinkBy", comment: "Navigation Bar menu title: Drink By.  This will display a list of wines sorted by when they should be consumed, from sooner to later.")
         let drinkByMenuCode = (notification.userInfo?["drinkByMenuCode"])! as! String
@@ -226,11 +259,23 @@ class DrinkByViewController: UIViewController {
         let drinkByMenuCode = NSLocalizedString("drinkByNavTitleAvailable", comment: "drink by nav title Available DO NOT TRANSLATE")
 
         navigationItem.titleView = DataServices.setupTitleView(title: title, subTitle: drinkByMenuCode)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-                                                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
-                                                style: UIBarButtonItem.Style.plain,
-                                                target: self,
-                                                action: #selector(handleLogOut))
+        
+        let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
+        if widgetVarietal == "" {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+                style: UIBarButtonItem.Style.plain,
+                target: self,
+                action: #selector(handleLogOut)
+            )
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: NSLocalizedString("buttonAllWine", comment: "button text: All Wines, toggled with buttonLogOut"),
+                style: UIBarButtonItem.Style.plain,
+                target: self,
+                action: #selector(handleLoadAllWine)
+            )
+        }
     }
     
     func configureUI() {
@@ -336,19 +381,17 @@ extension DrinkByViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("Search text is \(searchText)")
         if searchText.isEmpty {
+            searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
             filteredBottles = searchKeys
         } else {
             filteredBottles = searchKeys.filter({( country: SearchKeys) -> Bool in
-                
                 return country.searckKey.localizedCaseInsensitiveContains(searchText)
-                
             })
         }
         
         footerView.text = DataServices.countBottles(bins: filteredBottles)
 
         tableView.reloadData()
-
     }
 }
 
