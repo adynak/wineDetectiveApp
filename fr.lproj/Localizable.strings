@@ -31,6 +31,9 @@
 /* alert title: inventory out of sync */
 "alertTitleTellCellarTracker" = "Inventaire non synchronisé";
 
+/* button text: All Wines, toggled with buttonLogOut */
+"buttonAllWine" = "Tout";
+
 /* cancel button */
 "buttonCancel" = "Annuler";
 
