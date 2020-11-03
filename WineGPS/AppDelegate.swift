@@ -89,8 +89,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "showPages")
         }
         
+        UserDefaults.standard.setWidgetVarietal(value: "")
+
         let widgetViewController = MainTabBarController()
-        widgetViewController.widgetVarietal = ""
         
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height + 50
@@ -164,9 +165,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("varietalName = \(varietalName)")
             print("link from widget")
             
+            UserDefaults.standard.setWidgetVarietal(value: varietalName)
+
             let widgetViewController = MainTabBarController()
-            widgetViewController.widgetVarietal = varietalName
-            print("from app delegate \(widgetViewController.widgetVarietal)")
             let width = UIScreen.main.bounds.width
             let height = UIScreen.main.bounds.height + 0
             let frame = CGRect.init(x: 0, y: 0, width: width, height: height)
