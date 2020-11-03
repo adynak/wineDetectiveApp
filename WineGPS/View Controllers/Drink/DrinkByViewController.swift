@@ -212,7 +212,8 @@ class DrinkByViewController: UIViewController {
     
     @objc func handleLogOut(){
         UserDefaults.standard.setIsLoggedIn(value: false)
-        
+        UserDefaults.standard.setWidgetVarietal(value: "")
+
         let loginController = LoginController()
         loginController.modalPresentationStyle = .fullScreen
         present(loginController, animated: true, completion: nil)
