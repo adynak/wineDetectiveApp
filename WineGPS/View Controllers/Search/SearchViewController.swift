@@ -130,9 +130,12 @@ class SearchViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
         
-        var widgetVarietal = "Dolcetto"
+        let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
         searchWines = allWine?.search
         allSearchWines = allWine?.search
+        allSearchWines = allSearchWines!.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
 
         if !(widgetVarietal.isEmpty){
             let filteredWines = searchWines!.filter({
@@ -159,19 +162,35 @@ class SearchViewController: UIViewController {
     }
     
     @objc func handleReload(){
+
         searchWines = allWine?.search
         searchWines = searchWines!.sorted(by: {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
         })
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+            style: UIBarButtonItem.Style.plain,
+            target: self,
+            action: #selector(handleLogOut)
+        )
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
         footerView.text = DataServices.countBottles(bins: searchKeys)
         tableView.reloadData()
     }
     
+    @objc func handleLoadAllWine(){
+        let widgetVarietal = ""
+        UserDefaults.standard.setWidgetVarietal(value: "")
+        searchBar.searchTextField.text = widgetVarietal
+        handleReload()
+            filteredBottles = searchKeys
+    }
+    
     @objc func handleLogOut(){
         UserDefaults.standard.setIsLoggedIn(value: false)
-        
+        UserDefaults.standard.setWidgetVarietal(value: "")
+
         let loginController = LoginController()
         loginController.modalPresentationStyle = .fullScreen
         present(loginController, animated: true, completion: nil)
@@ -193,11 +212,23 @@ class SearchViewController: UIViewController {
     
     func setupNavigationBar() {
         navigationItem.title = NSLocalizedString("titleSearch", comment: "navigation title: search")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-                                                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
-                                                style: UIBarButtonItem.Style.plain,
-                                                target: self,
-                                                action: #selector(handleLogOut))
+        
+        let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
+        if widgetVarietal == "" {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+                style: UIBarButtonItem.Style.plain,
+                target: self,
+                action: #selector(handleLogOut)
+            )
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: NSLocalizedString("buttonAllWine", comment: "button text: All Wines, toggled with buttonLogOut"),
+                style: UIBarButtonItem.Style.plain,
+                target: self,
+                action: #selector(handleLoadAllWine)
+            )
+        }
     }
     
     func configureUI() {
@@ -208,18 +239,20 @@ class SearchViewController: UIViewController {
         searchBar.sizeToFit()
         showSearchBarButton(shouldShow: true)
     }
-    
+            
     func showSearchBarButton(shouldShow: Bool) {
         if shouldShow {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
-                                                    title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
-                                                    style: UIBarButtonItem.Style.plain,
-                                                    target: self,
-                                                    action: #selector(handleLogOut))
+                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+                style: UIBarButtonItem.Style.plain,
+                target: self,
+                action: #selector(handleLogOut)
+            )
             navigationItem.rightBarButtonItem = UIBarButtonItem(
-                                                    barButtonSystemItem: .search,
-                                                    target: self,
-                                                    action:#selector(handleShowSearchBar))
+                barButtonSystemItem: .search,
+                target: self,
+                action:#selector(handleShowSearchBar)
+            )
         } else {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
@@ -275,6 +308,7 @@ extension SearchViewController: UISearchBarDelegate {
         let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
 
         if searchText.isEmpty {
+            
             searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
 
             filteredBottles = searchKeys
