@@ -18,6 +18,7 @@ extension UserDefaults {
         case showPages
         case rememberMe
         case iCloudAvailable
+        case widgetVarietal
     }
     
     static func contains(_ key: String) -> Bool {
@@ -51,6 +52,11 @@ extension UserDefaults {
         synchronize()
     }
     
+    func setWidgetVarietal(value: String) {
+        set(value, forKey: UserDefaultsKeys.widgetVarietal.rawValue)
+        synchronize()
+    }
+    
     func getUserName() -> String{
         return string(forKey: UserDefaultsKeys.userName.rawValue)!
     }
@@ -74,4 +80,9 @@ extension UserDefaults {
     func getiCloudStatus() -> Bool {
         return bool(forKey: UserDefaultsKeys.iCloudAvailable.rawValue)
     }
+    
+    func getWidgetVarietal() -> String{
+        return string(forKey: UserDefaultsKeys.widgetVarietal.rawValue)!
+    }
+
 }
