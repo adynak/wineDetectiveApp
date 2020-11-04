@@ -371,6 +371,7 @@ extension DrinkByViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         search(shouldShow: false)
         searchBar.searchTextField.text = ""
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
         filteredBottles = searchKeys
         footerView.text = DataServices.countBottles(bins: filteredBottles)
         tableView.reloadData()

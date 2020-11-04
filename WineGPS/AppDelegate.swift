@@ -165,7 +165,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("varietalName = \(varietalName)")
             print("link from widget")
             
-            UserDefaults.standard.setWidgetVarietal(value: varietalName)
+            if varietalName == NSLocalizedString("totalBottles", comment: "plural : total bottles") {
+                UserDefaults.standard.setWidgetVarietal(value: "")
+            } else {
+                UserDefaults.standard.setWidgetVarietal(value: varietalName)
+            }
 
             let widgetViewController = MainTabBarController()
             let width = UIScreen.main.bounds.width

@@ -175,6 +175,7 @@ struct SmallWidgetViewTotalBottles: View {
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .leading)
         .padding()
         .background(LinearGradient(gradient: Gradient(colors: [.white,.white, .purple]), startPoint: .top, endPoint: .bottom))
+        .widgetURL(entry.deepLinkURL)
     }
 
 }
