@@ -281,7 +281,6 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.searchTextField.text = "Pinot Gris"
         searchString = searchBar.searchTextField.text!
         searchBar.resignFirstResponder()
         print("searchBarSearchButtonClicked")
@@ -306,13 +305,21 @@ extension SearchViewController: UISearchBarDelegate {
         print("Search text is \(searchText)")
 // smart quotes on the keyboard, not in the download, fool!
         let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
+// match any word in any position by using an array.contains(where: ...
+        var searchTextArray = searchText.components(separatedBy: " ")
+        if searchTextArray.last == "" {
+            searchTextArray.removeLast()
+        }
 
         if searchText.isEmpty {
             searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
             filteredBottles = searchKeys
         } else {
             filteredBottles = searchKeys.filter({( text: SearchKeys) -> Bool in
-                return text.searckKey.localizedCaseInsensitiveContains(searchText)
+// returns true when there is an exact match of needle in haystack
+//                return text.searchKey.localizedCaseInsensitiveContains(searchText)
+// returns true if needle is anywhere in the haystack
+                return !searchTextArray.contains(where: { !text.searchKey.localizedCaseInsensitiveContains($0) })
             })
         }
         

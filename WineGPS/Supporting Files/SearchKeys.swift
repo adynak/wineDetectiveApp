@@ -20,10 +20,10 @@ struct SearchKeys {
     let designation: String
     let vineyard: String
     let drinkBy: String
-    let searckKey: String
+    let searchKey: String
     var storageBins: [StorageBins]?
     var description: String?
-    
+        
     static func BuildSearchKeys(wines: inout [AllLevel0]) -> [SearchKeys] {
         var searchWines = [SearchKeys]()
         var searchBins = [StorageBins]()
@@ -84,7 +84,7 @@ struct SearchKeys {
                                        designation: designation,
                                        vineyard: vineyard,
                                        drinkBy: wine.label[0].drinkBy,
-                                       searckKey: searchKey,
+                                       searchKey: searchKey,
                                        storageBins: searchBins,
                                        description: description)
             )
