@@ -35,7 +35,7 @@ class SearchBarContainerView: UIView {
 }
 
 class SearchViewController: UIViewController {
-    
+        
     let cellID = "cell123"
     var searchKeys = [SearchKeys]()
 
@@ -81,6 +81,16 @@ class SearchViewController: UIViewController {
         return sb
     }()
     
+    let refreshControl: UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.tintColor = barTintColor
+        rc.attributedTitle = NSAttributedString(string: "Fetching Wine from Cellar Tracker", attributes: [
+            NSAttributedString.Key.foregroundColor: barTintColor,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16)!
+        ])
+        return rc
+    }()
+
     @objc func removeRecentlyDrank(notification: NSNotification){
         let markAsDrank = DataServices.buildCellarTrackerList()
         if markAsDrank.count > 0 {
@@ -88,7 +98,7 @@ class SearchViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    
+        
     func removeFilteredBottles(markAsDrank: [DrillLevel2] ,filteredBottles: [SearchKeys]) -> [SearchKeys]{
                 
         for emptyBottle in markAsDrank {
@@ -118,6 +128,13 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refreshControl
+        } else {
+            tableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(reloadSourceData(_:)), for: .valueChanged)
+
         NotificationCenter.default.addObserver(self, selector: #selector(removeRecentlyDrank), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
 
         tellCellarTracker()
@@ -193,6 +210,14 @@ class SearchViewController: UIViewController {
         let loginController = LoginController()
         loginController.modalPresentationStyle = .fullScreen
         present(loginController, animated: true, completion: nil)
+    }
+    
+    @objc private func reloadSourceData(_ sender: Any) {
+        let results = API.load()
+//        self.updateView()
+        self.refreshControl.endRefreshing()
+//        self.activityIndicatorView.stopAnimating()
+        print("pull")
     }
     
     func tellCellarTracker(){
