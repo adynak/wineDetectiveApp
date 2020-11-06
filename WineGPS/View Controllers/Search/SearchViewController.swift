@@ -331,10 +331,7 @@ extension SearchViewController: UISearchBarDelegate {
 // smart quotes on the keyboard, not in the download, fool!
         let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
 // match any word in any position by using an array.contains(where: ...
-        var searchTextArray = searchText.components(separatedBy: " ")
-        if searchTextArray.last == "" {
-            searchTextArray.removeLast()
-        }
+        let searchTextArray = searchText.split(separator: " ")
 
         if searchText.isEmpty {
             searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
