@@ -11,22 +11,13 @@ import UIKit
 class ProducerViewController :UITableViewController {
     
     let cellID = "cellId"
-    
-    var dig: Int = 0
-    
+        
     var bottles: [DrillLevel0]?
     var locationLocations:Set = Set<Int>()
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        if dig > 0{
-//            print("SFSG")
-//                    let drinkBottlesViewController : UIViewController
-//                    drinkBottlesViewController = DrinkBottlesViewController()
-//
-//            navigationController?.pushViewController(drinkBottlesViewController, animated: true)
-//
-//        }
-//    }
+    func swipeRefresh(){
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

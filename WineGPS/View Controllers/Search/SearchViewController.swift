@@ -214,12 +214,49 @@ class SearchViewController: UIViewController {
     
     @objc private func reloadSourceData(_ sender: Any) {
         let results = API.load()
-//        self.updateView()
-        self.refreshControl.endRefreshing()
-//        self.activityIndicatorView.stopAnimating()
-        print("pull")
+        
+        searchWines = allWine?.search
+        allSearchWines = allWine?.search
+        allSearchWines = allSearchWines!.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
+        
+        let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
+        if !(widgetVarietal.isEmpty){
+            let filteredWines = searchWines!.filter({
+                return $0.label[0].varietal == widgetVarietal
+            })
+            searchBar.searchTextField.text = widgetVarietal
+            searchWines = filteredWines
+        } else {
+            searchWines = allWine?.search
+        }
+
+        searchWines = searchWines!.sorted(by: {
+            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
+        })
+        
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+        filteredBottles = searchKeys
+        footerView.text = DataServices.countBottles(bins: searchKeys)
+
+        switch apiResults(rawValue: results)! {
+            case .Failed :
+                Alert.showAPIFailedsAlert(on: self)
+            case .NoInternet:
+                Alert.noInternetAlert(on: self)
+            case .Success:
+                break
+        }
+        
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+            DrinkByViewController().swipeRefresh()
+            ProducerViewController().swipeRefresh()
+        }
     }
-    
+        
     func tellCellarTracker(){
         var markAsDrank = [DrillLevel2]()
 

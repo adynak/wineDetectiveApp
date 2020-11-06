@@ -20,6 +20,10 @@ class DrinkByViewController: UIViewController {
     
     var searchWines: [AllLevel0]?
     var allSearchWines: [AllLevel0]?
+    
+    func swipeRefresh(){
+        
+    }
 
     lazy var tableView: UITableView = {
         let tv = UITableView()
