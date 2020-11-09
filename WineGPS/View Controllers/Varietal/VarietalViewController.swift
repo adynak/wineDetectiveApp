@@ -22,6 +22,9 @@ class VarietalViewController : UITableViewController {
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
         bottles = allWine?.varietals
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
+
 
     }
                     

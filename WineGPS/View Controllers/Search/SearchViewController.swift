@@ -252,8 +252,7 @@ class SearchViewController: UIViewController {
         DispatchQueue.main.async {
             self.refreshControl.endRefreshing()
             self.tableView.reloadData()
-            DrinkByViewController().swipeRefresh()
-            ProducerViewController().swipeRefresh()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
         }
     }
         

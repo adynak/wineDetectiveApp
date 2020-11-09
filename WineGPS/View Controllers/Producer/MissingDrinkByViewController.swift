@@ -25,6 +25,9 @@ class MissingDrinkByViewController :UITableViewController {
         bottles = allWine?.missing
                 
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
+
 
     }
                     

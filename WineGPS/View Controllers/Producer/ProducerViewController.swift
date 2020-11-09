@@ -15,10 +15,6 @@ class ProducerViewController :UITableViewController {
     var bottles: [DrillLevel0]?
     var locationLocations:Set = Set<Int>()
     
-    func swipeRefresh(){
-        
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +22,8 @@ class ProducerViewController :UITableViewController {
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
         bottles = allWine?.producers
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
 
     }
                     

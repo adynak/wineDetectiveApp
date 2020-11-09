@@ -21,10 +21,6 @@ class DrinkByViewController: UIViewController {
     var searchWines: [AllLevel0]?
     var allSearchWines: [AllLevel0]?
     
-    func swipeRefresh(){
-        
-    }
-
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -94,8 +90,7 @@ class DrinkByViewController: UIViewController {
         return self.filteredBottles
         
     }
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -113,8 +108,9 @@ class DrinkByViewController: UIViewController {
                                                selector: #selector(changeDrinkBySort),
                                                name: Notification.Name("changeDrinkBySort"),
                                                object: nil)
-
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
+
         let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
         searchWines = allWine?.drinkBy
         allSearchWines = allWine?.drinkBy
