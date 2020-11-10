@@ -15,15 +15,30 @@ class ProducerViewController :UITableViewController {
     var bottles: [DrillLevel0]?
     var locationLocations:Set = Set<Int>()
     
+    let refreshControlP: UIRefreshControl = {
+        let spinnerText = NSLocalizedString("runAPI", comment: "textfield label: Getting Your Wines, text below animation while waiting for download")
+        let rc = UIRefreshControl()
+        rc.tintColor = barTintColor
+        rc.attributedTitle = NSAttributedString(string: spinnerText, attributes: [
+            NSAttributedString.Key.foregroundColor: barTintColor,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16)!
+        ])
+        return rc
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
+        
+        tableView.refreshControl = refreshControlP
         bottles = allWine?.producers
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
+        
+        refreshControlP.addTarget(self, action: #selector(reloadSourceData(_:)), for: .valueChanged)
 
     }
                     
@@ -73,6 +88,27 @@ class ProducerViewController :UITableViewController {
                 handleExpandClose(button: button)
             }
         }
+    }
+    
+    @objc private func reloadSourceData(_ sender: Any) {
+        let results = API.load()
+        bottles = allWine?.producers
+
+        switch apiResults(rawValue: results)! {
+            case .Failed :
+                Alert.showAPIFailedsAlert(on: self)
+            case .NoInternet:
+                Alert.noInternetAlert(on: self)
+            case .Success:
+                break
+        }
+        
+        DispatchQueue.main.async {
+            self.refreshControlP.endRefreshing()
+            self.tableView.reloadData()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
+        }
+
     }
 
     @objc func handleExpandClose(button: UIButton) {

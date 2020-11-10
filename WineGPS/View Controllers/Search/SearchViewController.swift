@@ -129,13 +129,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if #available(iOS 10.0, *) {
-//            tableView.refreshControl = refreshControl
-//        } else {
-//            tableView.addSubview(refreshControl)
-//        }
-        
+
         refreshControl.addTarget(self, action: #selector(reloadSourceData(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(removeRecentlyDrank), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)

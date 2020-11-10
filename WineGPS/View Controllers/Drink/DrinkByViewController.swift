@@ -69,7 +69,6 @@ class DrinkByViewController: UIViewController {
         return rc
     }()
 
-    
     @objc func removeRecentlyDrank(notification: NSNotification){
         let markAsDrank = DataServices.buildCellarTrackerList()
         if markAsDrank.count > 0 {
