@@ -133,6 +133,8 @@ class SearchViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(reloadSourceData(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(removeRecentlyDrank), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
 
         tellCellarTracker()
 

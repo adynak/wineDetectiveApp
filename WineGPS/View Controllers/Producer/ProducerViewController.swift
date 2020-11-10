@@ -31,8 +31,8 @@ class ProducerViewController :UITableViewController {
         
         setupNavBar()
         tableView.register(TableCell.self, forCellReuseIdentifier: cellID)
-        
         tableView.refreshControl = refreshControlP
+        
         bottles = allWine?.producers
         NotificationCenter.default.addObserver(self, selector: #selector(handleReload), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
         
