@@ -51,6 +51,7 @@ class SearchViewController: UIViewController {
         tv.register(TableCell.self, forCellReuseIdentifier: cellID)
         tv.delegate = self
         tv.dataSource = self
+        tv.refreshControl = refreshControl
         return tv
     }()
     
@@ -82,9 +83,10 @@ class SearchViewController: UIViewController {
     }()
     
     let refreshControl: UIRefreshControl = {
+        let spinnerText = NSLocalizedString("runAPI", comment: "textfield label: Getting Your Wines, text below animation while waiting for download")
         let rc = UIRefreshControl()
         rc.tintColor = barTintColor
-        rc.attributedTitle = NSAttributedString(string: "Fetching Wine from Cellar Tracker", attributes: [
+        rc.attributedTitle = NSAttributedString(string: spinnerText, attributes: [
             NSAttributedString.Key.foregroundColor: barTintColor,
             NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16)!
         ])
@@ -128,11 +130,12 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 10.0, *) {
-            tableView.refreshControl = refreshControl
-        } else {
-            tableView.addSubview(refreshControl)
-        }
+//        if #available(iOS 10.0, *) {
+//            tableView.refreshControl = refreshControl
+//        } else {
+//            tableView.addSubview(refreshControl)
+//        }
+        
         refreshControl.addTarget(self, action: #selector(reloadSourceData(_:)), for: .valueChanged)
 
         NotificationCenter.default.addObserver(self, selector: #selector(removeRecentlyDrank), name: NSNotification.Name(rawValue: "removeBottles"), object: nil)

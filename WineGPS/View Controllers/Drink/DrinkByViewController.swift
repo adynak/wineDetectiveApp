@@ -13,7 +13,7 @@ class DrinkByViewController: UIViewController {
     let cellID = "cell123"
     var searchKeys = [SearchKeys]()
     
-    var drinkByMenuCode = "available"
+    var drinkByMenuCode = "Available"
 
     var filteredBottles = [SearchKeys]()
     var searchString: String = ""
@@ -27,6 +27,7 @@ class DrinkByViewController: UIViewController {
         tv.register(TableCell.self, forCellReuseIdentifier: cellID)
         tv.delegate = self
         tv.dataSource = self
+        tv.refreshControl = refreshControl
         return tv
     }()
     
@@ -56,6 +57,18 @@ class DrinkByViewController: UIViewController {
         sb.subviews.first?.clipsToBounds = true
         return sb
     }()
+    
+    let refreshControl: UIRefreshControl = {
+        let spinnerText = NSLocalizedString("runAPI", comment: "textfield label: Getting Your Wines, text below animation while waiting for download")
+        let rc = UIRefreshControl()
+        rc.tintColor = barTintColor
+        rc.attributedTitle = NSAttributedString(string: spinnerText, attributes: [
+            NSAttributedString.Key.foregroundColor: barTintColor,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16)!
+        ])
+        return rc
+    }()
+
     
     @objc func removeRecentlyDrank(notification: NSNotification){
         let markAsDrank = DataServices.buildCellarTrackerList()
@@ -97,6 +110,8 @@ class DrinkByViewController: UIViewController {
         setupElements()
         setupNavigationBar()
         searchBar.resignFirstResponder()
+        
+        refreshControl.addTarget(self, action: #selector(reloadSourceData(_:)), for: .valueChanged)
                 
         searchWines = allWine?.drinkBy
         
@@ -114,9 +129,6 @@ class DrinkByViewController: UIViewController {
         let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
         searchWines = allWine?.drinkBy
         allSearchWines = allWine?.drinkBy
-        allSearchWines = allSearchWines!.sorted(by: {
-            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
-        })
         
         if !(widgetVarietal.isEmpty){
             let filteredWines = searchWines!.filter({
@@ -128,10 +140,9 @@ class DrinkByViewController: UIViewController {
             searchWines = allWine?.drinkBy
         }
         
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].available) > ($1.label[0].available)
-        })
-        
+        searchWines = buidSearchWinesFromDrinkByMenuCode(drinkByMenuCode: drinkByMenuCode)
+        allSearchWines = searchWines
+
         tableView.reloadData()
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
         filteredBottles = searchKeys
@@ -142,9 +153,7 @@ class DrinkByViewController: UIViewController {
         let drinkBySort = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: "available")
         allWine?.drinkBy = drinkBySort
         searchWines = allWine?.drinkBy
-        searchWines = searchWines!.sorted(by: {
-            ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
-        })
+        searchWines = buidSearchWinesFromDrinkByMenuCode(drinkByMenuCode: drinkByMenuCode)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
@@ -185,8 +194,114 @@ class DrinkByViewController: UIViewController {
         } else {
             searchWines = DataServices.buildDrinkByBottlesArray(fields: fields, drinkByKey: drinkByMenuCode.lowercased())
         }
+        
+        searchWines = buidSearchWinesFromDrinkByMenuCode(drinkByMenuCode: drinkByMenuCode)
+
+//        switch drinkByMenuCode {
+//        case "Linear":
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].linear) > ($1.label[0].linear)
+//            })
+//        case "Bell":
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].bell) > ($1.label[0].bell)
+//            })
+//        case "Early":
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].early) > ($1.label[0].early)
+//            })
+//        case "Late":
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].late) > ($1.label[0].late)
+//            })
+//        case "Fast":
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].fast) > ($1.label[0].fast)
+//            })
+//        case "TwinPeak":
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].twinPeak) > ($1.label[0].twinPeak)
+//            })
+//        case "Simple":
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].simple) > ($1.label[0].simple)
+//            })
+//        case "Missing":
+//            searchWines = searchWines!.filter{
+//                $0.label[0].drinkBy == ""
+//            }
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].producer) < ($1.label[0].producer)
+//            })
+//        default:
+//            searchWines = searchWines!.sorted(by: {
+//                ($0.label[0].available) > ($1.label[0].available)
+//            })
+//        }
+        
         searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
         footerView.text = DataServices.countBottles(bins: searchKeys)
+
+        self.tableView.reloadData()
+
+    }
+    
+    @objc func handleShowSearchBar() {
+        searchBar.becomeFirstResponder()
+        search(shouldShow: true)
+    }
+    
+    @objc func handleLogOut(){
+        UserDefaults.standard.setIsLoggedIn(value: false)
+        UserDefaults.standard.setWidgetVarietal(value: "")
+
+        let loginController = LoginController()
+        loginController.modalPresentationStyle = .fullScreen
+        present(loginController, animated: true, completion: nil)
+    }
+    
+    @objc private func reloadSourceData(_ sender: Any) {
+        let results = API.load()
+        
+        searchWines = allWine?.drinkBy
+        allSearchWines = allWine?.drinkBy
+        
+        let widgetVarietal = UserDefaults.standard.getWidgetVarietal()
+        if !(widgetVarietal.isEmpty){
+            let filteredWines = searchWines!.filter({
+                return $0.label[0].varietal == widgetVarietal
+            })
+            searchBar.searchTextField.text = widgetVarietal
+            searchWines = filteredWines
+        } else {
+            searchWines = allWine?.search
+        }
+
+        searchWines = buidSearchWinesFromDrinkByMenuCode(drinkByMenuCode: drinkByMenuCode)
+        allSearchWines = searchWines
+
+        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+        filteredBottles = searchKeys
+        footerView.text = DataServices.countBottles(bins: searchKeys)
+
+        switch apiResults(rawValue: results)! {
+            case .Failed :
+                Alert.showAPIFailedsAlert(on: self)
+            case .NoInternet:
+                Alert.noInternetAlert(on: self)
+            case .Success:
+                break
+        }
+        
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
+        }
+        
+    }
+    
+    func buidSearchWinesFromDrinkByMenuCode(drinkByMenuCode: String) -> [AllLevel0]{
 
         switch drinkByMenuCode {
         case "Linear":
@@ -224,32 +339,12 @@ class DrinkByViewController: UIViewController {
             searchWines = searchWines!.sorted(by: {
                 ($0.label[0].producer) < ($1.label[0].producer)
             })
-            searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-            footerView.text = DataServices.countBottles(bins: searchKeys)
         default:
             searchWines = searchWines!.sorted(by: {
                 ($0.label[0].available) > ($1.label[0].available)
             })
         }
-        
-        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-
-        self.tableView.reloadData()
-
-    }
-    
-    @objc func handleShowSearchBar() {
-        searchBar.becomeFirstResponder()
-        search(shouldShow: true)
-    }
-    
-    @objc func handleLogOut(){
-        UserDefaults.standard.setIsLoggedIn(value: false)
-        UserDefaults.standard.setWidgetVarietal(value: "")
-
-        let loginController = LoginController()
-        loginController.modalPresentationStyle = .fullScreen
-        present(loginController, animated: true, completion: nil)
+        return searchWines!
     }
     
     func setupNavigationBar() {
