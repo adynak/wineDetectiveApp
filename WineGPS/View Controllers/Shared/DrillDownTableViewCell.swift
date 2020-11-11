@@ -35,6 +35,11 @@ class DrillDownTableViewCell : UITableViewCell {
 
                 vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
                 
+                let components = vintageAndDescriptionLabel.text?.components(separatedBy: " ")
+                let orderedNoDuplicates = NSOrderedSet(array: components!).map({ $0 as! String })
+                
+                vintageAndDescriptionLabel.text = orderedNoDuplicates.joined(separator: " ")
+                
                 let drinkBy = buildDrinkBy(beginConsume: binItem.beginConsume!, endConsume: binItem.endConsume!)
                 
                 if binItem.viewName == "location"{
@@ -48,11 +53,21 @@ class DrillDownTableViewCell : UITableViewCell {
                     }
                     vintageAndDescriptionLabel.text = "\(binItem.vintage!) \(producer) \(additionalInfo)"
                     
+                    let components = vintageAndDescriptionLabel.text?.components(separatedBy: " ")
+                    let orderedNoDuplicates = NSOrderedSet(array: components!).map({ $0 as! String })
+                    
+                    vintageAndDescriptionLabel.text = orderedNoDuplicates.joined(separator: " ")
+
                     drinkByLabel.text = binItem.varietal
                     locationAndBinLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "textfield label: Drinking Window: 2020 - 2022") + " \(drinkBy)"
 
                 } else {
                     vintageAndDescriptionLabel.text =  "\(binItem.vintage!) \(description)"
+                    
+                    let components = vintageAndDescriptionLabel.text?.components(separatedBy: " ")
+                    let orderedNoDuplicates = NSOrderedSet(array: components!).map({ $0 as! String })
+                    vintageAndDescriptionLabel.text = orderedNoDuplicates.joined(separator: " ")
+
                     drinkByLabel.text = NSLocalizedString("labelDrinkByWindow", comment: "textfield label: Drinking Window: 2020 - 2022") + " \(drinkBy)"
                     locationAndBinLabel.text = NSLocalizedString("labelLocation", comment: "textfield label: Location: similar to a storage room") + ": \(binItem.location!) \(binItem.bin!)"
                 }

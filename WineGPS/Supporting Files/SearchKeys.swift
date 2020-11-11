@@ -37,25 +37,31 @@ struct SearchKeys {
             vineyard = wine.label[0].vineyard
             producer = wine.label[0].producer
             
-            if designation == "" && vineyard == "" {
-                description = wine.label[0].producer
-            }
+//            if designation == "" && vineyard == "" {
+//                description = producer
+//            }
+//            
+//            if designation == "" && vineyard != "" {
+//                description = producer + " " + vineyard
+//            }
+//            
+//            if designation != "" && vineyard == "" {
+//                description = producer + " " + designation
+//            }
+//            
+//            if designation != "" && vineyard != "" {
+//                description = designation + " " + vineyard
+//                description = description.replacingOccurrences(of: designation, with: "")
+//                description = producer + " " + description
+//            }
             
-            if designation == "" && vineyard != "" {
-                description = producer + " " + vineyard
-            }
-            
-            if designation != "" && vineyard == "" {
-                description = producer + " " + designation
-            }
-            
-            if designation != "" && vineyard != "" {
-                description = designation + " " + vineyard
-                description = description.replacingOccurrences(of: designation, with: "")
-                description = producer + " " + description
-            }
-            
+            description = producer + " " + designation + " " + vineyard
             description = description.condensedWhitespace
+
+            let components = description.components(separatedBy: " ")
+            let orderedNoDuplicates = NSOrderedSet(array: components).map({ $0 as! String })
+            
+            description = orderedNoDuplicates.joined(separator: " ")
 
             let searchKey = wine.label[0].vintage + " " +
                             wine.label[0].varietal + " " +
@@ -91,6 +97,18 @@ struct SearchKeys {
             searchBins.removeAll()
         }
         return searchWines
+    }
+    
+    static func uniq<S : Sequence, T : Hashable>(source: S) -> [T] where S.Iterator.Element == T {
+        var buffer = [T]()
+        var added = Set<T>()
+        for elem in source {
+            if !added.contains(elem) {
+                buffer.append(elem)
+                added.insert(elem)
+            }
+        }
+        return buffer
     }
     
 }
