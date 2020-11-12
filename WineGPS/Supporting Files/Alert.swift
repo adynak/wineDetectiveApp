@@ -61,8 +61,6 @@ struct Alert{
         let title = NSLocalizedString("alertTextNoIcloudTitle", comment: "alert title: iCloud")
         let message = NSLocalizedString("alertTextNoIcloudMessage", comment: "alert text: connect to iCloud account")
         showBasicAlert(on: vc, with: title, message: message)
-
-        
     }
 
 }
