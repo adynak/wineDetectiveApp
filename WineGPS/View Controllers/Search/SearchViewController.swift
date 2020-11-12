@@ -242,8 +242,10 @@ class SearchViewController: UIViewController {
         switch apiResults(rawValue: results)! {
             case .Failed :
                 Alert.showAPIFailedsAlert(on: self)
+                DataServices.endRefreshing(tv: tableView, rc: refreshControl)
             case .NoInternet:
                 Alert.noInternetAlert(on: self)
+                DataServices.endRefreshing(tv: tableView, rc: refreshControl)
             case .Success:
                 break
         }
@@ -254,7 +256,7 @@ class SearchViewController: UIViewController {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTableView"), object: nil)
         }
     }
-        
+    
     func tellCellarTracker(){
         var markAsDrank = [DrillLevel2]()
 

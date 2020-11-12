@@ -889,6 +889,16 @@ class DataServices {
         return "\(totalBottles)" + plural
     }
 
-    
+    static func endRefreshing(tv: UITableView, rc: UIRefreshControl){
+        let top = CGPoint(x: 0, y: -rc.bounds.size.height)
+        let rowsInSectionZero = tv.numberOfRows(inSection: 0)
+        if rowsInSectionZero == 0 {
+            tv.setContentOffset(top, animated: true)
+            tv.layoutIfNeeded()
+        } else {
+            tv.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+        }
+        rc.endRefreshing()
+    }
 }
 

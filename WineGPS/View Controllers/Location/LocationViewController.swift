@@ -96,8 +96,10 @@ class LocationViewController :UITableViewController {
         switch apiResults(rawValue: results)! {
             case .Failed :
                 Alert.showAPIFailedsAlert(on: self)
+                DataServices.endRefreshing(tv: tableView, rc: refreshControl!)
             case .NoInternet:
                 Alert.noInternetAlert(on: self)
+                DataServices.endRefreshing(tv: tableView, rc: refreshControl!)
             case .Success:
                 break
         }
