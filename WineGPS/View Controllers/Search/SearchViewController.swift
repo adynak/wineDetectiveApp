@@ -83,7 +83,7 @@ class SearchViewController: UIViewController {
     }()
     
     let refreshControl: UIRefreshControl = {
-        let spinnerText = NSLocalizedString("runAPI", comment: "textfield label: Getting Your Wines, text below animation while waiting for download")
+        let spinnerText = NSLocalizedString("checkForNewWine", comment: "textfield label: Checking for New Wine, text below animation while waiting for download")
         let rc = UIRefreshControl()
         rc.tintColor = barTintColor
         rc.attributedTitle = NSAttributedString(string: spinnerText, attributes: [
@@ -199,7 +199,7 @@ class SearchViewController: UIViewController {
         UserDefaults.standard.setWidgetVarietal(value: "")
         searchBar.searchTextField.text = widgetVarietal
         handleReload()
-            filteredBottles = searchKeys
+        filteredBottles = searchKeys
     }
     
     @objc func handleLogOut(){
