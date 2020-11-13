@@ -70,6 +70,9 @@
 /* button text: return this selection to inventory (Un-Drink) */
 "buttonSyncUnDrink" = "Regresen a su Inventario";
 
+/* textfield label: Checking for New Wine, text below animation while waiting for download */
+"checkForNewWine" = "Comprobación de Vino Nuevo";
+
 /* button text: drink all bottles */
 "drinkAllBottles" = "Consumir";
 
