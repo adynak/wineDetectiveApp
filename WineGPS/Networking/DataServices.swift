@@ -897,7 +897,7 @@ class DataServices {
             tv.layoutIfNeeded()
         } else {
             tv.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
-        }
+        } 
         rc.endRefreshing()
     }
 }
