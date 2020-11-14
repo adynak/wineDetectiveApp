@@ -19,6 +19,7 @@ enum apiResults: String {
     case NoInternet
     case Success
     case Failed
+    case CancelRefresh
 }
 
 class LoginController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LoginControllerDelegate {
@@ -279,6 +280,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
                             self.hideSpinner()
                         case .Success:
                             break
+                        case .CancelRefresh:
+                            Alert.throttleRefreshAlert(on: self)
                     }
                 } else {
                     if(self.dataLoaded == true){

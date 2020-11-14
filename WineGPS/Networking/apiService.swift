@@ -16,6 +16,8 @@ class API {
     
     static func load() -> String {
         
+        let refreshInterval = RefreshInterval()
+        
         print("debug = \(debug)")
         
         if Reachability.isConnectedToNetwork(){
@@ -23,6 +25,10 @@ class API {
         }else{
             print("Internet Connection not Available!")
             return "NoInternet"
+        }
+
+        if refreshInterval.currentRefreshTime - refreshInterval.priorRefreshTime < 60 {
+            return "CancelRefresh"
         }
 
         do {

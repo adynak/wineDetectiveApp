@@ -11,7 +11,7 @@ import UIKit
 
 struct RefreshInterval {
     let priorRefreshTime = Date()
-    let currentRefreshTime = Date()
+    let currentRefreshTime = Date().addingTimeInterval(60)
 }
 struct Bottle {
     let producer: String

@@ -101,6 +101,8 @@ class ProducerViewController :UITableViewController {
             case .NoInternet:
                 Alert.noInternetAlert(on: self)
                 DataServices.endRefreshing(tv: tableView, rc: refreshControl!)
+            case .CancelRefresh:
+                Alert.throttleRefreshAlert(on: self)
             case .Success:
                 break
         }
