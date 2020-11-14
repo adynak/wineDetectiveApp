@@ -44,6 +44,8 @@ class SearchViewController: UIViewController {
     
     var searchWines: [AllLevel0]?
     var allSearchWines: [AllLevel0]?
+    
+    var searchBarFlag = false
 
     lazy var tableView: UITableView = {
         let tv = UITableView()
@@ -172,6 +174,7 @@ class SearchViewController: UIViewController {
     }
     
     @objc func handleShowSearchBar() {
+        searchBarFlag = true
         searchBar.becomeFirstResponder()
         search(shouldShow: true)
     }
@@ -360,7 +363,7 @@ extension SearchViewController: UISearchBarDelegate {
         footerView.text = DataServices.countBottles(bins: filteredBottles)
         tableView.reloadData()
         searchBar.endEditing(true)
-
+        searchBarFlag = false
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
