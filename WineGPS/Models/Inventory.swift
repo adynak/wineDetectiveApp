@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+struct RefreshInterval {
+    let priorRefreshTime = Date()
+    let currentRefreshTime = Date()
+}
 struct Bottle {
     let producer: String
     let varietal: String

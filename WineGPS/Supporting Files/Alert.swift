@@ -62,5 +62,11 @@ struct Alert{
         let message = NSLocalizedString("alertTextNoIcloudMessage", comment: "alert text: connect to iCloud account")
         showBasicAlert(on: vc, with: title, message: message)
     }
+    
+    static func throttleRefreshAlert(on vc: UIViewController){
+        let title = NSLocalizedString("alertTextThrottleRefreshTitle", comment: "alert title: seriously...")
+        let message = NSLocalizedString("alertTextThrottleRefreshMessage", comment: "alert text: pull to refresh rules")
+        showBasicAlert(on: vc, with: title, message: message)
+    }
 
 }
