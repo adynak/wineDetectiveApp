@@ -186,14 +186,19 @@ class SearchViewController: UIViewController {
             ($0.label[0].vvp.lowercased()) < ($1.label[0].vvp.lowercased())
         })
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
-            style: UIBarButtonItem.Style.plain,
-            target: self,
-            action: #selector(handleLogOut)
-        )
-        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-        footerView.text = DataServices.countBottles(bins: searchKeys)
+        if searchBarFlag {
+            let searchText = searchBar.searchTextField.text!
+            buildFilteredBottles(searchText: searchText)
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+                style: UIBarButtonItem.Style.plain,
+                target: self,
+                action: #selector(handleLogOut)
+            )
+            searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+            footerView.text = DataServices.countBottles(bins: searchKeys)
+        }
         tableView.reloadData()
     }
     
@@ -368,11 +373,16 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("Search text is \(searchText)")
-// smart quotes on the keyboard, not in the download, fool!
+        buildFilteredBottles(searchText: searchText)        
+        footerView.text = DataServices.countBottles(bins: filteredBottles)
+        tableView.reloadData()
+    }
+    
+    func buildFilteredBottles(searchText: String){
+        // smart quotes on the keyboard, not in the download, fool!
         let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
 // match any word in any position by using an array.contains(where: ...
         let searchTextArray = searchText.split(separator: " ")
-
         if searchText.isEmpty {
             searchKeys = SearchKeys.BuildSearchKeys(wines: &allSearchWines!)
             filteredBottles = searchKeys
@@ -384,9 +394,6 @@ extension SearchViewController: UISearchBarDelegate {
                 return !searchTextArray.contains(where: { !text.searchKey.localizedCaseInsensitiveContains($0) })
             })
         }
-        
-        footerView.text = DataServices.countBottles(bins: filteredBottles)
-        tableView.reloadData()
     }
 }
 
