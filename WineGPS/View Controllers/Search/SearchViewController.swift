@@ -189,6 +189,7 @@ class SearchViewController: UIViewController {
         if searchBarFlag {
             let searchText = searchBar.searchTextField.text!
             buildFilteredBottles(searchText: searchText)
+            footerView.text = DataServices.countBottles(bins: filteredBottles)
         } else {
             navigationItem.leftBarButtonItem = UIBarButtonItem(
                 title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),

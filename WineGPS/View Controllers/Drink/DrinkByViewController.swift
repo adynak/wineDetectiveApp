@@ -21,6 +21,8 @@ class DrinkByViewController: UIViewController {
     var searchWines: [AllLevel0]?
     var allSearchWines: [AllLevel0]?
     
+    var searchBarFlag = false
+    
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -154,15 +156,21 @@ class DrinkByViewController: UIViewController {
         searchWines = allWine?.drinkBy
         searchWines = buidSearchWinesFromDrinkByMenuCode(drinkByMenuCode: drinkByMenuCode)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
-            style: UIBarButtonItem.Style.plain,
-            target: self,
-            action: #selector(handleLogOut)
-        )
+        if searchBarFlag {
+            let searchText = searchBar.searchTextField.text!
+            buildFilteredBottles(searchText: searchText)
+            footerView.text = DataServices.countBottles(bins: filteredBottles)
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                title: NSLocalizedString("buttonLogOut", comment: "button text: Log Out"),
+                style: UIBarButtonItem.Style.plain,
+                target: self,
+                action: #selector(handleLogOut)
+            )
 
-        searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
-        footerView.text = DataServices.countBottles(bins: searchKeys)
+            searchKeys = SearchKeys.BuildSearchKeys(wines: &searchWines!)
+            footerView.text = DataServices.countBottles(bins: searchKeys)
+        }
         self.tableView.reloadData()
     }
     
@@ -246,6 +254,7 @@ class DrinkByViewController: UIViewController {
     }
     
     @objc func handleShowSearchBar() {
+        searchBarFlag = true
         searchBar.becomeFirstResponder()
         search(shouldShow: true)
     }
@@ -472,11 +481,17 @@ extension DrinkByViewController: UISearchBarDelegate {
         footerView.text = DataServices.countBottles(bins: filteredBottles)
         tableView.reloadData()
         searchBar.endEditing(true)
-
+        searchBarFlag = false
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("Search text is \(searchText)")
+        buildFilteredBottles(searchText: searchText)        
+        footerView.text = DataServices.countBottles(bins: filteredBottles)
+        tableView.reloadData()
+    }
+    
+    func buildFilteredBottles(searchText: String){
 // smart quotes on the keyboard, not in the download, fool!
         let searchText = searchText.replacingOccurrences(of: "’", with: "\'", options: NSString.CompareOptions.literal, range: nil)
 // match any word in any position by using an array.contains(where: ...
@@ -493,9 +508,6 @@ extension DrinkByViewController: UISearchBarDelegate {
                 return !searchTextArray.contains(where: { !text.searchKey.localizedCaseInsensitiveContains($0) })
             })
         }
-        
-        footerView.text = DataServices.countBottles(bins: filteredBottles)
-        tableView.reloadData()
     }
 }
 
