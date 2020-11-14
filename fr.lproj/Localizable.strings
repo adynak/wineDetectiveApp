@@ -25,6 +25,12 @@
 /* alert title: internet connection failed */
 "alertTextNoInternetTitle" = "Échec de la connexion iInternet";
 
+/* alert text: pull to refresh rules */
+"alertTextThrottleRefreshMessage" = "La dernière actualisation remonte à %1 secondes. Vous devez attendre au moins 60 secondes entre les actualisations.";
+
+/* alert title: seriously... */
+"alertTextThrottleRefreshTitle" = "Ah, la vache!";
+
 /* alert title: mark this bottle as consumed */
 "alertTitleMarkAsDrank" = "supprimer de l'inventaire";
 
