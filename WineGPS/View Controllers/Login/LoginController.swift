@@ -268,7 +268,7 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 timeLeft -= 1
                 if timeLeft == 20 {
-                    let results = API.load()
+                    let results = API.load(callingView: "login")
                     switch apiResults(rawValue: results)! {
                         case .Failed :
                             Alert.showAPIFailedsAlert(on: self)
@@ -282,6 +282,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
                             break
                         case .CancelRefresh:
                             Alert.throttleRefreshAlert(on: self)
+                            timer.invalidate()
+                            self.hideSpinner()
                     }
                 } else {
                     if(self.dataLoaded == true){

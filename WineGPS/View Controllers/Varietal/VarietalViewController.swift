@@ -92,7 +92,7 @@ class VarietalViewController : UITableViewController {
     }
     
     @objc private func reloadSourceData(_ sender: Any) {
-        let results = API.load()
+        let results = API.load(callingView: "")
         bottles = allWine?.varietals
 
         switch apiResults(rawValue: results)! {
@@ -104,6 +104,7 @@ class VarietalViewController : UITableViewController {
                 DataServices.endRefreshing(tv: tableView, rc: refreshControl!)
             case .CancelRefresh:
                 Alert.throttleRefreshAlert(on: self)
+                DataServices.endRefreshing(tv: tableView, rc: refreshControl!)
             case .Success:
                 break
         }

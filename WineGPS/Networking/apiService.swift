@@ -14,10 +14,8 @@ import WidgetKit
 
 class API {
     
-    static func load() -> String {
-        
-        let refreshInterval = RefreshInterval()
-        
+    static func load(callingView: String) -> String {
+                
         print("debug = \(debug)")
         
         if Reachability.isConnectedToNetwork(){
@@ -26,9 +24,15 @@ class API {
             print("Internet Connection not Available!")
             return "NoInternet"
         }
-
-        if refreshInterval.currentRefreshTime - refreshInterval.priorRefreshTime < 60 {
+        
+        if lastRefreshTime == nil || callingView == "login" {
+            lastRefreshTime = Date() - 60
+        }
+            
+        if Date() - lastRefreshTime! < 59 {
             return "CancelRefresh"
+        } else {
+            lastRefreshTime = Date()
         }
 
         do {

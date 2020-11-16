@@ -80,7 +80,7 @@ class DataServices {
         return result
     }
     
-    static func getDataUrl(user: String,pword: String, table: String) -> String{
+    static func getDataUrl(user: String, pword: String, table: String) -> String{
         
         struct URL {
             let scheme: String

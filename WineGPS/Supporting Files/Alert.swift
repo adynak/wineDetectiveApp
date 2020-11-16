@@ -65,7 +65,12 @@ struct Alert{
     
     static func throttleRefreshAlert(on vc: UIViewController){
         let title = NSLocalizedString("alertTextThrottleRefreshTitle", comment: "alert title: seriously...")
-        let message = NSLocalizedString("alertTextThrottleRefreshMessage", comment: "alert text: pull to refresh rules")
+        var message = NSLocalizedString("alertTextThrottleRefreshMessage", comment: "alert text: pull to refresh rules")
+        let interval = String(Date() - lastRefreshTime!)
+        let array = interval.components(separatedBy: ".")
+
+        message = message.replacingOccurrences(of: "%1", with: array[0])
+
         showBasicAlert(on: vc, with: title, message: message)
     }
 

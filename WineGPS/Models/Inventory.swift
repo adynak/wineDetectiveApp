@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-struct RefreshInterval {
-    let priorRefreshTime = Date()
-    let currentRefreshTime = Date().addingTimeInterval(60)
-}
 struct Bottle {
     let producer: String
     let varietal: String
@@ -277,6 +273,7 @@ var wine = [Wines]()
 var bin = [StorageBins]()
 var designation: String = ""
 var dataHeader = [String]()
+var lastRefreshTime : Date? = nil
 
 struct StorageBins: Codable {
     var binName: String?

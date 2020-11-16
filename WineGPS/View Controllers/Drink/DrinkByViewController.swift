@@ -269,7 +269,7 @@ class DrinkByViewController: UIViewController {
     }
     
     @objc private func reloadSourceData(_ sender: Any) {
-        let results = API.load()
+        let results = API.load(callingView: "")
         
         searchWines = allWine?.drinkBy
         allSearchWines = allWine?.drinkBy
@@ -301,6 +301,7 @@ class DrinkByViewController: UIViewController {
                 DataServices.endRefreshing(tv: tableView, rc: refreshControl)
             case .CancelRefresh:
                 Alert.throttleRefreshAlert(on: self)
+                DataServices.endRefreshing(tv: tableView, rc: refreshControl)
             case .Success:
                 break
         }
