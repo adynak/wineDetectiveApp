@@ -28,15 +28,21 @@ class MoreMenuViewController: UIViewController {
     
     func configureTableView() {
         tableView = UITableView()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = CGFloat(self.tableRowHeight)
+        
+        tableView.tableFooterView = UIView()
+
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.register(MoreMenuCell.self, forCellReuseIdentifier: cellID)
         view.addSubview(tableView)
-        
+                
         let tableFrameHeight = calcTableHeight()
-        let frame = CGRect(x: 0, y: 80, width: view.frame.width, height: CGFloat(tableFrameHeight))
-        
+        let height = CGFloat(tableFrameHeight)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
+
         tableView.frame = frame
         tableView.layer.cornerRadius = CGFloat(0)
         
@@ -58,6 +64,8 @@ class MoreMenuViewController: UIViewController {
     }
     
     func calcTableHeight() -> Int{
+        let topOffset = UIApplication.shared.windows[0].safeAreaInsets.top
+
         var numberOfRows: Int = 0
         let numberofHeaders = MoreMenuSections.allCases.count
         for (_,section) in MoreMenuSections.allCases.enumerated(){
@@ -66,7 +74,7 @@ class MoreMenuViewController: UIViewController {
         let spaceForHeader = numberofHeaders * tableHeaderHeight
         let spaceForFooter = numberofHeaders * tableFooterHeight
         let spaceForRows = numberOfRows * tableRowHeight
-        return spaceForHeader + spaceForFooter + spaceForRows
+        return spaceForHeader + spaceForFooter + spaceForRows + Int(topOffset)
     }
     
     @objc func handleLogOut(){
@@ -129,7 +137,7 @@ extension MoreMenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
