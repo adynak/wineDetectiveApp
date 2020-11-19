@@ -73,5 +73,11 @@ struct Alert{
 
         showBasicAlert(on: vc, with: title, message: message)
     }
+    
+    static func debugPrint(debugMessage: String){
+        if debug == true {
+            print(debugMessage)
+        }
+    }
 
 }

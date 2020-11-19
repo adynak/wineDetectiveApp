@@ -63,13 +63,13 @@
 //    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
 //        let localizedText = NSLocalizedString("loadingWebPage", comment: "textfield label: Loading Web Page, text below animation while page loads")
 //        showSpinner(localizedText: localizedText)
-//        print("start loading webView")
+//        Alert.debugPrint(debugMessage: "start loading webView")
 //    }
 //    
 //    //web view finish loading
 //    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 //        hideSpinner()
-//        print("finish loading webView")
+//        Alert.debugPrint(debugMessage: "finish loading webView")
 //    }
 //    
 //}
@@ -78,7 +78,7 @@
 //    
 //    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
 //       if(error.code == NSURLErrorNotConnectedToInternet){
-//        print("WTF")
+//        Alert.debugPrint(debugMessage: "WTF")
 //       }
 //    }
 //

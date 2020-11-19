@@ -514,11 +514,11 @@ class DrillDownDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-        print("WILL")
+        Alert.debugPrint(debugMessage: "WILL")
     }
     
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("DID")
+        Alert.debugPrint(debugMessage: "DID")
         let showConfirmAlert = shouldShowConfirmAlert(cells: cells)
 
         if showConfirmAlert {

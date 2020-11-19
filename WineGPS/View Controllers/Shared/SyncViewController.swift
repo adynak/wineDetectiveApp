@@ -120,7 +120,7 @@ class SyncViewController: UITableViewController {
         do {
             bottlesConsumed = try context.fetch(BottlesConsumed.fetchRequest())
         } catch let error as NSError {
-            print("could not fetch. \(error), \(error.userInfo)")
+            Alert.debugPrint(debugMessage: "could not fetch. \(error), \(error.userInfo)")
         }
         
         let inventoryPositionOf = Label(data:fields)

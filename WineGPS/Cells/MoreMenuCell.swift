@@ -85,7 +85,7 @@ class MoreMenuCell: UITableViewCell {
         let showBarcode: Int = 3
         let showPages: Int = 4
         if sender.isOn{
-            print("SwitchOn \(sender.tag)")
+            Alert.debugPrint(debugMessage: "SwitchOn \(sender.tag)")
             if sender.tag == showBarcode {
                 UserDefaults.standard.set(true, forKey: "showBarcode")
             }
@@ -93,7 +93,7 @@ class MoreMenuCell: UITableViewCell {
                 UserDefaults.standard.set(true, forKey: "showPages")
             }
         } else {
-            print("SwitchOff \(sender.tag)")
+            Alert.debugPrint(debugMessage: "SwitchOff \(sender.tag)")
             if sender.tag == showBarcode {
                 UserDefaults.standard.set(false, forKey: "showBarcode")
             }

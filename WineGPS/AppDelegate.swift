@@ -59,7 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         group.wait()
         
-        print("didFinishLaunchingWithOptions")
+        Alert.debugPrint(debugMessage: "didFinishLaunchingWithOptions")
+        
                 
         let attrs = [
             NSAttributedString.Key.foregroundColor: foregroundColor,
@@ -120,28 +121,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-        // print("applicationWillResignActive")
+        // Alert.debugPrint(debugMessage: "applicationWillResignActive")
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-//        print("applicationDidEnterBackground")
+//        Alert.debugPrint(debugMessage: "applicationDidEnterBackground")
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        // print("applicationWillEnterForeground")
+        // Alert.debugPrint(debugMessage: "applicationWillEnterForeground")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        // print("applicationDidBecomeActive")
+        // Alert.debugPrint(debugMessage: "applicationDidBecomeActive")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // print("applicationWillTerminate")
+        // Alert.debugPrint(debugMessage: "applicationWillTerminate")
         UserDefaults.standard.setIsLoggedIn(value: false)
     }
     
@@ -151,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Determine who sent the URL.
 //        let sendingAppID = options[.sourceApplication]
-        print("link from widget")
+        Alert.debugPrint(debugMessage: "link from widget")
 
         // Process the URL.
         guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
@@ -161,9 +162,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if let varietalName = params.first(where: { $0.name == "varietal" })?.value {
-            print("urlPath = \(urlPath)")
-            print("varietalName = \(varietalName)")
-            print("link from widget")
+            Alert.debugPrint(debugMessage: "urlPath = \(urlPath)")
+            Alert.debugPrint(debugMessage: "varietalName = \(varietalName)")
+            Alert.debugPrint(debugMessage: "link from widget")
             
             if varietalName == NSLocalizedString("totalBottles", comment: "plural : total bottles") {
                 UserDefaults.standard.setWidgetVarietal(value: "")
@@ -181,7 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = widgetViewController
             return true
         } else {
-            print("Photo index missing")
+            Alert.debugPrint(debugMessage: "Photo index missing")
             return false
         }
     }

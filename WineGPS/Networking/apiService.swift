@@ -16,12 +16,12 @@ class API {
     
     static func load(callingView: String) -> String {
                 
-        print("debug = \(debug)")
+        Alert.debugPrint(debugMessage: "debug = \(debug)")
         
         if Reachability.isConnectedToNetwork(){
-            print("Internet Connection Available!")
+            Alert.debugPrint(debugMessage: "Internet Connection Available!")
         }else{
-            print("Internet Connection not Available!")
+            Alert.debugPrint(debugMessage: "Internet Connection not Available!")
             return "NoInternet"
         }
         
@@ -66,9 +66,9 @@ class API {
                 
             }
 
-            print("loading availability")
+            Alert.debugPrint(debugMessage: "loading availability")
         } catch {
-            print("Failed to fetch availability:", error)
+            Alert.debugPrint(debugMessage: "Failed to fetch availability: \(error)")
             return "Failed"
         }
         
@@ -116,7 +116,7 @@ class API {
             }
             
             dataArray = inventoryArray
-            print("loading inventory")
+            Alert.debugPrint(debugMessage: "loading inventory")
             
             dataHeader = dataArray.removeFirst()
             fields = DataServices.locateDataPositions(dataHeader:dataHeader)
@@ -157,14 +157,14 @@ class API {
             
             WidgetCenter.shared.reloadAllTimelines()
 
-            print("build data arrays complete")
+            Alert.debugPrint(debugMessage: "build data arrays complete")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APILoaded"), object: nil)
 
             allWine = newInventory
             return "Success"
 
         } catch {
-            print("Failed to fetch inventory:", error)
+            Alert.debugPrint(debugMessage: "Failed to fetch inventory: \(error)")
             return "Failed"
         }
 

@@ -244,7 +244,7 @@ class DataServices {
 //        })
 //        
 //        for (type) in wineTypes {
-//            print("\(type.key!) : \(wineTypes[type.key]!.count)")
+//            Alert.debugPrint(debugMessage: "\(type.key!) : \(wineTypes[type.key]!.count)")
 //        }
 
         let groupLevel0 = Dictionary(grouping: wines, by: { $0.sortKey0 })
@@ -596,7 +596,7 @@ class DataServices {
                                          location: locationSort,
                                          missing: missingSort)
         
-        print("rebuild data arrays complete")
+        Alert.debugPrint(debugMessage: "rebuild data arrays complete")
         allWine = newInventory
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "removeBottles"), object: nil)
         
@@ -802,7 +802,7 @@ class DataServices {
 
     static func writeToDocumentsDirectory(wines: [DrillLevel0]) {
         
-//        print("writeToDocumentsDirectory")
+//        Alert.debugPrint(debugMessage: "writeToDocumentsDirectory")
         var totalBottles = 0
         let jsonArray:NSMutableArray = NSMutableArray()
 
@@ -840,9 +840,9 @@ class DataServices {
 //            varietalArray = try decoder.decode([WidgetVarietals].self, from: data)
 //            print(varietalArray)
 //        } catch {
-//            print("error:\(error)")
+//            Alert.debugPrint(debugMessage: "error:\(error)")
 //        }
-//        print("atend")
+//        Alert.debugPrint(debugMessage: "atend")
                 
     }
     
@@ -869,7 +869,7 @@ class DataServices {
 //                    wineCounts[varietal.name] = varietal.quantity
 //                }                
 //            } catch {
-//                print("error:\(error)")
+//                Alert.debugPrint(debugMessage: "error:\(error)")
 //                wineCounts["Total Bottles"] = 0
 //            }
 //        return wineCounts

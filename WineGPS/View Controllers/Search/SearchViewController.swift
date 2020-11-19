@@ -351,17 +351,17 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("Search bar editing did begin..")
+        Alert.debugPrint(debugMessage: "Search bar editing did begin..")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchString = searchBar.searchTextField.text!
         searchBar.resignFirstResponder()
-        print("searchBarSearchButtonClicked")
+        Alert.debugPrint(debugMessage: "searchBarSearchButtonClicked")
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("Search bar editing did end..")
+        Alert.debugPrint(debugMessage: "Search bar editing did end..")
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -376,7 +376,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Search text is \(searchText)")
+        Alert.debugPrint(debugMessage: "Search text is \(searchText)")
         buildFilteredBottles(searchText: searchText)        
         footerView.text = DataServices.countBottles(bins: filteredBottles)
         tableView.reloadData()

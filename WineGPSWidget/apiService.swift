@@ -31,7 +31,6 @@ class WidgetAPI {
                     wineCounts[varietal.name] = varietal.quantity
                 }
             } catch {
-                print("error:\(error)")
                 wineCounts["Total Bottles"] = 0
             }
         return wineCounts
