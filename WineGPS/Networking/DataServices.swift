@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 import WidgetKit
 
-let debug: Bool = true
+let debug: Bool = false
 
 class DataServices {
             
