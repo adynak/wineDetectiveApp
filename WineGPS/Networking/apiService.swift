@@ -172,8 +172,8 @@ class API {
     
     static func deleteCoreData(barcode: String){
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let managedContext = appDelegate.persistentContainer.viewContext
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = PersistentCloudKitContainer.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BottlesConsumed")
         fetchRequest.predicate = NSPredicate(format: "barcode = %@", barcode)
        

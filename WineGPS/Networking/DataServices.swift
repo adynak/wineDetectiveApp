@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 import WidgetKit
 
-let debug: Bool = false
+let debug: Bool = true
 
 class DataServices {
             
@@ -495,8 +495,8 @@ class DataServices {
         
         let inventoryPositionOf = Label(data:fields)
         
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let managedContext = appDelegate!.persistentContainer.viewContext
+//        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let managedContext = PersistentCloudKitContainer.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "BottlesConsumed")
         
         do {
@@ -543,8 +543,8 @@ class DataServices {
         
     static func removeBottles(bottles: [DrillLevel2], writeCoreData: Bool){
         
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let context = appDelegate!.persistentContainer.viewContext
+//        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = PersistentCloudKitContainer.persistentContainer.viewContext
     
         let fields = DataServices.locateDataPositions(dataHeader:dataHeader)
         var dataArrayFiltered = [[String]]()
@@ -559,7 +559,7 @@ class DataServices {
                 consumed.iWine = iwine
                 consumed.barcode = barcode
                 consumed.consumed = Date()
-                appDelegate!.saveContext()
+                PersistentCloudKitContainer.saveContext()
             }
             
             dataArrayFiltered = dataArray.filter { !$0[1].contains(barcode) }

@@ -113,8 +113,8 @@ class SyncViewController: UITableViewController {
 
     func reactToCoraData(){
         var coreData = [DrillLevel2]()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = PersistentCloudKitContainer.persistentContainer.viewContext
         var bottlesConsumed = [BottlesConsumed]()
         
         do {

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		36BDE4BD203D87BC00581A05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4BC203D87BC00581A05 /* AppDelegate.swift */; };
-		36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */; };
 		36BDE4C4203D87BC00581A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36BDE4C3203D87BC00581A05 /* Assets.xcassets */; };
 		36BDE4D1203D884D00581A05 /* ProducerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDE4D0203D884D00581A05 /* ProducerViewController.swift */; };
 		9201C7A524B5015400775B00 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9201C7A424B5015400775B00 /* DeviceInfo.swift */; };
@@ -51,11 +50,13 @@
 		924C7F742525042A007900BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 927C22B22483729800695B45 /* Localizable.strings */; };
 		924E5BAA25164D3B00259AB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BA825164D3B00259AB3 /* Localizable.strings */; };
 		924E5BB125164DCB00259AB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 924E5BAF25164DCB00259AB3 /* InfoPlist.strings */; };
+		9251957A2566D3E600787423 /* CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925195792566D3E600787423 /* CloudKit.swift */; };
 		92557D6B2560753B002E4D3A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92557D6A2560753B002E4D3A /* Date.swift */; };
 		9256B72B24B4DEA0003BAA4C /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256B72A24B4DEA0003BAA4C /* mail.png */; };
 		9256B72D24B4E085003BAA4C /* bottleLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9256B72C24B4E085003BAA4C /* bottleLogo.png */; };
 		925C4513246AE8A000044894 /* SearchKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925C4512246AE8A000044894 /* SearchKeys.swift */; };
 		925E9B9324B4C49F00D4553A /* SupportMenuSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925E9B9224B4C49F00D4553A /* SupportMenuSections.swift */; };
+		925FFA582566E7C500B3296A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FFA572566E7C500B3296A /* MainTabBarController.swift */; };
 		92674FD72518D638000D5B45 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 92674FD92518D638000D5B45 /* Localizable.stringsdict */; };
 		9270146724BCDBA6001A20CC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9270146624BCDBA6001A20CC /* LoginController.swift */; };
 		9272ADD2251CFA5B00576020 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272ADD1251CFA5B00576020 /* IntentHandler.swift */; };
@@ -162,7 +163,6 @@
 /* Begin PBXFileReference section */
 		36BDE4B9203D87BC00581A05 /* WineGPS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WineGPS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BDE4BC203D87BC00581A05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		36BDE4C3203D87BC00581A05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36BDE4C8203D87BC00581A05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../WineGPSWidget/Info.plist; sourceTree = "<group>"; };
 		36BDE4D0203D884D00581A05 /* ProducerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducerViewController.swift; sourceTree = "<group>"; };
@@ -214,11 +214,13 @@
 		924E5BB225164DCB00259AB3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		924E5BB725164EDB00259AB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		924E5BB825164EDB00259AB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		925195792566D3E600787423 /* CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKit.swift; sourceTree = "<group>"; };
 		92557D6A2560753B002E4D3A /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		9256B72A24B4DEA0003BAA4C /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		9256B72C24B4E085003BAA4C /* bottleLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottleLogo.png; sourceTree = "<group>"; };
 		925C4512246AE8A000044894 /* SearchKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchKeys.swift; sourceTree = "<group>"; };
 		925E9B9224B4C49F00D4553A /* SupportMenuSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportMenuSections.swift; sourceTree = "<group>"; };
+		925FFA572566E7C500B3296A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		92674FD82518D638000D5B45 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		92674FDA2518D666000D5B45 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		92674FDB2518D668000D5B45 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -368,7 +370,6 @@
 				92DCEA1924915C2400AFFB59 /* Resources */,
 				92DCEA17249159B600AFFB59 /* Supporting Files */,
 				92DCEA1A2491632400AFFB59 /* View Controllers */,
-				36BDE4BE203D87BC00581A05 /* MainTabBarController.swift */,
 			);
 			path = WineGPS;
 			sourceTree = "<group>";
@@ -564,6 +565,7 @@
 				92DCEA22249165D100AFFB59 /* Search */,
 				92DCEA262491681900AFFB59 /* Shared */,
 				92DCEA20249165B800AFFB59 /* Varietal */,
+				925FFA572566E7C500B3296A /* MainTabBarController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -632,6 +634,7 @@
 				925E9B9224B4C49F00D4553A /* SupportMenuSections.swift */,
 				92C97C3524F5CEC7002CA657 /* WineGPS.xcdatamodeld */,
 				9225A05D25378AAF00732FCE /* wineJSON.swift */,
+				925195792566D3E600787423 /* CloudKit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -765,7 +768,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Al Dynak";
 				TargetAttributes = {
 					36BDE4B8203D87BC00581A05 = {
@@ -915,6 +918,7 @@
 			files = (
 				922FBD4021B9CD4800E14641 /* Inventory.swift in Sources */,
 				92AE9BCF24BE1CCF00924435 /* Colors.swift in Sources */,
+				925FFA582566E7C500B3296A /* MainTabBarController.swift in Sources */,
 				92307A9E24E1D1CA00C06F32 /* alert.swift in Sources */,
 				92E94A8824942AA600419F11 /* Constraints.swift in Sources */,
 				92F6896B2472E294006EB934 /* LocationViewController.swift in Sources */,
@@ -928,7 +932,6 @@
 				924175FA245A2625002502FE /* UserDefaults.swift in Sources */,
 				923B6EC524A7EA9B00598D57 /* Strings.swift in Sources */,
 				9289227A24AD0FEC0090A410 /* DrillDownDetailViewController.swift in Sources */,
-				36BDE4BF203D87BC00581A05 /* MainTabBarController.swift in Sources */,
 				9230461F24D0F1360083BCF7 /* MissingDrinkByViewController.swift in Sources */,
 				36BDE4BD203D87BC00581A05 /* AppDelegate.swift in Sources */,
 				9289227C24AD102E0090A410 /* DrillDownTableViewCell.swift in Sources */,
@@ -957,6 +960,7 @@
 				924175F2245A2082002502FE /* LoginCell.swift in Sources */,
 				924175F4245A2104002502FE /* PageCell.swift in Sources */,
 				92753CE5245DC3D400EF08F6 /* Keyboard.swift in Sources */,
+				9251957A2566D3E600787423 /* CloudKit.swift in Sources */,
 				922FBD3A21B9AEC100E14641 /* Alert.swift in Sources */,
 				92CA325024B661ED00AC2747 /* DrinkBottlesViewController.swift in Sources */,
 				921636F524B8EA5900BF0574 /* Bundle.swift in Sources */,
@@ -1232,6 +1236,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 1;
